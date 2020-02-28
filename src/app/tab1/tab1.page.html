@@ -1,7 +1,7 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1111
+      Tab 1
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,4 +14,109 @@
   </ion-header>
 
   <app-explore-container name="Tab 1 page"></app-explore-container>
+</ion-content> -->
+
+<ion-header class=" header-bg-color">
+  <ion-toolbar>
+    <ion-title size="large" style="margin-top:15px;">OVERVIEW</ion-title>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col></ion-col> 
+        <ion-col>
+          <ion-chip>
+            <ion-label>Balance</ion-label>
+          </ion-chip>
+        </ion-col> 
+        <ion-col></ion-col> 
+      </ion-row>
+    </ion-grid>
+    <ion-title style="font-size: 50px;">750 <span style="font-size: 25px;">THB.</span></ion-title>
+    <ion-title size="small" style="margin-top:10px; font-size: 15px;">This Month</ion-title>
+    <ion-grid>
+      <ion-row style="text-align:center;" class="ion-align-items-center">
+        <ion-col  style="color:whtie;">
+          <ion-label>Income</ion-label>
+        </ion-col> 
+        <ion-col>
+        </ion-col> 
+        <ion-col>
+          <ion-label>Expense</ion-label>
+        </ion-col> 
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content >
+ 
+
+  
+  <!-- Item Dividers in a List -->
+  <ion-list>
+    <ion-item-divider>
+      <ion-label>
+        25 February 2562
+      </ion-label>
+    </ion-item-divider>
+  
+    <ion-card>
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label>Food</ion-label>
+        <ion-button fill="outline" slot="end">500</ion-button>
+      </ion-item>
+  
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label>Food</ion-label>
+        <ion-button fill="outline" slot="end">500</ion-button>
+      </ion-item>
+  
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label>Food</ion-label>
+        <ion-button fill="outline" slot="end">500</ion-button>
+      </ion-item>
+  
+    </ion-card>
+
+    <ion-item-divider>
+      <ion-label>
+        26 February 2562
+      </ion-label>
+    </ion-item-divider>
+  
+    <ion-card>
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label>Food</ion-label>
+        <ion-button fill="outline" slot="end">500</ion-button>
+      </ion-item>
+  
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label>Food</ion-label>
+        <ion-button fill="outline" slot="end">500</ion-button>
+      </ion-item>
+  
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label>Food</ion-label>
+        <ion-button fill="outline" slot="end">500</ion-button>
+      </ion-item>
+  
+    </ion-card>
+  
+  </ion-list>
+ 
+  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>

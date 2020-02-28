@@ -24,3 +24,55 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+/* --------------------------------------------------------------------------------------------------------- */
+
+
+ion-content {
+    --ion-background-color: white;
+}   
+ion-card{
+    --ion-background-color: #FFFFFF;
+}
+
+.header-bg-color{
+    --ion-background-color: linear-gradient(to bottom right, #71A2FD, #3E82FE);
+    --color:white;
+}
+
+ion-header ion-toolbar{
+    height:250px;
+}
+
+ion-title {
+    width: 100%;
+    text-align: center;
+    color:white;
+    font-size: 20px;
+}
+ion-chip {
+    height:25px;
+    width: 100%;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    color:white;
+}
+
+
+.content-fullscreen-message {
+    text-align: center;
+    padding: 30% 15%;
+    font-size: 26px;
+    font-weight: 300;
+    opacity: 0.2;
+  }
+  
+  //// Background colors
+  .dark-bg {
+    background-color: #110A3B;
+    .scroll {
+      background-color: #110A3B;
+    }
+  }
+  
