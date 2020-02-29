@@ -17,8 +17,8 @@
 </ion-content> -->
 
 <ion-header class=" header-bg-color">
-  <ion-toolbar>
-    <ion-title size="large" style="margin-top:15px;">OVERVIEW</ion-title>
+  <ion-toolbar style="height:250px;">
+    <ion-title size="large" class="p-t-25">OVERVIEW</ion-title>
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col></ion-col> 
@@ -34,13 +34,14 @@
     <ion-title size="small" style="margin-top:10px; font-size: 15px;">This Month</ion-title>
     <ion-grid>
       <ion-row style="text-align:center;" class="ion-align-items-center">
-        <ion-col  style="color:whtie;">
-          <ion-label>Income</ion-label>
+        <ion-col >
+          <ion-label class="tw"><ion-icon style="zoom:2.0;" name="arrow-up-outline"></ion-icon> Income</ion-label>
         </ion-col> 
+        <ion-col></ion-col> 
         <ion-col>
-        </ion-col> 
-        <ion-col>
-          <ion-label>Expense</ion-label>
+          <ion-label class="tw">
+            <ion-icon style="zoom:2.0;" name="arrow-down-outline"></ion-icon> Expense
+          </ion-label>
         </ion-col> 
       </ion-row>
     </ion-grid>

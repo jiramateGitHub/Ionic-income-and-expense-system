@@ -10,8 +10,8 @@ export class TabsPage {
   
   constructor(private SessionService:SessionService, private router:Router) {
     console.log(this.SessionService.password );
-    if(this.SessionService.password == undefined){
-      this.router.navigateByUrl('signin');
-    }
+    // if(this.SessionService.password == undefined){
+    //   this.router.navigateByUrl('signin');
+    // }
   }
 }
