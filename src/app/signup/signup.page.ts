@@ -3,13 +3,15 @@ import { MPersonService } from './../services/m_person/m-person.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.page.html',
-  styleUrls: ['./signin.page.scss'],
+  selector: 'app-signup',
+  templateUrl: './signup.page.html',
+  styleUrls: ['./signup.page.scss'],
 })
-export class SigninPage implements OnInit {
+export class SignupPage implements OnInit {
+
   public username:string;
   public password:string;
+  public validate_password:string;
   constructor(
     private router:Router,
     private MPersonService:MPersonService,
@@ -19,7 +21,7 @@ export class SigninPage implements OnInit {
   ngOnInit() {
   }
 
-  signin(){
+  signup(){
     this.SessionService.username = this.username;
     this.SessionService.password = this.password;
     this.router.navigateByUrl('tabs');
@@ -42,8 +44,9 @@ export class SigninPage implements OnInit {
     //   this.router.navigateByUrl('home');
   }
 
-  redirect_signup(){
-    this.router.navigateByUrl('signup');
+  redirect_signin(){
+    this.router.navigateByUrl('signin');
   }
+
 
 }
