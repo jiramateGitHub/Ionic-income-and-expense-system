@@ -1,3 +1,14 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+.line{
+  border-top: 1px solid gray;
+}
+.active-item {
+  --background:  #e9e9eb;
+  --color: var(--ion-color-primary) !important;
+  border-left:8px solid var(--ion-color-primary);
+}
+.active-item  ion-icon{
+  color:var(--ion-color-primary)
+}
