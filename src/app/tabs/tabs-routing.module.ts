@@ -8,11 +8,11 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'sin',
+        path: 'transaction_input',
         children: [
           {
             path: '',
-            loadChildren: () => import('../signin/signin.module').then( m => m.SigninPageModule)
+            loadChildren: () => import('../pages/transaction_input/transaction-input/transaction-input.module').then( m => m.TransactionInputPageModule)
           }
         ]
       },

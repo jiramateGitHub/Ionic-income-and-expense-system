@@ -1,3 +1,4 @@
+import { TransactionInputPage } from './pages/transaction_input/transaction-input/transaction-input.page';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -14,10 +15,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TransactionInputPage
   ],
   entryComponents: [
-
+    TransactionInputPage
   ],
   imports: [
     BrowserModule, 
