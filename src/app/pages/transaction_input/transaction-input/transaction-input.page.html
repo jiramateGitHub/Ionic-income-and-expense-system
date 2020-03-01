@@ -1,6 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>transaction_input</ion-title>
+      <ion-item lines="none">
+        <ion-buttons slot="start" (click)="close_modal()">
+            <ion-icon name="close" style="zoom:1.5;"></ion-icon>
+        </ion-buttons>
+        <ion-title *ngIf="type_input == 'insert'">Add transaction</ion-title>
+        <ion-title *ngIf="type_input == 'update'">Edit transaction</ion-title>
+        <ion-buttons slot="end"  (click)="process_group_insert()" *ngIf="type_input == 'insert'">
+            <ion-icon name="checkmark" style="zoom:1.5;"></ion-icon>
+        </ion-buttons>
+        <ion-buttons slot="end"  (click)="process_group_update()" *ngIf="type_input == 'update'">
+            <ion-icon name="checkmark" style="zoom:1.5;"></ion-icon>
+        </ion-buttons>
+      </ion-item>
   </ion-toolbar>
 </ion-header>
 

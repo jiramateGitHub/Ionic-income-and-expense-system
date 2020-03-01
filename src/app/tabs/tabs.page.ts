@@ -23,8 +23,12 @@ export class TabsPage {
 
   async modal_insert_show() {
     const modal = await this.modalController.create({
-      component: TransactionInputPage
+      component: TransactionInputPage,
+      componentProps: {
+        'type_input': 'insert'
+      }
     });
     return await modal.present();
   }
+
 }

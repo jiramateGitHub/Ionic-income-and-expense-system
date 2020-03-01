@@ -1,3 +1,28 @@
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../../../src/assets/fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../../../src/assets/fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../../../src/assets/fonts/poppins/Poppins-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('../../../src/assets/fonts/poppins/Poppins-SemiBold.ttf'); 
+}
+
+*{
+  font-family: Poppins-Regular !important; 
+  src: url('../../../src/assets/fonts/poppins/Poppins-Regular.ttf'); 
+}
+
 ion-content ion-toolbar {
   --background: translucent;
 }
@@ -7,4 +32,26 @@ ion-title {
   text-align: center;
   color:white;
   font-size: 20px!important;
+}
+
+ion-chip {
+  height:25px!important;
+  width: 100%;
+  display: block;
+  vertical-align: middle;
+  text-align: center;
+  color:white;
+}
+
+.header-bg-color{
+  --ion-background-color: linear-gradient(to bottom right, #71A2FD, #3E82FE);
+  --color:white;
+}
+
+.content-fullscreen-message {
+  text-align: center;
+  padding: 30% 15%;
+  font-size: 26px!important;
+  font-weight: 300;
+  opacity: 0.2;
 }

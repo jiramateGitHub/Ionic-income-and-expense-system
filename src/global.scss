@@ -30,48 +30,13 @@
 .tw{
     color:white;
 }
+
 ion-content {
-    --ion-background-color: white;
+    --ion-background-color: #FFFFFF;
 }   
 ion-card{
     --ion-background-color: #FFFFFF;
 }
-
-.header-bg-color{
-    --ion-background-color: linear-gradient(to bottom right, #71A2FD, #3E82FE);
-    --color:white;
-}
-
-
-
-ion-chip {
-    height:25px!important;
-    width: 100%;
-    display: block;
-    vertical-align: middle;
-    text-align: center;
-    color:white;
-}
-
-
-.content-fullscreen-message {
-    text-align: center;
-    padding: 30% 15%;
-    font-size: 26px!important;
-    font-weight: 300;
-    opacity: 0.2;
-  }
-  
-  //// Background colors
-  .dark-bg {
-    background-color: #110A3B;
-    .scroll {
-      background-color: #110A3B;
-    }
-  }
-  
-
-  
   
 /*[ FONT SIZE ]
 ///////////////////////////////////////////////////////////
