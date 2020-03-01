@@ -17,21 +17,20 @@
 </ion-content> -->
 
 <ion-header class=" header-bg-color">
-  <ion-toolbar style="height:250px;">
-    <ion-title size="large" class="p-t-25">OVERVIEW</ion-title>
+  <ion-toolbar >
     <ion-grid>
-      <ion-row class="ion-align-items-center">
+      <ion-row class="ion-align-items-center p-t-10">
         <ion-col></ion-col> 
         <ion-col>
-          <ion-chip>
+          <ion-chip class="chip-bl">
             <ion-label>Balance</ion-label>
           </ion-chip>
         </ion-col> 
         <ion-col></ion-col> 
       </ion-row>
     </ion-grid>
-    <ion-title style="font-size: 40px!important;">750 <span style="font-size: 20px;">THB.</span></ion-title>
-    <ion-title size="small" style="font-size: 10px;">This Month</ion-title>
+    <ion-title style="font-size: 40px!important;">2000 <span style="font-size: 20px;">THB.</span></ion-title>
+    <ion-title size="small" style="font-size: 13px;">This Month</ion-title>
     <ion-grid>
       <ion-row style="text-align:center;" class="ion-align-items-center">
         <ion-col >
@@ -58,67 +57,72 @@
   <!-- Item Dividers in a List -->
   <ion-list>
     <ion-item-divider>
-      <ion-label>
-        25 February 2562
-      </ion-label>
+      <ion-label slot="start"><span class="fs-25">25</span> February 2562</ion-label>
+      <ion-label slot="end" class="p-r-10">+3500</ion-label>
     </ion-item-divider>
   
-    <ion-card>
-      <ion-item>
-        <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label>Food</ion-label>
-        <ion-button fill="outline" slot="end">500</ion-button>
+    <ion-card >
+      <ion-item style="margin: -8px;">
+        <ion-icon name="wallet-outline" slot="start" size="large" style="color:red !important;"></ion-icon>
+        <ion-label>
+          <span class="fs-14" >Food</span> 
+          <br> 
+          <span class="fs-11" style="color: grey !important;">กระเพราถาด</span>
+        </ion-label>
+        <ion-chip fill="outline" slot="end" style="color:red !important;">-500</ion-chip>
       </ion-item>
-  
+    </ion-card>
+    <ion-card >
+      <ion-item style="margin: -8px;">
+        <ion-icon name="wallet-outline" slot="start" size="large" style="color:red !important;"></ion-icon>
+        <ion-label>
+          <span class="fs-14" >Shopping</span> 
+          <br> 
+          <span class="fs-11" style="color: grey !important;">เสื้อใหม่</span>
+        </ion-label>
+        <ion-chip fill="outline" slot="end" style="color:red !important;">-1000</ion-chip>
+      </ion-item>
     </ion-card>
     <ion-card>
-      <ion-item>
-        <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label>Food</ion-label>
-        <ion-button fill="outline" slot="end">500</ion-button>
+      <ion-item style="margin: -8px;">
+        <ion-icon name="cash-outline" slot="start" size="large" style="color:rgb(5, 209, 5) !important;"></ion-icon>
+        <ion-label>
+          <span class="fs-14" >Salary</span> 
+          <br> 
+          <span class="fs-11" style="color: grey !important;">เงินดือนออกแล้วโว้ยยย</span>
+        </ion-label>
+        <ion-chip fill="outline" slot="end" style="color:green !important;">+5000</ion-chip>
       </ion-item>
-  
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label>Food</ion-label>
-        <ion-button fill="outline" slot="end">500</ion-button>
-      </ion-item>
-  
     </ion-card>
 
     <ion-item-divider>
-      <ion-label>
-        26 February 2562
-      </ion-label>
+      <ion-label slot="start"><span class="fs-25">24</span> February 2562</ion-label>
+      <ion-label slot="end" class="p-r-10">-1500</ion-label>
     </ion-item-divider>
   
-    <ion-card>
-      <ion-item>
-        <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label>Food</ion-label>
-        <ion-button fill="outline" slot="end">500</ion-button>
+    <ion-card >
+      <ion-item style="margin: -8px;">
+        <ion-icon name="wallet-outline" slot="start" size="large" style="color:red !important;"></ion-icon>
+        <ion-label>
+          <span class="fs-14" >Food</span> 
+          <br> 
+          <span class="fs-11" style="color: grey !important;">กระเพราถาด</span>
+        </ion-label>
+        <ion-chip fill="outline" slot="end" style="color:red !important;">-500</ion-chip>
       </ion-item>
-  
     </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label>Food</ion-label>
-        <ion-button fill="outline" slot="end">500</ion-button>
+    <ion-card >
+      <ion-item style="margin: -8px;">
+        <ion-icon name="wallet-outline" slot="start" size="large" style="color:red !important;"></ion-icon>
+        <ion-label>
+          <span class="fs-14" >Shopping</span> 
+          <br> 
+          <span class="fs-11" style="color: grey !important;">เสื้อใหม่</span>
+        </ion-label>
+        <ion-chip fill="outline" slot="end" style="color:red !important;">-1000</ion-chip>
       </ion-item>
-  
     </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-icon name="pin" slot="start"></ion-icon>
-        <ion-label>Food</ion-label>
-        <ion-button fill="outline" slot="end">500</ion-button>
-      </ion-item>
-  
-    </ion-card>
-  
+
   </ion-list>
  
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
