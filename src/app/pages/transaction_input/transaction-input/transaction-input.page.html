@@ -17,5 +17,42 @@
 </ion-header>
 
 <ion-content>
+  <ion-grid class="p-t-10">
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <ion-item>
+          <ion-label class="fs-25">฿</ion-label>
+          <ion-input class="fs-25" placeholder="0"></ion-input>
+        </ion-item>
 
+        <ion-item>
+          <ion-icon name="trail-sign-outline" class="p-r-5"></ion-icon>
+          <ion-label position="fixed"> Category</ion-label>
+          <ion-input placeholder="Select Category" (click)="select_category_alert()" style="text-align: right;" readonly></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="calendar-outline" class="p-r-5"></ion-icon>
+          <ion-label> Date</ion-label>
+          <ion-datetime displayFormat="DD MMMM YY" placeholder="Select Date"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="clipboard-outline" class="p-r-5"></ion-icon>
+          <ion-label position="fixed"> Write note</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row >
+      <ion-col>
+        <ion-button expand="block">Save Transaction</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
