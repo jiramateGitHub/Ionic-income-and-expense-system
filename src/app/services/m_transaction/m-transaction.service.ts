@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 @Injectable({
   providedIn: 'root'
 })
-export class MTransectionService {
+export class MTransactionService {
   public tran_id : string;
   public tran_catt_id	: string;
   public tran_wat_id : string;

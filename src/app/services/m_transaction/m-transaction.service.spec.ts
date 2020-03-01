@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MTransectionService } from './m-transection.service';
+import { MTransactionService } from './m-transaction.service';
 
-describe('MTransectionService', () => {
+describe('MTransactionService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MTransectionService = TestBed.get(MTransectionService);
+    const service: MTransactionService = TestBed.get(MTransactionService);
     expect(service).toBeTruthy();
   });
 });

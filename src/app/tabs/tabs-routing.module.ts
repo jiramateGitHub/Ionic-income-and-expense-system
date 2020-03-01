@@ -8,6 +8,15 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
+        path: 'sin',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../signin/signin.module').then( m => m.SigninPageModule)
+          }
+        ]
+      },
+      {
         path: 'tab1',
         children: [
           {

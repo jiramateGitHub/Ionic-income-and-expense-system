@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
+  },
+  {
+    path: 'transaction-input',
+    loadChildren: () => import('./pages/transaction_input/transaction-input/transaction-input.module').then( m => m.TransactionInputPageModule)
   }
 ];
 @NgModule({
