@@ -25,7 +25,10 @@ export class SignupPage implements OnInit {
     private toastController: ToastController,
     private MPersonService:MPersonService,
     private SessionService:SessionService
-  ) { }
+  ) {
+    this.username = "";
+    this.password = "";
+   }
 
 // * @Function   : ngOnInit => ทำหน้าที่ในการ initial ค่าข้อมูลของ component
 // * @Author     : Jiramate Phuaphan
@@ -42,13 +45,28 @@ export class SignupPage implements OnInit {
     if(this.password == this.validate_password){
       this.data.per_username = this.username;
       this.data.per_password = this.password;
-      var temp = this.MPersonService.get_obs_mperson(); 
-
-      this.MPersonService.insert_person(this.data).then(() => {
-        this.router.navigateByUrl('signin');
-        this.showToast('Sign up successful.');
-      }, err => {
-        this.showToast('There was a problem sign up your account :(');
+      var check_username_duplicate = false;
+      var count = 0;
+      this.MPersonService.get_obs_mperson().subscribe(res => {
+        for(var i = 0; i < res.length ; i++){
+          if(res[i].per_username == this.username){
+            check_username_duplicate = true;
+            break;
+          }
+        }
+        if(check_username_duplicate == false){
+          this.MPersonService.insert_person(this.data).then(() => {
+            this.router.navigateByUrl('signin');
+            this.showToast('Sign up successful.');
+          }, err => {
+            this.showToast('There was a problem sign up your account :(');
+          });
+        }else{
+          if(count == 0){
+            this.showToast('Your username duplicate.');
+          }
+        }
+        count++;
       });
     }else{
       this.showToast('Passwords do not match.');
