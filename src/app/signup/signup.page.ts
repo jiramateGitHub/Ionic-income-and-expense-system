@@ -1,5 +1,5 @@
 import { SessionService } from './../services/session/session.service';
-import { MPersonService } from './../services/m_person/m-person.service';
+import { MPersonService, MPerson } from './../services/m_person/m-person.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -11,9 +11,10 @@ import { ToastController } from '@ionic/angular';
 })
 export class SignupPage implements OnInit {
 
-  public data: Person = {
+  public data: MPerson = {
     per_username: '',
-    per_password: ''
+    per_password: '',
+    per_active:'Y'
   };
 
   public username : string;

@@ -6,10 +6,7 @@
         </ion-buttons>
         <ion-title *ngIf="type_input == 'insert'">Add transaction</ion-title>
         <ion-title *ngIf="type_input == 'update'">Edit transaction</ion-title>
-        <ion-buttons slot="end" *ngIf="type_input == 'insert'">
-            <ion-icon name="checkmark" style="zoom:1.5;"></ion-icon>
-        </ion-buttons>
-        <ion-buttons slot="end" *ngIf="type_input == 'update'">
+        <ion-buttons slot="end">
             <ion-icon name="checkmark" style="zoom:1.5;"></ion-icon>
         </ion-buttons>
       </ion-item>
@@ -22,7 +19,7 @@
       <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
         <ion-item>
           <ion-label class="fs-25">฿</ion-label>
-          <ion-input class="fs-25" placeholder="0"></ion-input>
+          <ion-input class="fs-25" placeholder="0" type="number"></ion-input>
         </ion-item>
 
         <ion-item>

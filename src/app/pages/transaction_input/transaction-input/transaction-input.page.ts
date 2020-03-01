@@ -59,6 +59,10 @@ export class TransactionInputPage implements OnInit {
     await alert.present();
   }
  
+  
+// * @Function   : showToast => แสดง Toast
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   showToast(msg) {
     this.toastController.create({
       message: msg,
@@ -66,6 +70,9 @@ export class TransactionInputPage implements OnInit {
     }).then(toast => toast.present());
   }
 
+// * @Function   : close_modal => คำสั่งปิด modal
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   async close_modal(){
     this.modalController.dismiss({
       'dismissed': true
