@@ -4,6 +4,10 @@ import 'rxjs/add/operator/map';
 import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
+
+// * @Interface  : MPerson => เก็บข้อมูล Object ของ MPerson
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
 export interface MPerson {
   per_id?: string,
   per_username: string,
@@ -32,10 +36,16 @@ export class MPersonService   {
     );
   }
  
+// * @Function   : get_obs_mperson => คือค่าข้อมูล interface MPerson ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   get_obs_mperson(): Observable<MPerson[]> {
     return this.obs_mperson;
   }
- 
+
+// * @Function   : get_obs_mperson_by_id => คือค่าข้อมูล interface MPerson โดยค้นหาจาก id
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   get_obs_mperson_by_id(id: string): Observable<MPerson> {
     return this.mpersonCollection.doc<MPerson>(id).valueChanges().pipe(
       take(1),
@@ -45,15 +55,24 @@ export class MPersonService   {
       })
     );
   }
- 
+
+// * @Function   : insert_person => เพิ่มข้อมูล person ลงใน Firebase Cloud
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   insert_person(mperson: MPerson): Promise<DocumentReference> {
     return this.mpersonCollection.add(mperson);
   }
- 
+
+// * @Function   : update_person => แก้ไขข้อมูล person ลงใน Firebase Cloud
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   update_person(mperson: MPerson): Promise<void> {
     return this.mpersonCollection.doc(mperson.per_id).update({ per_username: mperson.per_username, per_password: mperson.per_password });
   }
- 
+
+// * @Function   : delete_person => ลบข้อมูล person ใน Firebase Cloud
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   delete_person(per_id: string): Promise<void> {
     return this.mpersonCollection.doc(per_id).delete();
   }

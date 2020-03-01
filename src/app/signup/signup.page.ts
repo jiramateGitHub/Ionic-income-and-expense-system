@@ -3,7 +3,7 @@ import { MPersonService } from './../services/m_person/m-person.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -11,14 +11,14 @@ import { Observable } from 'rxjs';
 })
 export class SignupPage implements OnInit {
 
-  data: Person = {
+  public data: Person = {
     per_username: '',
     per_password: ''
   };
 
-  public username:string;
-  public password:string;
-  public validate_password:string;
+  public username : string;
+  public password : string;
+  public validate_password : string;
 
   constructor(
     private router:Router,
@@ -27,18 +27,24 @@ export class SignupPage implements OnInit {
     private SessionService:SessionService
   ) { }
 
+// * @Function   : ngOnInit => ทำหน้าที่ในการ initial ค่าข้อมูลของ component
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   ngOnInit() {
     this.username = "";
     this.password = "";
   }
 
+// * @Function   : signup => สมัครสมาชิก
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   signup(){
     if(this.password == this.validate_password){
       this.data.per_username = this.username;
       this.data.per_password = this.password;
-      var temp = this.MPersonService.getIdeas(); 
+      var temp = this.MPersonService.get_obs_mperson(); 
 
-      this.MPersonService.addIdea(this.data).then(() => {
+      this.MPersonService.insert_person(this.data).then(() => {
         this.router.navigateByUrl('signin');
         this.showToast('Sign up successful.');
       }, err => {
@@ -47,13 +53,18 @@ export class SignupPage implements OnInit {
     }else{
       this.showToast('Passwords do not match.');
     }
-    
   }
 
+// * @Function   : redirect_signin => กลับหน้า sign in
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   redirect_signin(){
     this.router.navigateByUrl('signin');
   }
-
+  
+// * @Function   : redirect_signin => ใช้แสดง Toast
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
   showToast(msg) {
     this.toastController.create({
       message: msg,
