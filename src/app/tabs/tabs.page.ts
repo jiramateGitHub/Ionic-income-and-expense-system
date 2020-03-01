@@ -15,7 +15,6 @@ export class TabsPage {
     private router:Router,
     private modalController: ModalController,
     ) {
-    console.log(this.SessionService.password );
     // if(this.SessionService.password == undefined){
     //   this.router.navigateByUrl('signin');
     // }
