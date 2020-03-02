@@ -8,7 +8,56 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="p-t-10">
+<ion-content class="p-t-10" *ngIf="type_input == 'income'">
+  <ion-item-divider color="success">
+    <ion-icon name="trending-up-outline" style="zoom:1.6;"></ion-icon>
+    <ion-label class="fs-20">
+      &nbsp;INCOME
+    </ion-label>
+  </ion-item-divider>
+
+  <!-- Item Dividers in a List -->
+  <ion-list lines="none">
+    <ion-item (click)="add_category('Award','1')">
+      <ion-label class="p-l-15">Award</ion-label>
+      <ion-button slot="end" color="light" >
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-15">Gifts</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-15">Interest Money</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-15">Salary</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-15">Selling</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-15">Others</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-content class="p-t-10" *ngIf="type_input == 'expense'">
   <ion-item-divider color="danger">
     <ion-icon name="trending-down-outline" style="zoom:1.6;"></ion-icon>
     <ion-label class="fs-20">
