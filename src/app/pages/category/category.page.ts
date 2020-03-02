@@ -29,34 +29,34 @@ export class CategoryPage implements OnInit {
     return await modal.present();
   }
 
-// * @Function   : category_manage_alert => แสดง Select สำหรับเลือกตัวดำเนินการ Category 
-// * @Author     : Kessarin
-// * @Create Date: 2563-03-02
-async category_manage_alert(){
-  const alert = await this.alertController.create({
-    header: 'Manage Category',
-    buttons: [
-      {
-        text: 'Edit',
-        cssClass: 'secondary',
-        handler: () => {
+  // * @Function   : category_manage_alert => แสดง Select สำหรับเลือกตัวดำเนินการ Category 
+  // * @Author     : Kessarin
+  // * @Create Date: 2563-03-02
+  async category_manage_alert(){
+    const alert = await this.alertController.create({
+      header: 'Manage Category',
+      buttons: [
+        {
+          text: 'Edit',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Delete',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
         }
-      },
-      {
-        text: 'Delete',
-        cssClass: 'secondary',
-        handler: () => {
-        }
-      },
-      {
-        text: 'Cancel',
-        cssClass: 'secondary',
-        handler: () => {
-        }
-      }
-    ]
-  });
-  await alert.present();
-}
+      ]
+    });
+    await alert.present();
+  }
 
 }

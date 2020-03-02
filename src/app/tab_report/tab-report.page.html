@@ -3,15 +3,19 @@
     <ion-title>
       Report
     </ion-title>
+    <ion-chip slot="end" class="chip-bl" style="--background:#3E82FE" (click)="selcet_report_alert()">
+      <ion-icon name="calendar-outline" class="p-r-10" style="color: white !important;"></ion-icon>
+    </ion-chip>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-list>
+  <ion-item class="p-t-10">
+    <ion-icon name="calendar-outline" class="p-r-5"></ion-icon>
+    <ion-label> Date</ion-label>
+    <ion-datetime displayFormat="DD MMMM YY" placeholder="Select Date"></ion-datetime>
+  </ion-item>
+</ion-list>
+  <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
 </ion-content>

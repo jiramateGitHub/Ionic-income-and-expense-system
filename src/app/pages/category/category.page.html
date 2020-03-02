@@ -17,102 +17,42 @@
 
   <!-- Item Dividers in a List -->
   <ion-list lines="none">
-    <ion-item-sliding>
-      <ion-item >
-        <ion-label class="p-l-15">Award</ion-label>
-        <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option color="primary">
-          <ion-icon slot="start" name="create"></ion-icon>
-          Edit
-        </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="start" name="trash"></ion-icon>
-          Delete
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-    <ion-item-sliding>
-      <ion-item >
-        <ion-label class="p-l-15">Gifts</ion-label>
-        <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option color="primary">
-          <ion-icon slot="start" name="create"></ion-icon>
-          Edit
-        </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="start" name="trash"></ion-icon>
-          Delete
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-    <ion-item-sliding>
-      <ion-item >
-        <ion-label class="p-l-15">Interest Money</ion-label>
-        <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option color="primary">
-          <ion-icon slot="start" name="create"></ion-icon>
-          Edit
-        </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="start" name="trash"></ion-icon>
-          Delete
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-    <ion-item-sliding>
-      <ion-item >
-        <ion-label class="p-l-15">Salary</ion-label>
-        <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option color="primary">
-          <ion-icon slot="start" name="create"></ion-icon>
-          Edit
-        </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="start" name="trash"></ion-icon>
-          Delete
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-    <ion-item-sliding>
-      <ion-item >
-        <ion-label class="p-l-15">Selling</ion-label>
-        <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option color="primary">
-          <ion-icon slot="start" name="create"></ion-icon>
-          Edit
-        </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="start" name="trash"></ion-icon>
-          Delete
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-    <ion-item-sliding>
-      <ion-item >
-        <ion-label class="p-l-15">Others</ion-label>
-        <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-      </ion-item>
-      <ion-item-options>
-        <ion-item-option color="primary">
-          <ion-icon slot="start" name="create"></ion-icon>
-          Edit
-        </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="start" name="trash"></ion-icon>
-          Delete
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+    <ion-item-divider>
+      <ion-label class="fs-17">
+        Award
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item-divider>
+      <ion-label class="fs-17">
+        Gifts
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item-divider>
+      <ion-label class="fs-17">
+        Interest Money
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item-divider>
+      <ion-label class="fs-17">
+        Salary
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item-divider>
+      <ion-label class="fs-17">
+        Selling
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item-divider>
+      <ion-label class="fs-17">
+        Others
+      </ion-label>
+    </ion-item-divider>
+    
   </ion-list>
 
   <ion-item-divider color="danger">
@@ -129,39 +69,132 @@
         Food & Beverage
       </ion-label>
     </ion-item-divider>
-    <ion-item >
-      <ion-label class="p-l-15">Restaurants</ion-label>
-      <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-15">Cafe</ion-label>
-      <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-15">Food</ion-label>
-      <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-    </ion-item>
-  </ion-list>
 
-    <!-- Item Dividers in a List -->
-  <ion-list lines="none">
+    <ion-item-sliding>
+      <ion-item >
+        <ion-label class="p-l-15">Restaurants</ion-label>
+        <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="primary">
+          <ion-icon slot="start" name="create"></ion-icon>
+          Edit
+        </ion-item-option>
+        <ion-item-option color="danger">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item-sliding>
+      <ion-item >
+        <ion-label class="p-l-15">Cafe</ion-label>
+        <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="primary">
+          <ion-icon slot="start" name="create"></ion-icon>
+          Edit
+        </ion-item-option>
+        <ion-item-option color="danger">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item-sliding>
+      <ion-item >
+        <ion-label class="p-l-15">Food</ion-label>
+        <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="primary">
+          <ion-icon slot="start" name="create"></ion-icon>
+          Edit
+        </ion-item-option>
+        <ion-item-option color="danger">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
     <ion-item-divider>
       <ion-label class="fs-17">
-        Bills & Utilites
+        Transportation
       </ion-label>
     </ion-item-divider>
-    <ion-item >
-      <ion-label class="p-l-15">Electricity</ion-label>
-      <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-15">Internet</ion-label>
-      <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-15">Phone</ion-label>
-      <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
-    </ion-item>
+    <ion-item-sliding>
+      <ion-item >
+        <ion-label class="p-l-15">Taxi</ion-label>
+        <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="primary">
+          <ion-icon slot="start" name="create"></ion-icon>
+          Edit
+        </ion-item-option>
+        <ion-item-option color="danger">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item-sliding>
+      <ion-item >
+        <ion-label class="p-l-15">Parking Fees</ion-label>
+        <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="primary">
+          <ion-icon slot="start" name="create"></ion-icon>
+          Edit
+        </ion-item-option>
+        <ion-item-option color="danger">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  
+    <ion-item-divider>
+      <ion-label class="fs-17">
+        Shopping
+      </ion-label>
+    </ion-item-divider>
+    <ion-item-sliding>
+      <ion-item >
+        <ion-label class="p-l-15">Clothing</ion-label>
+        <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="primary">
+          <ion-icon slot="start" name="create"></ion-icon>
+          Edit
+        </ion-item-option>
+        <ion-item-option color="danger">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item-sliding>
+      <ion-item >
+        <ion-label class="p-l-15">Footwear</ion-label>
+        <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="primary">
+          <ion-icon slot="start" name="create"></ion-icon>
+          Edit
+        </ion-item-option>
+        <ion-item-option color="danger">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  
   </ion-list>
 
   <!-- fab placed to the bottom end -->
