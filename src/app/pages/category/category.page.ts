@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { CategoryInputPage } from './../category_input/category-input.page';
+import { ModalController, ToastController, NavParams, AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-category',
   templateUrl: './category.page.html',
@@ -9,7 +9,8 @@ import { CategoryInputPage } from './../category_input/category-input.page';
 export class CategoryPage implements OnInit {
 
   constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private alertController: AlertController,
   ) { }
 
   ngOnInit() {
@@ -27,5 +28,35 @@ export class CategoryPage implements OnInit {
     });
     return await modal.present();
   }
+
+// * @Function   : category_manage_alert => แสดง Select สำหรับเลือกตัวดำเนินการ Category 
+// * @Author     : Kessarin
+// * @Create Date: 2563-03-02
+async category_manage_alert(){
+  const alert = await this.alertController.create({
+    header: 'Manage Category',
+    buttons: [
+      {
+        text: 'Edit',
+        cssClass: 'secondary',
+        handler: () => {
+        }
+      },
+      {
+        text: 'Delete',
+        cssClass: 'secondary',
+        handler: () => {
+        }
+      },
+      {
+        text: 'Cancel',
+        cssClass: 'secondary',
+        handler: () => {
+        }
+      }
+    ]
+  });
+  await alert.present();
+}
 
 }
