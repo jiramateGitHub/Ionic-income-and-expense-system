@@ -1,3 +1,4 @@
+import { TransferInputPage } from './pages/transfer_input/transfer-input.page';
 import { CategoryInputPage } from './pages/category_input/category-input.page';
 import { WalletInputPage } from './pages/wallet_input/wallet-input.page';
 import { TransactionInputPage } from './pages/transaction_input/transaction-input.page';
@@ -27,13 +28,15 @@ import { TransactionCategoryPage } from './pages/transaction_category/transactio
     TransactionInputPage,
     TransactionCategoryPage,
     WalletInputPage,
-    CategoryInputPage
+    CategoryInputPage,
+    TransferInputPage
   ],
   entryComponents: [
     TransactionInputPage,
     TransactionCategoryPage,
     WalletInputPage,
-    CategoryInputPage
+    CategoryInputPage,
+    TransferInputPage
   ],
   imports: [
     BrowserModule, 
