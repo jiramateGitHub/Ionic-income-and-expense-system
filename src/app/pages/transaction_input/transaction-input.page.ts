@@ -13,6 +13,10 @@ import { Observable } from 'rxjs';
 export class TransactionInputPage implements OnInit {
 
   private type_input: string;
+  private tran_amount: string;
+  private tran_note: string;
+  private tran_date: string;
+  public catt_name: string;
  
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -24,9 +28,12 @@ export class TransactionInputPage implements OnInit {
     private MPersonService: MPersonService
   ) { 
       this.type_input = navParams.get('type_input');
+      
+      console.log('constructor')
     }
  
   ngOnInit() {
+    console.log('ngOnInit')
    }
 
   async select_category_alert(){
@@ -64,6 +71,10 @@ export class TransactionInputPage implements OnInit {
       componentProps: {
         'type_input': type
       }
+    });
+    modal.onDidDismiss()
+    .then((data) => {
+      this.catt_name = data['data'].name; // Here's your selected user!
     });
     return await modal.present();
   }

@@ -25,7 +25,7 @@
         <ion-item>
           <ion-icon name="trail-sign-outline" class="p-r-5"></ion-icon>
           <ion-label position="fixed"> Category</ion-label>
-          <ion-input placeholder="Select Category" (click)="select_category_alert()" style="text-align: right;" readonly></ion-input>
+          <ion-input placeholder="Select Category" (click)="select_category_alert()" style="text-align: right;" [(ngModel)]="catt_name" readonly></ion-input>
         </ion-item>
 
         <ion-item>
