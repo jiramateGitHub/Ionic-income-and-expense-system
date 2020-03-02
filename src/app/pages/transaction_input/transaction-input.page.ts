@@ -58,6 +58,13 @@ export class TransactionInputPage implements OnInit {
           }
         },
         {
+          text: 'Transfer',
+          cssClass: 'secondary',
+          handler: () => {
+            this.modal_taransaction_category_show("transfer")
+          }
+        },
+        {
           text: 'Cancel',
           cssClass: 'secondary',
           handler: () => {
