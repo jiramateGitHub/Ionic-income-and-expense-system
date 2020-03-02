@@ -1,3 +1,4 @@
+import { TransferInputPage } from './../transfer_input/transfer-input.page';
 import { TransactionCategoryPage } from './../transaction_category/transaction-category.page';
 import { MPersonService } from '../../services/m_person/m-person.service';
 import { Component, OnInit } from '@angular/core';
@@ -58,6 +59,13 @@ export class TransactionInputPage implements OnInit {
           }
         },
         {
+          text: 'Transfer',
+          cssClass: 'secondary',
+          handler: () => {
+            this.modal_transfer_input_show("transfer")
+          }
+        },
+        {
           text: 'Cancel',
           cssClass: 'secondary',
           handler: () => {
@@ -74,6 +82,23 @@ export class TransactionInputPage implements OnInit {
   async modal_taransaction_category_show(type:string) {
     const modal = await this.modalController.create({
       component: TransactionCategoryPage,
+      componentProps: {
+        'type_input': type
+      }
+    });
+    modal.onDidDismiss()
+    .then((data) => {
+      this.catt_name = data['data'].name; // Here's your selected user!
+    });
+    return await modal.present();
+  }
+
+// * @Function   : modal_transfer_input_show => แสดง Modal TransferInputPage และ ตอนปิด Modal จะ Passing Data กลับมา
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-02
+  async modal_transfer_input_show(type:string) {
+    const modal = await this.modalController.create({
+      component: TransferInputPage,
       componentProps: {
         'type_input': type
       }
