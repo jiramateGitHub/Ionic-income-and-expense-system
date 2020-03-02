@@ -1,3 +1,4 @@
+import { TabReportPageModule } from './../tab_report/tab-report.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
@@ -27,22 +28,22 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'tab_report',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../tab_report/tab-report.module').then(m => m.TabReportPageModule)
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'tab_account',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+              import('../tab_account/tab-account.module').then(m => m.TabAccountPageModule)
           }
         ]
       },
