@@ -131,3 +131,84 @@
     </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-content class="p-t-10" *ngIf="type_input == 'parent_income'">
+  <ion-item-divider color="success">
+    <ion-icon name="trending-up-outline" style="zoom:1.6;"></ion-icon>
+    <ion-label class="fs-20">
+      &nbsp;INCOME
+    </ion-label>
+  </ion-item-divider>
+
+  <!-- Item Dividers in a List -->
+  <ion-list lines="none">
+    <ion-item (click)="add_category('Award','1')">
+      <ion-label class="p-l-0">Award</ion-label>
+      <ion-button slot="end" color="light" >
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-0">Gifts</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-0">Interest Money</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-0">Salary</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-0">Selling</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-0">Others</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-content class="p-t-10" *ngIf="type_input == 'parent_expense'">
+  <ion-item-divider color="danger">
+    <ion-icon name="trending-down-outline" style="zoom:1.6;"></ion-icon>
+    <ion-label class="fs-20">
+      &nbsp;EXPENSE
+    </ion-label>
+  </ion-item-divider>
+
+  <!-- Item Dividers in a List -->
+  <ion-list lines="none">
+
+    <ion-item (click)="add_category('Food & Beverage','1')">
+      <ion-label class="p-l-0">Food & Beverage</ion-label>
+      <ion-button slot="end" color="light" >
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-0">Transportation</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="p-l-0">Shopping</ion-label>
+      <ion-button slot="end" color="light">
+        + ADD
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
