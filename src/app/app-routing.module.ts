@@ -26,6 +26,22 @@ const routes: Routes = [
   {
     path: 'transaction-category',
     loadChildren: () => import('./pages/transaction_category/transaction-category.module').then( m => m.TransactionCategoryPageModule)
+  },
+  {
+    path: 'wallet',
+    loadChildren: () => import('./pages/wallet/wallet.module').then( m => m.WalletPageModule)
+  },
+  {
+    path: 'category',
+    loadChildren: () => import('./pages/category/category.module').then( m => m.CategoryPageModule)
+  },
+  {
+    path: 'wallet-input',
+    loadChildren: () => import('./pages/wallet_input/wallet-input.module').then( m => m.WalletInputPageModule)
+  },
+  {
+    path: 'category-input',
+    loadChildren: () => import('./pages/category_input/category-input.module').then( m => m.CategoryInputPageModule)
   }
 ];
 @NgModule({

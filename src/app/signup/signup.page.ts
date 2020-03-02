@@ -57,6 +57,7 @@ export class SignupPage implements OnInit {
         }
         if(check_username_duplicate == false){
           this.MPersonService.insert_person(this.data).then(() => {
+            this.SessionService.username = this.username
             this.router.navigateByUrl('signin');
             this.showToast('Sign up successful.');
           }, err => {
