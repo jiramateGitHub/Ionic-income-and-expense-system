@@ -1,12 +1,12 @@
-import { SessionService } from './../services/session/session.service';
+import { SessionService } from '../services/session/session.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  templateUrl: 'tab-wallet.page.html',
+  styleUrls: ['tab-wallet.page.scss']
 })
-export class Tab1Page {
+export class TabWalletPage {
 
   constructor(private SessionService:SessionService, private router:Router) {
    

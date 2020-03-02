@@ -17,12 +17,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab1',
+        path: 'tab_wallet',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+              import('../tab_wallet/tab-wallet.module').then(m => m.TabWalletPageModule)
           }
         ]
       },
@@ -48,14 +48,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/tab_wallet',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/tab_wallet',
     pathMatch: 'full'
   }
 ];
