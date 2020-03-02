@@ -1,4 +1,4 @@
-import { TransactionInputPage } from './pages/transaction_input/transaction-input/transaction-input.page';
+import { TransactionInputPage } from './pages/transaction_input/transaction-input.page';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -17,14 +17,17 @@ import { FormsModule } from "@angular/forms";
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { TransactionCategoryPage } from './pages/transaction_category/transaction-category.page';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TransactionInputPage
+    TransactionInputPage,
+    TransactionCategoryPage
   ],
   entryComponents: [
-    TransactionInputPage
+    TransactionInputPage,
+    TransactionCategoryPage
   ],
   imports: [
     BrowserModule, 

@@ -70,6 +70,8 @@
     </ion-item-divider>
   
     <ion-card >
+      <ion-item-sliding>
+
       <ion-item style="margin: -8px;">
         <ion-icon name="wallet-outline" slot="start" size="large" style="color:red !important;"></ion-icon>
         <ion-label>
@@ -79,6 +81,18 @@
         </ion-label>
         <ion-chip fill="outline" slot="end" style="color:red !important;">-500</ion-chip>
       </ion-item>
+      <ion-item-options>
+        <ion-item-option color="primary">
+          <ion-icon slot="start" name="create"></ion-icon>
+          Edit
+        </ion-item-option>
+        <ion-item-option color="danger">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
     </ion-card>
     <ion-card >
       <ion-item style="margin: -8px;">

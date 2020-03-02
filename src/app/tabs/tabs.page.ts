@@ -1,4 +1,4 @@
-import { TransactionInputPage } from './../pages/transaction_input/transaction-input/transaction-input.page';
+import { TransactionInputPage } from '../pages/transaction_input/transaction-input.page';
 import { SessionService } from './../services/session/session.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';

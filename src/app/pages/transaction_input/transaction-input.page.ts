@@ -1,4 +1,5 @@
-import { MPersonService } from './../../../services/m_person/m-person.service';
+import { TransactionCategoryPage } from './../transaction_category/transaction-category.page';
+import { MPersonService } from '../../services/m_person/m-person.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, ToastController, NavParams, AlertController } from '@ionic/angular';
@@ -28,8 +29,7 @@ export class TransactionInputPage implements OnInit {
   ngOnInit() {
    }
 
-   async select_category_alert(){
-    
+  async select_category_alert(){
     const alert = await this.alertController.create({
       header: 'Select Category',
       buttons: [
@@ -37,14 +37,14 @@ export class TransactionInputPage implements OnInit {
           text: 'Income',
           cssClass: 'secondary',
           handler: () => {
-            this.router.navigateByUrl("procedure")
+            this.modal_taransaction_category_show("income")
           }
         },
         {
           text: 'Expense',
           cssClass: 'secondary',
           handler: () => {
-            this.router.navigateByUrl("case")
+            this.modal_taransaction_category_show("expense")
           }
         },
         {
@@ -55,8 +55,17 @@ export class TransactionInputPage implements OnInit {
         }
       ]
     });
-
     await alert.present();
+  }
+
+  async modal_taransaction_category_show(type:string) {
+    const modal = await this.modalController.create({
+      component: TransactionCategoryPage,
+      componentProps: {
+        'type_input': type
+      }
+    });
+    return await modal.present();
   }
  
   

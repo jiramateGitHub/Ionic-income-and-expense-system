@@ -13,7 +13,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/transaction_input/transaction-input/transaction-input.module').then( m => m.TransactionInputPageModule)
+            loadChildren: () => import('../pages/transaction_input/transaction-input.module').then( m => m.TransactionInputPageModule)
           }
         ]
       },

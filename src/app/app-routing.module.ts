@@ -21,11 +21,11 @@ const routes: Routes = [
   },
   {
     path: 'transaction-input',
-    loadChildren: () => import('./pages/transaction_input/transaction-input/transaction-input.module').then( m => m.TransactionInputPageModule)
+    loadChildren: () => import('./pages/transaction_input/transaction-input.module').then( m => m.TransactionInputPageModule)
   },
   {
     path: 'transaction-category',
-    loadChildren: () => import('./pages/transaction_category/transaction-category/transaction-category.module').then( m => m.TransactionCategoryPageModule)
+    loadChildren: () => import('./pages/transaction_category/transaction-category.module').then( m => m.TransactionCategoryPageModule)
   }
 ];
 @NgModule({
