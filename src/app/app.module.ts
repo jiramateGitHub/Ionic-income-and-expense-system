@@ -1,3 +1,5 @@
+import { CategoryInputPage } from './pages/category_input/category-input.page';
+import { WalletInputPage } from './pages/wallet_input/wallet-input.page';
 import { TransactionInputPage } from './pages/transaction_input/transaction-input.page';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,11 +25,15 @@ import { TransactionCategoryPage } from './pages/transaction_category/transactio
   declarations: [
     AppComponent,
     TransactionInputPage,
-    TransactionCategoryPage
+    TransactionCategoryPage,
+    WalletInputPage,
+    CategoryInputPage
   ],
   entryComponents: [
     TransactionInputPage,
-    TransactionCategoryPage
+    TransactionCategoryPage,
+    WalletInputPage,
+    CategoryInputPage
   ],
   imports: [
     BrowserModule, 

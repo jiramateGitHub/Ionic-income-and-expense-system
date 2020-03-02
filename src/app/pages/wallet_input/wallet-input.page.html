@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>wallet_input</ion-title>
+    <ion-item lines="none">
+      <ion-buttons slot="start" (click)="close_modal()">
+          <ion-icon name="close" style="zoom:1.5;"></ion-icon>
+      </ion-buttons>
+      <ion-title *ngIf="type_input == 'insert'" style="text-align: center;">Add wallet</ion-title>
+      <ion-title *ngIf="type_input == 'update'" style="text-align: center;">Edit wallet</ion-title>
+      <ion-buttons slot="end">
+          <ion-icon name="checkmark" style="zoom:1.5;"></ion-icon>
+      </ion-buttons>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row >
+      <ion-col>
+        <ion-button expand="block">Save Wallet</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

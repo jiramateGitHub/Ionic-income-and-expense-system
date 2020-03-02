@@ -20,6 +20,9 @@ export class TabsPage {
     // }
   }
 
+  // * @Function   : modal_insert_show => แสดง modal TransactionInputPage
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-01
   async modal_insert_show() {
     const modal = await this.modalController.create({
       component: TransactionInputPage,

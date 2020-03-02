@@ -36,6 +36,9 @@ export class TransactionInputPage implements OnInit {
     console.log('ngOnInit')
    }
 
+// * @Function   : select_category_alert => แสดง Select สำหรับเลือก Category Type
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-02
   async select_category_alert(){
     const alert = await this.alertController.create({
       header: 'Select Category',
@@ -65,6 +68,9 @@ export class TransactionInputPage implements OnInit {
     await alert.present();
   }
 
+// * @Function   : modal_taransaction_category_show => แสดง Modal TransactionCategoryPage และ ตอนปิด Modal จะ Passing Data กลับมา
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-02
   async modal_taransaction_category_show(type:string) {
     const modal = await this.modalController.create({
       component: TransactionCategoryPage,
