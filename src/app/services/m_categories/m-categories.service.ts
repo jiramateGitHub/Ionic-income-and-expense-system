@@ -23,12 +23,13 @@ export class MCategoriesService {
   public cat_type	 : string;
   public cat_active : string;
 
-  private obs_mcategories: Observable<MCategories[]>;
+  private obs_mcategories_income: Observable<MCategories[]>;
+  private obs_mcategories_expense: Observable<MCategories[]>;
   private mcategoriesCollection: AngularFirestoreCollection<MCategories>;
  
   constructor(private afs: AngularFirestore) {
     this.mcategoriesCollection = this.afs.collection<MCategories>('M_categories', ref => ref.where('cat_type', '==', 1));
-    this.obs_mcategories = this.mcategoriesCollection.snapshotChanges().pipe(
+    this.obs_mcategories_income = this.mcategoriesCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => { 
           const data = a.payload.doc.data();
@@ -37,16 +38,31 @@ export class MCategoriesService {
         });
       })
     );
-    this.obs_mcategories.subscribe(res => console.log(res))
-      
+    this.mcategoriesCollection = this.afs.collection<MCategories>('M_categories', ref => ref.where('cat_type', '==', 2));
+    this.obs_mcategories_expense = this.mcategoriesCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => { 
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
   }
   
  
-// * @Function   : get_obs_mcategories => คือค่าข้อมูล interface MCategories ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
+// * @Function   : get_obs_mcategories_income => คือค่าข้อมูล interface MCategories ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-03
-  get_obs_mcategories(): Observable<MCategories[]> {
-    return this.obs_mcategories;
+  get_obs_mcategories_income(): Observable<MCategories[]> {
+    return this.obs_mcategories_income;
+  }
+
+// * @Function   : get_obs_mcategories_expense => คือค่าข้อมูล interface MCategories ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-03
+  get_obs_mcategories_expense(): Observable<MCategories[]> {
+    return this.obs_mcategories_expense;
   }
 
 // * @Function   : get_obs_mcategories_by_id => คือค่าข้อมูล interface MCategories โดยค้นหาจาก id
