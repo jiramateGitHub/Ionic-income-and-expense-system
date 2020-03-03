@@ -34,6 +34,7 @@ export class MPersonService   {
         });
       })
     );
+    this.obs_mperson.subscribe(res => console.log(res))
   }
  
 // * @Function   : get_obs_mperson => คือค่าข้อมูล interface MPerson ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้

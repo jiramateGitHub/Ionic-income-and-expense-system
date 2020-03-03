@@ -17,18 +17,18 @@
 
   <!-- Item Dividers in a List -->
   <ion-list lines="none">
-    <ion-item-divider>
+    <!-- <ion-item-divider>
       <ion-label class="fs-17">
         Award
       </ion-label>
-    </ion-item-divider>
+    </ion-item-divider> -->
 
-    <ion-item-divider>
+    <ion-item-divider button  *ngFor="let value of (MCategories_list | async)">
       <ion-label class="fs-17">
-        Gifts
+        {{value.cat_name}}
       </ion-label>
     </ion-item-divider>
-
+<!-- 
     <ion-item-divider>
       <ion-label class="fs-17">
         Interest Money
@@ -51,7 +51,7 @@
       <ion-label class="fs-17">
         Others
       </ion-label>
-    </ion-item-divider>
+    </ion-item-divider> -->
     
   </ion-list>
 
