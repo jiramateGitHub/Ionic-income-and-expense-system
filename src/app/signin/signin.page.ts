@@ -58,12 +58,12 @@ export class SigninPage implements OnInit {
 // * @Function   : redirect_signin => ใช้แสดง Toast
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
-showToast(msg) {
-  this.toastController.create({
-    message: msg,
-    duration: 2000
-  }).then(toast => toast.present());
-}
+  showToast(msg) {
+    this.toastController.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
+  }
 
 
 }
