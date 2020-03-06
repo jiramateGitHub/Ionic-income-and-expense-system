@@ -36,6 +36,19 @@ export class CategoryPage implements OnInit {
     return await modal.present();
   }
 
+  // * @Function   : modal_update_show => แสดง modal CategoryInputPage
+  // * @Author     : Kessarin
+  // * @Create Date: 2563-03-01
+  async modal_update_show() {
+    const modal = await this.modalController.create({
+      component: CategoryInputPage,
+      componentProps: {
+        'type_input': 'update'
+      }
+    });
+    return await modal.present();
+  }
+
   // * @Function   : category_manage_alert => แสดง Select สำหรับเลือกตัวดำเนินการ Category 
   // * @Author     : Kessarin
   // * @Create Date: 2563-03-02
@@ -47,12 +60,14 @@ export class CategoryPage implements OnInit {
           text: 'Edit',
           cssClass: 'secondary',
           handler: () => {
+            this.modal_update_show();
           }
         },
         {
           text: 'Delete',
           cssClass: 'secondary',
           handler: () => {
+            this.category_active_update_AlertConfirm();
           }
         },
         {
@@ -63,6 +78,28 @@ export class CategoryPage implements OnInit {
         }
       ]
     });
+    await alert.present();
+  }
+
+  async category_active_update_AlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Confirm',
+          handler: () => {
+           
+          }
+        }
+      ]
+    });
+
     await alert.present();
   }
 

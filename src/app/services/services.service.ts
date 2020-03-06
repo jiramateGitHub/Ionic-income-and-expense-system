@@ -6,5 +6,5 @@ import 'rxjs/add/operator/map';
 })
 export class ServicesService {
 
-  constructor(private http:Http) { }
+  constructor() { }
 }
