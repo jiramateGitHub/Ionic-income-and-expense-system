@@ -46,13 +46,10 @@ export class MCategoriesService {
   }
 
   ngOnInit() {
-    this.orderList = this.servicesService.get_list();
-    console.log(this.orderList)
-  }
-
-  get_list(){
     
   }
+
+
   
  
 // * @Function   : get_obs_mcategories_income => คือค่าข้อมูล interface MCategories ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
