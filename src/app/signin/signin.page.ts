@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs';
 import { SessionService } from './../services/session/session.service';
-import { MPersonService } from './../services/m_person/m-person.service';
+import { MPersonService , MPerson} from './../services/m_person/m-person.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -11,14 +12,16 @@ import { ToastController } from '@ionic/angular';
 export class SigninPage implements OnInit {
 
   public username:string;
-  public password:string;
+  public password : string;
 
   constructor(
     private router:Router,
     private toastController: ToastController,
-    private MPersonService:MPersonService,
-    private SessionService:SessionService
-  ) { }
+    private MPersonService: MPersonService,
+    private SessionService: SessionService,
+  ) {
+
+   }
 
   ngOnInit() {
   }
@@ -29,7 +32,7 @@ export class SigninPage implements OnInit {
   signin(){
     var check_login = false;
     var count = 0;
-    this.MPersonService.get_obs_mperson().subscribe(res => {
+    this.MPersonService.get_obs_mperson(this.username, this.password).subscribe(res => {
       for(var i = 0; i < res.length ; i++){
         if(res[i].per_username == this.username && res[i].per_password == this.password){
           check_login = true;

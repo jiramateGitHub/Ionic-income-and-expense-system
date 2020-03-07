@@ -48,7 +48,7 @@ export class SignupPage implements OnInit {
       this.data.per_password = this.password;
       var check_username_duplicate = false;
       var count = 0;
-      this.MPersonService.get_obs_mperson().subscribe(res => {
+      this.MPersonService.get_obs_mperson(this.username, this.password).subscribe(res => {
         for(var i = 0; i < res.length ; i++){
           if(res[i].per_username == this.username){
             check_username_duplicate = true;

@@ -9,7 +9,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument,
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
 export interface MPerson {
-  per_id?: string,
+  per_id: string,
   per_username: string,
   per_password: string,
   per_active: string
@@ -24,7 +24,13 @@ export class MPersonService   {
   private mpersonCollection: AngularFirestoreCollection<MPerson>;
  
   constructor(private afs: AngularFirestore) {
-    this.mpersonCollection = this.afs.collection<MPerson>('M_person');
+  }
+ 
+// * @Function   : get_obs_mperson => คือค่าข้อมูล interface MPerson ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
+  get_obs_mperson(username, password): Observable<MPerson[]> {
+    this.mpersonCollection = this.afs.collection<MPerson>('M_person', ref => ref.where('per_username', '==', username).where('per_password', '==', password));
     this.obs_mperson = this.mpersonCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -34,13 +40,6 @@ export class MPersonService   {
         });
       })
     );
-    this.obs_mperson.subscribe(res => console.log(res))
-  }
- 
-// * @Function   : get_obs_mperson => คือค่าข้อมูล interface MPerson ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-01
-  get_obs_mperson(): Observable<MPerson[]> {
     return this.obs_mperson;
   }
 
