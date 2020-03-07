@@ -3,7 +3,7 @@ import { MTransactionService } from './m_transaction/m-transaction.service';
 import { MWalletService } from './m_wallet/m-wallet.service';
 import { MPersonService } from './m_person/m-person.service';
 import { MSubCategoriesService } from './m_sub_categories/m-sub-categories.service';
-import { MCategories, MCategoriesService } from './m_categories/m-categories.service';
+import { MCategoriesService } from './m_categories/m-categories.service';
 import { Injectable, Injector } from '@angular/core';
 import { Http } from '@angular/http'
 import 'rxjs/add/operator/map';

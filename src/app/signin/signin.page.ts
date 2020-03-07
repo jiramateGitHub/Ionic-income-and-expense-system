@@ -1,5 +1,4 @@
-import { MPerson } from './../services/m_person/m-person.service';
-import { ServicesService } from './../services/services.service';
+import { ServicesService,MPerson } from './../services/services.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';

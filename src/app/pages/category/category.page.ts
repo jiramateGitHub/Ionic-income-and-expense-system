@@ -1,4 +1,4 @@
-import { MCategoriesService , MCategories} from './../../services/m_categories/m-categories.service';
+import { MCategoriesService} from './../../services/m_categories/m-categories.service';
 import { Component, OnInit } from '@angular/core';
 import { CategoryInputPage } from './../category_input/category-input.page';
 import { ModalController, ToastController, NavParams, AlertController } from '@ionic/angular';
@@ -10,8 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./category.page.scss'],
 })
 export class CategoryPage implements OnInit {
-  private MCategories_income_list : Observable<MCategories[]>;
-  private MCategories_expense_list : Observable<MCategories[]>;
+
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,
@@ -19,8 +18,7 @@ export class CategoryPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.MCategories_income_list = this.mCategoriesService.get_obs_mcategories_income();
-    this.MCategories_expense_list = this.mCategoriesService.get_obs_mcategories_expense();
+   
   }
 
   // * @Function   : modal_insert_show => แสดง modal CategoryInputPage
