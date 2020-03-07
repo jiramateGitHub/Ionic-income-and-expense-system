@@ -1,6 +1,4 @@
-import { ServicesService } from './../services/services.service';
-import { SessionService } from './../services/session/session.service';
-import { MPerson } from './../services/m_person/m-person.service';
+import { ServicesService, MPerson} from './../services/services.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
@@ -13,7 +11,6 @@ import { ToastController, LoadingController } from '@ionic/angular';
 export class SignupPage implements OnInit {
 
   public obj_MPerson: MPerson = {
-    id:null,
     username: null,
     password: null,
   };

@@ -1,5 +1,4 @@
-import { MPerson } from './../services/m_person/m-person.service';
-import { ServicesService } from './../services/services.service';
+import { ServicesService,MPerson } from './../services/services.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -44,7 +43,6 @@ export class SigninPage implements OnInit {
 
     var check_login = false;
     var count = 0;
-
     this.obj_MPerson.username = this.username
     this.obj_MPerson.password = this.password
     this.ServicesService.MPersonService.get_obs_mperson(this.obj_MPerson).subscribe(async res => {
@@ -53,7 +51,6 @@ export class SigninPage implements OnInit {
           check_login = true;
         }
       }
-      const { role, data } = await loading.onDidDismiss();
       if(check_login == true){
         this.ServicesService.SessionService.set_session_username(this.username)
         this.router.navigateByUrl('tabs');
@@ -65,6 +62,7 @@ export class SigninPage implements OnInit {
       }
       count++;
     });
+    const { role, data } = await loading.onDidDismiss();
   }
 
 // * @Function   : redirect_signup => กลับหน้า sign up

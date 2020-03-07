@@ -21,9 +21,8 @@ export class MPersonService   {
 // * @Function   : get_obs_mperson => คือค่าข้อมูล interface MPerson ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
-  get_obs_mperson(m:MPerson): Observable<MPerson[]> {
-    console.log(m.username)
-    this.serviceCollection = this.afs.collection<MPerson>('M_person', ref => ref.where('username', '==', m.username).where('password', '==', m.password));
+  get_obs_mperson(mperson:MPerson): Observable<MPerson[]> {
+    this.serviceCollection = this.afs.collection<MPerson>('M_person', ref => ref.where('username', '==', mperson.username).where('password', '==', mperson.password));
     this.service = this.serviceCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
