@@ -1,6 +1,6 @@
+import { ServicesService } from './../../services/services.service';
 import { TransferInputPage } from './../transfer_input/transfer-input.page';
 import { TransactionCategoryPage } from './../transaction_category/transaction-category.page';
-import { MPersonService } from '../../services/m_person/m-person.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, ToastController, NavParams, AlertController } from '@ionic/angular';
@@ -14,10 +14,18 @@ import { Observable } from 'rxjs';
 export class TransactionInputPage implements OnInit {
 
   private type_input: string;
-  private tran_amount: string;
-  private tran_note: string;
-  private tran_date: string;
-  public catt_name: string;
+  private MTransaction = {
+    id: null,
+    username : null,
+    wallet_name : null,
+    categorise_type : null,
+    categorise_name : null,
+    sub_categories_name : null,
+    transaction_amount : null,
+    transaction_date : null,
+    transaction_note : null,
+    transaction_active : null
+  }
  
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -26,7 +34,7 @@ export class TransactionInputPage implements OnInit {
     private modalController: ModalController,
     private alertController: AlertController,
     private navParams: NavParams,
-    private MPersonService: MPersonService
+    private servicesService: ServicesService
   ) { 
       this.type_input = navParams.get('type_input');
       
@@ -88,7 +96,7 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.catt_name = data['data'].name; // Here's your selected user!
+      this.MTransaction.sub_categories_name = data['data'].name; // Here's your selected user!
     });
     return await modal.present();
   }
@@ -105,7 +113,7 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.catt_name = data['data'].name; // Here's your selected user!
+      this.MTransaction.sub_categories_name = data['data'].name; // Here's your selected user!
     });
     return await modal.present();
   }
