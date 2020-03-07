@@ -15,11 +15,11 @@
 
 <ion-content>
   <ion-grid class="p-t-10">
-    <ion-row justify-content-center>
+    <!-- <ion-row justify-content-center> --> 
       <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
         <ion-item>
           <ion-label class="fs-25">฿</ion-label>
-          <ion-input class="fs-25" placeholder="0" type="number"></ion-input>
+          <ion-input class="fs-25" placeholder="0" type="number" [(ngModel)]="tran_amount" ></ion-input>
         </ion-item>
 
         <ion-item>
@@ -31,7 +31,7 @@
         <ion-item>
           <ion-icon name="calendar-outline" class="p-r-5"></ion-icon>
           <ion-label> Date</ion-label>
-          <ion-datetime displayFormat="DD MMMM YY" placeholder="Select Date"></ion-datetime>
+          <ion-datetime displayFormat="DD MMMM YY" placeholder="Select Date" [(ngModel)]="tran_date"></ion-datetime>
         </ion-item>
 
         <ion-item>
@@ -41,14 +41,14 @@
         </ion-item>
         
       </ion-col>
-    </ion-row>
-  </ion-grid>
+    <!-- </ion-row> -->
+  </ion-grid> 
 </ion-content>
 <ion-footer>
   <ion-grid>
     <ion-row >
       <ion-col>
-        <ion-button expand="block">Save Transaction</ion-button>
+        <ion-button expand="block" (click)="insert_transection()" >Save Transaction</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
