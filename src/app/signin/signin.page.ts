@@ -1,6 +1,6 @@
+import { MPerson } from './../services/m_person/m-person.service';
+import { ServicesService } from './../services/services.service';
 import { Observable } from 'rxjs';
-import { SessionService } from './../services/session/session.service';
-import { MPersonService , MPerson} from './../services/m_person/m-person.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -10,21 +10,25 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
-
-  public username:string;
+  public obj_MPerson: MPerson = {
+    per_id : null,
+    per_username: null,
+    per_password: null,
+    per_active: null 
+  };
+  public username : string;
   public password : string;
 
   constructor(
     private router:Router,
     private toastController: ToastController,
-    private MPersonService: MPersonService,
-    private SessionService: SessionService,
+    private ServicesService : ServicesService,
   ) {
-
    }
 
   ngOnInit() {
   }
+  
 
 // * @Function   : signin => เข้าสู่ระบบ
 // * @Author     : Jiramate Phuaphan
@@ -32,14 +36,17 @@ export class SigninPage implements OnInit {
   signin(){
     var check_login = false;
     var count = 0;
-    this.MPersonService.get_obs_mperson(this.username, this.password).subscribe(res => {
+
+    this.obj_MPerson.per_username = this.username
+    this.obj_MPerson.per_password = this.password
+    this.ServicesService.MPersonService.get_obs_mperson(this.obj_MPerson).subscribe(res => {
       for(var i = 0; i < res.length ; i++){
         if(res[i].per_username == this.username && res[i].per_password == this.password){
           check_login = true;
         }
       }
       if(check_login == true){
-        this.SessionService.username = this.username;
+        this.ServicesService.SessionService.set_session_username(this.username)
         this.router.navigateByUrl('tabs');
         this.showToast('Sign in successful.');
       }else{

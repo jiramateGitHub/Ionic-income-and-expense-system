@@ -32,7 +32,7 @@ export class TabAccountPage {
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-02
   logout(){
-    this.SessionService.username = ""
+    this.SessionService.set_session(null,null)
     this.router.navigateByUrl('signin');
   }
 }
