@@ -44,10 +44,10 @@ export class SigninPage implements OnInit {
 
     var check_login = false;
     var count = 0;
-
     this.obj_MPerson.username = this.username
     this.obj_MPerson.password = this.password
     this.ServicesService.MPersonService.get_obs_mperson(this.obj_MPerson).subscribe(async res => {
+      console.log(res)
       for(var i = 0; i < res.length ; i++){
         if(res[i].username == this.username && res[i].password == this.password){
           check_login = true;

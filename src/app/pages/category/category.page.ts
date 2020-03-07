@@ -94,7 +94,7 @@ export class CategoryPage implements OnInit {
         }, {
           text: 'Confirm',
           handler: () => {
-           
+            
           }
         }
       ]

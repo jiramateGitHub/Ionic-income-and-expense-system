@@ -34,7 +34,7 @@ export class TransactionInputPage implements OnInit {
     private modalController: ModalController,
     private alertController: AlertController,
     private navParams: NavParams,
-    private servicesService: ServicesService
+    private servicesService: ServicesService,
   ) { 
       this.type_input = navParams.get('type_input');
       
