@@ -13,7 +13,6 @@ import { ToastController, LoadingController } from '@ionic/angular';
 export class SignupPage implements OnInit {
 
   public obj_MPerson: MPerson = {
-    id:null,
     username: null,
     password: null,
   };
