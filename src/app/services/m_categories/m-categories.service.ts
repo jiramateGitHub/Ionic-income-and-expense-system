@@ -1,3 +1,4 @@
+import { ServicesService } from './../services.service';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http'
 import 'rxjs/add/operator/map';
@@ -22,12 +23,15 @@ export class MCategoriesService {
   public cat_name : string;
   public cat_type	 : string;
   public cat_active : string;
-
   private obs_mcategories_income: Observable<MCategories[]>;
   private obs_mcategories_expense: Observable<MCategories[]>;
   private mcategoriesCollection: AngularFirestoreCollection<MCategories>;
+
+  orderList:string; 
  
-  constructor(private afs: AngularFirestore) {
+  constructor(
+    private afs: AngularFirestore,
+    private servicesService : ServicesService) {
     this.mcategoriesCollection = this.afs.collection<MCategories>('M_categories', ref => ref.where('cat_type', '==', 1));
     this.obs_mcategories_income = this.mcategoriesCollection.snapshotChanges().pipe(
       map(actions => {
@@ -38,16 +42,16 @@ export class MCategoriesService {
         });
       })
     );
-    this.mcategoriesCollection = this.afs.collection<MCategories>('M_categories', ref => ref.where('cat_type', '==', 2));
-    this.obs_mcategories_expense = this.mcategoriesCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => { 
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
+
+  }
+
+  ngOnInit() {
+    this.orderList = this.servicesService.get_list();
+    console.log(this.orderList)
+  }
+
+  get_list(){
+    
   }
   
  

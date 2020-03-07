@@ -1,3 +1,4 @@
+import { MPerson } from './../services.service';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http'
 import 'rxjs/add/operator/map';
@@ -5,27 +6,24 @@ import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
 
-// * @Interface  : MPerson => เก็บข้อมูล Object ของ MPerson
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-01
-export interface MPerson {
-  per_id?: string,
-  per_username: string,
-  per_password: string,
-  per_active: string
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class MPersonService   {
   
-  private obs_mperson: Observable<MPerson[]>;
-  private mpersonCollection: AngularFirestoreCollection<MPerson>;
+  private service: Observable<MPerson[]>;
+  private serviceCollection: AngularFirestoreCollection<MPerson>;
  
-  constructor(private afs: AngularFirestore) {
-    this.mpersonCollection = this.afs.collection<MPerson>('M_person');
-    this.obs_mperson = this.mpersonCollection.snapshotChanges().pipe(
+  constructor(
+    private afs: AngularFirestore) {
+  }
+ 
+// * @Function   : get_obs_mperson => คือค่าข้อมูล interface MPerson ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-01
+  get_obs_mperson(m:MPerson): Observable<MPerson[]> {
+    this.serviceCollection = this.afs.collection<MPerson>('M_person', ref => ref.where('per_username', '==', m.per_username).where('per_password', '==', m.per_password));
+    this.service = this.serviceCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -34,21 +32,14 @@ export class MPersonService   {
         });
       })
     );
-    this.obs_mperson.subscribe(res => console.log(res))
-  }
- 
-// * @Function   : get_obs_mperson => คือค่าข้อมูล interface MPerson ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-01
-  get_obs_mperson(): Observable<MPerson[]> {
-    return this.obs_mperson;
+    return this.service;
   }
 
 // * @Function   : get_obs_mperson_by_id => คือค่าข้อมูล interface MPerson โดยค้นหาจาก id
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
   get_obs_mperson_by_id(id: string): Observable<MPerson> {
-    return this.mpersonCollection.doc<MPerson>(id).valueChanges().pipe(
+    return this.serviceCollection.doc<MPerson>(id).valueChanges().pipe(
       take(1),
       map(M_person => {
         M_person.per_id = id;
@@ -61,21 +52,21 @@ export class MPersonService   {
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
   insert_person(mperson: MPerson): Promise<DocumentReference> {
-    return this.mpersonCollection.add(mperson);
+    return this.serviceCollection.add(mperson);
   }
 
 // * @Function   : update_person => แก้ไขข้อมูล person ลงใน Firebase Cloud
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
   update_person(mperson: MPerson): Promise<void> {
-    return this.mpersonCollection.doc(mperson.per_id).update({ per_username: mperson.per_username, per_password: mperson.per_password });
+    return this.serviceCollection.doc(mperson.per_id).update({ per_username: mperson.per_username, per_password: mperson.per_password });
   }
 
 // * @Function   : delete_person => ลบข้อมูล person ใน Firebase Cloud
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
   delete_person(per_id: string): Promise<void> {
-    return this.mpersonCollection.doc(per_id).delete();
+    return this.serviceCollection.doc(per_id).delete();
   }
 
 }
