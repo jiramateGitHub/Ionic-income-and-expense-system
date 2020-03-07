@@ -89,7 +89,7 @@ export class ServicesService {
     return this.obj_MCategoriesService;
   }
 
-  // MCategoriesService
+  // MSubCategoriesService
   private obj_MSubCategoriesService : MSubCategoriesService;
   public get MSubCategoriesService(): MSubCategoriesService {
     if(!this.obj_MSubCategoriesService){
