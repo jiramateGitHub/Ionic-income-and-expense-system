@@ -14,21 +14,25 @@ import { AngularFirestoreCollection } from '@angular/fire/firestore';
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
 export interface MPerson {
-  per_username: string,
-  per_password: string,
+  id?: string,
+  username: string,
+  password: string,
 }
 export interface MWallet {
+  id?: string,
   username: string,
   wallet_name: string,
   wallet_balance : string,
   wallet_active: string
 }
 export interface MCategories {
+  id?: string,
   categorise_name: string,
   categorise_type: number,
   categorise_active: string
 }
 export interface MSubCategories {
+  id?: string,
   username: string,
   categorise_name: string,
   categorise_type: number,
@@ -36,6 +40,7 @@ export interface MSubCategories {
   sub_categorise_active: string
 }
 export interface MTransaction {
+  id?: string,
   username : string,
   wallet_name : string,
   categorise_type : number,

@@ -22,7 +22,8 @@ export class MPersonService   {
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
   get_obs_mperson(m:MPerson): Observable<MPerson[]> {
-    this.serviceCollection = this.afs.collection<MPerson>('M_person', ref => ref.where('per_username', '==', m.per_username).where('per_password', '==', m.per_password));
+    console.log(m.username)
+    this.serviceCollection = this.afs.collection<MPerson>('M_person', ref => ref.where('username', '==', m.username).where('password', '==', m.password));
     this.service = this.serviceCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -31,7 +32,7 @@ export class MPersonService   {
           return { id, ...data };
         });
       })
-    );
+    );  
     return this.service;
   }
 
@@ -42,7 +43,7 @@ export class MPersonService   {
     return this.serviceCollection.doc<MPerson>(id).valueChanges().pipe(
       take(1),
       map(M_person => {
-        M_person.per_id = id;
+        M_person.id  = id;
         return M_person
       })
     );
@@ -59,7 +60,7 @@ export class MPersonService   {
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
   update_person(mperson: MPerson): Promise<void> {
-    return this.serviceCollection.doc(mperson.per_id).update({ per_username: mperson.per_username, per_password: mperson.per_password });
+    return this.serviceCollection.doc(mperson.id).update({ username: mperson.username, password: mperson.password });
   }
 
 // * @Function   : delete_person => ลบข้อมูล person ใน Firebase Cloud
