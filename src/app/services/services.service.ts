@@ -16,7 +16,7 @@ import { AngularFirestoreCollection } from '@angular/fire/firestore';
 export interface MPerson {
   id?: string,
   username: string,
-  password: string,
+  password: string
 }
 export interface MWallet {
   id?: string,

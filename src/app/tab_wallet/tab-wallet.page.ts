@@ -1,4 +1,3 @@
-import { SessionService } from '../services/session/session.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
@@ -8,8 +7,15 @@ import { Router } from '@angular/router';
 })
 export class TabWalletPage {
 
-  constructor(private SessionService:SessionService, private router:Router) {
+  constructor(
+    private router: Router,
+    ) {
    
   }
-
+  
+  doRefresh(event) {
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
 }

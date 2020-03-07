@@ -47,13 +47,11 @@ export class SigninPage implements OnInit {
     this.obj_MPerson.username = this.username
     this.obj_MPerson.password = this.password
     this.ServicesService.MPersonService.get_obs_mperson(this.obj_MPerson).subscribe(async res => {
-      console.log(res)
       for(var i = 0; i < res.length ; i++){
         if(res[i].username == this.username && res[i].password == this.password){
           check_login = true;
         }
       }
-      const { role, data } = await loading.onDidDismiss();
       if(check_login == true){
         this.ServicesService.SessionService.set_session_username(this.username)
         this.router.navigateByUrl('tabs');
@@ -65,6 +63,7 @@ export class SigninPage implements OnInit {
       }
       count++;
     });
+    const { role, data } = await loading.onDidDismiss();
   }
 
 // * @Function   : redirect_signup => กลับหน้า sign up
