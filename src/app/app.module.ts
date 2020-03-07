@@ -63,8 +63,7 @@ import { TransactionCategoryPage } from './pages/transaction_category/transactio
     MSubCategoriesService,
     MPersonService,
     MTransactionService,
-    MWalletService,
-    ServicesService
+    MWalletService
   ],
   bootstrap: [
     AppComponent
