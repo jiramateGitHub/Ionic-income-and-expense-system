@@ -13,10 +13,8 @@ import { ToastController } from '@ionic/angular';
 export class SignupPage implements OnInit {
 
   public obj_MPerson: MPerson = {
-    per_id : null,
     per_username: null,
     per_password: null,
-    per_active: null 
   };
 
   public username : string;

@@ -10,14 +10,41 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 
-// * @Interface  : MPerson => เก็บข้อมูล Object ของ MPerson
+// * @Interface  : interface => เก็บข้อมูล Object สำหรับจัดเก็บลง Firebase
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
 export interface MPerson {
-  per_id: string,
   per_username: string,
   per_password: string,
-  per_active: string
+}
+export interface MWallet {
+  username: string,
+  wallet_name: string,
+  wallet_balance : string,
+  wallet_active: string
+}
+export interface MCategories {
+  categorise_name: string,
+  categorise_type: number,
+  categorise_active: string
+}
+export interface MSubCategories {
+  username: string,
+  categorise_name: string,
+  categorise_type: number,
+  sub_categories_name: string,
+  sub_categorise_active: string
+}
+export interface MTransaction {
+  username : string,
+  wallet_name : string,
+  categorise_type : number,
+  categorise_name : string,
+  sub_categories_name : string,
+  transaction_amount : string,
+  transaction_date : string,
+  transaction_note : string,
+  transaction_active : string
 }
 @Injectable({
   providedIn: 'root'
