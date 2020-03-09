@@ -23,14 +23,25 @@
         <ion-col></ion-col> 
         <ion-col>
           <ion-chip class="chip-bl">
-            <ion-label>Balance</ion-label>
+            <ion-label>Wallet 1</ion-label>
           </ion-chip>
         </ion-col> 
         <ion-col></ion-col> 
       </ion-row>
     </ion-grid>
     <ion-title style="font-size: 40px!important;">2000 <span style="font-size: 20px;">THB.</span></ion-title>
-    <ion-title size="small" style="font-size: 13px;">This Month</ion-title>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col></ion-col> 
+        <ion-col>
+          <ion-chip class="chip-bl">
+            <ion-label>This Month</ion-label>
+          </ion-chip>
+        </ion-col> 
+        <ion-col></ion-col> 
+      </ion-row>
+    </ion-grid>
+   
     <ion-list lines="none" style="background-color: transparent !important;">
       <ion-item style="background-color: transparent !important;">
         <ion-grid>
@@ -62,6 +73,16 @@
 </ion-header>
 
 <ion-content >
+  
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <!-- Item Dividers in a List -->
   <ion-list>
     <ion-item-divider>
@@ -98,7 +119,7 @@
       <ion-item style="margin: -8px;">
         <ion-icon name="wallet" slot="start" size="large" style="color:red !important;"></ion-icon>
         <ion-label>
-          <span class="fs-14" >Shopping</span> 
+          <span class="fs-14" >Clothing</span> 
           <br> 
           <span class="fs-11" style="color: grey !important;">เสื้อใหม่</span>
         </ion-label>
@@ -109,7 +130,7 @@
       <ion-item style="margin: -8px;">
         <ion-icon name="cash" slot="start" size="large" style="color:rgb(5, 209, 5) !important;"></ion-icon>
         <ion-label>
-          <span class="fs-14" >Salary</span> 
+          <span class="fs-14" >Buu Salary</span> 
           <br> 
           <span class="fs-11" style="color: grey !important;">เงินดือนออกแล้วโว้ยยย</span>
         </ion-label>
@@ -126,9 +147,9 @@
       <ion-item style="margin: -8px;">
         <ion-icon name="wallet" slot="start" size="large" style="color:red !important;"></ion-icon>
         <ion-label>
-          <span class="fs-14" >Food</span> 
+          <span class="fs-14" >Cafe</span> 
           <br> 
-          <span class="fs-11" style="color: grey !important;">กระเพราถาด</span>
+          <span class="fs-11" style="color: grey !important;">ชิว ๆ ที่ SE Cafe</span>
         </ion-label>
         <ion-chip fill="outline" slot="end" style="color:red !important;">-500</ion-chip>
       </ion-item>
@@ -137,7 +158,7 @@
       <ion-item style="margin: -8px;">
         <ion-icon name="wallet" slot="start" size="large" style="color:red !important;"></ion-icon>
         <ion-label>
-          <span class="fs-14" >Shopping</span> 
+          <span class="fs-14" >Clothing</span> 
           <br> 
           <span class="fs-11" style="color: grey !important;">เสื้อใหม่</span>
         </ion-label>

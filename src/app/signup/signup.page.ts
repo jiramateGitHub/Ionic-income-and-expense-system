@@ -1,8 +1,7 @@
-import { SessionService } from './../services/session/session.service';
-import { MPersonService, MPerson } from './../services/m_person/m-person.service';
+import { ServicesService, MPerson} from './../services/services.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -11,10 +10,9 @@ import { ToastController } from '@ionic/angular';
 })
 export class SignupPage implements OnInit {
 
-  public data: MPerson = {
-    per_username: '',
-    per_password: '',
-    per_active:'Y'
+  public obj_MPerson: MPerson = {
+    username: null,
+    password: null,
   };
 
   public username : string;
@@ -22,14 +20,11 @@ export class SignupPage implements OnInit {
   public validate_password : string;
 
   constructor(
+    private loadingController: LoadingController,
     private router:Router,
     private toastController: ToastController,
-    private MPersonService:MPersonService,
-    private SessionService:SessionService
-  ) {
-    this.username = "";
-    this.password = "";
-   }
+    private ServicesService:ServicesService
+  ) {}
 
 // * @Function   : ngOnInit => ทำหน้าที่ในการ initial ค่าข้อมูลของ component
 // * @Author     : Jiramate Phuaphan
@@ -42,22 +37,30 @@ export class SignupPage implements OnInit {
 // * @Function   : signup => สมัครสมาชิก
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
-  signup(){
+  async signup(){
+    //loading present
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
+
     if(this.password == this.validate_password){
-      this.data.per_username = this.username;
-      this.data.per_password = this.password;
+      this.obj_MPerson.username = this.username;
+      this.obj_MPerson.password = this.password;
       var check_username_duplicate = false;
       var count = 0;
-      this.MPersonService.get_obs_mperson().subscribe(res => {
+      this.ServicesService.MPersonService.get_obs_mperson(this.obj_MPerson).subscribe(async res => {
         for(var i = 0; i < res.length ; i++){
-          if(res[i].per_username == this.username){
+          if(res[i].username == this.username){
             check_username_duplicate = true;
             break;
           }
         }
+        const { role, data } = await loading.onDidDismiss();
         if(check_username_duplicate == false){
-          this.MPersonService.insert_person(this.data).then(() => {
-            this.SessionService.username = this.username
+          this.ServicesService.MPersonService.insert_person(this.obj_MPerson).then(() => {
+            this.ServicesService.SessionService.set_session_username(this.username)
             this.router.navigateByUrl('signin');
             this.showToast('Sign up successful.');
           }, err => {

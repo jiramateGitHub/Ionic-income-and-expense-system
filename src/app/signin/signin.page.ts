@@ -1,42 +1,58 @@
-import { SessionService } from './../services/session/session.service';
-import { MPersonService } from './../services/m_person/m-person.service';
+import { ServicesService,MPerson } from './../services/services.service';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.page.html',
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
+  public obj_MPerson: MPerson = {
+    id: null,
+    username: null,
+    password: null,
+  };
 
-  public username:string;
-  public password:string;
+  public username : string;
+  public password : string;
 
   constructor(
+    private loadingController: LoadingController,
     private router:Router,
     private toastController: ToastController,
-    private MPersonService:MPersonService,
-    private SessionService:SessionService
-  ) { }
+    private ServicesService : ServicesService,
+  ) {}
 
   ngOnInit() {
+    this.username = "";
+    this.password = "";
   }
-
+  
 // * @Function   : signin => เข้าสู่ระบบ
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
-  signin(){
+  async signin(){
+    //loading present
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      duration: 1000
+    });
+    await loading.present();
+
     var check_login = false;
     var count = 0;
-    this.MPersonService.get_obs_mperson().subscribe(res => {
+    this.obj_MPerson.username = this.username
+    this.obj_MPerson.password = this.password
+    this.ServicesService.MPersonService.get_obs_mperson(this.obj_MPerson).subscribe(async res => {
       for(var i = 0; i < res.length ; i++){
-        if(res[i].per_username == this.username && res[i].per_password == this.password){
+        if(res[i].username == this.username && res[i].password == this.password){
           check_login = true;
         }
       }
       if(check_login == true){
-        this.SessionService.username = this.username;
+        this.ServicesService.SessionService.set_session_username(this.username)
         this.router.navigateByUrl('tabs');
         this.showToast('Sign in successful.');
       }else{
@@ -46,6 +62,7 @@ export class SigninPage implements OnInit {
       }
       count++;
     });
+    const { role, data } = await loading.onDidDismiss();
   }
 
 // * @Function   : redirect_signup => กลับหน้า sign up
@@ -58,12 +75,12 @@ export class SigninPage implements OnInit {
 // * @Function   : redirect_signin => ใช้แสดง Toast
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
-showToast(msg) {
-  this.toastController.create({
-    message: msg,
-    duration: 2000
-  }).then(toast => toast.present());
-}
+  showToast(msg) {
+    this.toastController.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
+  }
 
 
 }

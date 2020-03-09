@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-      <ion-item lines="none">
+  <ion-toolbar class="bg-toolbar">
+      <ion-item lines="none" class="bg-toolbar">
         <ion-buttons slot="start" (click)="close_modal()">
             <ion-icon name="close" style="zoom:1.5;"></ion-icon>
         </ion-buttons>
@@ -25,7 +25,7 @@
         <ion-item>
           <ion-icon name="trail-sign-outline" class="p-r-5"></ion-icon>
           <ion-label position="fixed"> Category</ion-label>
-          <ion-input placeholder="Select Category" (click)="select_category_alert()" style="text-align: right;" [(ngModel)]="catt_name" readonly></ion-input>
+          <ion-input placeholder="Select Category" (click)="select_category_alert()" style="text-align: right;" [(ngModel)]="MTransaction.sub_categories_name" readonly></ion-input>
         </ion-item>
 
         <ion-item>

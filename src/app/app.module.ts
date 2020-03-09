@@ -1,3 +1,10 @@
+import { ServicesService , MPerson } from './services/services.service';
+import { MWalletService } from './services/m_wallet/m-wallet.service';
+import { MTransactionService } from './services/m_transaction/m-transaction.service';
+import { MPersonService} from './services/m_person/m-person.service';
+import { MSubCategoriesService } from './services/m_sub_categories/m-sub-categories.service';
+import { MCategoriesService } from './services/m_categories/m-categories.service';
+import { TransferInputPage } from './pages/transfer_input/transfer-input.page';
 import { CategoryInputPage } from './pages/category_input/category-input.page';
 import { WalletInputPage } from './pages/wallet_input/wallet-input.page';
 import { TransactionInputPage } from './pages/transaction_input/transaction-input.page';
@@ -27,13 +34,15 @@ import { TransactionCategoryPage } from './pages/transaction_category/transactio
     TransactionInputPage,
     TransactionCategoryPage,
     WalletInputPage,
-    CategoryInputPage
+    CategoryInputPage,
+    TransferInputPage
   ],
   entryComponents: [
     TransactionInputPage,
     TransactionCategoryPage,
     WalletInputPage,
-    CategoryInputPage
+    CategoryInputPage,
+    TransferInputPage
   ],
   imports: [
     BrowserModule, 
@@ -49,7 +58,12 @@ import { TransactionCategoryPage } from './pages/transaction_category/transactio
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: FirestoreSettingsToken, useValue: {} }
+    { provide: FirestoreSettingsToken, useValue: {} },
+    MCategoriesService,
+    MSubCategoriesService,
+    MPersonService,
+    MTransactionService,
+    MWalletService
   ],
   bootstrap: [
     AppComponent

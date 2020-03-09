@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'category-input',
     loadChildren: () => import('./pages/category_input/category-input.module').then( m => m.CategoryInputPageModule)
+  },
+  {
+    path: 'transfer-input',
+    loadChildren: () => import('./pages/transfer_input/transfer-input.module').then( m => m.TransferInputPageModule)
   }
 ];
 @NgModule({
