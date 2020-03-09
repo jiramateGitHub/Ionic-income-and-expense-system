@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
+import { ServicesService } from '../services/services.service';
 
 @Component({
   selector: 'app-tab-report',
@@ -10,7 +11,8 @@ export class TabReportPage {
 
   constructor(
     private modalController: ModalController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private ServicesService : ServicesService
   ) {}
 
 // * @Function   : selcet_report_alert => แสดง Select สำหรับเลือกประเภทรายงาน
