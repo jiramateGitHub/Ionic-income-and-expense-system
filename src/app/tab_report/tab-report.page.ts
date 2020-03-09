@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { ServicesService, MTransaction } from '../services/services.service';
+import { timestamp } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab-report',
@@ -8,7 +9,6 @@ import { ServicesService, MTransaction } from '../services/services.service';
   styleUrls: ['tab-report.page.scss']
 })
 export class TabReportPage {
-
     public obj_MTransaction:MTransaction = {
     id: null,
     username : null,
@@ -76,11 +76,17 @@ async selcet_report_alert(){
 // * @Author     : Sathien Supabkul
 // * @Create Date: 2563-03-09
 get_report_by_day(){
-  this.obj_MTransaction.transaction_date = postTimestamp.dateValue()
   this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MTransaction).subscribe(async res => {
-    console.log(res)
-
+    console.log(res[0].transaction_date);
+    console.log(new Date(1583485800))
   });
+}
+
+formatDate(date:Date) :string{
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return year+'-'+month+'-'+day
 }
 
 }
