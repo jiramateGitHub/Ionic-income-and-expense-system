@@ -40,7 +40,6 @@ export class SigninPage implements OnInit {
       duration: 1000
     });
     await loading.present();
-
     var check_login = false;
     var count = 0;
     this.obj_MPerson.username = this.username
