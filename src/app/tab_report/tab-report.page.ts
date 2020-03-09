@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
-import { ServicesService } from '../services/services.service';
+import { ServicesService, MTransaction } from '../services/services.service';
 
 @Component({
   selector: 'app-tab-report',
@@ -8,6 +8,19 @@ import { ServicesService } from '../services/services.service';
   styleUrls: ['tab-report.page.scss']
 })
 export class TabReportPage {
+
+    public obj_MTransaction:MTransaction = {
+    id: null,
+    username : null,
+    wallet_name : null,
+    categories_type : null,
+    categories_name : null,
+    sub_categories_name : null,
+    transaction_amount : null,
+    transaction_date : null,
+    transaction_note : null,
+    transaction_active : null
+  }
 
   constructor(
     private modalController: ModalController,
@@ -55,6 +68,15 @@ async selcet_report_alert(){
     ]
   });
   await alert.present();
+}
+
+// * @Function   : get_report => แสดงข้อมูลรายรับ-รายจ่าย เป็นวัน
+// * @Author     : Sathien Supabkul
+// * @Create Date: 2563-03-09
+get_report_by_day(){
+  this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MPerson).subscribe(async res => {
+    
+  });
 }
 
 }
