@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class CategoryPage implements OnInit {
 
-  public obj_MSubCategories:MSubCategories = {
+  public obj_MSubCategories : MSubCategories = {
     id: null,
     username: null,
     categories_name: null,
@@ -20,14 +20,16 @@ export class CategoryPage implements OnInit {
     sub_categories_name: null,
     sub_categories_active: null
   }
+  public obj_MSubCategories_Income : Observable<MSubCategories[]>
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,
     private ServicesService:ServicesService
-  ) { }
+  ) { 
+   this.get_categories()
+  }
 
   ngOnInit() {
-   
   }
 
   // * @Function   : modal_insert_show => แสดง modal CategoryInputPage
@@ -114,10 +116,9 @@ export class CategoryPage implements OnInit {
   // * @Author     : Kessarin U-tumporn
   // * @Create Date: 2563-03-09
   get_categories(){
-    this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MPerson).subscribe(async res => {
-      
-    });
-
+    this.obj_MSubCategories.categories_type = 1;
+    this.obj_MSubCategories_Income = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories)
+    this.obj_MSubCategories_Income.subscribe(res => console.log(res))
   }
 
 }
