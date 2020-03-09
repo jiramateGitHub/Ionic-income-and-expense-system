@@ -27,24 +27,24 @@ export interface MWallet {
 }
 export interface MCategories {
   id?: string,
-  categorise_name: string,
-  categorise_type: number,
-  categorise_active: string
+  categories_name: string,
+  categories_type: number,
+  categories_active: string
 }
 export interface MSubCategories {
   id?: string,
   username: string,
-  categorise_name: string,
-  categorise_type: number,
+  categories_name: string,
+  categories_type: number,
   sub_categories_name: string,
-  sub_categorise_active: string
+  sub_categories_active: string
 }
 export interface MTransaction {
   id?: string,
   username : string,
   wallet_name : string,
-  categorise_type : number,
-  categorise_name : string,
+  categories_type : number,
+  categories_name : string,
   sub_categories_name : string,
   transaction_amount : string,
   transaction_date : string,
