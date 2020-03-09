@@ -28,8 +28,8 @@ export class TransactionCategoryPage implements OnInit {
   // * @Function   : add_category => เลือก Category และเรียกคำสั่งปิด modal 
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-02
-  async add_category(name:string,id:string){
-    this.modalController.dismiss({name, id});
+  async add_category(name:string,type:string){
+    this.modalController.dismiss({name, type});
   }
 
   // * @Function   : close_modal => คำสั่งปิด modal

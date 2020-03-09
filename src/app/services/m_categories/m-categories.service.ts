@@ -73,7 +73,7 @@ export class MCategoriesService {
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-03
   update_categories(mcategories: MCategories): Promise<void> {
-    return this.serviceCollection.doc(mcategories.id).update({ categorise_name: mcategories.categorise_name, categorise_type: mcategories.categorise_type });
+    return this.serviceCollection.doc(mcategories.id).update({ categories_name: mcategories.categories_name, categories_type: mcategories.categories_type });
   }
 
 // * @Function   : delete_categories => ลบข้อมูล categories ใน Firebase Cloud
