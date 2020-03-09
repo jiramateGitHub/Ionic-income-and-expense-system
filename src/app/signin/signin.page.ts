@@ -37,7 +37,7 @@ export class SigninPage implements OnInit {
     //loading present
     const loading = await this.loadingController.create({
       message: 'Please wait...',
-      duration: 2000
+      duration: 1000
     });
     await loading.present();
 
