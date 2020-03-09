@@ -29,7 +29,7 @@ export class TransactionCategoryPage implements OnInit {
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-02
   async add_category(name:string,id:string){
-    this.modalController.dismiss({name});
+    this.modalController.dismiss({name, id});
   }
 
   // * @Function   : close_modal => คำสั่งปิด modal
