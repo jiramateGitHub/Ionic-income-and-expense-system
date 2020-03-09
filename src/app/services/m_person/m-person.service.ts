@@ -9,6 +9,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument,
 @Injectable({
   providedIn: 'root'
 })
+
 export class MPersonService   {
   
   private service: Observable<MPerson[]>;

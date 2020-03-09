@@ -1,3 +1,4 @@
+import { ServicesService , MPerson } from './services/services.service';
 import { MWalletService } from './services/m_wallet/m-wallet.service';
 import { MTransactionService } from './services/m_transaction/m-transaction.service';
 import { MPersonService} from './services/m_person/m-person.service';
