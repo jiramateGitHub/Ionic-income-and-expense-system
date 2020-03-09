@@ -1,3 +1,4 @@
+import { ServicesService, MSubCategories } from './../../services/services.service';
 import { MCategoriesService} from './../../services/m_categories/m-categories.service';
 import { Component, OnInit } from '@angular/core';
 import { CategoryInputPage } from './../category_input/category-input.page';
@@ -11,10 +12,18 @@ import { Observable } from 'rxjs';
 })
 export class CategoryPage implements OnInit {
 
+  public obj_MSubCategories:MSubCategories = {
+    id: null,
+    username: null,
+    categories_name: null,
+    categories_type: null,
+    sub_categories_name: null,
+    sub_categories_active: null
+  }
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,
-    private mCategoriesService:MCategoriesService
+    private ServicesService:ServicesService
   ) { }
 
   ngOnInit() {
@@ -22,7 +31,7 @@ export class CategoryPage implements OnInit {
   }
 
   // * @Function   : modal_insert_show => แสดง modal CategoryInputPage
-  // * @Author     : Kessarin
+  // * @Author     : Kessarin U-tumporn
   // * @Create Date: 2563-03-01
   async modal_insert_show() {
     const modal = await this.modalController.create({
@@ -35,7 +44,7 @@ export class CategoryPage implements OnInit {
   }
 
   // * @Function   : modal_update_show => แสดง modal CategoryInputPage
-  // * @Author     : Kessarin
+  // * @Author     : Kessarin U-tumporn
   // * @Create Date: 2563-03-01
   async modal_update_show() {
     const modal = await this.modalController.create({
@@ -48,7 +57,7 @@ export class CategoryPage implements OnInit {
   }
 
   // * @Function   : category_manage_alert => แสดง Select สำหรับเลือกตัวดำเนินการ Category 
-  // * @Author     : Kessarin
+  // * @Author     : Kessarin U-tumporn
   // * @Create Date: 2563-03-02
   async category_manage_alert(){
     const alert = await this.alertController.create({
@@ -99,6 +108,16 @@ export class CategoryPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  // * @Function   : get_categories => แสดงข้อมูล categories
+  // * @Author     : Kessarin U-tumporn
+  // * @Create Date: 2563-03-09
+  get_categories(){
+    this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MPerson).subscribe(async res => {
+      
+    });
+
   }
 
 }
