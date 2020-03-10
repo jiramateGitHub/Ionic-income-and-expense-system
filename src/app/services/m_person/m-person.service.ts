@@ -17,6 +17,7 @@ export class MPersonService   {
  
   constructor(
     private afs: AngularFirestore) {
+      this.serviceCollection = this.afs.collection<MPerson>('M_person')
   }
  
 // * @Function   : get_obs_mperson => คือค่าข้อมูล interface MPerson ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
