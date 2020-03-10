@@ -1,4 +1,4 @@
-import { ServicesService , MTransaction , MWallet} from './../../services/services.service';
+import { ServicesService } from './../../services/services.service';
 import { TransferInputPage } from './../transfer_input/transfer-input.page';
 import { TransactionCategoryPage } from './../transaction_category/transaction-category.page';
 import { Component, OnInit } from '@angular/core';
@@ -14,28 +14,18 @@ import { Observable } from 'rxjs';
 export class TransactionInputPage implements OnInit {
 
   private type_input: string;
-  public transaction_amount : string;
-  public transaction_date : string;
-  public transaction_note : string;
-
-  private obj_MWallet:MWallet = {
-    username: null,
-    wallet_name: null,
-    wallet_balance : null,
-    wallet_active: null
-  };
-
-  private obj_MTransection:MTransaction = {
+  private MTransaction = {
+    id: null,
     username : null,
     wallet_name : null,
-    categories_type : null,
-    categories_name : null,
+    categorise_type : null,
+    categorise_name : null,
     sub_categories_name : null,
     transaction_amount : null,
     transaction_date : null,
     transaction_note : null,
     transaction_active : null
-  };
+  }
  
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -106,7 +96,7 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.obj_MTransection.sub_categories_name = data['data'].name; // Here's your selected user!
+      this.MTransaction.sub_categories_name = data['data'].name; // Here's your selected user!
     });
     return await modal.present();
   }
@@ -123,7 +113,7 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.obj_MTransection.sub_categories_name = data['data'].name; // Here's your selected user!
+      this.MTransaction.sub_categories_name = data['data'].name; // Here's your selected user!
     });
     return await modal.present();
   }
