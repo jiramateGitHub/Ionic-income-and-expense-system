@@ -21,7 +21,7 @@
         <ion-item>
           <ion-icon name="wallet-outline" class="p-r-5"></ion-icon>
           <ion-label position="fixed"> Name</ion-label>
-          <ion-input placeholder="" ></ion-input>
+          <ion-input placeholder="" [(ngModel)]="wallet_name"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -32,7 +32,7 @@
 
         <ion-item>
           <ion-label class="fs-15">Initial Balance</ion-label>
-          <ion-input class="" placeholder="0" type="number"></ion-input>
+          <ion-input class="" placeholder="0" [(ngModel)]="wallet_balance" type="number"></ion-input>
         </ion-item>
         
       </ion-col>
@@ -43,7 +43,7 @@
   <ion-grid>
     <ion-row >
       <ion-col>
-        <ion-button expand="block">Save Wallet</ion-button>
+        <ion-button expand="block" (click)=insert_wallet()>Save Wallet</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
