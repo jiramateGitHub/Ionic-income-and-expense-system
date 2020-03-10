@@ -117,4 +117,20 @@ get_report_by_day(){
   });
 }
 
+// * @Function   : get_report_by_year => แสดงข้อมูลรายรับ-รายจ่าย เป็นปี
+// * @Author     : Peeranat Buranarek
+// * @Create Date: 2563-03-10
+get_report_by_year(){
+   this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MTransaction).subscribe(async res => {
+    console.log("da",this.obj_MTransaction.transaction_date.substr(0,4))
+    var total_year : number = 0;
+      for(var i = 0; i < res.length ; i++){
+        if(this.obj_MTransaction.transaction_date.substr(0,4) == res[i].transaction_date.substr(0,4)){
+          total_year += res[i].transaction_amount ;
+        }
+      }
+    this.income =  total_year;   
+  });
+}
+
 }
