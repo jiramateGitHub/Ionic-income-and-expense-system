@@ -22,3 +22,14 @@ export class TransactionCategories_Creator_Expense extends TransactionCategories
         return new TransactionCategories_Expense(servicesService);
     }
 }
+
+export class TransactionSubCategories_Creator_Income extends TransactionCategories_Creator {
+    public factoryMethod(servicesService : ServicesService): TransactionCategories_Interface {
+        return new TransactionCategories_Income(servicesService);
+    }
+}
+export class TransactionSubCategories_Creator_Expense extends TransactionCategories_Creator{
+    public factoryMethod(servicesService : ServicesService): TransactionCategories_Interface {
+        return new TransactionCategories_Expense(servicesService);
+    }
+}
