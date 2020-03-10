@@ -22,12 +22,17 @@ export class TabReportPage {
     transaction_active : null
   }
 
+  public date
+
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,
     private ServicesService : ServicesService
   ) {
+    
+
     this.get_report_by_day()
+
   }
 
 // * @Function   : selcet_report_alert => แสดง Select สำหรับเลือกประเภทรายงาน
@@ -41,6 +46,7 @@ async selcet_report_alert(){
         text: 'Day',
         cssClass: 'secondary',
         handler: () => {
+          this.get_report_by_day()
         }
       },
       {
@@ -72,20 +78,29 @@ async selcet_report_alert(){
   await alert.present();
 }
 
+
 // * @Function   : get_report => แสดงข้อมูลรายรับ-รายจ่าย เป็นวัน
 // * @Author     : Sathien Supabkul
 // * @Create Date: 2563-03-09
 get_report_by_day(){
+ // console.log(this.date)
+  // this.obj_MTransaction.transaction_date = "2563-03-06";
   this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MTransaction).subscribe(async res => {
-    console.log(res);
-  });
-}
 
-formatDate(date:Date) :string{
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  return year+'-'+month+'-'+day
+
+
+
+    console.log(this.obj_MTransaction);
+    var str = this.obj_MTransaction.transaction_date.substr(0,10)
+    var date = str.split("-");
+
+    console.log("da",date);
+    console.log(res[0].transaction_date);
+    console.log(this.obj_MTransaction);
+
+    if(date[0] )
+   
+  });
 }
 
 }
