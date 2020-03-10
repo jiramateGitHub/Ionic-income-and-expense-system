@@ -1,4 +1,4 @@
-import { TransactionCategories_Interface, TransactionCategories_Income, TransactionCategories_Expense } from './transaction-categories.interface';
+import { TransactionCategories_Interface, TransactionCategories_Income, TransactionCategories_Expense ,TransactionSubCategories_Income , TransactionSubCategories_Expense} from './transaction-categories.interface';
 import { Observable } from 'rxjs';
 import { ServicesService, MCategories } from '../services/services.service';
 import { Component, OnInit } from '@angular/core';
@@ -25,11 +25,11 @@ export class TransactionCategories_Creator_Expense extends TransactionCategories
 
 export class TransactionSubCategories_Creator_Income extends TransactionCategories_Creator {
     public factoryMethod(servicesService : ServicesService): TransactionCategories_Interface {
-        return new TransactionCategories_Income(servicesService);
+        return new TransactionSubCategories_Income(servicesService);
     }
 }
 export class TransactionSubCategories_Creator_Expense extends TransactionCategories_Creator{
     public factoryMethod(servicesService : ServicesService): TransactionCategories_Interface {
-        return new TransactionCategories_Expense(servicesService);
+        return new TransactionSubCategories_Expense(servicesService);
     }
 }
