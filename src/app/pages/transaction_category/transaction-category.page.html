@@ -7,57 +7,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="p-t-10" *ngIf="type_input == 'income'">
-  <ion-item-divider color="success">
+<ion-content>
+  <ion-item-divider color="success" *ngIf="type_input == 'parent_income' || type_input == 'income'">
     <ion-icon name="trending-up-outline" style="zoom:1.6;"></ion-icon>
     <ion-label class="fs-20">
       &nbsp;INCOME
     </ion-label>
   </ion-item-divider>
 
-  <!-- Item Dividers in a List -->
-  <ion-list lines="none">
-    <ion-item-divider>
-      <ion-label class="fs-17">
-        Award
-      </ion-label>
-    </ion-item-divider>
-    <ion-item-divider>
-      <ion-label class="fs-17">
-        Gifts
-      </ion-label>
-    </ion-item-divider>
-    <ion-item-divider>
-      <ion-label class="fs-17">
-        Interest Money
-      </ion-label>
-    </ion-item-divider>
-    <ion-item-divider>
-      <ion-label class="fs-17">
-        Salary
-      </ion-label>
-    </ion-item-divider>
-    <ion-item (click)="add_category('Buu Salary','1')">
-      <ion-label class="p-l-15">Buu Salary</ion-label>
-      <ion-button slot="end" color="light" >
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item-divider>
-      <ion-label class="fs-17">
-        Selling
-      </ion-label>
-    </ion-item-divider>
-    <ion-item-divider>
-      <ion-label class="fs-17">
-        Others
-      </ion-label>
-    </ion-item-divider>
-  </ion-list>
-</ion-content>
-
-<ion-content class="p-t-10" *ngIf="type_input == 'expense'">
-  <ion-item-divider color="danger">
+  <ion-item-divider color="danger" *ngIf="type_input == 'parent_expense' || type_input == 'expense'">
     <ion-icon name="trending-down-outline" style="zoom:1.6;"></ion-icon>
     <ion-label class="fs-20">
       &nbsp;EXPENSE
@@ -65,147 +23,19 @@
   </ion-item-divider>
 
   <!-- Item Dividers in a List -->
-  <ion-list lines="none">
-    <ion-item-divider>
-      <ion-label class="fs-17">
-        Food & Beverage
-      </ion-label>
-    </ion-item-divider>
-
-    <ion-item (click)="add_category('Restaurants','1')">
-      <ion-label class="p-l-15">Restaurants</ion-label>
+  <ion-list *ngIf="type_input == 'income' || type_input == 'expense'">
+    <ion-item *ngFor="let value of (obj_category | async)" (click)="add_category(value.cat_name,value.cat_type)">
+      <ion-label class="p-l-0">{{value.cat_name}}</ion-label>
       <ion-button slot="end" color="light" >
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-15">Cafe</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-15">Food</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-
-    <ion-item-divider>
-      <ion-label class="fs-17">
-        Transportation
-      </ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <ion-label class="p-l-15">Taxi</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-15">Parking Fees</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-
-    <ion-item-divider>
-      <ion-label class="fs-17">
-        Shopping
-      </ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <ion-label class="p-l-15">Clothing</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-15">Footwear</ion-label>
-      <ion-button slot="end" color="light">
         + ADD
       </ion-button>
     </ion-item>
   </ion-list>
-</ion-content>
 
-<ion-content class="p-t-10" *ngIf="type_input == 'parent_income'">
-  <ion-item-divider color="success">
-    <ion-icon name="trending-up-outline" style="zoom:1.6;"></ion-icon>
-    <ion-label class="fs-20">
-      &nbsp;INCOME
-    </ion-label>
-  </ion-item-divider>
-
-  <!-- Item Dividers in a List -->
-  <ion-list>
-    <ion-item (click)="add_category('Award','1')">
-      <ion-label class="p-l-0">Award</ion-label>
+  <ion-list *ngIf="type_input == 'parent_income' || type_input == 'parent_expense'">
+    <ion-item *ngFor="let value of (obj_sub_category | async)" (click)="add_category(value.cat_name,value.cat_type)">
+      <ion-label class="p-l-0">{{value.cat_name}}</ion-label>
       <ion-button slot="end" color="light" >
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-0">Gifts</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-0">Interest Money</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-0">Salary</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-0">Selling</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-0">Others</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-  </ion-list>
-</ion-content>
-
-<ion-content class="p-t-10" *ngIf="type_input == 'parent_expense'">
-  <ion-item-divider color="danger">
-    <ion-icon name="trending-down-outline" style="zoom:1.6;"></ion-icon>
-    <ion-label class="fs-20">
-      &nbsp;EXPENSE
-    </ion-label>
-  </ion-item-divider>
-
-  <!-- Item Dividers in a List -->
-  <ion-list>
-
-    <ion-item (click)="add_category('Food & Beverage','1')">
-      <ion-label class="p-l-0">Food & Beverage</ion-label>
-      <ion-button slot="end" color="light" >
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-0">Transportation</ion-label>
-      <ion-button slot="end" color="light">
-        + ADD
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label class="p-l-0">Shopping</ion-label>
-      <ion-button slot="end" color="light">
         + ADD
       </ion-button>
     </ion-item>
