@@ -19,15 +19,15 @@
   <!-- lish Income -->
   <ion-list lines="none" *ngFor="let income of (obj_MSubCategories_Income | async)" >
 
-    <ion-item-divider>
-      <ion-label class="fs-17" >
+    <ion-item-divider >
+      <ion-label class="fs-17" *ngIf=" obj_MSubCategories.categories_name[0] == income.categories_name">
         {{income.categories_name}}
       </ion-label>
     </ion-item-divider>
 
     <ion-item-sliding>
       <ion-item>
-        <ion-label class="p-l-15" *ngIf="this.income.categories_name == 'Award'">
+        <ion-label class="p-l-15" >
           {{income.sub_categories_name}}
         </ion-label>
         <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
