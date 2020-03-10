@@ -21,10 +21,11 @@
   <ion-list lines="none">
     <div *ngFor="let income of (obj_MSubCategories_Income | async)">
       <ion-item-divider >
-        <ion-label class="fs-17" >
-          {{income.categories_name}}
+        <ion-label class="fs-17"  >
+          {{income.categories_name}} 
         </ion-label>
       </ion-item-divider >
+
       <ion-item-sliding>
         <ion-item>
           <ion-label class="p-l-15" >
