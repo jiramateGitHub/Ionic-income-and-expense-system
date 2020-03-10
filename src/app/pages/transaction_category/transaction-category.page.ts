@@ -1,4 +1,5 @@
 import { TransactionInputPage } from './../transaction_input/transaction-input.page';
+import { TransactionCategories_Creator_Income } from './../../interface/creator.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController, ModalController, AlertController, NavParams, NavController } from '@ionic/angular';
@@ -8,7 +9,7 @@ import { ToastController, ModalController, AlertController, NavParams, NavContro
   templateUrl: './transaction-category.page.html',
   styleUrls: ['./transaction-category.page.scss'],
 })
-export class TransactionCategoryPage implements OnInit {
+export class TransactionCategoryPage  implements OnInit  {
   private type_input: string;
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -23,13 +24,15 @@ export class TransactionCategoryPage implements OnInit {
   }
 
   ngOnInit() {
+    var n = new TransactionCategories_Creator_Income();
+    n.someOperation();
   }
 
   // * @Function   : add_category => เลือก Category และเรียกคำสั่งปิด modal 
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-02
-  async add_category(name:string,id:string){
-    this.modalController.dismiss({name});
+  async add_category(name:string,type:string){
+    this.modalController.dismiss({name, type});
   }
 
   // * @Function   : close_modal => คำสั่งปิด modal

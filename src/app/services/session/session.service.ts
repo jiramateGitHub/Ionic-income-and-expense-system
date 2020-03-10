@@ -33,7 +33,7 @@ export class SessionService {
   // * @Function   : get_session_username => คืนค่า session_username ที่เข้าสู่ระบบ
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-08
-  get_session_username(username){
+  get_session_username(){
     return this.session_username;
   }
 
