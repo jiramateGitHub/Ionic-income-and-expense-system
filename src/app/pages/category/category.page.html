@@ -16,8 +16,10 @@
   </ion-item-divider>
 
   <!-- Item Dividers in a List -->
-  <!-- lish Income -->
-
+  <!-- lish Income 
+    // * @Author     : Kessarin U-tumporn
+    // * @Create Date: 2563-03-09
+  -->
   <ion-list lines="none">
     <div *ngFor="let income of (obj_MSubCategories_Income | async)">
       <ion-item-divider >
@@ -54,11 +56,14 @@
   </ion-item-divider>
 
   <!-- Item Dividers in a List -->
-  <!-- lish Expense -->
+  <!-- lish Expense 
+    // * @Author     : Kessarin U-tumporn
+    // * @Create Date: 2563-03-10
+  -->
   <ion-list lines="none" *ngFor="let expense of (obj_MSubCategories_Expense | async)">
 
     <ion-item-divider>
-      <ion-label class="fs-17" *ngIf="this.expense.categories_name == 'Award' ">
+      <ion-label class="fs-17">
         {{expense.categories_name}}
       </ion-label>
     </ion-item-divider>
