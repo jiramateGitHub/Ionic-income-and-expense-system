@@ -37,10 +37,9 @@ export class SigninPage implements OnInit {
     //loading present
     const loading = await this.loadingController.create({
       message: 'Please wait...',
-      duration: 2000
+      duration: 1000
     });
     await loading.present();
-
     var check_login = false;
     var count = 0;
     this.obj_MPerson.username = this.username

@@ -1,17 +1,37 @@
+import { MWallet } from './../services.service';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http'
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
+import { map, take } from 'rxjs/operators';
+import 'rxjs/add/operator/map';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'
 })
 export class MWalletService {
-  public wat_id : string;
-  public wat_cat_id : string;
-  public wat_per_id	: string;
-  public wat_cur_id	: string;
-  public wat_balance : string;
-  public wat_active	: string;
-  public wat_editor : string;
 
-  constructor(private http:Http) { }
+  public service: Observable<MWallet[]>
+  private serviceCollection: AngularFirestoreCollection<MWallet>; 
+
+  constructor(
+    private afs: AngularFirestore) {
+    this.serviceCollection = this.afs.collection<MWallet>('M_wallet')
+    
+  }
+
+  get_obs_mwallet(): Observable<MWallet[]> {
+    this.serviceCollection = this.afs.collection<MWallet>('M_wallet');
+    this.service = this.serviceCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );  
+    return this.service;
+  }
+
 }

@@ -20,11 +20,11 @@
 
         <ion-item>
           <ion-icon name="cube-outline" class="p-r-5"></ion-icon>
-          <ion-input placeholder="Category Name"></ion-input>
+          <ion-input placeholder="Category Name" [(ngModel)]="obj_MSubCategories.sub_categories_name"></ion-input>
         </ion-item>
 
         <ion-list>
-          <ion-radio-group [(ngModel)]="category_type" value="income">
+          <ion-radio-group [(ngModel)]="type_parent_categories" value="income">
             <ion-list-header>
               <ion-label class="fs-15">Categories Type</ion-label>
             </ion-list-header>
@@ -44,7 +44,7 @@
 
         <ion-item>
           <ion-icon name="trail-sign-outline" class="p-r-5"></ion-icon>
-          <ion-input placeholder="Select Parent Category" (click)="modal_taransaction_category_show()" style="text-align: left;" [(ngModel)]="catt_name" readonly></ion-input>
+          <ion-input [(ngModel)]="obj_MSubCategories.categories_name" placeholder="Select Parent Category" (click)="modal_taransaction_category_show()" style="text-align: left;" [(ngModel)]="catt_name" readonly></ion-input>
         </ion-item>
 
         
@@ -57,7 +57,9 @@
   <ion-grid>
     <ion-row >
       <ion-col>
-        <ion-button expand="block">Save Wallet</ion-button>
+        <ion-button *ngIf="type_input == 'insert'" expand="block" (click)="insert_categories()">Save Categories</ion-button>
+        <ion-button *ngIf="type_input == 'update'" expand="block" (click)="insert_categories()">Save Categories</ion-button>
+        <ion-button *ngIf="type_input == 'delete'" expand="block" (click)="delete_categories()">Save Categories</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
