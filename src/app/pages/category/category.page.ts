@@ -21,11 +21,13 @@ export class CategoryPage implements OnInit {
     sub_categories_active: null
   }
   public obj_MSubCategories_Income : Observable<MSubCategories[]>
+  public obj_MSubCategories_Expense : Observable<MSubCategories[]>
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,
     private ServicesService:ServicesService
   ) { 
+    
    this.get_categories()
   }
 
@@ -116,9 +118,16 @@ export class CategoryPage implements OnInit {
   // * @Author     : Kessarin U-tumporn
   // * @Create Date: 2563-03-09
   get_categories(){
+    
+    //get รายรับ
     this.obj_MSubCategories.categories_type = 1;
     this.obj_MSubCategories_Income = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories)
     this.obj_MSubCategories_Income.subscribe(res => console.log(res))
+
+    //get รายจ่าย
+    this.obj_MSubCategories.categories_type = 2;
+    this.obj_MSubCategories_Expense = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories)
+    this.obj_MSubCategories_Expense.subscribe(res => console.log(res))
   }
 
 }
