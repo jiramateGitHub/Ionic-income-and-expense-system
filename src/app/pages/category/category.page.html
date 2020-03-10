@@ -34,14 +34,13 @@
             <ion-label class="p-l-15">
               {{sub.sub_categories_name}}
             </ion-label>
-            <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
           </ion-item>
           <ion-item-options>
-            <ion-item-option color="primary" (click)="modal_update_show()">
+            <ion-item-option color="primary" (click)="modal_update_show(sub.id)">
               <ion-icon slot="start" name="create"></ion-icon>
               Edit
             </ion-item-option>
-            <ion-item-option color="danger" (click)="category_active_update_AlertConfirm()">
+            <ion-item-option color="danger" (click)="category_active_update_AlertConfirm(sub.id)">
               <ion-icon slot="start" name="trash"></ion-icon>
               Delete
             </ion-item-option>
@@ -77,14 +76,13 @@
             <ion-label class="p-l-15">
               {{sub.sub_categories_name}}
             </ion-label>
-            <ion-icon slot="end" name="ellipsis-vertical" (click)="category_manage_alert()"></ion-icon>
           </ion-item>
           <ion-item-options>
-            <ion-item-option color="primary" (click)="modal_update_show()">
+            <ion-item-option color="primary" (click)="modal_update_show(sub.id)">
               <ion-icon slot="start" name="create"></ion-icon>
               Edit
             </ion-item-option>
-            <ion-item-option color="danger" (click)="category_active_update_AlertConfirm()">
+            <ion-item-option color="danger" (click)="category_active_update_AlertConfirm(sub.id)">
               <ion-icon slot="start" name="trash"></ion-icon>
               Delete
             </ion-item-option>

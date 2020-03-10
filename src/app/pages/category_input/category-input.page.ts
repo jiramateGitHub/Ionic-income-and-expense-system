@@ -26,6 +26,7 @@ export class CategoryInputPage implements OnInit {
     private ServicesService: ServicesService
   ) { 
     this.type_input = navParams.get('type_input');
+    console.log(navParams.get('id'))
     if(this.type_input == "update"){
 
     }
