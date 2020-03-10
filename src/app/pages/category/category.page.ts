@@ -121,12 +121,12 @@ export class CategoryPage implements OnInit {
     
     //get รายรับ
     this.obj_MSubCategories.categories_type = 1;
-    this.obj_MSubCategories_Income = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories)
+    this.obj_MSubCategories_Income = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories.categories_type)
     this.obj_MSubCategories_Income.subscribe(res => console.log(res))
 
     //get รายจ่าย
     this.obj_MSubCategories.categories_type = 2;
-    this.obj_MSubCategories_Expense = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories)
+    this.obj_MSubCategories_Expense = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories.categories_type)
     this.obj_MSubCategories_Expense.subscribe(res => console.log(res))
   }
 

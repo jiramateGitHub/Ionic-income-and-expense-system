@@ -23,8 +23,8 @@ export class MSubCategoriesService {
   // * @Function   : get_obs_msubcategories => แสดงข้อมูล sub_categories จาก Firebase Cloud
   // * @Author     : Kessarin U-tumporn
   // * @Create Date: 2563-03-09
-  get_obs_msubcategories(msubcategories:MSubCategories): Observable<MSubCategories[]> {
-    this.serviceCollection = this.afs.collection<MSubCategories>('M_sub_categories', ref => ref.where('categories_type', '==', msubcategories.categories_type));
+  get_obs_msubcategories(type:number): Observable<MSubCategories[]> {
+    this.serviceCollection = this.afs.collection<MSubCategories>('M_sub_categories', ref => ref.where('categories_type', '==', type));
     this.service = this.serviceCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
