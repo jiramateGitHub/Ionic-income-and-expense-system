@@ -35,9 +35,17 @@ export class TabReportPage {
   ) {
 
     // this.obj_MTransaction.transaction_date = Date()
-    this.get_report_by_day()
+    
 
   }
+
+ngOnInit(): void {
+  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+  //Add 'implements OnInit' to the class.
+  this.obj_MTransaction.transaction_date = Date()
+
+  
+}
 
   // * @Function   : selcet_report_alert => แสดง Select สำหรับเลือกประเภทรายงาน
   // * @Author     : Jiramate
