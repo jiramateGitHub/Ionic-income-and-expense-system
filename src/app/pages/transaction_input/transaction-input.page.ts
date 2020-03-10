@@ -137,4 +137,5 @@ export class TransactionInputPage implements OnInit {
       'dismissed': true
     });
   }
+
 }
