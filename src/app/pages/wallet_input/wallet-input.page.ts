@@ -27,9 +27,7 @@ export class WalletInputPage implements OnInit {
   public obj_MTransaction: MTransaction = {
     username : null,
     wallet_name : null,
-    categorise_type : null,
-    categorise_name : null,
-    sub_categories_name : null,
+    
     transaction_amount : null,
     transaction_date :null,
     transaction_note : null,
@@ -41,6 +39,7 @@ export class WalletInputPage implements OnInit {
     private navParams: NavParams,
     private modalController: ModalController,
     private alertController: AlertController,
+    private ServicesService:ServicesService
     
   ) { 
     this.type_input = navParams.get('type_input');
@@ -111,7 +110,7 @@ export class WalletInputPage implements OnInit {
   // * @Create Date: 2563-03-09
   async insert_wallet(){
     console.log(this.wallet_name , this.wallet_balance);
-    this.obj_MWallet.wallet_name = this.wallet_name;
+    this.obj_MWallet.wallet_name = this.ServicesService.SessionService.get_session_wallet()
     this.obj_MWallet.wallet_balance = this.wallet_balance;
     this.obj_MTransaction.transaction_amount = this.wallet_balance;
     this.obj_MTransaction.transaction_note = "...";
