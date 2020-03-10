@@ -49,7 +49,7 @@ import { TransactionCategoryPage } from './pages/transaction_category/transactio
     IonicModule.forRoot(), 
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     FormsModule,
     HttpModule,
     HttpClientModule
