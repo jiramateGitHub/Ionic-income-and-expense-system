@@ -32,9 +32,17 @@ export class TransactionCategoryPage  implements OnInit  {
     }else if(this.type_input == "parent_expense"){
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Expense();
       this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
+    }else if(this.type_input == "income"){
+      var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Expense();
+      this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
+    }else if(this.type_input == "expense"){
+      var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Expense();
+      this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
     }
-    this.obj_category .subscribe(res=>console.log(res))
   }
+
+  ngOnInit(){}
+
 
   // * @Function   : add_category => เลือก Category และเรียกคำสั่งปิด modal 
   // * @Author     : Jiramate Phuaphan
