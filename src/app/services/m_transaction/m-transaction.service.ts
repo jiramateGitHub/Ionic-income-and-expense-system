@@ -69,7 +69,7 @@ export class MTransactionService {
     return this.serviceCollection.doc<MTransaction>(id).valueChanges().pipe(
       take(1),
       map(MTransaction => {
-        // MTransaction.id = id;
+        MTransaction.id = id;
         return MTransaction
       })
     );
@@ -82,8 +82,7 @@ export class MTransactionService {
     this.serviceCollection.doc<MTransaction>(id).update(mtransaction);
   }
 
-  async delete_transection(id:string){
-    console.log(id)
+   delete_transaction(id:string){
     this.serviceCollection.doc<MTransaction>(id).delete();
   }
 
