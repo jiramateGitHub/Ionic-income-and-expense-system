@@ -14,28 +14,32 @@ export class MTransactionService {
 
   private service: Observable<MTransaction[]>;
   private serviceCollection: AngularFirestoreCollection<MTransaction>;
- 
+
   constructor(
     private afs: AngularFirestore) {
-      this.serviceCollection = this.afs.collection<MTransaction>('M_transaction')
+    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction')
   }
 
-// * @Function   : get_obs_mtransaction => คือค่าข้อมูล interface MTransaction ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
-// * @Author     : Sathien Supabkul
-// * @Create Date: 2563-03-09
-get_obs_mtransaction(mtransaction:MTransaction): Observable<MTransaction[]> {
-  // this.serviceCollection = this.afs.collection<MTransaction>('M_transaction', ref => ref.where('transaction_date', '==', mtransaction.transaction_date));
-  this.serviceCollection = this.afs.collection<MTransaction>('M_transaction');
-  this.service = this.serviceCollection.snapshotChanges().pipe(
-    map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    })
-  );  
-  return this.service;
-}
+  // * @Function   : get_obs_mtransaction => คือค่าข้อมูล interface MTransaction ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
+  // * @Author     : Sathien Supabkul
+  // * @Create Date: 2563-03-09
+  get_obs_mtransaction(mtransaction: MTransaction): Observable<MTransaction[]> {
+    // this.serviceCollection = this.afs.collection<MTransaction>('M_transaction', ref => ref.where('transaction_date', '==', mtransaction.transaction_date));
+    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction');
+    this.service = this.serviceCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.service;
+  }
 
+
+  async insert_transection(mtransaction:MTransaction) {
+    this.serviceCollection.add(mtransaction);
+  }
 }

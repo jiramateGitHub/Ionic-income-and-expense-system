@@ -102,16 +102,11 @@ async modal_taransaction_category_show() {
     //console.log(this.obj_MSubCategories)
   }
 
-<<<<<<< HEAD
-  get_all_sub_categories(){
-    this.ServicesService.MSubCategoriesService.get_all_sub_categories();
-=======
   showToast(msg) {
     this.toastController.create({
       message: msg,
       duration: 2000
     }).then(toast => toast.present());
->>>>>>> 491a82f0bd4e70d5165e881da355590907429a61
   }
 
 }

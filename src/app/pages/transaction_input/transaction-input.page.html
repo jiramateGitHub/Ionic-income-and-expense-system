@@ -19,7 +19,7 @@
       <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
         <ion-item>
           <ion-label class="fs-25">฿</ion-label>
-          <ion-input class="fs-25" placeholder="0" type="number" [(ngModel)]="tran_amount" ></ion-input>
+          <ion-input class="fs-25" placeholder="0" type="number" [(ngModel)]="MTransaction.transaction_amount" ></ion-input>
         </ion-item>
 
         <ion-item>
@@ -31,13 +31,13 @@
         <ion-item>
           <ion-icon name="calendar-outline" class="p-r-5"></ion-icon>
           <ion-label> Date</ion-label>
-          <ion-datetime displayFormat="DD MMMM YY" placeholder="Select Date" [(ngModel)]="tran_date"></ion-datetime>
+          <ion-datetime displayFormat="DD MMMM YY" placeholder="Select Date" [(ngModel)]="MTransaction.transaction_date"></ion-datetime>
         </ion-item>
 
         <ion-item>
           <ion-icon name="clipboard-outline" class="p-r-5"></ion-icon>
           <ion-label position="fixed"> Write note</ion-label>
-          <ion-input></ion-input>
+          <ion-input [(ngModel)]="MTransaction.transaction_note" ></ion-input>
         </ion-item>
         
       </ion-col>

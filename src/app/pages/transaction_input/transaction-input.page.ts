@@ -1,4 +1,4 @@
-import { ServicesService } from './../../services/services.service';
+import { ServicesService , MTransaction } from './../../services/services.service';
 import { TransferInputPage } from './../transfer_input/transfer-input.page';
 import { TransactionCategoryPage } from './../transaction_category/transaction-category.page';
 import { Component, OnInit } from '@angular/core';
@@ -14,12 +14,14 @@ import { Observable } from 'rxjs';
 export class TransactionInputPage implements OnInit {
 
   private type_input: string;
-  private MTransaction = {
-    id: null,
+  public 
+
+
+  private MTransaction:MTransaction = {
     username : null,
     wallet_name : null,
-    categorise_type : null,
-    categorise_name : null,
+    categories_type : null,
+    categories_name : null,
     sub_categories_name : null,
     transaction_amount : null,
     transaction_date : null,
@@ -96,7 +98,9 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.MTransaction.sub_categories_name = data['data'].name; // Here's your selected user!
+      this.MTransaction.categories_type = 2
+      this.MTransaction.categories_name = "Transport"
+      this.MTransaction.sub_categories_name = "Taxi"
     });
     return await modal.present();
   }
@@ -113,7 +117,9 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.MTransaction.sub_categories_name = data['data'].name; // Here's your selected user!
+      this.MTransaction.categories_type = 2
+      this.MTransaction.categories_name = "Transport"
+      this.MTransaction.sub_categories_name = "taxi"
     });
     return await modal.present();
   }
@@ -138,12 +144,20 @@ export class TransactionInputPage implements OnInit {
     });
   }
 
+
   // * @Function   : insert_transection => เพิ่มข้อมูล transectio
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
   async insert_transection() {
-        
+    this.MTransaction.username = this.servicesService.SessionService.get_session_username();
+    this.MTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
+    this.MTransaction.transaction_active = "Y"
 
+    this.servicesService.MTransactionService.insert_transection(this.MTransaction).then(() => {
+      this.showToast('Insert Transection successful.');
+    });
+
+    this.close_modal();
   }
 
 }
