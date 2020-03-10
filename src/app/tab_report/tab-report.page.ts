@@ -77,8 +77,7 @@ async selcet_report_alert(){
 // * @Create Date: 2563-03-09
 get_report_by_day(){
   this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MTransaction).subscribe(async res => {
-    console.log(res[0].transaction_date);
-    console.log(new Date(1583485800))
+    console.log(res);
   });
 }
 
