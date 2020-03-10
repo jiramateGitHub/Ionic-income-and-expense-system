@@ -23,8 +23,17 @@
   </ion-item-divider>
 
   <!-- Item Dividers in a List -->
-  <ion-list>
+  <ion-list *ngIf="type_input == 'income' || type_input == 'expense'">
     <ion-item *ngFor="let value of (obj_category | async)" (click)="add_category(value.cat_name,value.cat_type)">
+      <ion-label class="p-l-0">{{value.cat_name}}</ion-label>
+      <ion-button slot="end" color="light" >
+        + ADD
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="type_input == 'parent_income' || type_input == 'parent_expense'">
+    <ion-item *ngFor="let value of (obj_sub_category | async)" (click)="add_category(value.cat_name,value.cat_type)">
       <ion-label class="p-l-0">{{value.cat_name}}</ion-label>
       <ion-button slot="end" color="light" >
         + ADD

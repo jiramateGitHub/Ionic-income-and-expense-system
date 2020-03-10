@@ -1,4 +1,4 @@
-import { ServicesService, MCategories } from './../../services/services.service';
+import { ServicesService, MCategories, MSubCategories } from './../../services/services.service';
 import { TransactionInputPage } from './../transaction_input/transaction-input.page';
 import { TransactionCategories_Creator_Income, TransactionCategories_Creator_Expense, TransactionSubCategories_Creator_Expense, TransactionSubCategories_Creator_Income } from './../../interface/creator.interface';
 import { Component, OnInit } from '@angular/core';
@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 export class TransactionCategoryPage  implements OnInit  {
   private type_input: string;
   private obj_category: Observable<MCategories[]>;
+  private obj_sub_category: Observable<MSubCategories[]>;
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -26,6 +27,7 @@ export class TransactionCategoryPage  implements OnInit  {
     private servicesService:ServicesService
   ) { 
     this.type_input = navParams.get('type_input');
+    console.log(this.type_input)
     if(this.type_input == "parent_income"){
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Income();
       this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
@@ -34,12 +36,14 @@ export class TransactionCategoryPage  implements OnInit  {
       this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
     }else if(this.type_input == "income"){
       var obj_TransactionCategories_Creator = new TransactionSubCategories_Creator_Income();
-      this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
+      this.obj_sub_category = obj_TransactionCategories_Creator.get_sub_categories(this.servicesService)
     }else if(this.type_input == "expense"){
       var obj_TransactionCategories_Creator = new TransactionSubCategories_Creator_Expense();
-      this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
+      this.obj_sub_category = obj_TransactionCategories_Creator.get_sub_categories(this.servicesService)
     }
-    this.obj_category.subscribe(res=>console.log(res))
+    console.log(this.obj_category)
+    console.log(this.obj_sub_category)
+    
   }
 
   ngOnInit(){}

@@ -1,6 +1,6 @@
 import { TransactionCategories_Interface, TransactionCategories_Income, TransactionCategories_Expense ,TransactionSubCategories_Income , TransactionSubCategories_Expense} from './transaction-categories.interface';
 import { Observable } from 'rxjs';
-import { ServicesService, MCategories } from '../services/services.service';
+import { ServicesService, MCategories, MSubCategories } from '../services/services.service';
 import { Component, OnInit } from '@angular/core';
 export abstract class TransactionCategories_Creator {
     public abstract factoryMethod(servicesService : ServicesService): TransactionCategories_Interface;
@@ -9,6 +9,13 @@ export abstract class TransactionCategories_Creator {
         const product = this.factoryMethod(servicesService);
         // Now, use the product.
         return product.get_categories();
+    }
+
+    public get_sub_categories(servicesService : ServicesService) : Observable<MSubCategories[]>{
+        // Call the factory method to create a Product object.
+        const product = this.factoryMethod(servicesService);
+        // Now, use the product.
+        return product.get_sub_categories();
     }
 }
 
