@@ -12,7 +12,6 @@ export class CategoryInputPage implements OnInit {
   private type_input: string;
   private type_parent_categories : string;
   public obj_MSubCategories: MSubCategories= {
-    id : null,
     username: null,
     categories_name: null,
     categories_type: null,
@@ -27,6 +26,7 @@ export class CategoryInputPage implements OnInit {
     private ServicesService: ServicesService
   ) { 
     this.type_input = navParams.get('type_input');
+    console.log(navParams.get('id'))
     if(this.type_input == "update"){
 
     }
@@ -47,8 +47,8 @@ async modal_taransaction_category_show() {
   });
   modal.onDidDismiss()
   .then((data) => {
-    this.obj_MSubCategories.categories_name = data['data'].name; // Here's your selected user!
-    this.obj_MSubCategories.categories_type = data['data'].type;
+    this.obj_MSubCategories.categories_name = data['data'].categories_name; // Here's your selected user!
+    this.obj_MSubCategories.categories_type = data['data'].categories_type;
   });
   return await modal.present();
 }
@@ -77,6 +77,8 @@ async modal_taransaction_category_show() {
     this.obj_MSubCategories.sub_categories_active = "Y"
     this.ServicesService.MSubCategoriesService.insert_sub_categories(this.obj_MSubCategories)
     //console.log(this.obj_MSubCategories)
+    this.showToast("Add Categories Success");
+    this.close_modal()
   }
 
   // * @Function   : update_categories => คำสั่งแก้ไข sub_categories
@@ -87,6 +89,7 @@ async modal_taransaction_category_show() {
     this.obj_MSubCategories.sub_categories_active = "Y"
     this.ServicesService.MSubCategoriesService.update_sub_categories(this.obj_MSubCategories)
     //console.log(this.obj_MSubCategories)
+    this.close_modal()
   }
 
   // * @Function   : delete_categories => คำสั่งลบ sub_categories
@@ -97,6 +100,13 @@ async modal_taransaction_category_show() {
     this.obj_MSubCategories.sub_categories_active = "Y"
     this.ServicesService.MSubCategoriesService.update_sub_categories(this.obj_MSubCategories)
     //console.log(this.obj_MSubCategories)
+  }
+
+  showToast(msg) {
+    this.toastController.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
   }
 
 }

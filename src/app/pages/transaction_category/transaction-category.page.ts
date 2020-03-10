@@ -1,6 +1,6 @@
-import { ServicesService, MCategories } from './../../services/services.service';
+import { ServicesService, MCategories, MSubCategories } from './../../services/services.service';
 import { TransactionInputPage } from './../transaction_input/transaction-input.page';
-import { TransactionCategories_Creator_Income , TransactionCategories_Creator_Expense } from './../../interface/creator.interface';
+import { TransactionCategories_Creator_Income, TransactionCategories_Creator_Expense, TransactionSubCategories_Creator_Expense, TransactionSubCategories_Creator_Income } from './../../interface/creator.interface';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController, ModalController, AlertController, NavParams, NavController } from '@ionic/angular';
@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 export class TransactionCategoryPage  implements OnInit  {
   private type_input: string;
   private obj_category: Observable<MCategories[]>;
+  private obj_sub_category: Observable<MSubCategories[]>;
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -25,7 +26,9 @@ export class TransactionCategoryPage  implements OnInit  {
     private navCtrl:NavController,
     private servicesService:ServicesService
   ) { 
+
     this.type_input = navParams.get('type_input');
+
     if(this.type_input == "parent_income"){
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Income();
       this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
@@ -33,12 +36,17 @@ export class TransactionCategoryPage  implements OnInit  {
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Expense();
       this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
     }else if(this.type_input == "income"){
-      var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Expense();
+      var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Income();
       this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
+      var obj_TransactionCategories_Creator = new TransactionSubCategories_Creator_Income();
+      this.obj_sub_category = obj_TransactionCategories_Creator.get_sub_categories(this.servicesService)
     }else if(this.type_input == "expense"){
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Expense();
       this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
+      var obj_TransactionCategories_Creator = new TransactionSubCategories_Creator_Expense();
+      this.obj_sub_category = obj_TransactionCategories_Creator.get_sub_categories(this.servicesService)
     }
+    
   }
 
   ngOnInit(){}
@@ -47,8 +55,15 @@ export class TransactionCategoryPage  implements OnInit  {
   // * @Function   : add_category => เลือก Category และเรียกคำสั่งปิด modal 
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-02
-  async add_category(name:string,type:number){
-    this.modalController.dismiss({name, type});
+  async add_category(categories_name:string, categories_type:number){
+    this.modalController.dismiss({categories_name, categories_type});
+  }
+  
+  // * @Function   : add_sub_category => เลือก Sub Category และเรียกคำสั่งปิด modal 
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-010
+  async add_sub_category(categories_name:string, categories_type:number, sub_categories:string){
+    this.modalController.dismiss({categories_name, categories_type, sub_categories});
   }
 
   // * @Function   : close_modal => คำสั่งปิด modal
