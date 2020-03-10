@@ -36,9 +36,13 @@ export class TransactionCategoryPage  implements OnInit  {
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Expense();
       this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
     }else if(this.type_input == "income"){
+      var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Income();
+      this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
       var obj_TransactionCategories_Creator = new TransactionSubCategories_Creator_Income();
       this.obj_sub_category = obj_TransactionCategories_Creator.get_sub_categories(this.servicesService)
     }else if(this.type_input == "expense"){
+      var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Expense();
+      this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
       var obj_TransactionCategories_Creator = new TransactionSubCategories_Creator_Expense();
       this.obj_sub_category = obj_TransactionCategories_Creator.get_sub_categories(this.servicesService)
     }
@@ -53,6 +57,13 @@ export class TransactionCategoryPage  implements OnInit  {
   // * @Create Date: 2563-03-02
   async add_category(categories_name:string, categories_type:number){
     this.modalController.dismiss({categories_name, categories_type});
+  }
+  
+  // * @Function   : add_sub_category => เลือก Sub Category และเรียกคำสั่งปิด modal 
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-010
+  async add_sub_category(categories_name:string, categories_type:number, sub_categories:string){
+    this.modalController.dismiss({categories_name, categories_type, sub_categories});
   }
 
   // * @Function   : close_modal => คำสั่งปิด modal
