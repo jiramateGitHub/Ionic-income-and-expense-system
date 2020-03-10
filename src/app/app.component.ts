@@ -1,3 +1,4 @@
+import { ServicesService } from './services/services.service';
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
@@ -13,9 +14,11 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private ServicesService:ServicesService
   ) {
     this.initializeApp();
+    this.ServicesService.SessionService.set_session("60160157","Wallet Test")
   }
 
   initializeApp() {
