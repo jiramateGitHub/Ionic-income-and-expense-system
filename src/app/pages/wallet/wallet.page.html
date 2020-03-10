@@ -13,8 +13,8 @@
     <ion-item-divider>
       <ion-label slot="start">Included in Total</ion-label>
     </ion-item-divider>
-
     <ion-card>
+      <ion-spinner name="dots" *ngIf="loading == 0" style="text-align: center;"></ion-spinner>
       <div *ngFor="let wallet of (obj_MWallet_List | async)">
         <ion-item-sliding>
           <ion-item style="margin: 0px;">

@@ -39,11 +39,15 @@ export class SignupPage implements OnInit {
 // * @Create Date: 2563-03-01
   async signup(){
     //loading present
-    const loading = await this.loadingController.create({
+    var loading;
+    var time_loading = 60000;
+    await this.loadingController.create({
       message: 'Please wait...',
-      duration: 2000
+    }).then((overlay) => {
+      loading = overlay
+      loading.present();
     });
-    await loading.present();
+    setTimeout(() => {}, time_loading);
     
     if(this.password == this.validate_password){
       this.obj_MPerson.username = this.username;
@@ -57,24 +61,27 @@ export class SignupPage implements OnInit {
             break;
           }
         }
-        const { role, data } = await loading.onDidDismiss();
         if(check_username_duplicate == false){
           this.ServicesService.MPersonService.insert_person(this.obj_MPerson).then(() => {
             this.ServicesService.SessionService.set_session_username(this.username)
             this.router.navigateByUrl('signin');
             this.showToast('Sign up successful.');
+            loading.dismiss();
           }, err => {
             this.showToast('There was a problem sign up your account :(');
+            loading.dismiss();
           });
         }else{
           if(count == 0){
             this.showToast('Your username duplicate.');
+            loading.dismiss();
           }
         }
         count++;
       });
     }else{
       this.showToast('Passwords do not match.');
+      loading.dismiss();
     }
   }
 
