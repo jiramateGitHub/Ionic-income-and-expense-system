@@ -24,16 +24,15 @@ export class WalletInputPage implements OnInit {
  
   };
 
-  public obj_MTransaction: MTransaction = {
-    username : null,
-    wallet_name : null,
-    
-    transaction_amount : null,
-    transaction_date :null,
-    transaction_note : null,
-    transaction_active :null
+  // public obj_MTransaction: MTransaction = {
+  //   username : null,
+  //   wallet_name : null,
+  //   transaction_amount : null,
+  //   transaction_date :null,
+  //   transaction_note : null,
+  //   transaction_active :null
  
-  };
+  // };
 
   constructor(
     private navParams: NavParams,
@@ -112,9 +111,9 @@ export class WalletInputPage implements OnInit {
     console.log(this.wallet_name , this.wallet_balance);
     this.obj_MWallet.wallet_name = this.ServicesService.SessionService.get_session_wallet()
     this.obj_MWallet.wallet_balance = this.wallet_balance;
-    this.obj_MTransaction.transaction_amount = this.wallet_balance;
-    this.obj_MTransaction.transaction_note = "...";
-    this.obj_MTransaction.transaction_active = "Y";
+    // this.obj_MTransaction.transaction_amount = this.wallet_balance;
+    // this.obj_MTransaction.transaction_note = "...";
+    // this.obj_MTransaction.transaction_active = "Y";
     // this.obj_MWallet.categories_name = this.categories_name;
   }
 }
