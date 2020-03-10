@@ -98,9 +98,10 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.MTransaction.categories_type = 2
-      this.MTransaction.categories_name = "Transport"
-      this.MTransaction.sub_categories_name = "Taxi"
+      console.log(data)
+      this.MTransaction.categories_type = data['data']['categories_type'];
+      this.MTransaction.categories_name = data['data']['categories_name'];
+      this.MTransaction.sub_categories_name = data['data']['sub_categories_name'];
     });
     return await modal.present();
   }
@@ -108,7 +109,7 @@ export class TransactionInputPage implements OnInit {
   // * @Function   : modal_transfer_input_show => แสดง Modal TransferInputPage และ ตอนปิด Modal จะ Passing Data กลับมา
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-02
-  async modal_transfer_input_show(type: string) {
+  async modal_transfer_input_show(type: string) { 
     const modal = await this.modalController.create({
       component: TransferInputPage,
       componentProps: {
@@ -117,9 +118,9 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.MTransaction.categories_type = 2
-      this.MTransaction.categories_name = "Transportation"
-      this.MTransaction.sub_categories_name = "Taxi"
+      this.MTransaction.categories_type = data['data'].categories_type
+      this.MTransaction.categories_name = data['data'].categories_name
+      this.MTransaction.sub_categories_name = data['data'].sub_categories_name
     });
     return await modal.present();
   }
