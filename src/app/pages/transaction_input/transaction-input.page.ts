@@ -118,8 +118,8 @@ export class TransactionInputPage implements OnInit {
     modal.onDidDismiss()
     .then((data) => {
       this.MTransaction.categories_type = 2
-      this.MTransaction.categories_name = "Transport"
-      this.MTransaction.sub_categories_name = "taxi"
+      this.MTransaction.categories_name = "Transportation"
+      this.MTransaction.sub_categories_name = "Taxi"
     });
     return await modal.present();
   }
