@@ -100,8 +100,8 @@ ngOnInit(): void {
     this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MTransaction).subscribe(async res => {
 
       console.log("da", this.obj_MTransaction.transaction_date.substr(0, 10))
-      var sum_income: number = 0;
-      var sum_expent: number = 0;
+      var sum_income = 0;
+      var sum_expent = 0;
       //console.log(this.obj_MTransaction);
       //var str = this.obj_MTransaction.transaction_date.substr(0,10)
       //var date = str.split("-");
@@ -110,14 +110,14 @@ ngOnInit(): void {
           if (this.obj_MTransaction.transaction_date.substr(0, 10) == res[i].transaction_date.substr(0, 10)) {
 
             console.log(res[i].transaction_amount);
-            sum_income += res[i].transaction_amount;
+            sum_income += +res[i].transaction_amount;
 
           }
         } else if(res[i].categories_type == 2){
           if (this.obj_MTransaction.transaction_date.substr(0, 10) == res[i].transaction_date.substr(0, 10)) {
 
             console.log(res[i].transaction_amount);
-            sum_expent += res[i].transaction_amount;
+            sum_expent += +res[i].transaction_amount;
 
           }
         }
