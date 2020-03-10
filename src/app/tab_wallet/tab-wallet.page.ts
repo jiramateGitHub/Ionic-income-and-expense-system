@@ -41,7 +41,7 @@ export class TabWalletPage {
   }
 
   async modal_edit_show(id:string) {
-
+    
     await this.servicesService.MTransactionService.get_edit_transaction(id).subscribe( async res => {
       this.edit_transaction = res;
       const modal = await this.modalController.create({
@@ -62,7 +62,6 @@ export class TabWalletPage {
       });
       return await modal.present();
     })
-    
   }
 
   // * @Function   : get_all_transaction_show => ดึงข้อมูล Transaction มาแสดง
