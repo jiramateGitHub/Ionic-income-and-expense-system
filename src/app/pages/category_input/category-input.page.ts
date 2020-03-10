@@ -1,7 +1,8 @@
-import { ServicesService, MSubCategories } from './../../services/services.service';
+import { ServicesService, MSubCategories , MTransaction } from './../../services/services.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, NavParams, AlertController } from '@ionic/angular';
 import { TransactionCategoryPage } from './../transaction_category/transaction-category.page';
+// import { ServicesService, MTransaction} from '../../services/services.service';
 @Component({
   selector: 'app-category-input',
   templateUrl: './category-input.page.html',
