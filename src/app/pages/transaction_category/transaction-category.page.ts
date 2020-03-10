@@ -12,6 +12,7 @@ import { ToastController, ModalController, AlertController, NavParams, NavContro
 })
 export class TransactionCategoryPage  implements OnInit  {
   private type_input: string;
+  
   constructor(
     private activatedRoute: ActivatedRoute, 
     private router: Router,
