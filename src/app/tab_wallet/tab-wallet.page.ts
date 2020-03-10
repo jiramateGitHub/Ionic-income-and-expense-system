@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController , ToastController} from '@ionic/angular';
+import { ModalController, ToastController, NavParams, AlertController } from '@ionic/angular';
 import { ServicesService, MTransaction } from '../services/services.service';
 import { TransactionInputPage } from '../pages/transaction_input/transaction-input.page';
 
@@ -41,7 +41,7 @@ export class TabWalletPage {
     }, 2000);
   }
 
-  async modal_edit_show(id: number) {
+  async modal_edit_show(id: string) {
 
     this.servicesService.MTransactionService.get_edit_transaction(id).subscribe(res => {
       this.edit_transaction = res;
@@ -80,9 +80,9 @@ export class TabWalletPage {
 
   }
 
-  async delete_show(id:string){
-    this.servicesService.MTransactionService.delete_transection(id).then(() => {
-      // this.showToast('Edit Transection successful.');
+  async delete_transaction(id:string){
+    this.servicesService.MTransactionService.insert_transection.then(() => {
+      this.showToast('Insert Transection successful.');
     });
   }
 
