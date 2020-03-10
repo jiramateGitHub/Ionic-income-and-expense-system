@@ -9,6 +9,9 @@ import { timestamp } from 'rxjs/operators';
   styleUrls: ['tab-report.page.scss']
 })
 export class TabReportPage {
+
+  public income:number;
+
     public obj_MTransaction:MTransaction = {
     id: null,
     username : null,
@@ -22,7 +25,7 @@ export class TabReportPage {
     transaction_active : null
   }
 
-  public date
+
 
   constructor(
     private modalController: ModalController,
@@ -30,7 +33,7 @@ export class TabReportPage {
     private ServicesService : ServicesService
   ) {
     
-
+    // this.obj_MTransaction.transaction_date = Date()
     this.get_report_by_day()
 
   }
@@ -84,21 +87,32 @@ async selcet_report_alert(){
 // * @Create Date: 2563-03-09
 get_report_by_day(){
  // console.log(this.date)
-  // this.obj_MTransaction.transaction_date = "2563-03-06";
+  // console.log(this.obj_MTransaction.transaction_date.substr(0,10))
   this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MTransaction).subscribe(async res => {
 
+    console.log("da",this.obj_MTransaction.transaction_date.substr(0,10))
+    var sum : number = 0;
+    //console.log(this.obj_MTransaction);
+    //var str = this.obj_MTransaction.transaction_date.substr(0,10)
+    //var date = str.split("-");
+    for(var i = 0; i < res.length ; i++){
+    if(this.obj_MTransaction.transaction_date.substr(0,10) == res[i].transaction_date.substr(0,10)){
+      
+      console.log(res[i].transaction_amount);
+        sum += res[i].transaction_amount ;
+
+    }
+    }
+
+    this.income =  sum;
 
 
+    //console.log("da",date);
+    //console.log("str",str);
+    // console.log(res[0].transaction_date.substr(0,10));
+  //  console.log(this.obj_MTransaction);
 
-    console.log(this.obj_MTransaction);
-    var str = this.obj_MTransaction.transaction_date.substr(0,10)
-    var date = str.split("-");
 
-    console.log("da",date);
-    console.log(res[0].transaction_date);
-    console.log(this.obj_MTransaction);
-
-    if(date[0] )
    
   });
 }
