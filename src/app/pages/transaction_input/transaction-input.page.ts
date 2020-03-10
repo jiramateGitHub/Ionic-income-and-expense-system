@@ -14,8 +14,29 @@ import { Observable } from 'rxjs';
 export class TransactionInputPage implements OnInit {
 
   private type_input: string;
-  public 
 
+  private  editMTransaction:MTransaction = {
+    username : null,
+    wallet_name : null,
+    categories_type : null,
+    categories_name : null,
+    sub_categories_name : null,
+    transaction_amount : null,
+    transaction_date : null,
+    transaction_note : null,
+    transaction_active : null
+  }
+
+  public id:number;
+  public categories_name:string;
+  public categories_type:string;
+  public sub_categories_name:string;
+  public transaction_amount:string;
+  public transaction_active:string;
+  public transaction_date:string;
+  public transaction_note:string;
+  public username:string;
+  public wallet_name:string;
 
   private MTransaction:MTransaction = {
     username : null,
@@ -39,7 +60,18 @@ export class TransactionInputPage implements OnInit {
     private servicesService: ServicesService,
   ) { 
       this.type_input = navParams.get('type_input');
-      
+      this.id = navParams.get('id');
+      this.editMTransaction.categories_name= navParams.get('categories_name');
+      this.editMTransaction.categories_type= navParams.get('categories_type');
+      this.editMTransaction.sub_categories_name= navParams.get('sub_categories_name');
+      this.editMTransaction.transaction_amount= navParams.get('transaction_amount');
+      this.editMTransaction.transaction_active= navParams.get('transaction_active');
+      this.editMTransaction.transaction_date= navParams.get('transaction_date');
+      this.editMTransaction.transaction_note= navParams.get('transaction_note');
+      this.editMTransaction.username= navParams.get('username');
+      this.editMTransaction.wallet_name= navParams.get('wallet_name');
+
+      console.log(this.id)
       console.log('constructor')
     }
  
@@ -102,6 +134,10 @@ export class TransactionInputPage implements OnInit {
       this.MTransaction.categories_type = data['data']['categories_type'];
       this.MTransaction.categories_name = data['data']['categories_name'];
       this.MTransaction.sub_categories_name = data['data']['sub_categories_name'];
+
+      this.editMTransaction.categories_type = data['data']['categories_type'];
+      this.editMTransaction.categories_name = data['data']['categories_name'];
+      this.editMTransaction.sub_categories_name = data['data']['sub_categories_name'];
     });
     return await modal.present();
   }
@@ -146,7 +182,7 @@ export class TransactionInputPage implements OnInit {
   }
 
 
-  // * @Function   : insert_transection => เพิ่มข้อมูล transectio
+  // * @Function   : insert_transection => เพิ่มข้อมูล transection
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
   async insert_transection() {
@@ -157,8 +193,20 @@ export class TransactionInputPage implements OnInit {
     this.servicesService.MTransactionService.insert_transection(this.MTransaction).then(() => {
       this.showToast('Insert Transection successful.');
     });
-
     this.close_modal();
   }
 
+  // * @Function   : edit_transection => เเก้ไขข้อมูล transection
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-06
+  async edit_transection(){
+    this.editMTransaction.username = this.servicesService.SessionService.get_session_username();
+    this.editMTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
+    this.editMTransaction.transaction_active = "Y"
+
+    this.servicesService.MTransactionService.edit_transection( this.id,this.editMTransaction).then(() => {
+      this.showToast('Edit Transection successful.');
+    });
+    this.close_modal();
+  }
 }

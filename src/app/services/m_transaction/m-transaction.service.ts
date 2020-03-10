@@ -38,8 +38,48 @@ export class MTransactionService {
     return this.service;
   }
 
-
+  // * @Function   : insert_transection => เพิ่ม Transacrion
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-10
   async insert_transection(mtransaction:MTransaction) {
     this.serviceCollection.add(mtransaction);
   }
+
+  // * @Function   : get_all_transaction_show => แสดงข้อมูล Transaction ทั้งหมด
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-10
+  get_all_transaction_show():Observable<MTransaction[]>{
+    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction');
+    this.service = this.serviceCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.service;
+  }
+
+  // * @Function   : get_edit_transaction => ดึงข้อมูลเพื่อแก้ไข Transacrion
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-10
+  get_edit_transaction(id:number):Observable<MTransaction[]>{
+    return this.serviceCollection.doc<MTransaction>(id).valueChanges().pipe(
+      take(1),
+      map(MTransaction => {
+        MTransaction.id = id;
+        return MTransaction
+      })
+    );
+  }
+
+  // * @Function   : edit_transection => แก้ไข Transacrion
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-10
+  async edit_transection(id:number , mtransaction:MTransaction) {
+    this.serviceCollection.doc<MTransaction>(id).update(mtransaction);
+  }
+
 }

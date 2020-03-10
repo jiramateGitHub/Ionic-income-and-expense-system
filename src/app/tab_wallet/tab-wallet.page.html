@@ -90,21 +90,23 @@
       <ion-label slot="end" class="p-r-10">+3500</ion-label>
     </ion-item-divider>
   
-    <ion-card >
-      <ion-item-sliding>
+
+    <ion-card *ngFor = "let transaction of all_transaction">
+      <ion-item-sliding >
 
       <ion-item style="margin: -8px;">
         <ion-icon name="wallet" slot="start" size="large" style="color:red !important;"></ion-icon>
         <ion-label>
-          <span class="fs-14" >Food</span> 
+          <span class="fs-14" >{{transaction.categories_name}}</span> 
           <br> 
-          <span class="fs-11" style="color: grey !important;">กระเพราถาด</span>
+          <span class="fs-11" style="color: grey !important;">{{transaction.transaction_note}} </span>
         </ion-label>
-        <ion-chip fill="outline" slot="end" style="color:red !important;">-500</ion-chip>
+        <ion-chip fill="outline" slot="end" style="color:red !important;" *ngIf="transaction.categories_type == '2'">- {{transaction.transaction_amount}}</ion-chip>
+        <ion-chip fill="outline" slot="end" style="color:#2ECC71  !important;" *ngIf="transaction.categories_type == '1'">+ {{transaction.transaction_amount}}</ion-chip>
       </ion-item>
       <ion-item-options>
-        <ion-item-option color="primary">
-          <ion-icon slot="start" name="create"></ion-icon>
+        <ion-item-option color="primary" (click)="modal_edit_show(transaction.id)">
+          <ion-icon slot="start" name="create" ></ion-icon>
           Edit
         </ion-item-option>
         <ion-item-option color="danger">
@@ -112,9 +114,14 @@
           Delete
         </ion-item-option>
       </ion-item-options>
-    </ion-item-sliding>
 
+    </ion-item-sliding>
     </ion-card>
+
+
+
+
+<!-- 
     <ion-card >
       <ion-item style="margin: -8px;">
         <ion-icon name="wallet" slot="start" size="large" style="color:red !important;"></ion-icon>
@@ -164,9 +171,9 @@
         </ion-label>
         <ion-chip fill="outline" slot="end" style="color:red !important;">-1000</ion-chip>
       </ion-item>
-    </ion-card>
+    </ion-card> -->
 
-  </ion-list>
+  </ion-list> 
  
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>
