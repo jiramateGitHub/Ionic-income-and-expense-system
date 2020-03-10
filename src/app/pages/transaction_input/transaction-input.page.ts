@@ -27,7 +27,7 @@ export class TransactionInputPage implements OnInit {
     transaction_active : null
   }
 
-  public id:number;
+  public id:string;
   public categories_name:string;
   public categories_type:string;
   public sub_categories_name:string;

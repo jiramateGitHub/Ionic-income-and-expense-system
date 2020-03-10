@@ -40,30 +40,29 @@ export class TabWalletPage {
     }, 2000);
   }
 
-  async modal_edit_show(id:number) {
+  async modal_edit_show(id:string) {
 
-      this.servicesService.MTransactionService.get_edit_transaction(id).subscribe( res => {
+    await this.servicesService.MTransactionService.get_edit_transaction(id).subscribe( async res => {
       this.edit_transaction = res;
-     console.log(this.edit_transaction);
-   })
-
-    const modal = await this.modalController.create({
-      component: TransactionInputPage,
-      componentProps: {
-        'type_input': 'update',
-        'id': id,
-        'categories_name':this.edit_transaction.categories_name,
-        'categories_type':this.edit_transaction.categories_type,
-        'sub_categories_name':this.edit_transaction.sub_categories_name,
-        'transaction_amount':this.edit_transaction.transaction_amount,
-        'transaction_active':this.edit_transaction.transaction_active,
-        'transaction_date':this.edit_transaction.transaction_date,
-        'transaction_note':this.edit_transaction.transaction_note,
-        'username':this.edit_transaction.username,
-        'wallet_name':this.edit_transaction.wallet_name
-      }
-    });
-    return await modal.present();
+      const modal = await this.modalController.create({
+        component: TransactionInputPage,
+        componentProps: {
+          'type_input': 'update',
+          'id': id,
+          'categories_name':this.edit_transaction.categories_name,
+          'categories_type':this.edit_transaction.categories_type,
+          'sub_categories_name':this.edit_transaction.sub_categories_name,
+          'transaction_amount':this.edit_transaction.transaction_amount,
+          'transaction_active':this.edit_transaction.transaction_active,
+          'transaction_date':this.edit_transaction.transaction_date,
+          'transaction_note':this.edit_transaction.transaction_note,
+          'username':this.edit_transaction.username,
+          'wallet_name':this.edit_transaction.wallet_name
+        }
+      });
+      return await modal.present();
+    })
+    
   }
 
   // * @Function   : get_all_transaction_show => ดึงข้อมูล Transaction มาแสดง
@@ -74,7 +73,6 @@ export class TabWalletPage {
       this.servicesService.MTransactionService.get_all_transaction_show().subscribe( res => {
       this.all_transaction = res;
       console.log( this.all_transaction)
-
    })
    
   }
