@@ -77,7 +77,9 @@ export class TabWalletPage {
    })
    
   }
-
+  // * @Function   : delete_transaction => ลบข้อมูล Transaction 
+  // * @Author     : Thanpisit Suetrong
+  // * @Create Date: 2563-03-11
    delete_transaction(id:string){
     this.servicesService.MTransactionService.delete_transaction(id)
   }
