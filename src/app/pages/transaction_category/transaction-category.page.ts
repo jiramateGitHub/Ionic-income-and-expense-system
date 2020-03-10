@@ -26,8 +26,9 @@ export class TransactionCategoryPage  implements OnInit  {
     private navCtrl:NavController,
     private servicesService:ServicesService
   ) { 
+
     this.type_input = navParams.get('type_input');
-    console.log(this.type_input)
+
     if(this.type_input == "parent_income"){
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Income();
       this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
@@ -41,8 +42,6 @@ export class TransactionCategoryPage  implements OnInit  {
       var obj_TransactionCategories_Creator = new TransactionSubCategories_Creator_Expense();
       this.obj_sub_category = obj_TransactionCategories_Creator.get_sub_categories(this.servicesService)
     }
-    console.log(this.obj_category)
-    console.log(this.obj_sub_category)
     
   }
 
@@ -52,8 +51,8 @@ export class TransactionCategoryPage  implements OnInit  {
   // * @Function   : add_category => เลือก Category และเรียกคำสั่งปิด modal 
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-02
-  async add_category(name:string,type:number){
-    this.modalController.dismiss({name, type});
+  async add_category(categories_name:string, categories_type:number){
+    this.modalController.dismiss({categories_name, categories_type});
   }
 
   // * @Function   : close_modal => คำสั่งปิด modal

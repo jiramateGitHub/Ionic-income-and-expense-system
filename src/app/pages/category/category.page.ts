@@ -21,6 +21,7 @@ export class CategoryPage implements OnInit {
   }
   public obj_MSubCategories_Income : Observable<MSubCategories[]>
   public obj_MSubCategories_Expense : Observable<MSubCategories[]>
+  public obj_MCategories
   constructor(
     private modalController: ModalController,
     private alertController: AlertController,
@@ -121,6 +122,7 @@ export class CategoryPage implements OnInit {
     this.obj_MSubCategories.categories_type = 1;
     this.obj_MSubCategories_Income = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories.categories_type)
     // this.obj_MSubCategories_Income.subscribe(res => console.log(res))
+    this.obj_MCategories = this.ServicesService.MCategoriesService.get_obs_mcategories(this.obj_MSubCategories.categories_type)
 
     //get รายจ่าย
     this.obj_MSubCategories.categories_type = 2;
