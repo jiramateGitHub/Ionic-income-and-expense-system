@@ -63,16 +63,3 @@ export class TransactionSubCategories_Expense implements TransactionCategories_I
     return this.ServicesService.MSubCategoriesService.get_obs_msubcategories(2);
   }
 }
-export class TransactionSubCategories_Income implements TransactionCategories_Interface {
-  constructor(private ServicesService?: ServicesService) {}
-  get_categories(): Observable<MCategories[]> {
-    return this.ServicesService.MSubCategoriesService.get_obs_mcategories(1)
-  }
-}
-
-export class TransactionSubCategories_Expense implements TransactionCategories_Interface {
-  constructor(private ServicesService?: ServicesService) {}
-  get_categories(): Observable<MCategories[]> {
-    return this.ServicesService.MSubCategoriesService.get_obs_mcategories(2);
-  }
-}

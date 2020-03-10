@@ -147,7 +147,7 @@ ngOnInit(): void {
       var total_year: number = 0;
       for (var i = 0; i < res.length; i++) {
         if (this.obj_MTransaction.transaction_date.substr(0, 4) == res[i].transaction_date.substr(0, 4)) {
-          total_year += res[i].transaction_amount;
+          total_year += +res[i].transaction_amount;
         }
       }
       this.income = total_year;
