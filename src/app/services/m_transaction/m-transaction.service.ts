@@ -65,7 +65,7 @@ export class MTransactionService {
   // * @Function   : get_edit_transaction => ดึงข้อมูลเพื่อแก้ไข Transacrion
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-10
-  get_edit_transaction(id:number):Observable<MTransaction[]>{
+  get_edit_transaction(id:string):Observable<MTransaction>{
     return this.serviceCollection.doc<MTransaction>(id).valueChanges().pipe(
       take(1),
       map(MTransaction => {
@@ -78,7 +78,7 @@ export class MTransactionService {
   // * @Function   : edit_transection => แก้ไข Transacrion
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-10
-  async edit_transection(id:number , mtransaction:MTransaction) {
+  async edit_transection(id:string , mtransaction:MTransaction) {
     this.serviceCollection.doc<MTransaction>(id).update(mtransaction);
   }
 
