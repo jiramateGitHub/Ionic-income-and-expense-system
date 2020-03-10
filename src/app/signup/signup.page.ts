@@ -44,7 +44,7 @@ export class SignupPage implements OnInit {
       duration: 2000
     });
     await loading.present();
-
+    
     if(this.password == this.validate_password){
       this.obj_MPerson.username = this.username;
       this.obj_MPerson.password = this.password;

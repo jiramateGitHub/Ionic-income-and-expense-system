@@ -19,7 +19,14 @@ export class MCategoriesService {
   constructor(
     private afs: AngularFirestore,
     private servicesService : ServicesService) {
-    this.serviceCollection = this.afs.collection<MCategories>('M_categories', ref => ref.where('cat_type', '==', 1));
+    this.serviceCollection = this.afs.collection<MCategories>('M_categories');
+  }
+ 
+// * @Function   : get_obs_mcategories_income => คือค่าข้อมูล interface MCategories ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
+// * @Author     : Jiramate Phuaphan
+// * @Create Date: 2563-03-03
+  get_obs_mcategories(type:number): Observable<MCategories[]> {
+    this.serviceCollection = this.afs.collection<MCategories>('M_categories', ref => ref.where('cat_type', '==', type));
     this.service = this.serviceCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => { 
@@ -29,25 +36,9 @@ export class MCategoriesService {
         });
       })
     );
-  }
-
-  ngOnInit() {
-    
-  }
- 
-// * @Function   : get_obs_mcategories_income => คือค่าข้อมูล interface MCategories ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-03
-  get_obs_mcategories_income(): Observable<MCategories[]> {
     return this.service;
   }
 
-// * @Function   : get_obs_mcategories_expense => คือค่าข้อมูล interface MCategories ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-03
-  get_obs_mcategories_expense(): Observable<MCategories[]> {
-    return this.service;
-  }
 
 // * @Function   : get_obs_mcategories_by_id => คือค่าข้อมูล interface MCategories โดยค้นหาจาก id
 // * @Author     : Jiramate Phuaphan
@@ -73,7 +64,7 @@ export class MCategoriesService {
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-03
   update_categories(mcategories: MCategories): Promise<void> {
-    return this.serviceCollection.doc(mcategories.id).update({ categorise_name: mcategories.categorise_name, categorise_type: mcategories.categorise_type });
+    return this.serviceCollection.doc(mcategories.id).update({ categories_name: mcategories.categories_name, categories_type: mcategories.categories_type });
   }
 
 // * @Function   : delete_categories => ลบข้อมูล categories ใน Firebase Cloud
