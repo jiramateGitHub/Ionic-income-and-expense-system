@@ -23,7 +23,7 @@ export class CategoryPage implements OnInit {
   }
   public obj_MSubCategories_Income : Observable<MSubCategories[]>
   public obj_MSubCategories_Expense : Observable<MSubCategories[]>
-  public obj_MCategories_Income
+  public obj_MCategories_Income 
   public obj_MCategories_Expense
   constructor(
     private loadingController: LoadingController,
