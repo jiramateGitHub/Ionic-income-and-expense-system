@@ -62,7 +62,7 @@ async modal_taransaction_category_show() {
     });
   }
 
-  // * @Function   : get_categories => คำสั่งปิด modal
+  // * @Function   : get_categories => คำสั่ง get 
   // * @Author     : Thananya Banchuenwijit
   // * @Create Date: 2563-03-09
   get_categories(){
@@ -83,6 +83,16 @@ async modal_taransaction_category_show() {
   // * @Author     : Thananya Banchuenwijit
   // * @Create Date: 2563-03-09
   update_categories(){
+    this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
+    this.obj_MSubCategories.sub_categories_active = "Y"
+    this.ServicesService.MSubCategoriesService.update_sub_categories(this.obj_MSubCategories)
+    //console.log(this.obj_MSubCategories)
+  }
+
+  // * @Function   : delete_categories => คำสั่งลบ sub_categories
+  // * @Author     : Thananya Banchuenwijit
+  // * @Create Date: 2563-03-09
+  delete_categories(){
     this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
     this.obj_MSubCategories.sub_categories_active = "Y"
     this.ServicesService.MSubCategoriesService.update_sub_categories(this.obj_MSubCategories)
