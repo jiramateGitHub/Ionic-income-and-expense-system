@@ -9,13 +9,8 @@ import { ServicesService, MWallet , MTransaction} from '../../services/services.
   styleUrls: ['./wallet-input.page.scss'],
 })
 export class WalletInputPage implements OnInit {
-  public categories_name: string;
   private type_input: string;
-  public username: string;
-  public wallet_name: string;
-  public wallet_balance : string;
-  public wallet_active: string;
-  
+
   public obj_MWallet: MWallet = {
     username: null,
     wallet_name: null,
@@ -27,11 +22,13 @@ export class WalletInputPage implements OnInit {
   public obj_MTransaction: MTransaction = {
     username : null,
     wallet_name : null,
-    
+    categories_type : null,
+    categories_name : null,
+    sub_categories_name : null,
     transaction_amount : null,
-    transaction_date :null,
+    transaction_date : null,
     transaction_note : null,
-    transaction_active :null
+    transaction_active : null
  
   };
 
@@ -92,7 +89,8 @@ export class WalletInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.categories_name = data['data'].name; // Here's your selected user!
+      console.log(data)
+      this.obj_MTransaction.sub_categories_name = data['data']['sub_categories_name']; // Here's your selected user!
     });
     return await modal.present();
   }
@@ -109,10 +107,10 @@ export class WalletInputPage implements OnInit {
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-09
   async insert_wallet(){
-    console.log(this.wallet_name , this.wallet_balance);
     this.obj_MWallet.wallet_name = this.ServicesService.SessionService.get_session_wallet()
-    this.obj_MWallet.wallet_balance = this.wallet_balance;
-    this.obj_MTransaction.transaction_amount = this.wallet_balance;
+
+    this.obj_MTransaction.username = this.ServicesService.SessionService.get_session_username()
+    this.obj_MTransaction.wallet_name = this.ServicesService.SessionService.get_session_wallet()
     this.obj_MTransaction.transaction_note = "...";
     this.obj_MTransaction.transaction_active = "Y";
     // this.obj_MWallet.categories_name = this.categories_name;
