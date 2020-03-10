@@ -1,4 +1,4 @@
-import { ServicesService } from './../../services/services.service';
+import { ServicesService , MTransaction } from './../../services/services.service';
 import { TransferInputPage } from './../transfer_input/transfer-input.page';
 import { TransactionCategoryPage } from './../transaction_category/transaction-category.page';
 import { Component, OnInit } from '@angular/core';
@@ -14,12 +14,35 @@ import { Observable } from 'rxjs';
 export class TransactionInputPage implements OnInit {
 
   private type_input: string;
-  private MTransaction = {
-    id: null,
+
+  private  editMTransaction:MTransaction = {
     username : null,
     wallet_name : null,
-    categorise_type : null,
-    categorise_name : null,
+    categories_type : null,
+    categories_name : null,
+    sub_categories_name : null,
+    transaction_amount : null,
+    transaction_date : null,
+    transaction_note : null,
+    transaction_active : null
+  }
+
+  public id:number;
+  public categories_name:string;
+  public categories_type:string;
+  public sub_categories_name:string;
+  public transaction_amount:string;
+  public transaction_active:string;
+  public transaction_date:string;
+  public transaction_note:string;
+  public username:string;
+  public wallet_name:string;
+
+  private MTransaction:MTransaction = {
+    username : null,
+    wallet_name : null,
+    categories_type : null,
+    categories_name : null,
     sub_categories_name : null,
     transaction_amount : null,
     transaction_date : null,
@@ -28,27 +51,38 @@ export class TransactionInputPage implements OnInit {
   }
  
   constructor(
-    private activatedRoute: ActivatedRoute, 
+    private activatedRoute: ActivatedRoute,
     private router: Router,
-    private toastController: ToastController, 
+    private toastController: ToastController,
     private modalController: ModalController,
     private alertController: AlertController,
     private navParams: NavParams,
     private servicesService: ServicesService,
   ) { 
       this.type_input = navParams.get('type_input');
-      
+      this.id = navParams.get('id');
+      this.editMTransaction.categories_name= navParams.get('categories_name');
+      this.editMTransaction.categories_type= navParams.get('categories_type');
+      this.editMTransaction.sub_categories_name= navParams.get('sub_categories_name');
+      this.editMTransaction.transaction_amount= navParams.get('transaction_amount');
+      this.editMTransaction.transaction_active= navParams.get('transaction_active');
+      this.editMTransaction.transaction_date= navParams.get('transaction_date');
+      this.editMTransaction.transaction_note= navParams.get('transaction_note');
+      this.editMTransaction.username= navParams.get('username');
+      this.editMTransaction.wallet_name= navParams.get('wallet_name');
+
+      console.log(this.id)
       console.log('constructor')
     }
  
   ngOnInit() {
     console.log('ngOnInit')
-   }
+  }
 
-// * @Function   : select_category_alert => แสดง Select สำหรับเลือก Category Type
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-02
-  async select_category_alert(){
+  // * @Function   : select_category_alert => แสดง Select สำหรับเลือก Category Type
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-02
+  async select_category_alert() {
     const alert = await this.alertController.create({
       header: 'Select Category',
       buttons: [
@@ -84,10 +118,10 @@ export class TransactionInputPage implements OnInit {
     await alert.present();
   }
 
-// * @Function   : modal_taransaction_category_show => แสดง Modal TransactionCategoryPage และ ตอนปิด Modal จะ Passing Data กลับมา
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-02
-  async modal_taransaction_category_show(type:string) {
+  // * @Function   : modal_taransaction_category_show => แสดง Modal TransactionCategoryPage และ ตอนปิด Modal จะ Passing Data กลับมา
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-02
+  async modal_taransaction_category_show(type: string) {
     const modal = await this.modalController.create({
       component: TransactionCategoryPage,
       componentProps: {
@@ -96,15 +130,22 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.MTransaction.sub_categories_name = data['data'].name; // Here's your selected user!
+      console.log(data)
+      this.MTransaction.categories_type = data['data']['categories_type'];
+      this.MTransaction.categories_name = data['data']['categories_name'];
+      this.MTransaction.sub_categories_name = data['data']['sub_categories_name'];
+
+      this.editMTransaction.categories_type = data['data']['categories_type'];
+      this.editMTransaction.categories_name = data['data']['categories_name'];
+      this.editMTransaction.sub_categories_name = data['data']['sub_categories_name'];
     });
     return await modal.present();
   }
 
-// * @Function   : modal_transfer_input_show => แสดง Modal TransferInputPage และ ตอนปิด Modal จะ Passing Data กลับมา
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-02
-  async modal_transfer_input_show(type:string) {
+  // * @Function   : modal_transfer_input_show => แสดง Modal TransferInputPage และ ตอนปิด Modal จะ Passing Data กลับมา
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-02
+  async modal_transfer_input_show(type: string) { 
     const modal = await this.modalController.create({
       component: TransferInputPage,
       componentProps: {
@@ -113,15 +154,17 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.MTransaction.sub_categories_name = data['data'].name; // Here's your selected user!
+      this.MTransaction.categories_type = data['data'].categories_type
+      this.MTransaction.categories_name = data['data'].categories_name
+      this.MTransaction.sub_categories_name = data['data'].sub_categories_name
     });
     return await modal.present();
   }
- 
-  
-// * @Function   : showToast => แสดง Toast
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-01
+
+
+  // * @Function   : showToast => แสดง Toast
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-01
   showToast(msg) {
     this.toastController.create({
       message: msg,
@@ -129,12 +172,41 @@ export class TransactionInputPage implements OnInit {
     }).then(toast => toast.present());
   }
 
-// * @Function   : close_modal => คำสั่งปิด modal
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-01
-  async close_modal(){
+  // * @Function   : close_modal => คำสั่งปิด modal
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-01
+  async close_modal() {
     this.modalController.dismiss({
       'dismissed': true
     });
+  }
+
+
+  // * @Function   : insert_transection => เพิ่มข้อมูล transection
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-06
+  async insert_transection() {
+    this.MTransaction.username = this.servicesService.SessionService.get_session_username();
+    this.MTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
+    this.MTransaction.transaction_active = "Y"
+
+    this.servicesService.MTransactionService.insert_transection(this.MTransaction).then(() => {
+      this.showToast('Insert Transection successful.');
+    });
+    this.close_modal();
+  }
+
+  // * @Function   : edit_transection => เเก้ไขข้อมูล transection
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-06
+  async edit_transection(){
+    this.editMTransaction.username = this.servicesService.SessionService.get_session_username();
+    this.editMTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
+    this.editMTransaction.transaction_active = "Y"
+
+    this.servicesService.MTransactionService.edit_transection( this.id,this.editMTransaction).then(() => {
+      this.showToast('Edit Transection successful.');
+    });
+    this.close_modal();
   }
 }
