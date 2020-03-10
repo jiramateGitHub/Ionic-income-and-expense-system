@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-
-=======
 import { MWallet } from './../services.service';
->>>>>>> origin/devWipawee
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
