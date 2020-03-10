@@ -82,5 +82,11 @@ export class MTransactionService {
   async edit_transection(id:string , mtransaction:MTransaction) {
     this.serviceCollection.doc<MTransaction>(id).update(mtransaction);
   }
+  // * @Function   : delete_transaction => ลบข้อมูล Transaction 
+  // * @Author     : Thanpisit Suetrong
+  // * @Create Date: 2563-03-11
+   delete_transaction(id:string){
+    this.serviceCollection.doc<MTransaction>(id).delete();
+  }
 
 }

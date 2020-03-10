@@ -72,11 +72,16 @@ export class TabWalletPage {
       this.servicesService.MTransactionService.get_all_transaction_show().subscribe( res => {
       this.all_transaction = res;
       console.log( this.all_transaction)
+
    })
    
   }
-
-
+  // * @Function   : delete_transaction => ลบข้อมูล Transaction 
+  // * @Author     : Thanpisit Suetrong
+  // * @Create Date: 2563-03-11
+   delete_transaction(id:string){
+    this.servicesService.MTransactionService.delete_transaction(id)
+  }
 
   
 }
