@@ -14,14 +14,6 @@ import { Observable } from 'rxjs';
 export class TransactionInputPage implements OnInit {
 
   private type_input: string;
-<<<<<<< HEAD
-  private tran_amount: string;
-  private tran_note: string;
-  private tran_date: string;
-  public catt_name: string;
-  
-
-=======
   private MTransaction = {
     id: null,
     username : null,
@@ -35,7 +27,6 @@ export class TransactionInputPage implements OnInit {
     transaction_active : null
   }
  
->>>>>>> 39790c177929c202c1eabdd39b2cc472e7361d27
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -43,15 +34,6 @@ export class TransactionInputPage implements OnInit {
     private modalController: ModalController,
     private alertController: AlertController,
     private navParams: NavParams,
-<<<<<<< HEAD
-    private MPersonService: MPersonService
-  ) {
-    this.type_input = navParams.get('type_input');
-
-    console.log('constructor')
-  }
-
-=======
     private servicesService: ServicesService,
   ) { 
       this.type_input = navParams.get('type_input');
@@ -59,7 +41,6 @@ export class TransactionInputPage implements OnInit {
       console.log('constructor')
     }
  
->>>>>>> 39790c177929c202c1eabdd39b2cc472e7361d27
   ngOnInit() {
     console.log('ngOnInit')
   }
@@ -114,15 +95,9 @@ export class TransactionInputPage implements OnInit {
       }
     });
     modal.onDidDismiss()
-<<<<<<< HEAD
-      .then((data) => {
-        this.catt_name = data['data'].name; // Here's your selected user!
-      });
-=======
     .then((data) => {
       this.MTransaction.sub_categories_name = data['data'].name; // Here's your selected user!
     });
->>>>>>> 39790c177929c202c1eabdd39b2cc472e7361d27
     return await modal.present();
   }
 
@@ -137,15 +112,9 @@ export class TransactionInputPage implements OnInit {
       }
     });
     modal.onDidDismiss()
-<<<<<<< HEAD
-      .then((data) => {
-        this.catt_name = data['data'].name; // Here's your selected user!
-      });
-=======
     .then((data) => {
       this.MTransaction.sub_categories_name = data['data'].name; // Here's your selected user!
     });
->>>>>>> 39790c177929c202c1eabdd39b2cc472e7361d27
     return await modal.present();
   }
 

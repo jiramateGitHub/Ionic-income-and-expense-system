@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, NavParams, AlertController } from '@ionic/angular';
 import { TransactionCategoryPage } from './../transaction_category/transaction-category.page';
+import { ServicesService, MTransaction} from '../../services/services.service';
 @Component({
   selector: 'app-category-input',
   templateUrl: './category-input.page.html',
   styleUrls: ['./category-input.page.scss'],
 })
 export class CategoryInputPage implements OnInit {
-  public catt_name: string;
   private type_input: string;
   private category_type: string;
+  public category_name: string;
+   
+
   constructor(
     private navParams: NavParams,
     private toastController: ToastController, 
@@ -34,7 +37,7 @@ async modal_taransaction_category_show() {
   });
   modal.onDidDismiss()
   .then((data) => {
-    this.catt_name = data['data'].name; // Here's your selected user!
+    this.category_name = data['data'].name; // Here's your selected user!
   });
   return await modal.present();
 }
