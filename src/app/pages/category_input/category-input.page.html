@@ -4,8 +4,8 @@
       <ion-buttons slot="start" (click)="close_modal()">
           <ion-icon name="close" style="zoom:1.5;"></ion-icon>
       </ion-buttons>
-      <ion-title *ngIf="type_input == 'insert'" style="text-align: center;">Add categories</ion-title>
-      <ion-title *ngIf="type_input == 'update'" style="text-align: center;">Edit categories</ion-title>
+      <ion-title *ngIf="type_input == 'insert'" (click)="insert_categories()" style="text-align: center;">Add categories</ion-title>
+      <ion-title *ngIf="type_input == 'update'" (click)="update_categories()" style="text-align: center;">Edit categories</ion-title>
       <ion-buttons slot="end">
           <ion-icon name="checkmark" style="zoom:1.5;"></ion-icon>
       </ion-buttons>
@@ -57,7 +57,7 @@
     <ion-row >
       <ion-col>
         <ion-button *ngIf="type_input == 'insert'" expand="block" (click)="insert_categories()">Save Categories</ion-button>
-        <ion-button *ngIf="type_input == 'update'" expand="block" (click)="insert_categories()">Save Categories</ion-button>
+        <ion-button *ngIf="type_input == 'update'" expand="block" (click)="update_categories()">Save Categories</ion-button>
         <ion-button *ngIf="type_input == 'delete'" expand="block" (click)="delete_categories()">Save Categories</ion-button>
       </ion-col>
     </ion-row>
