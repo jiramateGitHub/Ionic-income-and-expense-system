@@ -41,7 +41,6 @@ export class TabWalletPage {
   }
 
   async modal_edit_show(id:string) {
-    var temp
     await this.servicesService.MTransactionService.get_edit_transaction(id).subscribe( async res => {
       this.edit_transaction = res;
       const modal = await this.modalController.create({
@@ -73,7 +72,6 @@ export class TabWalletPage {
       this.servicesService.MTransactionService.get_all_transaction_show().subscribe( res => {
       this.all_transaction = res;
       console.log( this.all_transaction)
-
    })
    
   }

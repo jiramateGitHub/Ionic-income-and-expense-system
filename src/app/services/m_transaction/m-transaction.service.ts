@@ -69,7 +69,7 @@ export class MTransactionService {
     return this.serviceCollection.doc<MTransaction>(id).valueChanges().pipe(
       take(1),
       map(MTransaction => {
-        MTransaction.id = id;
+        // MTransaction.id = id;
         return MTransaction
       })
     );
