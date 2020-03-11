@@ -179,7 +179,7 @@ export class TransactionInputPage implements OnInit {
     this.MTransaction.transaction_active = "Y"
 
     this.servicesService.MTransactionService.insert_transaction(this.MTransaction).then(() => {
-      this.showToast('Insert transaction successful.');
+      this.showToast('Add transaction successful.');
     });
     this.close_modal();
   }

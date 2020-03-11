@@ -25,7 +25,7 @@
     <div *ngFor="let parent of (obj_MCategories_Income | async)">
       <ion-item-divider >
         <ion-img src="{{'./../assets/icon/'+parent.cat_name+'.png'}}"></ion-img> 
-        <ion-label class="fs-17 p-l-10" style="color:black !important;" >
+        <ion-label class="fs-17 p-l-15" style="color:black !important;" >
           {{parent.cat_name}} 
         </ion-label>
       </ion-item-divider >
@@ -69,7 +69,7 @@
     <div *ngFor="let parent of (obj_MCategories_Expense | async)">
       <ion-item-divider >
         <ion-img src="{{'./../assets/icon/'+parent.cat_name+'.png'}}"></ion-img> 
-        <ion-label class="fs-17 p-l-10" style="color:black !important;">
+        <ion-label class="fs-17 p-l-15" style="color:black !important;">
           {{parent.cat_name}} 
         </ion-label>
       </ion-item-divider >
