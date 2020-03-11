@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 export class TransactionInputPage implements OnInit {
 
   private type_input: string;
+  public id:string;
 
   private  editMTransaction:MTransaction = {
     username : null,
@@ -26,17 +27,6 @@ export class TransactionInputPage implements OnInit {
     transaction_note : null,
     transaction_active : null
   }
-
-  public id:string;
-  public categories_name:string;
-  public categories_type:string;
-  public sub_categories_name:string;
-  public transaction_amount:string;
-  public transaction_active:string;
-  public transaction_date:string;
-  public transaction_note:string;
-  public username:string;
-  public wallet_name:string;
 
   private MTransaction:MTransaction = {
     username : null,
@@ -72,11 +62,9 @@ export class TransactionInputPage implements OnInit {
       this.editMTransaction.wallet_name= navParams.get('wallet_name');
 
       console.log(this.id)
-      console.log('constructor')
     }
  
   ngOnInit() {
-    console.log('ngOnInit')
   }
 
   // * @Function   : select_category_alert => แสดง Select สำหรับเลือก Category Type
@@ -182,30 +170,30 @@ export class TransactionInputPage implements OnInit {
   }
 
 
-  // * @Function   : insert_transection => เพิ่มข้อมูล transection
+  // * @Function   : insert_transaction => เพิ่มข้อมูล transaction
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
-  async insert_transection() {
+  async insert_transaction() {
     this.MTransaction.username = this.servicesService.SessionService.get_session_username();
     this.MTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
     this.MTransaction.transaction_active = "Y"
 
-    this.servicesService.MTransactionService.insert_transection(this.MTransaction).then(() => {
-      this.showToast('Insert Transection successful.');
+    this.servicesService.MTransactionService.insert_transaction(this.MTransaction).then(() => {
+      this.showToast('Insert transaction successful.');
     });
     this.close_modal();
   }
 
-  // * @Function   : edit_transection => เเก้ไขข้อมูล transection
+  // * @Function   : edit_transaction => เเก้ไขข้อมูล transaction
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
-  async edit_transection(){
+  async update_transaction(){
     this.editMTransaction.username = this.servicesService.SessionService.get_session_username();
     this.editMTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
     this.editMTransaction.transaction_active = "Y"
 
-    this.servicesService.MTransactionService.edit_transection( this.id,this.editMTransaction).then(() => {
-      this.showToast('Edit Transection successful.');
+    this.servicesService.MTransactionService.update_transaction( this.id,this.editMTransaction).then(() => {
+      this.showToast('Edit transaction successful.');
     });
     this.close_modal();
   }

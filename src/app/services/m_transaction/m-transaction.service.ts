@@ -38,13 +38,6 @@ export class MTransactionService {
     return this.service;
   }
 
-  // * @Function   : insert_transection => เพิ่ม Transacrion
-  // * @Author     : Kanathip Phithaksilp
-  // * @Create Date: 2563-03-10
-  async insert_transection(mtransaction:MTransaction) {
-    this.serviceCollection.add(mtransaction);
-  }
-
   // * @Function   : get_all_transaction_show => แสดงข้อมูล Transaction ทั้งหมด
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-10
@@ -75,17 +68,24 @@ export class MTransactionService {
     );
   }
 
-  // * @Function   : edit_transection => แก้ไข Transacrion
+  // * @Function   : insert_transaction => เพิ่ม Transacrion
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-10
-  async edit_transection(id:string , mtransaction:MTransaction) {
+  async insert_transaction(mtransaction:MTransaction) {
+    this.serviceCollection.add(mtransaction);
+  }
+
+  // * @Function   : edit_transaction => แก้ไข Transacrion
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-10
+  async update_transaction(id:string , mtransaction:MTransaction) {
     this.serviceCollection.doc<MTransaction>(id).update(mtransaction);
   }
   
   // * @Function   : delete_transaction => ลบข้อมูล Transaction 
   // * @Author     : Thanpisit Suetrong
   // * @Create Date: 2563-03-11
-   delete_transaction(id:string){
+  async delete_transaction(id:string){
     this.serviceCollection.doc<MTransaction>(id).delete();
   }
 
