@@ -20,7 +20,7 @@ export class MPersonService   {
       this.serviceCollection = this.afs.collection<MPerson>('M_person')
   }
  
-// * @Function   : get_obs_mperson => คือค่าข้อมูล interface MPerson ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
+// * @Function   : get_obs_mperson => คือค่าข้อมูล interface MPerson ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้ 
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
   get_obs_mperson(mperson:MPerson): Observable<MPerson[]> {
