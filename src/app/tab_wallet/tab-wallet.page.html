@@ -77,7 +77,8 @@
       <ion-item-sliding >
 
       <ion-item style="margin: -8px;">
-        <ion-icon name="wallet" slot="start" size="large" style="color:red !important;"></ion-icon>
+        <ion-icon name="wallet" slot="start" size="large" style="color:red !important;" *ngIf="transaction.categories_type == '2'"></ion-icon>
+        <ion-icon name="cash" slot="start" size="large" style="color: #3E82FE !important;" *ngIf="transaction.categories_type == '1'"></ion-icon>
         <ion-label>
           <span class="fs-14" >{{transaction.sub_categories_name}}</span> 
           <!-- <span class="fs-14" >{{transaction.categories_name}}&nbsp;( {{transaction.sub_categories_name}} )</span>  -->
