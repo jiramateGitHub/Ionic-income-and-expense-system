@@ -49,7 +49,9 @@ export class TransactionInputPage implements OnInit {
     private navParams: NavParams,
     private servicesService: ServicesService,
   ) { 
+      this.MTransaction.transaction_date = Date();
       this.type_input = navParams.get('type_input');
+
       this.id = navParams.get('id');
       this.editMTransaction.categories_name= navParams.get('categories_name');
       this.editMTransaction.categories_type= navParams.get('categories_type');
@@ -61,7 +63,6 @@ export class TransactionInputPage implements OnInit {
       this.editMTransaction.username= navParams.get('username');
       this.editMTransaction.wallet_name= navParams.get('wallet_name');
 
-      console.log(this.id)
     }
  
   ngOnInit() {
@@ -168,7 +169,6 @@ export class TransactionInputPage implements OnInit {
       'dismissed': true
     });
   }
-
 
   // * @Function   : insert_transaction => เพิ่มข้อมูล transaction
   // * @Author     : Kanathip Phithaksilp
