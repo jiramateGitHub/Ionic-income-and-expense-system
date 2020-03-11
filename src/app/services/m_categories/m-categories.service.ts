@@ -70,8 +70,8 @@ export class MCategoriesService {
 // * @Function   : delete_categories => ลบข้อมูล categories ใน Firebase Cloud
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-03
-  delete_categories(cat_id: string): Promise<void> {
-    return this.serviceCollection.doc(cat_id).delete();
+  delete_categories(id: string): Promise<void> {
+    return this.serviceCollection.doc(id).delete();
   }
 
 }
