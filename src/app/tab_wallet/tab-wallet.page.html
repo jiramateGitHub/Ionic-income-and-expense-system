@@ -91,14 +91,16 @@
           <ion-icon slot="start" name="create" ></ion-icon>
           Edit
         </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="start" name="trash"></ion-icon>
+        <ion-item-option color="danger" (click)="delete_transaction(transaction.id)">
+          <ion-icon slot="start" name="trash" ></ion-icon>
           Delete
         </ion-item-option>
       </ion-item-options>
 
     </ion-item-sliding>
     </ion-card>
+
+
 
 
 <!-- 
