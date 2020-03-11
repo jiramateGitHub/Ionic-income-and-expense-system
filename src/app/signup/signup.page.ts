@@ -92,7 +92,7 @@ export class SignupPage implements OnInit {
     this.router.navigateByUrl('signin');
   }
   
-// * @Function   : redirect_signin => ใช้แสดง Toast
+// * @Function   : showToast => ใช้แสดง Toast
 // * @Author     : Jiramate Phuaphan
 // * @Create Date: 2563-03-01
   showToast(msg) {

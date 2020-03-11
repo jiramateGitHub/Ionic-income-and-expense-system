@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { ServicesService , MTransaction } from '../services/services.service';
 import { TransactionInputPage } from '../pages/transaction_input/transaction-input.page';
 @Component({
@@ -28,6 +28,8 @@ export class TabWalletPage {
   constructor(
     private router: Router,
     public modalController: ModalController,
+    private alertController: AlertController,
+    private toastController: ToastController,
     private servicesService: ServicesService
     ){
       this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
@@ -64,11 +66,32 @@ export class TabWalletPage {
     
   }
 
+  async transaction_active_update_AlertConfirm(id:string) {
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Confirm',
+          handler: () => {
+            this.delete_transaction(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   // * @Function   : get_all_transaction_show => ดึงข้อมูล Transaction มาแสดง
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
   async get_all_transaction_show(){
-
       this.servicesService.MTransactionService.get_all_transaction_show().subscribe( res => {
       this.all_transaction = res;
       console.log( this.all_transaction)
@@ -81,6 +104,17 @@ export class TabWalletPage {
   // * @Create Date: 2563-03-11
    delete_transaction(id:string){
     this.servicesService.MTransactionService.delete_transaction(id)
+    this.showToast("Delete successful.")
+  }
+
+  // * @Function   : showToast => ใช้แสดง Toast
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-011
+  showToast(msg) {
+    this.toastController.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
   }
 
   
