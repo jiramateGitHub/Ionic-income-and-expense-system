@@ -181,7 +181,6 @@ export class TransactionInputPage implements OnInit {
     });
   }
 
-<<<<<<< HEAD
 
   // * @Function   : insert_transection => เพิ่มข้อมูล transection
   // * @Author     : Kanathip Phithaksilp
@@ -210,6 +209,4 @@ export class TransactionInputPage implements OnInit {
     });
     this.close_modal();
   }
-=======
->>>>>>> origin/devNuttorn
 }
