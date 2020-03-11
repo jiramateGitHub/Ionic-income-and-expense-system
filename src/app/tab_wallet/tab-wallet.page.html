@@ -1,21 +1,3 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content> -->
-
 <ion-header class=" header-bg-color">
   <ion-toolbar >
     <ion-grid>
@@ -29,7 +11,7 @@
         <ion-col></ion-col> 
       </ion-row>
     </ion-grid>
-    <ion-title style="font-size: 40px!important;">2000 <span style="font-size: 20px;">THB.</span></ion-title>
+    <ion-title style="font-size: 40px!important;">20500 <span style="font-size: 20px;">THB.</span></ion-title>
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col></ion-col> 
@@ -51,7 +33,7 @@
               <ion-label class="tw">
                 <span class="fs-13" style="color: lightgreen !important;">Income</span> 
                 <br> 
-                <span class="fs-15" style="color: white !important;">5000</span>
+                <span class="fs-15" style="color: white !important;">20500</span>
               </ion-label>
             </ion-col>
             <ion-col></ion-col>
@@ -60,7 +42,7 @@
               <ion-label class="tw">
                 <span class="fs-13" style="color: orange !important;">Expense</span> 
                 <br> 
-                <span class="fs-15" style="color: white !important;">3000</span>
+                <span class="fs-15" style="color: white !important;">0</span>
               </ion-label>
             </ion-col>
           </ion-row>
@@ -86,8 +68,8 @@
   <!-- Item Dividers in a List -->
   <ion-list>
     <ion-item-divider>
-      <ion-label slot="start"><span class="fs-25">25</span> February 2562</ion-label>
-      <ion-label slot="end" class="p-r-10">+3500</ion-label>
+      <ion-label slot="start"><span class="fs-25">11</span> March 2562</ion-label>
+      <ion-label slot="end" class="p-r-10">+20500</ion-label>
     </ion-item-divider>
   
 
@@ -97,7 +79,12 @@
       <ion-item style="margin: -8px;">
         <ion-icon name="wallet" slot="start" size="large" style="color:red !important;"></ion-icon>
         <ion-label>
+<<<<<<< HEAD
           <span class="fs-14" >{{transaction.categories_name}}&nbsp;( {{transaction.sub_categories_name}} )</span> 
+=======
+          <span class="fs-14" >{{transaction.sub_categories_name}}</span> 
+          <!-- <span class="fs-14" >{{transaction.categories_name}}&nbsp;( {{transaction.sub_categories_name}} )</span>  -->
+>>>>>>> 746a36025f26e41df4f475a58afb260407a21731
           <br> 
           <span class="fs-11" style="color: grey !important;">{{transaction.transaction_note}} </span>
         </ion-label>
@@ -109,7 +96,7 @@
           <ion-icon slot="start" name="create" ></ion-icon>
           Edit
         </ion-item-option>
-        <ion-item-option color="danger" (click)="delete_transaction(transaction.id)">
+        <ion-item-option color="danger" (click)="transaction_active_update_AlertConfirm(transaction.id)">
           <ion-icon slot="start" name="trash" ></ion-icon>
           Delete
         </ion-item-option>
@@ -119,6 +106,11 @@
     </ion-card>
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 746a36025f26e41df4f475a58afb260407a21731
 <!-- 
     <ion-card >
       <ion-item style="margin: -8px;">
@@ -175,59 +167,3 @@
  
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>
-
-<ion-header class=" header-bg-color">
-  <ion-toolbar >
-    <ion-grid>
-      <ion-row class="ion-align-items-center p-t-10">
-        <ion-col></ion-col> 
-        <ion-col>
-          <ion-chip class="chip-bl">
-            <ion-label>Wallet 2</ion-label>
-          </ion-chip>
-        </ion-col> 
-        <ion-col></ion-col> 
-      </ion-row>
-    </ion-grid>
-    <ion-title style="font-size: 40px!important;">2000 <span style="font-size: 20px;">THB.</span></ion-title>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col></ion-col> 
-        <ion-col>
-          <ion-chip class="chip-bl">
-            <ion-label>This Month</ion-label>
-          </ion-chip>
-        </ion-col> 
-        <ion-col></ion-col> 
-      </ion-row>
-    </ion-grid>
-   
-    <ion-list lines="none" style="background-color: transparent !important;">
-      <ion-item style="background-color: transparent !important;">
-        <ion-grid>
-          <ion-row align-items-center>
-            <ion-col style="text-align: center">
-              <!-- <ion-icon style="zoom:2.0;color:lightgreen;" name="arrow-up-outline"></ion-icon> -->
-              <ion-label class="tw">
-                <span class="fs-13" style="color: lightgreen !important;">Income</span> 
-                <br> 
-                <span class="fs-15" style="color: white !important;">5000</span>
-              </ion-label>
-            </ion-col>
-            <ion-col></ion-col>
-            <ion-col style="text-align: center">
-              <!-- <ion-icon style="zoom:2.0;color:red;" name="arrow-down-outline"></ion-icon> -->
-              <ion-label class="tw">
-                <span class="fs-13" style="color: orange !important;">Expense</span> 
-                <br> 
-                <span class="fs-15" style="color: white !important;">3000</span>
-              </ion-label>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        
-      </ion-item>
-    </ion-list>
-  </ion-toolbar>
-  
-</ion-header>

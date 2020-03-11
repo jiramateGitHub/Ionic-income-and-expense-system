@@ -20,6 +20,7 @@ export class WalletPage implements OnInit {
     wallet_active: null
   }
   public obj_MWallet_List : Observable<MWallet[]>
+  public loading: any = 0;
   
   constructor(
     private router:Router,
@@ -32,6 +33,10 @@ export class WalletPage implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter(){
+    this.loading = true;
   }
 
   // * @Function   : modal_insert_show => แสดง modal TransactionInputPage
@@ -48,12 +53,6 @@ export class WalletPage implements OnInit {
   }
 
   async get_wallet(){
-    const loading = await this.loadingController.create({
-      message: 'Please wait...',
-      duration: 1000
-    });
-    await loading.present();
-
     this.obj_MWallet_List = this.ServicesService.MWalletService.get_obs_mwallet()
     this.obj_MWallet_List.subscribe(res=>console.log(res))
   }

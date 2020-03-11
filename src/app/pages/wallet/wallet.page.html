@@ -13,8 +13,8 @@
     <ion-item-divider>
       <ion-label slot="start">Included in Total</ion-label>
     </ion-item-divider>
-
     <ion-card>
+      <ion-spinner name="dots" *ngIf="loading == 0" style="text-align: center;"></ion-spinner>
       <div *ngFor="let wallet of (obj_MWallet_List | async)">
         <ion-item-sliding>
           <ion-item style="margin: 0px;">
@@ -23,7 +23,6 @@
               <span class="fs-14">{{wallet.wallet_name}}</span>
             </ion-label>
             <ion-chip fill="outline" slot="end" style="color:blueviolet !important;">฿ {{wallet.wallet_balance}}</ion-chip>
-            <ion-icon slot="end" name="ellipsis-vertical"></ion-icon>
           </ion-item>
           <ion-item-options>
             <ion-item-option color="primary">
@@ -42,6 +41,7 @@
   </ion-list>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    <!-- fab placed to the bottom end -->
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="modal_insert_show()">
       <ion-fab-button color="success">
@@ -50,6 +50,8 @@
     </ion-fab>   
 </ion-content>
 =======
+=======
+>>>>>>> 746a36025f26e41df4f475a58afb260407a21731
   <!-- fab placed to the bottom end -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="modal_insert_show()">
     <ion-fab-button color="success">
@@ -57,4 +59,7 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+<<<<<<< HEAD
 >>>>>>> origin/devWipawee
+=======
+>>>>>>> 746a36025f26e41df4f475a58afb260407a21731
