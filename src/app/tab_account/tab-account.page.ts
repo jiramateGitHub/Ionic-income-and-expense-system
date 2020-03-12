@@ -37,6 +37,7 @@ export class TabAccountPage {
 // * @Create Date: 2563-03-02
   logout(){
     this.SessionService.set_session(null,null)
+    this.SessionService.logout()
     this.router.navigateByUrl('signin');
   }
 

@@ -1,7 +1,7 @@
 import { ServicesService } from './services/services.service';
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, Config } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -17,15 +17,19 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private ServicesService:ServicesService,
-    private router:Router
+    private router:Router,
+    private config: Config, 
   ) {
     this.initializeApp();
-    var temp = this.ServicesService.SessionService.get_session_username()
-    if(temp == null || temp == "" || temp == undefined){
-      this.ServicesService.SessionService.set_session(null,null)
-      this.router.navigateByUrl('signin');
-    }
+    platform.ready().then(() => {
+      if(this.ServicesService.SessionService.getUser() == null){
+        this.router.navigateByUrl('signin');
+      }else{
+        this.router.navigateByUrl('tabs/tab_wallet');
+      }
+    });
   }
+  
 
   initializeApp() {
     this.platform.ready().then(() => {

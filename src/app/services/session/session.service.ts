@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
-
+import { Storage } from '@ionic/storage';
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
   private session_username:string;
   private session_wallet:string;
-  constructor() { 
-  }
+  isLoggedIn: Boolean;
+  user: any;
+  constructor(public storage: Storage) {
+
+    this.storage.get('user').then((user) => {
+
+        this.user = user;
+        this.isLoggedIn = true;
+    });
+
+}
 
   // * @Function   : set_session => ตั้งค่า session_username และ session_wallet ที่เข้าสู่ระบบ
   // * @Author     : Jiramate Phuaphan
@@ -44,4 +53,30 @@ export class SessionService {
   get_session_wallet(){
     return this.session_wallet;
   }
+
+
+  login(user) {
+      this.storage.set('user', user).then(() => {
+          this.isLoggedIn = true;
+          this.user = user;
+      });
+  }
+
+  logout() {
+      this.storage.remove('user').then(() => {
+          this.isLoggedIn = false;
+          this.user = null;
+      });
+  }
+
+  isAuthenticated() {
+  return this.isLoggedIn
+  }
+
+  getUser() {
+    return this.storage.get('user').then((val) => {
+      console.log('Your user is', val);
+    });
+  }
+
 }
