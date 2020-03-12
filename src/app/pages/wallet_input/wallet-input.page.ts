@@ -142,7 +142,9 @@ export class WalletInputPage implements OnInit {
     this.close_modal();
   }
 
-
+  // * @Function   : update_wallet_name => แก้ไขชื่อ wallet
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-09
   async update_wallet_name(){
     this.edit_MWallet.username = this.ServicesService.SessionService.get_session_username();
     this.edit_MWallet.wallet_name = this.edit_MWallet.wallet_name;
