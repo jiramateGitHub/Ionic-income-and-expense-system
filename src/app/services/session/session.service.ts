@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 export class SessionService {
   private session_username:string;
   private session_wallet:string;
-  constructor() { }
+  constructor() { 
+  }
 
   // * @Function   : set_session => ตั้งค่า session_username และ session_wallet ที่เข้าสู่ระบบ
   // * @Author     : Jiramate Phuaphan
