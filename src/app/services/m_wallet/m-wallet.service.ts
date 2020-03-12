@@ -42,12 +42,13 @@ export class MWalletService {
     this.serviceCollection.add(mwallet);
   }
 
-// * @Function   :  delete_transaction=> ลบ wallet
+// * @Function   :  delete_wallet=> ลบ wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-13
-  delete_transaction(id:string){
+  delete_wallet(id:string){
     this.serviceCollection.doc<MWallet>(id).delete();
   }
+
 // * @Function   :  get_edit_wallet=> get ข้อมูลเก่า wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-13

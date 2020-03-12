@@ -57,31 +57,21 @@ export class WalletPage implements OnInit {
       component: WalletInputPage,
       componentProps: {
         'type_input': 'insert',
-        
       }
     });
     return await modal.present();
   }
 
-
-  async modal_update_show(id:string) {
-    const modal = await this.modalController.create({
-      component: WalletInputPage,
-      componentProps: {
-        'type_input': 'update',
-        'id': id
-      }
-    });
-    return await modal.present();
-  }
-
-
+  // * @Function   : get_wallet => แสดงรายการ wallet
+  // * @Author     : Wipawee
+  // * @Create Date: 2563-03-12
   async get_wallet(){
     this.obj_MWallet_List = this.ServicesService.MWalletService.get_obs_mwallet()
-    this.obj_MWallet_List.subscribe(res=>console.log(res))
-    
+    this.obj_MWallet_List.subscribe(res=> this.check_obj_MWallet_List = res.length)
+
   }
- // * @Function   : wallet_active_update_AlertConfirm => แสดง modal delete confirm 
+
+  // * @Function   : wallet_active_update_AlertConfirm => แสดง modal delete confirm 
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-12
   async wallet_active_update_AlertConfirm(id:string) {
@@ -106,7 +96,7 @@ export class WalletPage implements OnInit {
     await alert.present();
   }
 
-   // * @Function   : showToast => แสดง Toast แจ้งเตือน
+  // * @Function   : showToast => แสดง Toast แจ้งเตือน
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-12
   showToast(msg) {
@@ -116,17 +106,17 @@ export class WalletPage implements OnInit {
     }).then(toast => toast.present());
   }
 
-   // * @Function   : delete_wallet => ลบ wallet
+  // * @Function   : delete_wallet => ลบ wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-12
   delete_wallet(id:string){
-    this.ServicesService.MWalletService.delete_transaction(id)
+    this.ServicesService.MWalletService.delete_wallet(id)
     this.showToast("Delete successful.")
   }
- // * @Function   :  modal_edit_show => modal แก้ไข wallet
+
+  // * @Function   :  modal_edit_show => modal แก้ไข wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-13
-
   async modal_edit_show(id:string) {
     await this.ServicesService.MWalletService.get_edit_wallet(id).subscribe( async res => {
       this.edit_MWallet = res;
@@ -140,13 +130,10 @@ export class WalletPage implements OnInit {
           'wallet_name':this.edit_MWallet.wallet_name,
           'wallet_balance':this.edit_MWallet.wallet_balance,
           'wallet_active':this.edit_MWallet.wallet_active
-          
         }
       });
-
       return await modal.present();
     })
-    
   }
 
 }
