@@ -27,6 +27,7 @@ export class WalletPage implements OnInit {
     wallet_balance : null,
     wallet_active: null
   }
+
   public obj_MWallet_List : Observable<MWallet[]>
   public loading: any = 0;
   public check_obj_MWallet_List = 0;
@@ -66,9 +67,8 @@ export class WalletPage implements OnInit {
   // * @Author     : Wipawee
   // * @Create Date: 2563-03-12
   async get_wallet(){
-    this.obj_MWallet_List = this.ServicesService.MWalletService.get_obs_mwallet()
-    this.obj_MWallet_List.subscribe(res=> this.check_obj_MWallet_List = res.length)
-
+    this.obj_MWallet_List = await this.ServicesService.MWalletService.get_obs_mwallet()
+    await this.obj_MWallet_List.subscribe(res=> this.check_obj_MWallet_List = res.length)
   }
 
   // * @Function   : wallet_active_update_AlertConfirm => แสดง modal delete confirm 
@@ -109,9 +109,16 @@ export class WalletPage implements OnInit {
   // * @Function   : delete_wallet => ลบ wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-12
-  delete_wallet(id:string){
-    this.ServicesService.MWalletService.delete_wallet(id)
-    this.showToast("Delete successful.")
+  async delete_wallet(id:string){
+    await this.obj_MWallet_List.subscribe(res=>{
+      if(res.length > 1){
+        this.ServicesService.MWalletService.delete_wallet(id)
+        this.showToast("Delete successful.")
+      }else{
+        this.showToast("Can't delete wallet.")
+      }
+    })
+    
   }
 
   // * @Function   :  modal_edit_show => modal แก้ไข wallet

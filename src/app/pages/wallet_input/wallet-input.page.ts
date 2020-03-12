@@ -117,14 +117,6 @@ export class WalletInputPage implements OnInit {
       'dismissed': true
     });
   }
-
-
-  showToast(msg) {
-    this.ToastController.create({
-      message: msg,
-      duration: 2000
-    }).then(toast => toast.present());
-  }
   // * @Function   : insert_model => เพิ่มกระเป๋าเงิน
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-09
@@ -154,4 +146,12 @@ export class WalletInputPage implements OnInit {
     });
     this.close_modal();
   }
+
+  showToast(msg) {
+    this.ToastController.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
+  }
+
 }

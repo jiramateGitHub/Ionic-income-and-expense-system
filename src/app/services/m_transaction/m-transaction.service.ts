@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
 import { MTransaction } from './../services.service';
 import { map, take } from 'rxjs/operators';
-
+import { SessionService } from './../session/session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,8 @@ export class MTransactionService {
   private serviceCollection: AngularFirestoreCollection<MTransaction>;
 
   constructor(
-    private afs: AngularFirestore) {
+    private afs: AngularFirestore,
+    private SessionService:SessionService) {
     this.serviceCollection = this.afs.collection<MTransaction>('M_transaction')
   }
 
@@ -42,7 +43,7 @@ export class MTransactionService {
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-10
   get_all_transaction_show():Observable<MTransaction[]>{
-    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction', ref => ref.orderBy('transaction_date','desc'));
+    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction', ref => ref.where('username','==',this.SessionService.get_session_username()).orderBy('transaction_date','desc'));
     this.service = this.serviceCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {

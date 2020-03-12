@@ -58,6 +58,7 @@ export class SigninPage implements OnInit {
       if(check_login == true){
         this.ServicesService.SessionService.set_session_username(this.username)
         this.ServicesService.SessionService.login(this.username)
+        this.ServicesService.SessionService.isAuthenticated()
         this.showToast('Sign in successful.');
         this.router.navigateByUrl('tabs');
         loading.dismiss();
