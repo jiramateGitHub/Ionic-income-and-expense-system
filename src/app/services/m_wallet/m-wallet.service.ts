@@ -34,4 +34,7 @@ export class MWalletService {
     return this.service;
   }
 
+  insert_wallet(mwallet:MWallet){
+    this.serviceCollection.add(mwallet);
+  }
 }
