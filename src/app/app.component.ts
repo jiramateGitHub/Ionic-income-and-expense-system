@@ -22,11 +22,7 @@ export class AppComponent {
   ) {
     this.initializeApp();
     platform.ready().then(() => {
-      if(this.ServicesService.SessionService.getUser() == null){
-        this.router.navigateByUrl('signin');
-      }else{
-        this.router.navigateByUrl('tabs/tab_wallet');
-      }
+      this.ServicesService.SessionService.isAuthenticated()
     });
   }
   
