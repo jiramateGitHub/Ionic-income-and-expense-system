@@ -25,7 +25,7 @@
             <ion-chip fill="outline" slot="end" style="color:blueviolet !important;">฿ {{wallet.wallet_balance}}</ion-chip>
           </ion-item>
           <ion-item-options>
-            <ion-item-option color="primary">
+            <ion-item-option color="primary" (click)="modal_edit_show(wallet.id)">
               <ion-icon slot="start" name="create"></ion-icon>
               Edit
             </ion-item-option>

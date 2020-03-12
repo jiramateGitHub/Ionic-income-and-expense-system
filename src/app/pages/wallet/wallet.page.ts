@@ -13,6 +13,14 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./wallet.page.scss'],
 })
 export class WalletPage implements OnInit {
+
+  private  edit_MWallet:MWallet = {
+    username: null,
+    wallet_name: null,
+    wallet_balance : null,
+    wallet_active: null
+  }
+
   public obj_MWallet : MWallet = {
     username: null,
     wallet_name: null,
@@ -47,7 +55,8 @@ export class WalletPage implements OnInit {
     const modal = await this.modalController.create({
       component: WalletInputPage,
       componentProps: {
-        'type_input': 'insert'
+        'type_input': 'insert',
+        
       }
     });
     return await modal.present();
@@ -100,4 +109,30 @@ export class WalletPage implements OnInit {
     this.ServicesService.MWalletService.delete_transaction(id)
     this.showToast("Delete successful.")
   }
+ // * @Function   :  modal_edit_show => modal แก้ไข wallet
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-13
+
+  async modal_edit_show(id:string) {
+    await this.ServicesService.MWalletService.get_edit_wallet(id).subscribe( async res => {
+      this.edit_MWallet = res;
+      console.log(this.edit_MWallet);
+      const modal = await this.modalController.create({
+        component: WalletInputPage,
+        componentProps: {
+          'type_input': 'update', 
+          'id':id,
+          'username':this.edit_MWallet.username,
+          'wallet_name':this.edit_MWallet.wallet_name,
+          'wallet_balance':this.edit_MWallet.wallet_balance,
+          'wallet_active':this.edit_MWallet.wallet_active
+          
+        }
+      });
+
+      return await modal.present();
+    })
+    
+  }
+
 }

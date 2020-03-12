@@ -19,22 +19,24 @@
         <ion-item>
           <ion-icon name="wallet-outline" class="p-r-5"></ion-icon>
           <ion-label position="fixed"> Name</ion-label>
-          <ion-input placeholder="" [(ngModel)]="obj_MTransaction.wallet_name"  [(ngModel)]="obj_MWallet.wallet_name"></ion-input>
+          <ion-input placeholder="" *ngIf="type_input == 'insert'" [(ngModel)]="obj_MTransaction.wallet_name"  [(ngModel)]="obj_MWallet.wallet_name"></ion-input>
+          <ion-input placeholder="" *ngIf="type_input == 'update'" [(ngModel)]="edit_MWallet.wallet_name" ></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item *ngIf="type_input == 'insert'" >
           <ion-icon name="trail-sign-outline" class="p-r-5"></ion-icon>
           <ion-label position="fixed"> Category</ion-label>
           <ion-input placeholder="Select Category" (click)="select_category_alert()"  style="text-align: right;" readonly [(ngModel)]="obj_MTransaction.sub_categories_name"></ion-input>
+          <!-- <ion-input placeholder="Select Category" *ngIf="type_input == 'update'" (click)="select_category_alert()"  style="text-align: right;" readonly [(ngModel)]="obj_MTransaction.sub_categories_name"></ion-input> -->
         </ion-item>
         
-        <ion-item>
+        <ion-item *ngIf="type_input == 'insert'">
           <ion-icon name="calendar-outline" class="p-r-5"></ion-icon>
           <ion-label> Date</ion-label>
           <ion-datetime displayFormat="DD MMMM YY"  placeholder="Select Date" [(ngModel)]="obj_MTransaction.transaction_date"></ion-datetime>
         </ion-item>
 
-        <ion-item>
+        <ion-item *ngIf="type_input == 'insert'" >
           <ion-label class="fs-15">Initial Balance</ion-label>
           <ion-input class="" placeholder="0" [(ngModel)]="obj_MTransaction.transaction_amount"  [(ngModel)]="obj_MWallet.wallet_balance" type="number"></ion-input>
         </ion-item>
@@ -46,7 +48,8 @@
   <ion-grid>
     <ion-row >
       <ion-col>
-        <ion-button expand="block" (click)=insert_wallet()>Save Wallet</ion-button>
+        <ion-button expand="block" *ngIf="type_input == 'insert'" (click)=insert_wallet()>Save Wallet</ion-button>
+        <ion-button expand="block" *ngIf="type_input == 'update'" (click)=update_wallet_name()>Edit wallet</ion-button >
       </ion-col>
     </ion-row>
   </ion-grid>
