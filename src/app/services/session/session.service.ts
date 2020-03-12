@@ -11,10 +11,8 @@ export class SessionService {
   user: any;
 
   constructor(public storage: Storage, private router:Router) {
-    
         this.user = null;
         this.isLoggedIn = false;
-    
   }
 
   // * @Function   : set_session => ตั้งค่า session_username และ session_wallet ที่เข้าสู่ระบบ
