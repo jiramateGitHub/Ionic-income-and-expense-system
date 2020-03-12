@@ -52,6 +52,40 @@ export class WalletPage implements OnInit {
     return await modal.present();
   }
 
+
+  async modal_update_show(id:string) {
+    const modal = await this.modalController.create({
+      component: WalletInputPage,
+      componentProps: {
+        'type_input': 'update',
+        'id': id
+      }
+    });
+    return await modal.present();
+  }
+
+  async wallet_active_update_AlertConfirm(id:string) {
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Confirm',
+          handler: () => {
+            // this.ServicesService.MSubCategoriesService.delete_sub_categories(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   async get_wallet(){
     this.obj_MWallet_List = this.ServicesService.MWalletService.get_obs_mwallet()
     this.obj_MWallet_List.subscribe(res=>console.log(res))
