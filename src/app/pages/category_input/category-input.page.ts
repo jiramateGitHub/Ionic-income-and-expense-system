@@ -1,22 +1,36 @@
+import { ServicesService, MSubCategories , MTransaction } from './../../services/services.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, NavParams, AlertController } from '@ionic/angular';
 import { TransactionCategoryPage } from './../transaction_category/transaction-category.page';
+// import { ServicesService, MTransaction} from '../../services/services.service';
 @Component({
   selector: 'app-category-input',
   templateUrl: './category-input.page.html',
   styleUrls: ['./category-input.page.scss'],
 })
 export class CategoryInputPage implements OnInit {
-  public catt_name: string;
+  
   private type_input: string;
-  private category_type: string;
+  private type_parent_categories : string;
+  public obj_MSubCategories: MSubCategories= {
+    username: null,
+    categories_name: null,
+    categories_type: null,
+    sub_categories_name: null,
+    sub_categories_active: null
+  }
   constructor(
     private navParams: NavParams,
     private toastController: ToastController, 
     private modalController: ModalController,
     private alertController: AlertController,
+    private ServicesService: ServicesService
   ) { 
     this.type_input = navParams.get('type_input');
+    console.log(navParams.get('id'))
+    if(this.type_input == "update"){
+
+    }
   }
 
   ngOnInit() {
@@ -29,12 +43,13 @@ async modal_taransaction_category_show() {
   const modal = await this.modalController.create({
     component: TransactionCategoryPage,
     componentProps: {
-      'type_input': this.category_type
+      'type_input': this.type_parent_categories
     }
   });
   modal.onDidDismiss()
   .then((data) => {
-    this.catt_name = data['data'].name; // Here's your selected user!
+    this.obj_MSubCategories.categories_name = data['data'].categories_name; // Here's your selected user!
+    this.obj_MSubCategories.categories_type = data['data'].categories_type;
   });
   return await modal.present();
 }
@@ -46,6 +61,53 @@ async modal_taransaction_category_show() {
     this.modalController.dismiss({
       'dismissed': true
     });
+  }
+
+  // * @Function   : get_categories => คำสั่ง get 
+  // * @Author     : Thananya Banchuenwijit
+  // * @Create Date: 2563-03-09
+  get_categories(){
+   this.ServicesService.MSubCategoriesService.get_obs_msubcategories_by_id(this.obj_MSubCategories.id)
+  }
+
+  // * @Function   : insert_categories => คำสั่งเพิ่ม sub_categories
+  // * @Author     : Thananya Banchuenwijit
+  // * @Create Date: 2563-03-09
+  insert_categories(){
+    this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
+    this.obj_MSubCategories.sub_categories_active = "Y"
+    this.ServicesService.MSubCategoriesService.insert_sub_categories(this.obj_MSubCategories)
+    //console.log(this.obj_MSubCategories)
+    this.showToast("Add Categories Success");
+    this.close_modal()
+  }
+
+  // * @Function   : update_categories => คำสั่งแก้ไข sub_categories
+  // * @Author     : Thananya Banchuenwijit
+  // * @Create Date: 2563-03-09
+  update_categories(){
+    this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
+    this.obj_MSubCategories.sub_categories_active = "Y"
+    this.ServicesService.MSubCategoriesService.update_sub_categories(this.obj_MSubCategories)
+    //console.log(this.obj_MSubCategories)
+    this.close_modal()
+  }
+
+  // * @Function   : delete_categories => คำสั่งลบ sub_categories
+  // * @Author     : Thananya Banchuenwijit
+  // * @Create Date: 2563-03-09
+  delete_categories(){
+    this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
+    this.obj_MSubCategories.sub_categories_active = "Y"
+    this.ServicesService.MSubCategoriesService.update_sub_categories(this.obj_MSubCategories)
+    //console.log(this.obj_MSubCategories)
+  }
+
+  showToast(msg) {
+    this.toastController.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
   }
 
 }

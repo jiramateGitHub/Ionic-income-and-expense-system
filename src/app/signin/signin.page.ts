@@ -35,11 +35,15 @@ export class SigninPage implements OnInit {
 // * @Create Date: 2563-03-01
   async signin(){
     //loading present
-    const loading = await this.loadingController.create({
+    var loading;
+    var time_loading = 60000;
+    this.loadingController.create({
       message: 'Please wait...',
-      duration: 1000
+    }).then((overlay) => {
+      loading = overlay
+      loading.present();
     });
-    await loading.present();
+    setTimeout(() => {}, time_loading);
 
     var check_login = false;
     var count = 0;
@@ -53,16 +57,18 @@ export class SigninPage implements OnInit {
       }
       if(check_login == true){
         this.ServicesService.SessionService.set_session_username(this.username)
-        this.router.navigateByUrl('tabs');
         this.showToast('Sign in successful.');
+        this.router.navigateByUrl('tabs');
+        loading.dismiss();
       }else{
         if(count == 0){
           this.showToast('Username or Password Incorrent.');
+          loading.dismiss();
         }
       }
       count++;
     });
-    const { role, data } = await loading.onDidDismiss();
+ 
   }
 
 // * @Function   : redirect_signup => กลับหน้า sign up
