@@ -42,7 +42,7 @@ export class MTransactionService {
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-10
   get_all_transaction_show():Observable<MTransaction[]>{
-    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction');
+    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction', ref => ref.orderBy('transaction_date','desc'));
     this.service = this.serviceCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {

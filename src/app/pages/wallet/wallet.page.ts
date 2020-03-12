@@ -21,6 +21,7 @@ export class WalletPage implements OnInit {
   }
   public obj_MWallet_List : Observable<MWallet[]>
   public loading: any = 0;
+  public check_obj_MWallet_List = 0;
   
   constructor(
     private router:Router,
@@ -88,6 +89,7 @@ export class WalletPage implements OnInit {
 
   async get_wallet(){
     this.obj_MWallet_List = this.ServicesService.MWalletService.get_obs_mwallet()
-    this.obj_MWallet_List.subscribe(res=>console.log(res))
+    this.obj_MWallet_List.subscribe(res=> this.check_obj_MWallet_List = res.length)
+    console.log(this.check_obj_MWallet_List)
   }
 }

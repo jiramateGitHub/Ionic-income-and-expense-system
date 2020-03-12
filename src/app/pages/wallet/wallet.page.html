@@ -37,8 +37,16 @@
         </ion-item-sliding>
       </div>
     </ion-card>
-
+    <ion-card *ngIf="check_obj_MWallet_List == 0">
+      <ion-item style="margin: 0px;" >
+        <ion-label style="text-align: center;">
+          <span class="fs-14">No wallet</span>
+        </ion-label>
+      </ion-item>
+    </ion-card>
   </ion-list>
+
+
 
   <!-- fab placed to the bottom end -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="modal_insert_show()">
