@@ -10,8 +10,10 @@ import { timestamp } from 'rxjs/operators';
 })
 export class TabReportPage {
 
-  public income: number;
-  public expent: number;
+  public income: number = 0;
+  public expent: number = 0;
+  public net_income: number = 0;
+  
 
   public obj_MTransaction: MTransaction = {
     id: null,
@@ -43,6 +45,7 @@ ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.
   this.obj_MTransaction.transaction_date = Date()
+  console.log(this.obj_MTransaction.transaction_date);
 
   
 }
@@ -126,6 +129,14 @@ ngOnInit(): void {
 
       this.income = sum_income;
       this.expent = sum_expent;
+
+      if(sum_income >= sum_expent){
+        this.net_income = sum_income - sum_expent
+      }else if(sum_income <= sum_expent){
+        this.net_income = sum_income - sum_expent
+      }
+
+      
 
 
       //console.log("da",date);
