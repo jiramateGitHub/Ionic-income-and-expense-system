@@ -37,4 +37,9 @@ export class MWalletService {
   insert_wallet(mwallet:MWallet){
     this.serviceCollection.add(mwallet);
   }
+
+
+  delete_transaction(id:string){
+    this.serviceCollection.doc<MWallet>(id).delete();
+  }
 }

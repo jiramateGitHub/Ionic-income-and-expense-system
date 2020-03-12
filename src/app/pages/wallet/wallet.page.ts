@@ -23,6 +23,7 @@ export class WalletPage implements OnInit {
   public loading: any = 0;
   
   constructor(
+    private ToastController:ToastController,
     private router:Router,
     private loadingController: LoadingController,
     private modalController: ModalController,
@@ -55,5 +56,48 @@ export class WalletPage implements OnInit {
   async get_wallet(){
     this.obj_MWallet_List = this.ServicesService.MWalletService.get_obs_mwallet()
     this.obj_MWallet_List.subscribe(res=>console.log(res))
+    
+  }
+ // * @Function   : wallet_active_update_AlertConfirm => แสดง modal delete confirm 
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-12
+  async wallet_active_update_AlertConfirm(id:string) {
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Confirm',
+          handler: () => {
+            this.delete_wallet(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+   // * @Function   : showToast => แสดง Toast แจ้งเตือน
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-12
+  showToast(msg) {
+    this.ToastController.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
+  }
+
+   // * @Function   : delete_wallet => ลบ wallet
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-12
+  delete_wallet(id:string){
+    this.ServicesService.MWalletService.delete_transaction(id)
+    this.showToast("Delete successful.")
   }
 }
