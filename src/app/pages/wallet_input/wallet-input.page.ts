@@ -10,6 +10,14 @@ import { ServicesService, MWallet, MTransaction } from '../../services/services.
 })
 export class WalletInputPage implements OnInit {
   private type_input: string;
+  private id:string;
+
+  private  edit_MWallet:MWallet = {
+    username: null,
+    wallet_name: null,
+    wallet_balance : null,
+    wallet_active: null
+  }
 
   public obj_MWallet: MWallet = {
     username: null,
@@ -39,6 +47,11 @@ export class WalletInputPage implements OnInit {
 
   ) {
     this.type_input = navParams.get('type_input');
+    this.id = navParams.get('id');
+    this.edit_MWallet.username = navParams.get('username');
+    this.edit_MWallet.wallet_name = navParams.get('wallet_name');
+    this.edit_MWallet.wallet_balance = navParams.get('wallet_balance');
+    this.edit_MWallet.wallet_active = navParams.get('wallet_active');
   }
 
   ngOnInit() {
@@ -126,6 +139,19 @@ export class WalletInputPage implements OnInit {
     this.ServicesService.MWalletService.insert_wallet(this.obj_MWallet)
     this.showToast('Add Wallet successful.');
 
+    this.close_modal();
+  }
+
+  // * @Function   : update_wallet_name => แก้ไขชื่อ wallet
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-09
+  async update_wallet_name(){
+    this.edit_MWallet.username = this.ServicesService.SessionService.get_session_username();
+    this.edit_MWallet.wallet_name = this.edit_MWallet.wallet_name;
+  
+    this.ServicesService.MWalletService.update_wallet_name(this.id,this.edit_MWallet).then(() => {
+      this.showToast('Edit Wallet successful.');
+    });
     this.close_modal();
   }
 }
