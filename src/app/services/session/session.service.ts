@@ -89,6 +89,7 @@ export class SessionService {
       this.router.navigateByUrl('signin');
     }else{
       this.router.navigateByUrl('tabs/tab_wallet');
+      this.set_session_username(this.user)
     }
   }
 
