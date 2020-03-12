@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from './../services/session/session.service';
+import { ModalController, AlertController } from '@ionic/angular';
+import { TransferInputPage } from '../pages/transfer_input/transfer-input.page';
 @Component({
   selector: 'app-tab-account',
   templateUrl: 'tab-account.page.html',
@@ -10,7 +12,9 @@ export class TabAccountPage {
 
   constructor(
     private SessionService:SessionService,
-    private router:Router) {
+    private router:Router,
+    private modalController: ModalController,
+    private alertController: AlertController,) {
       
     }
 
@@ -34,5 +38,22 @@ export class TabAccountPage {
   logout(){
     this.SessionService.set_session(null,null)
     this.router.navigateByUrl('signin');
+  }
+
+   // * @Function   : modal_transfer_input_show => แสดง Modal TransferInputPage และ ตอนปิด Modal จะ Passing Data กลับมา
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-02
+  async modal_transfer_input_show() { 
+    const modal = await this.modalController.create({
+      component: TransferInputPage,
+      componentProps: {
+        'type_input': 'transfer'
+      }
+    });
+    modal.onDidDismiss()
+    .then((data) => {
+     
+    });
+    return await modal.present();
   }
 }
