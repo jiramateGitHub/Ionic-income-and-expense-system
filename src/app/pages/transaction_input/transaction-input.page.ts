@@ -49,9 +49,10 @@ export class TransactionInputPage implements OnInit {
     private navParams: NavParams,
     private servicesService: ServicesService,
   ) { 
-      this.MTransaction.transaction_date = Date();
       this.type_input = navParams.get('type_input');
-
+      if(this.type_input == "insert"){
+        this.MTransaction.transaction_date = Date();
+      }
       this.id = navParams.get('id');
       this.editMTransaction.categories_name= navParams.get('categories_name');
       this.editMTransaction.categories_type= navParams.get('categories_type');

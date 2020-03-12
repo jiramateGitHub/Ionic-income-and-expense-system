@@ -25,11 +25,11 @@
             <ion-chip fill="outline" slot="end" style="color:blueviolet !important;">฿ {{wallet.wallet_balance}}</ion-chip>
           </ion-item>
           <ion-item-options>
-            <ion-item-option color="primary">
+            <ion-item-option color="primary" (click)="modal_update_show(1)">
               <ion-icon slot="start" name="create"></ion-icon>
               Edit
             </ion-item-option>
-            <ion-item-option color="danger">
+            <ion-item-option color="danger" (click)="wallet_active_update_AlertConfirm(1)">
               <ion-icon slot="start" name="trash"></ion-icon>
               Delete
             </ion-item-option>
