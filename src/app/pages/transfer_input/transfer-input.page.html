@@ -54,8 +54,9 @@
   <div *ngIf="check_hide_card_tran">
     <ion-card >
     <ion-item style="font-size:18px;">
-      <ion-icon name="cash-outline" style="color:blueviolet;"></ion-icon>
+      <ion-icon name="cash-outline" style="color:blueviolet;" ></ion-icon>
       <ion-label position="" style="font-size:18px;">Tranfer Money</ion-label>
+      <ion-icon name="close" (click)="tranfer_money()"></ion-icon>
     </ion-item>
   
     <ion-card-content>
@@ -64,7 +65,7 @@
         <ion-input value="" [(ngModel)]="account"></ion-input>
         <ion-label position="floating">Amount of money</ion-label>
         <ion-input value="" [(ngModel)]="money"></ion-input>
-        <ion-button expand="block">Tranfer</ion-button>
+        <ion-button expand="block" (click)="remove_money()">Tranfer</ion-button>
      
     </ion-card-content>
   </ion-card>

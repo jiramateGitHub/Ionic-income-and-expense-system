@@ -51,9 +51,8 @@ export class TransferInputPage implements OnInit {
   tranfer_money() {
     this.check_hide_card_his = false
     this.check_hide_card_tran = true
-    console.log(this.check_hide_card_his)
-    console.log(this.account)
-    console.log(this.money)
+    this.money = 0                               //reset money when complete tranfer
+    this.account = ""                            //reset account when complete tranfer
   }
   history_tran(){
     this.check_hide_card_his = true
@@ -66,6 +65,11 @@ export class TransferInputPage implements OnInit {
         this.wallets.push(item)
       })
     })
+  }
+  remove_money(){
+    this.balance = this.balance - this.money
+    this.check_hide_card_his = true
+    this.check_hide_card_tran = false
   }
 
 
