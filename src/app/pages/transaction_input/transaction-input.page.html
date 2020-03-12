@@ -7,7 +7,8 @@
         <ion-title *ngIf="type_input == 'insert'" style="text-align: center;">Add transaction</ion-title>
         <ion-title *ngIf="type_input == 'update'" style="text-align: center;">Edit transaction</ion-title>
         <ion-buttons slot="end">
-            <ion-icon name="checkmark" style="zoom:1.5;"></ion-icon>
+            <ion-icon *ngIf="type_input == 'insert'" name="checkmark" style="zoom:1.5;" (click)="insert_transaction()"></ion-icon>
+            <ion-icon *ngIf="type_input == 'update'" name="checkmark" style="zoom:1.5;" (click)="update_transaction()"></ion-icon>
         </ion-buttons>
       </ion-item>
   </ion-toolbar>
@@ -52,8 +53,8 @@
   <ion-grid>
     <ion-row >
       <ion-col>
-        <ion-button expand="block" *ngIf="type_input == 'insert'" (click)="insert_transection()" >Save Transaction</ion-button>
-        <ion-button expand="block" *ngIf="type_input == 'update'" (click)="edit_transection()" >Edit Transaction</ion-button>
+        <ion-button expand="block" *ngIf="type_input == 'insert'" (click)="insert_transaction()" >Save Transaction</ion-button>
+        <ion-button expand="block" *ngIf="type_input == 'update'" (click)="update_transaction()" >Edit Transaction</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
