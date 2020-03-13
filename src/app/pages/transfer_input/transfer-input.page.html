@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar class="bg-toolbar">
+    <ion-buttons slot="start" class="p-l-5" (click)="close_modal()">
+      <ion-icon name="arrow-back-outline" style="zoom:1.5;color:white;"></ion-icon>
+    </ion-buttons>
+    <ion-title class="p-l-25">Transfer another wallets</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-icon style="color:blueviolet;" name="wallet-outline" class="p-r-5" ></ion-icon>
+    <ion-label position="" class="fs-15"> Select Wallet</ion-label> ------>
+        <ion-label position="">  
+          <ion-select style="margin-left: 1px;" [(ngModel)]="balance" value="Plase Select" cancelText="Cancle" okText="Confirm" id="select_wallet" (click)="select_wall()">
+            <div *ngFor="let value of wallets">
+                <ion-select-option value="{{value.wallet_balance}}">{{value.wallet_name}}</ion-select-option>
+            </div>
+          </ion-select>
+        </ion-label>   
+    </ion-item>
+
+  <div class="balance">
+    
+      <ion-img style="width: auto !important; height: 150px;align-items: center; margin-top: 30px;" src="assets/images/money.jpeg"></ion-img>
+      <span class="balance">
+        Balance :
+        <ion-chip fill="outline" slot="end" style="color:#ffcc33; font-size:25px">{{balance}}$</ion-chip><br>
+        <!-- <ion-chip  *ngIf="{{balance}} == '0'" fill="outline" slot="end" style="color:#ff0000; font-size:25px">{{balance}}$</ion-chip><br> -->
+        <ion-button *ngIf="check_hide_card_his" color="secondary" (click)="tranfer_money()">Transfer Money</ion-button>
+        <ion-button *ngIf="check_hide_card_tran" color="secondary" (click)="history_tran()">History Tranfer</ion-button>
+      </span>
+    
+  </div>
+  <!-- card  เเสดงประวัติการโอน-->
+  <div *ngIf="check_hide_card_his">
+    <ion-card >
+    <ion-item style="font-size:18px;">
+      <ion-icon name="time-outline" style="color:blueviolet;" class="p-r-5"></ion-icon>
+      <ion-label position="" class="fs-15">Money trnasfer history</ion-label>
+    </ion-item>
+    
+    <ion-item>
+      <ion-icon name="calendar-outline" class="p-r-5"></ion-icon>
+      <ion-label class="fs-15" >Month</ion-label>
+    </ion-item>
+  
+    <ion-card-content>
+      
+    </ion-card-content>
+  </ion-card>
+  </div>
+  <!-- card  แสดงส่วนของการโอน-->
+  <div *ngIf="check_hide_card_tran">
+    <ion-card >
+    <ion-item style="font-size:18px;">
+      <ion-icon name="cash-outline" style="color:blueviolet;" class="p-r-5"></ion-icon>
+      <ion-label position="" class="fs-15">Tranfer Money</ion-label>
+      <ion-icon name="close" (click)="tranfer_money()"></ion-icon>
+    </ion-item>
+  
+    <ion-card-content>
+      
+        <ion-label position="fixed" class="fs-15">Bank account number</ion-label>
+        <ion-input value="" [(ngModel)]="account"></ion-input>
+        <ion-label position="floating" class="fs-15">Amount of money</ion-label>
+        <ion-input value="" [(ngModel)]="money"></ion-input>
+        <ion-button expand="block" (click)="remove_money()">Tranfer</ion-button>
+     
+    </ion-card-content>
+  </ion-card>
+  </div>
+    <!-- <ion-title class="p-l-25">Money transfer history</ion-title> -->
+
+
+</ion-content>

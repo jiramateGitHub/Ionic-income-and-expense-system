@@ -1,0 +1,46 @@
+<ion-grid>
+	<ion-row justify-content-center>
+		<ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+			<div class="limiter">
+        <div class="container-login100">
+          <div class="wrap-login100">
+              <span class="login100-form-title p-b-25">
+                Welcome
+              </span>
+
+              <ion-img style="width: auto !important; height: 150px;align-items: center;" src="assets/images/logo.png"></ion-img>
+    
+              <ion-item>
+                <ion-label position="floating" >Username</ion-label>
+                <ion-input [(ngModel)]="username"></ion-input>
+              </ion-item>
+              <br>
+              <ion-item>
+                <ion-label position="floating" >Password</ion-label>
+                <ion-input type="password" [(ngModel)]="password"></ion-input>
+              </ion-item>
+              <br>
+              <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                  <div class="login100-form-bgbtn"></div>
+                  <button class="login100-form-btn" (click)="signin()">
+                    Login
+                  </button>
+                </div>
+              </div>
+    
+              <div class="text-center p-t-25">
+                <span class="txt1">
+                  Don’t have an account?
+                </span>
+    
+                <span class="txt2" (click)="redirect_signup()">
+                  Sign Up
+                </span>
+              </div>
+          </div>
+        </div>
+      </div>
+		</ion-col>
+	</ion-row>
+</ion-grid>
