@@ -72,5 +72,4 @@ export class TransferInputPage implements OnInit {
     this.check_hide_card_tran = false
   }
 
-
 }
