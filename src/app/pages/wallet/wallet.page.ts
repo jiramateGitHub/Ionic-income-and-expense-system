@@ -13,16 +13,27 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./wallet.page.scss'],
 })
 export class WalletPage implements OnInit {
+
+  private  edit_MWallet:MWallet = {
+    username: null,
+    wallet_name: null,
+    wallet_balance : null,
+    wallet_active: null
+  }
+
   public obj_MWallet : MWallet = {
     username: null,
     wallet_name: null,
     wallet_balance : null,
     wallet_active: null
   }
+
   public obj_MWallet_List : Observable<MWallet[]>
   public loading: any = 0;
+  public check_obj_MWallet_List = 0;
   
   constructor(
+    private ToastController:ToastController,
     private router:Router,
     private loadingController: LoadingController,
     private modalController: ModalController,
@@ -46,14 +57,90 @@ export class WalletPage implements OnInit {
     const modal = await this.modalController.create({
       component: WalletInputPage,
       componentProps: {
-        'type_input': 'insert'
+        'type_input': 'insert',
       }
     });
     return await modal.present();
   }
 
+  // * @Function   : get_wallet => แสดงรายการ wallet
+  // * @Author     : Wipawee
+  // * @Create Date: 2563-03-12
   async get_wallet(){
-    this.obj_MWallet_List = this.ServicesService.MWalletService.get_obs_mwallet()
-    this.obj_MWallet_List.subscribe(res=>console.log(res))
+    this.obj_MWallet_List = await this.ServicesService.MWalletService.get_obs_mwallet()
+    await this.obj_MWallet_List.subscribe(res=> this.check_obj_MWallet_List = res.length)
   }
+
+  // * @Function   : wallet_active_update_AlertConfirm => แสดง modal delete confirm 
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-12
+  async wallet_active_update_AlertConfirm(id:string) {
+    const alert = await this.alertController.create({
+      header: 'Confirm Delete?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Confirm',
+          handler: () => {
+            this.delete_wallet(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  // * @Function   : showToast => แสดง Toast แจ้งเตือน
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-12
+  showToast(msg) {
+    this.ToastController.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
+  }
+
+  // * @Function   : delete_wallet => ลบ wallet
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-12
+  async delete_wallet(id:string){
+    await this.obj_MWallet_List.subscribe(res=>{
+      if(res.length > 1){
+        this.ServicesService.MWalletService.delete_wallet(id)
+        this.showToast("Delete successful.")
+      }else{
+        this.showToast("Can't delete wallet.")
+      }
+    })
+    
+  }
+
+  // * @Function   :  modal_edit_show => modal แก้ไข wallet
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-13
+  async modal_edit_show(id:string) {
+    await this.ServicesService.MWalletService.get_edit_wallet(id).subscribe( async res => {
+      this.edit_MWallet = res;
+      console.log(this.edit_MWallet);
+      const modal = await this.modalController.create({
+        component: WalletInputPage,
+        componentProps: {
+          'type_input': 'update', 
+          'id':id,
+          'username':this.edit_MWallet.username,
+          'wallet_name':this.edit_MWallet.wallet_name,
+          'wallet_balance':this.edit_MWallet.wallet_balance,
+          'wallet_active':this.edit_MWallet.wallet_active
+        }
+      });
+      return await modal.present();
+    })
+  }
+
 }

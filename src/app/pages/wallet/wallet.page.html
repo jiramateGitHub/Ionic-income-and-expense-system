@@ -25,11 +25,11 @@
             <ion-chip fill="outline" slot="end" style="color:blueviolet !important;">฿ {{wallet.wallet_balance}}</ion-chip>
           </ion-item>
           <ion-item-options>
-            <ion-item-option color="primary">
+            <ion-item-option color="primary" (click)="modal_edit_show(wallet.id)">
               <ion-icon slot="start" name="create"></ion-icon>
               Edit
             </ion-item-option>
-            <ion-item-option color="danger">
+            <ion-item-option color="danger" (click)="wallet_active_update_AlertConfirm(wallet.id)">
               <ion-icon slot="start" name="trash"></ion-icon>
               Delete
             </ion-item-option>
@@ -37,11 +37,15 @@
         </ion-item-sliding>
       </div>
     </ion-card>
-
+    <ion-card *ngIf="check_obj_MWallet_List == 0">
+      <ion-item style="margin: 0px;" >
+        <ion-label style="text-align: center;">
+          <span class="fs-14">No wallet</span>
+        </ion-label>
+      </ion-item>
+    </ion-card>
   </ion-list>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
    <!-- fab placed to the bottom end -->
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="modal_insert_show()">
       <ion-fab-button color="success">
@@ -49,17 +53,13 @@
       </ion-fab-button>
     </ion-fab>   
 </ion-content>
-=======
-=======
->>>>>>> 746a36025f26e41df4f475a58afb260407a21731
+
+
+
   <!-- fab placed to the bottom end -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="modal_insert_show()">
     <ion-fab-button color="success">
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="add">+</ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
-<<<<<<< HEAD
->>>>>>> origin/devWipawee
-=======
->>>>>>> 746a36025f26e41df4f475a58afb260407a21731

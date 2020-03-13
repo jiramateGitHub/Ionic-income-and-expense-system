@@ -55,7 +55,6 @@
 </ion-header>
 
 <ion-content >
-  
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -67,6 +66,7 @@
 
   <!-- Item Dividers in a List -->
   <ion-list>
+<<<<<<< HEAD
     <ion-item-divider>
       <ion-label slot="start"><span class="fs-25">11</span> March 2562</ion-label>
       <ion-label slot="end" class="p-r-10">+20500</ion-label>
@@ -152,6 +152,39 @@
         <ion-chip fill="outline" slot="end" style="color:red !important;">-1000</ion-chip>
       </ion-item>
     </ion-card> -->
+=======
+
+        <ion-item-divider >
+          <ion-label slot="start"><span class="fs-25">11</span> March 2562</ion-label>
+          <ion-label slot="end" class="p-r-10">+20500</ion-label>
+        </ion-item-divider>
+      
+        <ion-card *ngFor = "let transaction of all_transaction">
+          <ion-item-sliding >
+            <ion-item style="margin: -8px;">
+              <ion-img src="{{'./../assets/icon/'+transaction.categories_name+'.png'}}"  style="width: 30px; height: 30px;" class="p-l-5"></ion-img> 
+              <ion-label class="p-l-15">
+                <span class="fs-14" >{{transaction.sub_categories_name}}</span> 
+                <!-- <span class="fs-14" >{{transaction.categories_name}}&nbsp;( {{transaction.sub_categories_name}} )</span>  -->
+                <br> 
+                <span class="fs-11" style="color: grey !important;">{{transaction.transaction_note}} </span>
+              </ion-label>
+              <ion-chip fill="outline" slot="end" style="color:red !important;" *ngIf="transaction.categories_type == '2'">- {{transaction.transaction_amount}}</ion-chip>
+              <ion-chip fill="outline" slot="end" style="color:#2ECC71  !important;" *ngIf="transaction.categories_type == '1'">+ {{transaction.transaction_amount}}</ion-chip>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option color="primary" (click)="modal_edit_show(transaction.id)">
+                <ion-icon slot="start" name="create" ></ion-icon>
+                Edit
+              </ion-item-option>
+              <ion-item-option color="danger" (click)="transaction_active_update_AlertConfirm(transaction.id)">
+                <ion-icon slot="start" name="trash" ></ion-icon>
+                Delete
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-card>
+>>>>>>> 885c915e20d974e53b8d1677ce3e4d6a41ba43b0
 
   </ion-list> 
  

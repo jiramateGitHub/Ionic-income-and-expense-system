@@ -24,7 +24,8 @@
     <ion-spinner name="dots" *ngIf="loading == 0" style="text-align: center;"></ion-spinner>
     <div *ngFor="let parent of (obj_MCategories_Income | async)">
       <ion-item-divider >
-        <ion-label class="fs-17"  >
+        <ion-img src="{{'./../assets/icon/'+parent.cat_name+'.png'}}"></ion-img> 
+        <ion-label class="fs-17 p-l-15" style="color:black !important;" >
           {{parent.cat_name}} 
         </ion-label>
       </ion-item-divider >
@@ -32,7 +33,7 @@
       <ion-item-sliding *ngFor="let sub of (obj_MSubCategories_Income | async)">
         <div  *ngIf="parent.cat_name == sub.categories_name">
           <ion-item >
-            <ion-label class="p-l-15">
+            <ion-label class="p-l-15" style="color: grey;">
               {{sub.sub_categories_name}}
             </ion-label>
           </ion-item>
@@ -67,7 +68,8 @@
     <ion-spinner name="dots" *ngIf="loading == 0" style="text-align: center;"></ion-spinner>
     <div *ngFor="let parent of (obj_MCategories_Expense | async)">
       <ion-item-divider >
-        <ion-label class="fs-17"  >
+        <ion-img src="{{'./../assets/icon/'+parent.cat_name+'.png'}}"></ion-img> 
+        <ion-label class="fs-17 p-l-15" style="color:black !important;">
           {{parent.cat_name}} 
         </ion-label>
       </ion-item-divider >
@@ -75,7 +77,7 @@
       <ion-item-sliding *ngFor="let sub of (obj_MSubCategories_Expense | async)">
         <div  *ngIf="parent.cat_name == sub.categories_name">
           <ion-item >
-            <ion-label class="p-l-15">
+            <ion-label class="p-l-15" style="color: grey;">
               {{sub.sub_categories_name}}
             </ion-label>
           </ion-item>

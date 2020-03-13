@@ -1,4 +1,5 @@
 import { MSubCategories } from './../services.service';
+import { SessionService } from './../session/session.service';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { map, take } from 'rxjs/operators';
@@ -15,7 +16,8 @@ export class MSubCategoriesService {
   private serviceCollection: AngularFirestoreCollection<MSubCategories>;
 
   constructor(
-    private afs: AngularFirestore) {
+    private afs: AngularFirestore,
+    private SessionService:SessionService) {
     this.serviceCollection = this.afs.collection<MSubCategories>('M_sub_categories')
 
   }
@@ -24,7 +26,7 @@ export class MSubCategoriesService {
   // * @Author     : Kessarin U-tumporn
   // * @Create Date: 2563-03-09
   get_obs_msubcategories(type:number): Observable<MSubCategories[]> {
-    this.serviceCollection = this.afs.collection<MSubCategories>('M_sub_categories', ref => ref.where('categories_type', '==', type));
+    this.serviceCollection = this.afs.collection<MSubCategories>('M_sub_categories', ref => ref.where('categories_type', '==', type).where('username','==',this.SessionService.get_session_username()));
     this.service = this.serviceCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {

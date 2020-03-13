@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { ServicesService , MTransaction } from '../services/services.service';
@@ -8,7 +8,7 @@ import { TransactionInputPage } from '../pages/transaction_input/transaction-inp
   templateUrl: 'tab-wallet.page.html',
   styleUrls: ['tab-wallet.page.scss']
 })
-export class TabWalletPage {
+export class TabWalletPage implements OnInit{
 
   public obj_transaction:MTransaction = {
     username : null,
@@ -33,13 +33,28 @@ export class TabWalletPage {
     private servicesService: ServicesService
     ){
       this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
+      this.servicesService.SessionService.set_session_wallet('wallet')
       this.get_all_transaction_show();
+      console.log("this.servicesService.SessionService.get_session_username() ",this.servicesService.SessionService.get_session_username())
   } 
+
+  ngOnInit(){}
+
+  ionViewCanEnter(){
+    this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
+    this.servicesService.SessionService.set_session_wallet('wallet')
+    this.get_all_transaction_show();
+  }
+
+ 
   
   doRefresh(event) {
     setTimeout(() => {
       event.target.complete();
     }, 2000);
+    this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
+    this.servicesService.SessionService.set_session_wallet('wallet')
+    this.get_all_transaction_show();
   }
 
   async modal_edit_show(id:string) {

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
 import { MTransaction } from './../services.service';
 import { map, take } from 'rxjs/operators';
-
+import { SessionService } from './../session/session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,8 @@ export class MTransactionService {
   private serviceCollection: AngularFirestoreCollection<MTransaction>;
 
   constructor(
-    private afs: AngularFirestore) {
+    private afs: AngularFirestore,
+    private SessionService:SessionService) {
     this.serviceCollection = this.afs.collection<MTransaction>('M_transaction')
   }
 
@@ -38,18 +39,11 @@ export class MTransactionService {
     return this.service;
   }
 
-  // * @Function   : insert_transection => เพิ่ม Transacrion
-  // * @Author     : Kanathip Phithaksilp
-  // * @Create Date: 2563-03-10
-  async insert_transection(mtransaction:MTransaction) {
-    this.serviceCollection.add(mtransaction);
-  }
-
   // * @Function   : get_all_transaction_show => แสดงข้อมูล Transaction ทั้งหมด
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-10
   get_all_transaction_show():Observable<MTransaction[]>{
-    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction', ref => ref .orderBy("transaction_date", "desc"));
+    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction', ref => ref.where('username','==',this.SessionService.get_session_username()).orderBy('transaction_date','desc'));
     this.service = this.serviceCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -76,16 +70,24 @@ export class MTransactionService {
     );
   }
 
-  // * @Function   : edit_transection => แก้ไข Transacrion
+  // * @Function   : insert_transaction => เพิ่ม Transacrion
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-10
-  async edit_transection(id:string , mtransaction:MTransaction) {
+  async insert_transaction(mtransaction:MTransaction) {
+    this.serviceCollection.add(mtransaction);
+  }
+
+  // * @Function   : edit_transaction => แก้ไข Transacrion
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-10
+  async update_transaction(id:string , mtransaction:MTransaction) {
     this.serviceCollection.doc<MTransaction>(id).update(mtransaction);
   }
+  
   // * @Function   : delete_transaction => ลบข้อมูล Transaction 
   // * @Author     : Thanpisit Suetrong
   // * @Create Date: 2563-03-11
-   delete_transaction(id:string){
+  async delete_transaction(id:string){
     this.serviceCollection.doc<MTransaction>(id).delete();
   }
 

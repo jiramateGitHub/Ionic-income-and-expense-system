@@ -1,3 +1,4 @@
+import { IonicStorageModule } from '@ionic/storage';
 import { ServicesService , MPerson } from './services/services.service';
 import { MWalletService } from './services/m_wallet/m-wallet.service';
 import { MTransactionService } from './services/m_transaction/m-transaction.service';
@@ -27,7 +28,6 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { TransactionCategoryPage } from './pages/transaction_category/transaction-category.page';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +50,7 @@ import { TransactionCategoryPage } from './pages/transaction_category/transactio
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
+    IonicStorageModule.forRoot(),
     FormsModule,
     HttpModule,
     HttpClientModule

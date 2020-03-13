@@ -1,9 +1,10 @@
 import { ServicesService } from './services/services.service';
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, Config } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,16 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private ServicesService:ServicesService
+    private ServicesService:ServicesService,
+    private router:Router,
+    private config: Config, 
   ) {
     this.initializeApp();
-    this.ServicesService.SessionService.set_session("60160157","Wallet Test")
+    platform.ready().then(() => {
+      this.ServicesService.SessionService.isAuthenticated()
+    });
   }
+  
 
   initializeApp() {
     this.platform.ready().then(() => {
