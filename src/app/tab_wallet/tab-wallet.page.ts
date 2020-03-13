@@ -43,10 +43,6 @@ export class TabWalletPage {
   }
 
   async modal_edit_show(id:string) {
-<<<<<<< HEAD
-    
-=======
->>>>>>> 746a36025f26e41df4f475a58afb260407a21731
     await this.servicesService.MTransactionService.get_edit_transaction(id).subscribe( async res => {
       this.edit_transaction = res;
       const modal = await this.modalController.create({

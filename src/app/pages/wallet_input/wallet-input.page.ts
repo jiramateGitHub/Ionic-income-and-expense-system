@@ -19,15 +19,15 @@ export class WalletInputPage implements OnInit {
  
   };
 
-  public obj_MTransaction: MTransaction = {
-    username : null,
-    wallet_name : null,
-    transaction_amount : null,
-    transaction_date :null,
-    transaction_note : null,
-    transaction_active :null
+  // public obj_MTransaction: MTransaction = {
+  //   username : null,
+  //   wallet_name : null,
+  //   transaction_amount : null,
+  //   transaction_date :null,
+  //   transaction_note : null,
+  //   transaction_active :null
  
-  };
+  // };
 
   constructor(
     private navParams: NavParams,
@@ -87,7 +87,7 @@ export class WalletInputPage implements OnInit {
     modal.onDidDismiss()
     .then((data) => {
       console.log(data)
-      this.obj_MTransaction.sub_categories_name = data['data']['sub_categories_name']; // Here's your selected user!
+      // this.obj_MTransaction.sub_categories_name = data['data']['sub_categories_name']; // Here's your selected user!
     });
     return await modal.present();
   }

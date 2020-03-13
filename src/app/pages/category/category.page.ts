@@ -98,28 +98,6 @@ export class CategoryPage implements OnInit {
   // * @Author     : Kessarin U-tumporn
   // * @Create Date: 2563-03-09
   async get_categories(){
-<<<<<<< HEAD
-    const loading = await this.loadingController.create({
-      message: 'Please wait...',
-      duration: 1000
-    });
-    await loading.present();
-
-    //get รายรับ
-    this.obj_MSubCategories.categories_type = 1;
-    this.obj_MSubCategories_Income = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories.categories_type)
-    // this.obj_MSubCategories_Income.subscribe(res => console.log(res))
-    this.obj_MCategories_Income = this.ServicesService.MCategoriesService.get_obs_mcategories(this.obj_MSubCategories.categories_type)
-
-    //get รายจ่าย
-    this.obj_MSubCategories.categories_type = 2;
-    this.obj_MSubCategories_Expense = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories.categories_type)
-    // this.obj_MSubCategories_Expense.subscribe(res => console.log(res))
-    this.obj_MCategories_Expense = this.ServicesService.MCategoriesService.get_obs_mcategories(this.obj_MSubCategories.categories_type)
-    
-    const { role, data } = await loading.onDidDismiss();
-  
-=======
       //get รายรับ
       this.obj_MSubCategories.categories_type = 1;
       this.obj_MSubCategories_Income = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories.categories_type)
@@ -129,7 +107,6 @@ export class CategoryPage implements OnInit {
       this.obj_MSubCategories.categories_type = 2;
       this.obj_MSubCategories_Expense = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories.categories_type)
       this.obj_MCategories_Expense = this.ServicesService.MCategoriesService.get_obs_mcategories(this.obj_MSubCategories.categories_type)
->>>>>>> 746a36025f26e41df4f475a58afb260407a21731
   }
 
 }
