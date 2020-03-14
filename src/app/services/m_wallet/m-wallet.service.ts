@@ -35,21 +35,22 @@ export class MWalletService {
     );  
     return this.service;
   }
- // * @Function   :  insert_wallet => เพิ่ม wallet
+
+  // * @Function   :  insert_wallet => เพิ่ม wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-13
   insert_wallet(mwallet:MWallet){
     this.serviceCollection.add(mwallet);
   }
 
-// * @Function   :  delete_wallet=> ลบ wallet
+  // * @Function   :  delete_wallet=> ลบ wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-13
   delete_wallet(id:string){
     this.serviceCollection.doc<MWallet>(id).delete();
   }
 
-// * @Function   :  get_edit_wallet=> get ข้อมูลเก่า wallet
+  // * @Function   :  get_edit_wallet=> get ข้อมูลเก่า wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-13
   get_edit_wallet(id:string):Observable<MWallet>{
@@ -61,7 +62,8 @@ export class MWalletService {
       })
     );
   }
-// * @Function   : update_wallet_name=> แก้ไขชื่อ wallet
+  
+  // * @Function   : update_wallet_name=> แก้ไขชื่อ wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-13
   async update_wallet_name(id:string , mwallet:MWallet) {
