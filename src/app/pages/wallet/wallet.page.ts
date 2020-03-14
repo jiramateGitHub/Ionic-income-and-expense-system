@@ -119,7 +119,9 @@ export class WalletPage implements OnInit {
           }
           this.check_delete = false;
         }else{
-          this.showToast("Can't delete wallet.")
+          if(this.check_delete == true){
+            this.showToast("Can't delete wallet.")
+          }
           this.check_delete = false;
         }
       })
