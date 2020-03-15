@@ -79,7 +79,7 @@ export class TransferInputPage implements OnInit {
   }
 
   history_tran(){
-    console.log(this.now_wallety)
+    console.log(this.now_wallet)
     this.check_hide_card_his = true
     this.check_hide_card_tran = false
 
@@ -104,7 +104,7 @@ export class TransferInputPage implements OnInit {
   }
 
   async insert_tranfer(){
-    this.balance = this.balance - this.money
+  
   
     this.MTransaction.username = this.ServicesService.SessionService.get_session_username();
     this.MTransaction.wallet_name = this.ServicesService.SessionService.get_session_wallet()
@@ -142,15 +142,5 @@ export class TransferInputPage implements OnInit {
     }).then(toast => toast.present());
   }
 
-  // set_blance(){
-  //   console.log("5656")
-  //   this.wallets.map((item,index)=>{
-  //     if(item.id==this.wallet_id){
-  //       this.balance = item.wallet_balance
-  //       this.wallet_name = item.wallet_name
-  //     }
-  //   })
-  // }
   
-
 }
