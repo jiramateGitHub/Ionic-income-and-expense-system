@@ -9,29 +9,29 @@
 
 <ion-content>
   <ion-list  >
-    <span style="margin-left: 10px; font-size:25px;">
-     Wallet : {{now_wallet}}
-    </span>
+    <ion-item-divider>
+      <ion-label >Wallet name:</ion-label>
+      <ion-label color="primary" class="p-l-15">
+        <h1>{{now_wallet}}</h1>
+      </ion-label>
+    </ion-item-divider>
   </ion-list>
  
   <div class="balance">
-   
-      <ion-img style="width: auto !important; height: 150px;align-items: center; margin-top: 30px;" src="assets/images/money.jpeg"></ion-img>
       <span class="balance">
-        Balance :
-        <ion-chip fill="outline" slot="end" style="color:#ffcc33; font-size:25px">{{balance}}$</ion-chip><br>
-        <!-- <ion-chip  *ngIf="{{balance}} == '0'" fill="outline" slot="end" style="color:#ff0000; font-size:25px">{{balance}}$</ion-chip><br> -->
+        Balance 
+        <ion-chip fill="outline" slot="end" style="color:#3358ff; font-size:25px">{{balance}} ฿</ion-chip><br>
+        <ion-img style="width: auto !important; height: 150px;align-items: center; margin-top: 30px;" src="assets/images/money.jpeg"></ion-img>
         <ion-button *ngIf="check_hide_card_his" color="secondary" (click)="tranfer_money()">Transfer Money</ion-button>
         <ion-button *ngIf="check_hide_card_tran" color="secondary" (click)="history_tran()">History Tranfer</ion-button>
       </span>
-
   </div>
   <!-- card  เเสดงประวัติการโอน-->
   <div *ngIf="check_hide_card_his">
     <ion-card >
     <ion-item style="font-size:18px;">
       <ion-icon name="time-outline" style="color:blueviolet;" class="p-r-5"></ion-icon>
-      <ion-label position="" class="fs-15">Money trnasfer history</ion-label>
+      <ion-label position="" class="fs-15">Money transfer history</ion-label>
     </ion-item>
     <div *ngFor="let value of historys">
       <div >
@@ -41,9 +41,6 @@
     </div>
   </div>
  
-    
-    
-  
     <ion-card-content>
       
     </ion-card-content>
@@ -54,7 +51,7 @@
     <ion-card >
     <ion-item style="font-size:18px;">
       <ion-icon name="cash-outline" style="color:blueviolet;" class="p-r-5"></ion-icon>
-      <ion-label position="" class="fs-15">Tranfer Money</ion-label>
+      <ion-label position="" class="fs-15">Transfer Money</ion-label>
       <ion-icon name="close" (click)="tranfer_money()"></ion-icon>
     </ion-item>
     <ion-item>
@@ -66,7 +63,7 @@
                   <ion-select-option value="{{value.id}}">{{value.wallet_name}}</ion-select-option>
               </div>
             </ion-select>
-          </ion-label>   
+          </ion-label>    
       </ion-item>
   
     <ion-card-content>
