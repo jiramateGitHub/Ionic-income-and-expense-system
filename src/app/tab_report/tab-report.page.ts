@@ -48,37 +48,39 @@ ngOnInit(): void {
   //Add 'implements OnInit' to the class.
   // this.obj_MTransaction.transaction_date = Date()
   var date = Date()
-  var month = date.substr(4,4)
+  var month = date.substr(4,3)
+  var day = date.substr(8,2)
+  var year = date.substr(11,4)
   var month_num;
-  console.log(month) 
-  if(month == "Jan "){
+ 
+  if(month == "Jan"){
     month_num = "01" ; 
-  }else if(month == "Feb "){
+  }else if(month == "Feb"){
     month_num = "02" ;
-  }else if(month == "Mar "){
+  }else if(month == "Mar"){
     month_num = "03" ;
-  }else if(month == "Apr "){
+  }else if(month == "Apr"){
     month_num = "04" ;
-  }else if(month == "May "){
+  }else if(month == "May"){
     month_num = "05" ;
-  }else if(month == "Jun "){
+  }else if(month == "Jun"){
     month_num = "06" 
-  }else if(month == "Jul "){
+  }else if(month == "Jul"){
     month_num = "07" 
-  }else if(month == "Aug "){
+  }else if(month == "Aug"){
     month_num = "08" 
-  }else if(month == "Sep "){
+  }else if(month == "Sep"){
     month_num = "09" 
-  }else if(month == "Oct "){
+  }else if(month == "Oct"){
     month_num = "10" 
-  }else if(month == "Nov "){
+  }else if(month == "Nov"){
     month_num = "11" 
-  }else if(month == "Dec "){
+  }else if(month == "Dec"){
     month_num = "12" 
   }
 
-  console.log(month_num) 
-  //console.log(this.obj_MTransaction.transaction_date);  
+  this.obj_MTransaction.transaction_date = year + "-" + month_num + "-" + day;
+  console.log(this.obj_MTransaction.transaction_date);  
 
   
 }
@@ -186,19 +188,14 @@ ngOnInit(): void {
   }
 
 
-  // * @Function   : get_report_by_day => แสดงข้อมูลรายรับ-รายจ่าย เป็นวัน
+  // * @Function   : get_report_by_month => แสดงข้อมูลรายรับ-รายจ่าย เป็นเดือน
   // * @Author     : Sathien Supabkul
-  // * @Create Date: 2563-03-09
+  // * @Create Date: 2563-03-15
   get_report_by_month() {
-    // console.log(this.date)
-    // console.log(this.obj_MTransaction.transaction_date.substr(0,10))
     this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MTransaction).subscribe(async res => {
 
       var sum_income = 0;
       var sum_expent = 0;
-      //console.log(this.obj_MTransaction);
-      //var str = this.obj_MTransaction.transaction_date.substr(0,10)
-      //var date = str.split("-");
       for (var i = 0; i < res.length; i++) {
         if (res[i].categories_type == 1) {
           if (this.obj_MTransaction.transaction_date.substr(0, 8) == res[i].transaction_date.substr(0, 8)) {
