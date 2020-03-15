@@ -39,18 +39,22 @@ export class CategoryInputPage implements OnInit {
 // * @Author     : Thananya
 // * @Create Date: 2563-03-02
 async modal_taransaction_category_show() {
-  const modal = await this.modalController.create({
-    component: TransactionCategoryPage,
-    componentProps: {
-      'type_input': this.type_parent_categories
-    }
-  });
-  modal.onDidDismiss()
-  .then((data) => {
-    this.obj_MSubCategories.categories_name = data['data'].categories_name; // Here's your selected user!
-    this.obj_MSubCategories.categories_type = data['data'].categories_type;
-  });
-  return await modal.present();
+  if(this.type_parent_categories == null || this.type_parent_categories == ""){
+    this.showToast('Please select categories type.');
+  }else{
+    const modal = await this.modalController.create({
+      component: TransactionCategoryPage,
+      componentProps: {
+        'type_input': this.type_parent_categories
+      }
+    });
+    modal.onDidDismiss()
+    .then((data) => {
+      this.obj_MSubCategories.categories_name = data['data'].categories_name; // Here's your selected user!
+      this.obj_MSubCategories.categories_type = data['data'].categories_type;
+    });
+    return await modal.present();
+  }
 }
 
   // * @Function   : close_modal => คำสั่งปิด modal
@@ -80,22 +84,35 @@ async modal_taransaction_category_show() {
   // * @Author     : Thananya Banchuenwijit
   // * @Create Date: 2563-03-09
   insert_categories(){
-    this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
-    this.obj_MSubCategories.sub_categories_active = "Y"
-    this.ServicesService.MSubCategoriesService.insert_sub_categories(this.obj_MSubCategories)
-    this.showToast("Add Categories Success");
-    this.close_modal()
+    if(this.obj_MSubCategories.sub_categories_name == null || this.obj_MSubCategories.sub_categories_name == ""){
+      this.showToast('Please fill in Category name.');
+    }else if(this.obj_MSubCategories.categories_name == null || this.obj_MSubCategories.categories_name == ""){
+      this.showToast('Please select parent category');
+    }else{
+      this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
+      this.obj_MSubCategories.sub_categories_active = "Y"
+      this.ServicesService.MSubCategoriesService.insert_sub_categories(this.obj_MSubCategories)
+      this.showToast("Add Categories Success");
+      this.close_modal()
+    }
+    
   }
 
   // * @Function   : update_categories => คำสั่งแก้ไข sub_categories
   // * @Author     : Thananya Banchuenwijit
   // * @Create Date: 2563-03-09
   update_categories(){
-    this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
-    this.obj_MSubCategories.sub_categories_active = "Y"
-    this.ServicesService.MSubCategoriesService.update_sub_categories(this.obj_MSubCategories)
-    this.showToast("Update Categories Success");
-    this.close_modal()
+    if(this.obj_MSubCategories.sub_categories_name == null || this.obj_MSubCategories.sub_categories_name == ""){
+      this.showToast('Please fill in Category name.');
+    }else if(this.obj_MSubCategories.categories_name == null || this.obj_MSubCategories.categories_name == ""){
+      this.showToast('Please select parent category');
+    }else{
+      this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
+      this.obj_MSubCategories.sub_categories_active = "Y"
+      this.ServicesService.MSubCategoriesService.update_sub_categories(this.obj_MSubCategories)
+      this.showToast("Update Categories Success");
+      this.close_modal()
+    }
   }
 
   // * @Function   : delete_categories => คำสั่งลบ sub_categories
