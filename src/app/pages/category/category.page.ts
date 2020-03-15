@@ -6,7 +6,6 @@ import { ModalController, ToastController, NavParams, AlertController } from '@i
 import { Observable } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-category',
   templateUrl: './category.page.html',
@@ -30,6 +29,7 @@ export class CategoryPage implements OnInit {
     private loadingController: LoadingController,
     private modalController: ModalController,
     private alertController: AlertController,
+    private toastController:ToastController,
     private ServicesService:ServicesService
   ) { 
    this.get_categories()
@@ -86,6 +86,7 @@ export class CategoryPage implements OnInit {
           text: 'Confirm',
           handler: () => {
             this.ServicesService.MSubCategoriesService.delete_sub_categories(id)
+            this.showToast("Delete Categories Success");
           }
         }
       ]
@@ -107,6 +108,16 @@ export class CategoryPage implements OnInit {
       this.obj_MSubCategories.categories_type = 2;
       this.obj_MSubCategories_Expense = this.ServicesService.MSubCategoriesService.get_obs_msubcategories(this.obj_MSubCategories.categories_type)
       this.obj_MCategories_Expense = this.ServicesService.MCategoriesService.get_obs_mcategories(this.obj_MSubCategories.categories_type)
+  }
+
+  // * @Function   : showToast => คำสั่งแสดงข้อความ
+  // * @Author     : Kessarin U-tumporn
+  // * @Create Date: 2563-03-09
+  showToast(msg) {
+    this.toastController.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
   }
 
 }

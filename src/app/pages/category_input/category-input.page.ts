@@ -27,9 +27,8 @@ export class CategoryInputPage implements OnInit {
     private ServicesService: ServicesService
   ) { 
     this.type_input = navParams.get('type_input');
-    console.log(navParams.get('id'))
     if(this.type_input == "update"){
-
+      this.get_categories_by_id(navParams.get('id'))
     }
   }
 
@@ -63,11 +62,18 @@ async modal_taransaction_category_show() {
     });
   }
 
-  // * @Function   : get_categories => คำสั่ง get 
+  // * @Function   : get_categories_by_id => คำสั่ง get 
   // * @Author     : Thananya Banchuenwijit
   // * @Create Date: 2563-03-09
-  get_categories(){
-   this.ServicesService.MSubCategoriesService.get_obs_msubcategories_by_id(this.obj_MSubCategories.id)
+  get_categories_by_id(id){
+   this.ServicesService.MSubCategoriesService.get_obs_msubcategories_by_id(id).subscribe( async res => {
+    this.obj_MSubCategories = res
+    if(res.categories_type == 1){
+      this.type_parent_categories = "parent_income"
+    }else if(res.categories_type == 2){
+      this.type_parent_categories = "parent_expense"
+    }
+   })
   }
 
   // * @Function   : insert_categories => คำสั่งเพิ่ม sub_categories
@@ -77,7 +83,6 @@ async modal_taransaction_category_show() {
     this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
     this.obj_MSubCategories.sub_categories_active = "Y"
     this.ServicesService.MSubCategoriesService.insert_sub_categories(this.obj_MSubCategories)
-    //console.log(this.obj_MSubCategories)
     this.showToast("Add Categories Success");
     this.close_modal()
   }
@@ -89,7 +94,7 @@ async modal_taransaction_category_show() {
     this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
     this.obj_MSubCategories.sub_categories_active = "Y"
     this.ServicesService.MSubCategoriesService.update_sub_categories(this.obj_MSubCategories)
-    //console.log(this.obj_MSubCategories)
+    this.showToast("Update Categories Success");
     this.close_modal()
   }
 
@@ -100,9 +105,12 @@ async modal_taransaction_category_show() {
     this.obj_MSubCategories.username = this.ServicesService.SessionService.get_session_username()
     this.obj_MSubCategories.sub_categories_active = "Y"
     this.ServicesService.MSubCategoriesService.update_sub_categories(this.obj_MSubCategories)
-    //console.log(this.obj_MSubCategories)
+    this.showToast("Delete Categories Success");
   }
 
+  // * @Function   : showToast => คำสั่งแสดงข้อความ
+  // * @Author     : Thananya Banchuenwijit
+  // * @Create Date: 2563-03-09
   showToast(msg) {
     this.toastController.create({
       message: msg,
