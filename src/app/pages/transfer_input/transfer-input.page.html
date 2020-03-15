@@ -8,8 +8,12 @@
 </ion-header>
 
 <ion-content>
-  
-  {{now_wallet}}
+  <ion-list  >
+    <span style="margin-left: 10px; font-size:25px;">
+     Wallet : {{now_wallet}}
+    </span>
+  </ion-list>
+ 
   <div class="balance">
    
       <ion-img style="width: auto !important; height: 150px;align-items: center; margin-top: 30px;" src="assets/images/money.jpeg"></ion-img>
@@ -30,8 +34,11 @@
       <ion-label position="" class="fs-15">Money trnasfer history</ion-label>
     </ion-item>
     <div *ngFor="let value of historys">
-      <ion-label>{{value.transaction_date}}  {{value.transaction_amount}} Bath.</ion-label>
+      <ion-item>
+        <ion-datetime displayFormat="DD MMM YYYY " [(ngModel)]="value.transaction_date"></ion-datetime><br>Price : {{value.transaction_amount}} Bath.
+    </ion-item>
   </div>
+ 
     
     
   

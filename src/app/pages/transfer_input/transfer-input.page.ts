@@ -21,6 +21,7 @@ export class TransferInputPage implements OnInit {
   public select_wallet_name: any;
   public historys: any;
   public now_wallet: any;
+ 
 
   private  MTransaction:MTransaction = {
     username : null,
@@ -84,6 +85,7 @@ export class TransferInputPage implements OnInit {
 
     this.ServicesService.MTransactionService.get_all_transaction_show().subscribe(async res => {
         this.historys = [];
+        this.transection = res
         res.map((item, index) => {
           if(item.categories_type == 3){
             this.historys.push(item)
