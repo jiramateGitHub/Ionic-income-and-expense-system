@@ -116,8 +116,19 @@ export class TabWalletPage implements OnInit{
 
       for(let i = 0 ; i < res.length ; i++){
         this.all_transaction[i].date = res[i]['transaction_date'].substring(8, 10);
-        this.all_transaction[i].month = res[i]['transaction_date'].substring(4, 7);
-        this.all_transaction[i].year = res[i]['transaction_date'].substring(10, 15);
+        this.all_transaction[i].month = res[i]['transaction_date'].substring(5, 7);
+        this.all_transaction[i].year = res[i]['transaction_date'].substring(0, 4);
+
+        if(i == 0){
+          this.all_transaction[i].status = 1
+        }else if(this.all_transaction[i].status < this.all_transaction[i-1].status){
+          this.all_transaction[i].status = 1
+        }else if(this.all_transaction[i].status > this.all_transaction[i-1].status){
+          this.all_transaction[i].status = 1
+        }else{
+          this.all_transaction[i].status = 0
+        }
+        
       }
      
    })
