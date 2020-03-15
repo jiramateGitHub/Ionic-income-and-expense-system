@@ -10,6 +10,7 @@ import { timestamp } from 'rxjs/operators';
 })
 export class TabReportPage {
 
+  public type_select: string = "day";
   public income: number = 0;
   public expent: number = 0;
   public net_income: number = 0;
@@ -61,7 +62,8 @@ ngOnInit(): void {
           text: 'Day',
           cssClass: 'secondary',
           handler: () => {
-            this.get_report_by_day()
+            this.type_select = "day"
+            // this.get_report_by_day()
           }
         },
         {
@@ -74,6 +76,8 @@ ngOnInit(): void {
           text: 'Month',
           cssClass: 'secondary',
           handler: () => {
+            this.type_select = "month"
+            // this.get_report_by_month()
           }
         },
         {
@@ -148,6 +152,52 @@ ngOnInit(): void {
 
     });
   }
+
+
+  // * @Function   : get_report_by_day => แสดงข้อมูลรายรับ-รายจ่าย เป็นวัน
+  // * @Author     : Sathien Supabkul
+  // * @Create Date: 2563-03-09
+  get_report_by_month() {
+    // console.log(this.date)
+    // console.log(this.obj_MTransaction.transaction_date.substr(0,10))
+    this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MTransaction).subscribe(async res => {
+
+      var sum_income = 0;
+      var sum_expent = 0;
+      //console.log(this.obj_MTransaction);
+      //var str = this.obj_MTransaction.transaction_date.substr(0,10)
+      //var date = str.split("-");
+      for (var i = 0; i < res.length; i++) {
+        if (res[i].categories_type == 1) {
+          if (this.obj_MTransaction.transaction_date.substr(0, 8) == res[i].transaction_date.substr(0, 8)) {
+
+            console.log(res[i].transaction_amount);
+            sum_income += +res[i].transaction_amount;
+
+          }
+        } else if(res[i].categories_type == 2){
+          if (this.obj_MTransaction.transaction_date.substr(0, 8) == res[i].transaction_date.substr(0, 8)) {
+
+            console.log(res[i].transaction_amount);
+            sum_expent += +res[i].transaction_amount;
+
+          }
+        }
+
+      }
+      this.income = sum_income;
+      this.expent = sum_expent;
+
+      if(sum_income >= sum_expent){
+        this.net_income = sum_income - sum_expent
+      }else if(sum_income <= sum_expent){
+        this.net_income = sum_income - sum_expent
+      }
+    });
+  }
+
+
+
 
   // * @Function   : get_report_by_year => แสดงข้อมูลรายรับ-รายจ่าย เป็นปี
   // * @Author     : Peeranat Buranarek

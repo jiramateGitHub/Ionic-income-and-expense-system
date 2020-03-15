@@ -23,7 +23,7 @@ export class TabWalletPage implements OnInit{
     transaction_active : null
   };
 
-  public all_transaction:any;
+  public all_transaction = [];
   public edit_transaction:any;
 
   constructor(
@@ -33,11 +33,12 @@ export class TabWalletPage implements OnInit{
     private toastController: ToastController,
     private servicesService: ServicesService
     ){
-      this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
-      this.get_all_transaction_show();
+     
   } 
 
   ngOnInit(){
+    this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
+    this.get_all_transaction_show();
   }
 
   ionViewWillEnter(){
