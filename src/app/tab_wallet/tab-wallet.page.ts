@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { ServicesService , MTransaction } from '../services/services.service';
 import { TransactionInputPage } from '../pages/transaction_input/transaction-input.page';
+// import {MatSortModule} from '@angular/material/sort';
 @Component({
   selector: 'app-tab-wallet',
   templateUrl: 'tab-wallet.page.html',
@@ -52,6 +53,9 @@ export class TabWalletPage implements OnInit{
     this.get_all_transaction_show();
   }
 
+   // * @Function   : modal_edit_show => Modal edit
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-06
   async modal_edit_show(id:string) {
     await this.servicesService.MTransactionService.get_edit_transaction(id).subscribe( async res => {
       this.edit_transaction = res;
@@ -76,6 +80,9 @@ export class TabWalletPage implements OnInit{
     
   }
 
+  // * @Function   : transaction_active_update_AlertConfirm => แจ้งเตือนการลบ
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-06
   async transaction_active_update_AlertConfirm(id:string) {
     const alert = await this.alertController.create({
       header: 'Confirm Delete?',
@@ -103,12 +110,41 @@ export class TabWalletPage implements OnInit{
   // * @Create Date: 2563-03-06
   async get_all_transaction_show(){
       this.servicesService.MTransactionService.get_all_transaction_show().subscribe( res => {
+      console.log(res)
       this.all_transaction = res;
-      console.log( this.all_transaction)
+      // console.log( this.all_transaction)
 
+      for(let i = 0 ; i < res.length ; i++){
+        this.all_transaction[i].date = res[i]['transaction_date'].substring(8, 10);
+        this.all_transaction[i].month = res[i]['transaction_date'].substring(5, 7);
+        this.all_transaction[i].year = res[i]['transaction_date'].substring(0, 4);
+
+        if(i == 0){
+          this.all_transaction[i].status = 1
+        }else if(this.all_transaction[i].status < this.all_transaction[i-1].status){
+          this.all_transaction[i].status = 1
+        }else if(this.all_transaction[i].status > this.all_transaction[i-1].status){
+          this.all_transaction[i].status = 1
+        }else{
+          this.all_transaction[i].status = 0
+        }
+        
+      }
+     
    })
    
   }
+
+  // * @Function   : sortData => เรียงข้อมูลตามเวลา
+  // * @Author     : Kanathip Phithaksilp
+  // * @Create Date: 2563-03-06
+  public get sortData() {
+    return this.all_transaction.sort((a, b) => {
+      return <any>new Date(b.transaction_date) - <any>new Date(a.transaction_date);
+    });
+  }
+
+
   // * @Function   : delete_transaction => ลบข้อมูล Transaction 
   // * @Author     : Thanpisit Suetrong
   // * @Create Date: 2563-03-11
