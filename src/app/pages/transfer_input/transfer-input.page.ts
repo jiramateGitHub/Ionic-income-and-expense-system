@@ -79,7 +79,7 @@ export class TransferInputPage implements OnInit {
   }
 
   history_tran(){
-    console.log(this.now_wallet)
+    console.log(this.now_wallety)
     this.check_hide_card_his = true
     this.check_hide_card_tran = false
 
