@@ -61,9 +61,9 @@
       <ion-icon style="color:blueviolet;" name="wallet-outline" class="p-r-5" ></ion-icon>
       <ion-label position="" class="fs-15"> Select Wallet</ion-label>
           <ion-label position="">  
-            <ion-select style="margin-left: 1px;" [(ngModel)]="select_wallet_name"  cancelText="Cancle" okText="Confirm" id="select_wallet">
+            <ion-select style="margin-left: 1px;" [(ngModel)]="select_wallet_id"  cancelText="Cancle" okText="Confirm" id="select_wallet">
               <div *ngFor="let value of wallets">
-                  <ion-select-option value="{{value.wallet_name}}">{{value.wallet_name}}</ion-select-option>
+                  <ion-select-option value="{{value.id}}">{{value.wallet_name}}</ion-select-option>
               </div>
             </ion-select>
           </ion-label>   
