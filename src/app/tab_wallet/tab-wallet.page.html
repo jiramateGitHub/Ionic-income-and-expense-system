@@ -3,15 +3,13 @@
     <ion-grid>
       <ion-row class="ion-align-items-center p-t-10">
         <ion-col></ion-col> 
-        <ion-col>
-          <ion-chip class="chip-bl">
-            <ion-label>Wallet Money</ion-label>  
-          </ion-chip>
+        <ion-col style="text-align: center;">
+            <ion-label>Wallet Name : {{obj_wallet[0].wallet_name}}</ion-label>  
         </ion-col> 
         <ion-col></ion-col> 
       </ion-row>
     </ion-grid>
-    <ion-title style="font-size: 40px!important;">20500 <span style="font-size: 20px;">THB.</span></ion-title>
+    <ion-title style="font-size: 40px!important;">{{obj_wallet[0].wallet_balance}} <span style="font-size: 20px;">THB.</span></ion-title>
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col></ion-col> 
@@ -65,7 +63,7 @@
   </ion-refresher>
 
   <!-- Item Dividers in a List -->
-  <ion-list *ngFor = "let transaction of all_transaction">
+  <ion-list *ngFor = "let transaction of sortData">
 
         <ion-item-divider *ngIf="transaction.status == 1">
           <ion-label slot="start"><span class="fs-25">11</span> March 2562</ion-label>

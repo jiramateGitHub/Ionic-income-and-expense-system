@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
-import { ServicesService , MTransaction } from '../services/services.service';
+import { ServicesService, MTransaction, MWallet } from '../services/services.service';
 import { TransactionInputPage } from '../pages/transaction_input/transaction-input.page';
 // import {MatSortModule} from '@angular/material/sort';
 @Component({
@@ -9,22 +9,23 @@ import { TransactionInputPage } from '../pages/transaction_input/transaction-inp
   templateUrl: 'tab-wallet.page.html',
   styleUrls: ['tab-wallet.page.scss']
 })
-export class TabWalletPage implements OnInit{
+export class TabWalletPage implements OnInit {
 
-  public obj_transaction:MTransaction = {
-    username : null,
-    wallet_name : null,
-    categories_type : null,
-    categories_name : null,
-    sub_categories_name : null,
-    transaction_amount : null,
-    transaction_date : null,
-    transaction_note : null,
-    transaction_active : null
+  public obj_transaction: MTransaction = {
+    username: null,
+    wallet_name: null,
+    categories_type: null,
+    categories_name: null,
+    sub_categories_name: null,
+    transaction_amount: null,
+    transaction_date: null,
+    transaction_note: null,
+    transaction_active: null
   };
 
+  public obj_wallet = [];
   public all_transaction = [];
-  public edit_transaction:any;
+  public edit_transaction: any;
 
   constructor(
     private router: Router,
@@ -32,16 +33,16 @@ export class TabWalletPage implements OnInit{
     private alertController: AlertController,
     private toastController: ToastController,
     private servicesService: ServicesService
-    ){
-     
-  } 
+  ) {
+    this.get_wallet_balance()
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
     this.get_all_transaction_show();
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
     this.get_all_transaction_show();
   }
@@ -54,37 +55,37 @@ export class TabWalletPage implements OnInit{
     this.get_all_transaction_show();
   }
 
-   // * @Function   : modal_edit_show => Modal edit
+  // * @Function   : modal_edit_show => Modal edit
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
-  async modal_edit_show(id:string) {
-    await this.servicesService.MTransactionService.get_edit_transaction(id).subscribe( async res => {
+  async modal_edit_show(id: string) {
+    await this.servicesService.MTransactionService.get_edit_transaction(id).subscribe(async res => {
       this.edit_transaction = res;
       const modal = await this.modalController.create({
         component: TransactionInputPage,
         componentProps: {
           'type_input': 'update',
           'id': id,
-          'categories_name':this.edit_transaction.categories_name,
-          'categories_type':this.edit_transaction.categories_type,
-          'sub_categories_name':this.edit_transaction.sub_categories_name,
-          'transaction_amount':this.edit_transaction.transaction_amount,
-          'transaction_active':this.edit_transaction.transaction_active,
-          'transaction_date':this.edit_transaction.transaction_date,
-          'transaction_note':this.edit_transaction.transaction_note,
-          'username':this.edit_transaction.username,
-          'wallet_name':this.edit_transaction.wallet_name
+          'categories_name': this.edit_transaction.categories_name,
+          'categories_type': this.edit_transaction.categories_type,
+          'sub_categories_name': this.edit_transaction.sub_categories_name,
+          'transaction_amount': this.edit_transaction.transaction_amount,
+          'transaction_active': this.edit_transaction.transaction_active,
+          'transaction_date': this.edit_transaction.transaction_date,
+          'transaction_note': this.edit_transaction.transaction_note,
+          'username': this.edit_transaction.username,
+          'wallet_name': this.edit_transaction.wallet_name
         }
       });
       return await modal.present();
     })
-    
+
   }
 
   // * @Function   : transaction_active_update_AlertConfirm => แจ้งเตือนการลบ
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
-  async transaction_active_update_AlertConfirm(id:string) {
+  async transaction_active_update_AlertConfirm(id: string) {
     const alert = await this.alertController.create({
       header: 'Confirm Delete?',
       buttons: [
@@ -109,31 +110,28 @@ export class TabWalletPage implements OnInit{
   // * @Function   : get_all_transaction_show => ดึงข้อมูล Transaction มาแสดง
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
-  async get_all_transaction_show(){
-      this.servicesService.MTransactionService.get_all_transaction_show().subscribe( res => {
+  async get_all_transaction_show() {
+    this.servicesService.MTransactionService.get_all_transaction_show().subscribe(res => {
       console.log(res)
       this.all_transaction = res;
       // console.log( this.all_transaction)
 
-      for(let i = 0 ; i < res.length ; i++){
+      for (let i = 0; i < res.length; i++) {
         this.all_transaction[i].date = res[i]['transaction_date'].substring(8, 10);
         this.all_transaction[i].month = res[i]['transaction_date'].substring(5, 7);
         this.all_transaction[i].year = res[i]['transaction_date'].substring(0, 4);
-
-        if(i == 0){
-          this.all_transaction[i].status = 1
-        }else if(this.all_transaction[i].status < this.all_transaction[i-1].status){
-          this.all_transaction[i].status = 1
-        }else if(this.all_transaction[i].status > this.all_transaction[i-1].status){
-          this.all_transaction[i].status = 1
-        }else{
-          this.all_transaction[i].status = 0
-        }
-        
+        // if (i == 0) {
+        //   this.all_transaction[i].status = 1
+        // } else if (this.all_transaction[i].status < this.all_transaction[i - 1].status) {
+        //   this.all_transaction[i].status = 1
+        // } else if (this.all_transaction[i].status > this.all_transaction[i - 1].status) {
+        //   this.all_transaction[i].status = 1
+        // } else {
+        //   this.all_transaction[i].status = 0
+        // }
       }
-     
-   })
-   
+    })
+
   }
 
   // * @Function   : sortData => เรียงข้อมูลตามเวลา
@@ -149,7 +147,7 @@ export class TabWalletPage implements OnInit{
   // * @Function   : delete_transaction => ลบข้อมูล Transaction 
   // * @Author     : Thanpisit Suetrong
   // * @Create Date: 2563-03-11
-   delete_transaction(id:string){
+  delete_transaction(id: string) {
     this.servicesService.MTransactionService.delete_transaction(id)
     this.showToast("Delete successful.")
   }
@@ -164,5 +162,12 @@ export class TabWalletPage implements OnInit{
     }).then(toast => toast.present());
   }
 
-  
+
+  get_wallet_balance() {
+    this.servicesService.MWalletService.get_wallet_balance().subscribe(res => {
+      console.log(res)
+      this.obj_wallet = res;
+    });
+  }
+
 }
