@@ -112,6 +112,7 @@ ngOnInit(): void {
           text: 'Yearly',
           cssClass: 'secondary',
           handler: () => {
+            this.type_select = "year"
           }
         },
         {
