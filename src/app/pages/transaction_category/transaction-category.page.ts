@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class TransactionCategoryPage  implements OnInit  {
   private type_input: string;
-  private obj_category: Observable<MCategories[]>;
+  private obj_category = []
   private obj_sub_category: Observable<MSubCategories[]>;
 
   constructor(
@@ -31,18 +31,26 @@ export class TransactionCategoryPage  implements OnInit  {
 
     if(this.type_input == "parent_income"){
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Income();
-      this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
+      obj_TransactionCategories_Creator.get_categories(this.servicesService).subscribe(res =>{
+        this.obj_category = res
+      })
     }else if(this.type_input == "parent_expense"){
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Expense();
-      this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
+      obj_TransactionCategories_Creator.get_categories(this.servicesService).subscribe(res =>{
+        this.obj_category = res
+      })
     }else if(this.type_input == "income"){
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Income();
-      this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
+      obj_TransactionCategories_Creator.get_categories(this.servicesService).subscribe(res =>{
+        this.obj_category = res
+      })
       var obj_TransactionCategories_Creator = new TransactionSubCategories_Creator_Income();
       this.obj_sub_category = obj_TransactionCategories_Creator.get_sub_categories(this.servicesService)
     }else if(this.type_input == "expense"){
       var obj_TransactionCategories_Creator = new TransactionCategories_Creator_Expense();
-      this.obj_category = obj_TransactionCategories_Creator.get_categories(this.servicesService)
+     obj_TransactionCategories_Creator.get_categories(this.servicesService).subscribe(res =>{
+        this.obj_category = res
+      })
       var obj_TransactionCategories_Creator = new TransactionSubCategories_Creator_Expense();
       this.obj_sub_category = obj_TransactionCategories_Creator.get_sub_categories(this.servicesService)
     }
@@ -72,6 +80,16 @@ export class TransactionCategoryPage  implements OnInit  {
   async close_modal(){
     this.modalController.dismiss({
       'dismissed': true
+    });
+    
+  }
+
+   // * @Function   : sortData_obj_category => sort categories
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-15
+  public get sortData_obj_category() {
+    return this.obj_category.sort((a, b) => {
+      return <any>(a.cat_seq) - <any>(b.cat_seq);
     });
   }
 }

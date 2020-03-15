@@ -29,7 +29,8 @@ export interface MCategories {
   id?: string,
   categories_name: string,
   categories_type: number,
-  categories_active: string
+  categories_active: string,
+  categories_seq : string
 }
 export interface MSubCategories {
   id?: string,
@@ -46,7 +47,7 @@ export interface MTransaction {
   categories_type : number,
   categories_name : string,
   sub_categories_name : string,
-  transaction_amount : string,
+  transaction_amount : number,
   transaction_date : string,
   transaction_note : string,
   transaction_active : string
