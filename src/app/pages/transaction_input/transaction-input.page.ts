@@ -148,7 +148,7 @@ export class TransactionInputPage implements OnInit {
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
   async insert_transaction() {
-    if(this.MTransaction.transaction_amount == null || this.MTransaction.transaction_amount == ""){
+    if(this.MTransaction.transaction_amount == null){
       this.showToast('Please fill in balance.');
     }else if(this.MTransaction.sub_categories_name == null || this.MTransaction.sub_categories_name == ""){
       this.showToast('Please fill in category.');
@@ -170,7 +170,7 @@ export class TransactionInputPage implements OnInit {
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
   async update_transaction(){
-    if(this.editMTransaction.transaction_amount == null || this.editMTransaction.transaction_amount == ""){
+    if(this.editMTransaction.transaction_amount == null){
       this.showToast('Please fill in balance.');
     }else if(this.editMTransaction.sub_categories_name == null || this.editMTransaction.sub_categories_name == ""){
       this.showToast('Please fill in category.');
