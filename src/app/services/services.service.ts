@@ -47,7 +47,7 @@ export interface MTransaction {
   categories_type : number,
   categories_name : string,
   sub_categories_name : string,
-  transaction_amount : string,
+  transaction_amount : number,
   transaction_date : string,
   transaction_note : string,
   transaction_active : string
