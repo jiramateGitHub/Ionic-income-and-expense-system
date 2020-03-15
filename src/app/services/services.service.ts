@@ -29,7 +29,8 @@ export interface MCategories {
   id?: string,
   categories_name: string,
   categories_type: number,
-  categories_active: string
+  categories_active: string,
+  categories_seq : string
 }
 export interface MSubCategories {
   id?: string,

@@ -81,8 +81,8 @@ export class SessionService {
       }else{
         this.isLoggedIn = true;
       }
-      console.log("isAuthenticated : ", user , " : " , this.isLoggedIn)
-      console.log("Wallet : ", this.session_wallet)
+      // console.log("isAuthenticated : ", user , " : " , this.isLoggedIn)
+      // console.log("Wallet : ", this.session_wallet)
     });
     if(this.isLoggedIn == false){
       this.router.navigateByUrl('signin');
