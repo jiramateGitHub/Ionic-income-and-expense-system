@@ -33,7 +33,6 @@ export class TabWalletPage implements OnInit{
     private servicesService: ServicesService
     ){
       this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
-      this.servicesService.SessionService.set_session_wallet('wallet')
       this.get_all_transaction_show();
   } 
 
@@ -42,7 +41,6 @@ export class TabWalletPage implements OnInit{
 
   ionViewWillEnter(){
     this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
-    this.servicesService.SessionService.set_session_wallet('wallet')
     this.get_all_transaction_show();
   }
 
@@ -51,7 +49,6 @@ export class TabWalletPage implements OnInit{
       event.target.complete();
     }, 2000);
     this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
-    this.servicesService.SessionService.set_session_wallet('wallet')
     this.get_all_transaction_show();
   }
 

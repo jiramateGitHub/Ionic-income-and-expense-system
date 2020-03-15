@@ -26,6 +26,7 @@ export class WalletPage implements OnInit {
   private loading: any = 0;
   private check_obj_MWallet_List = 0;
   private check_delete = false;
+  private type_input : string
   
   constructor(
     private ToastController:ToastController,
@@ -39,6 +40,9 @@ export class WalletPage implements OnInit {
 
   ngOnInit() {
     this.get_wallet()
+    if(this.ServicesService.SessionService.get_session_wallet() == null){
+      this.type_input = "select_wallet"
+    }
   }
 
   ionViewWillEnter(){
@@ -148,6 +152,14 @@ export class WalletPage implements OnInit {
       });
       return await modal.present();
     })
+  }
+
+  // * @Function   :  set_session_wallet => ตั้งค่ากระเป๋าเงิน
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-15
+  set_session_wallet(wallet_name : string){
+    this.ServicesService.SessionService.set_session_wallet(wallet_name)
+    this.router.navigateByUrl('tabs');
   }
 
 }
