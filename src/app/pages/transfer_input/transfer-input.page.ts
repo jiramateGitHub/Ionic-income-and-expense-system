@@ -79,15 +79,14 @@ export class TransferInputPage implements OnInit {
   }
 
   history_tran(){
-    
+    console.log(this.now_wallet)
     this.check_hide_card_his = true
     this.check_hide_card_tran = false
 
     this.ServicesService.MTransactionService.get_all_transaction_show().subscribe(async res => {
         this.historys = [];
-        this.transection = res
         res.map((item, index) => {
-          if(item.categories_type == 3){
+          if(item.categories_type == 3 && item.wallet_name == this.now_wallet){
             this.historys.push(item)
             }            
         }) 
