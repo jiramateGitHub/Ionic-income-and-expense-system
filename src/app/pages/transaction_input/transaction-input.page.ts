@@ -51,7 +51,7 @@ export class TransactionInputPage implements OnInit {
   ) { 
       this.type_input = navParams.get('type_input');
       if(this.type_input == "insert"){
-        this.MTransaction.transaction_date = Date();
+        // this.MTransaction.transaction_date = Date();
       }
       this.id = navParams.get('id');
       this.editMTransaction.categories_name= navParams.get('categories_name');

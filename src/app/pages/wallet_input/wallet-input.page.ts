@@ -52,7 +52,7 @@ export class WalletInputPage implements OnInit {
     this.edit_MWallet.wallet_name = navParams.get('wallet_name');
     this.edit_MWallet.wallet_balance = navParams.get('wallet_balance');
     this.edit_MWallet.wallet_active = navParams.get('wallet_active');
-    this.obj_MTransaction.transaction_date = Date()
+    // this.obj_MTransaction.transaction_date = Date()
   }
 
   ngOnInit() {
