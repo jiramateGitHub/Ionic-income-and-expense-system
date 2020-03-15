@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { ServicesService, MTransaction } from '../services/services.service';
+import { SessionService } from '../services/session/session.service';
 import { timestamp } from 'rxjs/operators';
 
 @Component({
@@ -32,6 +33,7 @@ export class TabReportPage {
 
 
   constructor(
+    private SessionService: SessionService,
     private modalController: ModalController,
     private alertController: AlertController,
     private ServicesService: ServicesService
