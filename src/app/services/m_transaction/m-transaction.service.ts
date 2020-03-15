@@ -43,7 +43,7 @@ export class MTransactionService {
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-10
   get_all_transaction_show(): Observable<MTransaction[]> {
-    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction', ref => ref.where('username', '==', this.SessionService.get_session_username()));
+    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction', ref => ref.where('username', '==', this.SessionService.get_session_username()).where('wallet_name', '==', this.SessionService.get_session_wallet()));
     this.service = this.serviceCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
