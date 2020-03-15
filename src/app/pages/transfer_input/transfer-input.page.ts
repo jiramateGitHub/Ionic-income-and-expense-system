@@ -107,7 +107,9 @@ export class TransferInputPage implements OnInit {
     this.wallets = [];
     this.ServicesService.MWalletService.get_obs_mwallet().subscribe(async res => {      
       res.map((item, index) => {
-        this.wallets.push(item)     
+        if(item.wallet_name != this.now_wallet){
+          this.wallets.push(item) 
+        }
       })      
     })  
     
