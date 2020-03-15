@@ -1,4 +1,4 @@
-import { ServicesService, MPerson} from './../services/services.service';
+import { ServicesService, MPerson, MWallet} from './../services/services.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
@@ -13,6 +13,13 @@ export class SignupPage implements OnInit {
   public obj_MPerson: MPerson = {
     username: null,
     password: null,
+  };
+
+  public obj_MWallet: MWallet = {
+    username: null,
+    wallet_name: null,
+    wallet_balance: null,
+    wallet_active: null
   };
 
   public username : string;
@@ -63,6 +70,13 @@ export class SignupPage implements OnInit {
         }
         if(check_username_duplicate == false){
           this.ServicesService.MPersonService.insert_person(this.obj_MPerson).then(() => {
+            
+            this.obj_MWallet.username = this.username
+            this.obj_MWallet.wallet_active = "Y"
+            this.obj_MWallet.wallet_balance = 0
+            this.obj_MWallet.wallet_name = "Wallet first"
+            this.ServicesService.MWalletService.insert_wallet(this.obj_MWallet)
+
             this.ServicesService.SessionService.set_session_username(this.username)
             this.router.navigateByUrl('signin');
             this.showToast('Sign up successful.');
