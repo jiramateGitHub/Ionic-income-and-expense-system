@@ -35,19 +35,17 @@ export class TabWalletPage implements OnInit{
       this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
       this.servicesService.SessionService.set_session_wallet('wallet')
       this.get_all_transaction_show();
-      console.log("this.servicesService.SessionService.get_session_username() ",this.servicesService.SessionService.get_session_username())
   } 
 
-  ngOnInit(){}
+  ngOnInit(){
+  }
 
-  ionViewCanEnter(){
+  ionViewWillEnter(){
     this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
     this.servicesService.SessionService.set_session_wallet('wallet')
     this.get_all_transaction_show();
   }
 
- 
-  
   doRefresh(event) {
     setTimeout(() => {
       event.target.complete();

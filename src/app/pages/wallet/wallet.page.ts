@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ModalController, ToastController, NavParams, AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-wallet',
@@ -21,16 +22,10 @@ export class WalletPage implements OnInit {
     wallet_active: null
   }
 
-  public obj_MWallet : MWallet = {
-    username: null,
-    wallet_name: null,
-    wallet_balance : null,
-    wallet_active: null
-  }
-
-  public obj_MWallet_List : Observable<MWallet[]>
-  public loading: any = 0;
-  public check_obj_MWallet_List = 0;
+  private obj_MWallet_List : Observable<MWallet[]>
+  private loading: any = 0;
+  private check_obj_MWallet_List = 0;
+  private check_delete = false;
   
   constructor(
     private ToastController:ToastController,
@@ -40,10 +35,14 @@ export class WalletPage implements OnInit {
     private alertController: AlertController,
     private ServicesService:ServicesService
   ) {
-    this.get_wallet()
    }
 
   ngOnInit() {
+    this.get_wallet()
+  }
+
+  ionViewWillEnter(){
+    this.get_wallet()
   }
 
   ionViewDidEnter(){
@@ -87,6 +86,7 @@ export class WalletPage implements OnInit {
         }, {
           text: 'Confirm',
           handler: () => {
+            this.check_delete = true;
             this.delete_wallet(id)
           }
         }
@@ -109,16 +109,23 @@ export class WalletPage implements OnInit {
   // * @Function   : delete_wallet => ลบ wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-12
-  async delete_wallet(id:string){
-    await this.obj_MWallet_List.subscribe(res=>{
-      if(res.length > 1){
-        this.ServicesService.MWalletService.delete_wallet(id)
-        this.showToast("Delete successful.")
-      }else{
-        this.showToast("Can't delete wallet.")
-      }
-    })
-    
+  delete_wallet(id:string){
+    if(id != null || id != undefined || id != ''){
+      this.obj_MWallet_List.subscribe(res=>{
+        if(res.length > 1){
+          if(this.check_delete == true){
+            this.ServicesService.MWalletService.delete_wallet(id)
+            this.showToast("Delete successful.")
+          }
+          this.check_delete = false;
+        }else{
+          if(this.check_delete == true){
+            this.showToast("Can't delete wallet.")
+          }
+          this.check_delete = false;
+        }
+      })
+    }
   }
 
   // * @Function   :  modal_edit_show => modal แก้ไข wallet

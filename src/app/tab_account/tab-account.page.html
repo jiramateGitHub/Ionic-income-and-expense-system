@@ -9,6 +9,15 @@
 <ion-content [fullscreen]="true">
   <ion-list  >
     <ion-item-divider>
+      <ion-icon slot="start" name="person"></ion-icon>
+      <ion-label >Profile</ion-label>
+      <ion-label color="primary" class="p-l-15">
+        <h1>{{view_username}}</h1>
+      </ion-label>
+    </ion-item-divider>
+  </ion-list>
+  <ion-list  >
+    <ion-item-divider>
       <ion-label slot="start">Menu</ion-label>
     </ion-item-divider>
     <ion-menu-toggle auto-hide="false">

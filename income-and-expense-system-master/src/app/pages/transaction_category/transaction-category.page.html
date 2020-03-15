@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar class="bg-toolbar">
+    <ion-buttons slot="start" class="p-l-5" (click)="close_modal()">
+      <ion-icon name="arrow-back-outline" style="zoom:1.5;color:white;"></ion-icon>
+    </ion-buttons>
+    <ion-title class="p-l-25">Select category</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-divider color="success" *ngIf="type_input == 'parent_income' || type_input == 'income'">
+    <ion-icon name="trending-up-outline" style="zoom:1.6;"></ion-icon>
+    <ion-label class="fs-20">
+      &nbsp;INCOME
+    </ion-label>
+  </ion-item-divider>
+
+  <ion-item-divider color="danger" *ngIf="type_input == 'parent_expense' || type_input == 'expense'">
+    <ion-icon name="trending-down-outline" style="zoom:1.6;"></ion-icon>
+    <ion-label class="fs-20">
+      &nbsp;EXPENSE
+    </ion-label>
+  </ion-item-divider>
+
+  <!-- Item Dividers in a List -->
+  <ion-list *ngIf="type_input == 'parent_income' || type_input == 'parent_expense'">
+    <ion-item *ngFor="let value_category of (obj_category | async)" (click)="add_category(value_category.cat_name,value_category.cat_type)">
+      <ion-label class="p-l-0">{{value_category.cat_name}}</ion-label>
+      <ion-button slot="end" color="light" >
+        + ADD
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  
+  <ion-list *ngIf="type_input == 'income' || type_input == 'expense'">
+    <div *ngFor="let parent of (obj_category | async)">
+      <ion-item-divider >
+        <ion-label class="fs-17"  >
+          {{parent.cat_name}} 
+        </ion-label>
+      </ion-item-divider >
+      <div *ngFor="let value_sub_category of (obj_sub_category | async)">
+        <div *ngIf="parent.cat_name == value_sub_category.categories_name">
+          <ion-item (click)="add_sub_category(value_sub_category.categories_name,value_sub_category.categories_type,value_sub_category.sub_categories_name)">
+            <ion-label class="p-l-15">{{value_sub_category.sub_categories_name}}</ion-label>
+            <ion-button slot="end" color="light" >
+              + ADD
+            </ion-button>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

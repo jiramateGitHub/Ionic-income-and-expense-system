@@ -9,7 +9,7 @@ import { TransferInputPage } from '../pages/transfer_input/transfer-input.page';
   styleUrls: ['tab-account.page.scss']
 })
 export class TabAccountPage {
-
+  private view_username
   constructor(
     private SessionService:SessionService,
     private router:Router,
@@ -17,6 +17,10 @@ export class TabAccountPage {
     private alertController: AlertController,) {
       
     }
+
+  ionViewWillEnter(){
+    this.view_username = this.SessionService.get_session_username()
+  }
 
   // * @Function   : redirect_signin => ไปหน้า wallet
   // * @Author     : Jiramate Phuaphan

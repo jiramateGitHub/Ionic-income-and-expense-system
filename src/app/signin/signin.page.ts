@@ -70,7 +70,7 @@ export class SigninPage implements OnInit {
       }
       count++;
     });
- 
+    loading.dismiss();
   }
 
 // * @Function   : redirect_signup => กลับหน้า sign up

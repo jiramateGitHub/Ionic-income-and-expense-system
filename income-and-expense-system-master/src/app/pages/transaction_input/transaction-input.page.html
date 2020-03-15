@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar class="bg-toolbar">
+      <ion-item lines="none" class="bg-toolbar">
+        <ion-buttons slot="start" (click)="close_modal()">
+            <ion-icon name="close" style="zoom:1.5;"></ion-icon>
+        </ion-buttons>
+        <ion-title *ngIf="type_input == 'insert'" style="text-align: center;">Add transaction</ion-title>
+        <ion-title *ngIf="type_input == 'update'" style="text-align: center;">Edit transaction</ion-title>
+        <ion-buttons slot="end">
+            <ion-icon name="checkmark" style="zoom:1.5;"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="p-t-10">
+    <!-- <ion-row justify-content-center> --> 
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <ion-item>
+          <ion-label class="fs-25">฿</ion-label>
+          <ion-input class="fs-25" placeholder="0" *ngIf="type_input == 'insert'" type="number" [(ngModel)]="MTransaction.transaction_amount" ></ion-input>
+          <ion-input class="fs-25" placeholder="0" *ngIf="type_input == 'update'" type="number" [(ngModel)]="editMTransaction.transaction_amount" ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="trail-sign-outline" class="p-r-5"></ion-icon>
+          <ion-label position="fixed"> Category</ion-label>
+          <ion-input placeholder="Select Category" *ngIf="type_input == 'insert'" (click)="select_category_alert()" style="text-align: right;" [(ngModel)]="MTransaction.sub_categories_name" readonly></ion-input>
+          <ion-input placeholder="Select Category" *ngIf="type_input == 'update'" (click)="select_category_alert()" style="text-align: right;" [(ngModel)]="editMTransaction.sub_categories_name" readonly></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="calendar-outline" class="p-r-5"></ion-icon>
+          <ion-label> Date</ion-label>
+          <ion-datetime displayFormat="DD MMMM YY" *ngIf="type_input == 'insert'" placeholder="Select Date" [(ngModel)]="MTransaction.transaction_date"></ion-datetime>
+          <ion-datetime displayFormat="DD MMMM YY" *ngIf="type_input == 'update'" placeholder="Select Date" [(ngModel)]="editMTransaction.transaction_date"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="clipboard-outline" class="p-r-5"></ion-icon>
+          <ion-label position="fixed"> Write note</ion-label>
+          <ion-input *ngIf="type_input == 'insert'"  [(ngModel)]="MTransaction.transaction_note" ></ion-input>
+          <ion-input *ngIf="type_input == 'update'"  [(ngModel)]="editMTransaction.transaction_note" ></ion-input>
+        </ion-item>
+        
+      </ion-col>
+    <!-- </ion-row> -->
+  </ion-grid> 
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row >
+      <ion-col>
+        <ion-button expand="block" *ngIf="type_input == 'insert'" (click)="insert_transection()" >Save Transaction</ion-button>
+        <ion-button expand="block" *ngIf="type_input == 'update'" (click)="edit_transection()" >Edit Transaction</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
