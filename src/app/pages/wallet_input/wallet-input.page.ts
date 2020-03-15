@@ -129,7 +129,7 @@ export class WalletInputPage implements OnInit {
       this.showToast('Please fill in categories.');
     }else if(this.obj_MTransaction.transaction_date == null || this.obj_MTransaction.transaction_date == "" ){
       this.showToast('Please fill in date.');
-    }else if(this.obj_MWallet.wallet_balance == null || this.obj_MWallet.wallet_balance == ""){
+    }else if(this.obj_MWallet.wallet_balance == null){
       this.showToast('Please fill in balance.');
     }else{
       this.obj_MWallet.username = this.ServicesService.SessionService.get_session_username();
