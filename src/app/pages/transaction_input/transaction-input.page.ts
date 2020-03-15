@@ -148,27 +148,43 @@ export class TransactionInputPage implements OnInit {
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
   async insert_transaction() {
-    this.MTransaction.username = this.servicesService.SessionService.get_session_username();
-    this.MTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
-    this.MTransaction.transaction_active = "Y"
-
-    this.servicesService.MTransactionService.insert_transaction(this.MTransaction).then(() => {
-      this.showToast('Add transaction successful.');
-    });
-    this.close_modal();
+    if(this.MTransaction.transaction_amount == null || this.MTransaction.transaction_amount == ""){
+      this.showToast('Please fill in balance.');
+    }else if(this.MTransaction.sub_categories_name == null || this.MTransaction.sub_categories_name == ""){
+      this.showToast('Please fill in category.');
+    }else if(this.MTransaction.transaction_date == null || this.MTransaction.transaction_date == ""){
+      this.showToast('Please fill in date.');
+    }else{
+      this.MTransaction.username = this.servicesService.SessionService.get_session_username();
+      this.MTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
+      this.MTransaction.transaction_active = "Y"
+  
+      this.servicesService.MTransactionService.insert_transaction(this.MTransaction).then(() => {
+        this.showToast('Add transaction successful.');
+      });
+      this.close_modal();
+    }
   }
 
   // * @Function   : edit_transaction => เเก้ไขข้อมูล transaction
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
   async update_transaction(){
-    this.editMTransaction.username = this.servicesService.SessionService.get_session_username();
-    this.editMTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
-    this.editMTransaction.transaction_active = "Y"
+    if(this.editMTransaction.transaction_amount == null || this.editMTransaction.transaction_amount == ""){
+      this.showToast('Please fill in balance.');
+    }else if(this.editMTransaction.sub_categories_name == null || this.editMTransaction.sub_categories_name == ""){
+      this.showToast('Please fill in category.');
+    }else if(this.editMTransaction.transaction_date == null || this.editMTransaction.transaction_date == ""){
+      this.showToast('Please fill in date.');
+    }else{
+      this.editMTransaction.username = this.servicesService.SessionService.get_session_username();
+      this.editMTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
+      this.editMTransaction.transaction_active = "Y"
 
-    this.servicesService.MTransactionService.update_transaction( this.id,this.editMTransaction).then(() => {
-      this.showToast('Edit transaction successful.');
-    });
-    this.close_modal();
+      this.servicesService.MTransactionService.update_transaction( this.id,this.editMTransaction).then(() => {
+        this.showToast('Edit transaction successful.');
+      });
+      this.close_modal();
+    }
   }
 }
