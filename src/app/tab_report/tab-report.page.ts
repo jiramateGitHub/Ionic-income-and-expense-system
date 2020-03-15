@@ -118,6 +118,7 @@ ngOnInit(): void {
           text: 'Year',
           cssClass: 'secondary',
           handler: () => {
+            this.type_select = "year"
           }
         },
         {
@@ -233,14 +234,34 @@ ngOnInit(): void {
   // * @Create Date: 2563-03-10
   get_report_by_year() {
     this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MTransaction).subscribe(async res => {
-      console.log("da", this.obj_MTransaction.transaction_date.substr(0, 4))
-      var total_year: number = 0;
+      var sum_income = 0;
+      var sum_expent = 0;
       for (var i = 0; i < res.length; i++) {
-        if (this.obj_MTransaction.transaction_date.substr(0, 4) == res[i].transaction_date.substr(0, 4)) {
-          total_year += +res[i].transaction_amount;
+        if (res[i].categories_type == 1) {
+          if (this.obj_MTransaction.transaction_date.substr(0, 4) == res[i].transaction_date.substr(0, 4)) {
+
+            console.log(res[i].transaction_amount);
+            sum_income += +res[i].transaction_amount;
+
+          }
+        } else if(res[i].categories_type == 2){
+          if (this.obj_MTransaction.transaction_date.substr(0, 4) == res[i].transaction_date.substr(0, 4)) {
+
+            console.log(res[i].transaction_amount);
+            sum_expent += +res[i].transaction_amount;
+
+          }
         }
+
       }
-      this.income = total_year;
+      this.income = sum_income;
+      this.expent = sum_expent;
+
+      if(sum_income >= sum_expent){
+        this.net_income = sum_income - sum_expent
+      }else if(sum_income <= sum_expent){
+        this.net_income = sum_income - sum_expent
+      }
     });
   }
 
