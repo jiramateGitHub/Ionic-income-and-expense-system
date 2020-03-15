@@ -70,9 +70,11 @@
         <ion-item-divider >
           <ion-label slot="start"><span class="fs-25">11</span> March 2562</ion-label>
           <ion-label slot="end" class="p-r-10">+20500</ion-label>
-        </ion-item-divider>
-      
-        <ion-card *ngFor = "let transaction of all_transaction">
+        </ion-item-divider>       
+
+
+        <ion-card *ngFor = "let transaction of sortData; index as i">
+
           <ion-item-sliding >
             <ion-item style="margin: -8px;">
               <ion-img src="{{'./../assets/icon/'+transaction.categories_name+'.png'}}"  style="width: 30px; height: 30px;" class="p-l-5"></ion-img> 
