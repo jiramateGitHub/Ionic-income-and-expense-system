@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { ServicesService , MTransaction } from '../services/services.service';
 import { TransactionInputPage } from '../pages/transaction_input/transaction-input.page';
+// import {MatSortModule} from '@angular/material/sort';
 @Component({
   selector: 'app-tab-wallet',
   templateUrl: 'tab-wallet.page.html',
@@ -112,6 +113,13 @@ export class TabWalletPage implements OnInit{
       console.log(res)
       this.all_transaction = res;
       // console.log( this.all_transaction)
+
+      for(let i = 0 ; i < res.length ; i++){
+        this.all_transaction[i].date = res[i]['transaction_date'].substring(8, 10);
+        this.all_transaction[i].month = res[i]['transaction_date'].substring(4, 7);
+        this.all_transaction[i].year = res[i]['transaction_date'].substring(10, 15);
+      }
+     
    })
    
   }
@@ -119,7 +127,7 @@ export class TabWalletPage implements OnInit{
   // * @Function   : sortData => เรียงข้อมูลตามเวลา
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
-  get sortData() {
+  public get sortData() {
     return this.all_transaction.sort((a, b) => {
       return <any>new Date(b.transaction_date) - <any>new Date(a.transaction_date);
     });

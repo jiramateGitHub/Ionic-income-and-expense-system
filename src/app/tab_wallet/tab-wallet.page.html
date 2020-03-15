@@ -73,8 +73,7 @@
         </ion-item-divider>       
 
 
-        <ion-card *ngFor = "let transaction of sortData; index as i">
-
+        <ion-card *ngFor = "let transaction of sortData; let indexOfelement = index;">     
           <ion-item-sliding >
             <ion-item style="margin: -8px;">
               <ion-img src="{{'./../assets/icon/'+transaction.categories_name+'.png'}}"  style="width: 30px; height: 30px;" class="p-l-5"></ion-img> 
