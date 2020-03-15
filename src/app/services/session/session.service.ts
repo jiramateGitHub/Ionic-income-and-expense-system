@@ -5,13 +5,12 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SessionService {
-  private session_username:string;
-  private session_wallet:string;
+  private session_username:any;
+  private session_wallet:any;
   isLoggedIn: Boolean;
-  user: any;
 
   constructor(public storage: Storage, private router:Router) {
-        this.user = null;
+        this.session_username = null;
         this.isLoggedIn = false;
   }
 
@@ -55,9 +54,9 @@ export class SessionService {
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-13
   login(user) {
-    this.storage.set('user', user).then(() => {
+    this.storage.set('session_username', user).then(() => {
         this.isLoggedIn = true;
-        this.user = user;
+        this.session_username = user;
     });
   }
   
@@ -65,9 +64,9 @@ export class SessionService {
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-13
   logout() {
-    this.storage.remove('user').then(() => {
+    this.storage.remove('session_username').then(() => {
         this.isLoggedIn = false;
-        this.user = null;
+        this.session_username = null;
     });
   }
 
@@ -75,20 +74,25 @@ export class SessionService {
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-13
   async isAuthenticated() {
-    await this.storage.get('user').then((user) => {
-      this.user = user;
+    await this.storage.get('session_username').then((user) => {
+      this.session_username = user;
       if(user == null){
         this.isLoggedIn = false;
       }else{
         this.isLoggedIn = true;
       }
       console.log("isAuthenticated : ", user , " : " , this.isLoggedIn)
+      console.log("Wallet : ", this.session_wallet)
     });
     if(this.isLoggedIn == false){
       this.router.navigateByUrl('signin');
     }else{
-      this.router.navigateByUrl('tabs/tab_wallet');
-      this.set_session_username(this.user)
+      this.set_session_username(this.session_username)
+      if(this.session_wallet == null){
+        this.router.navigateByUrl('wallet');
+      }else{
+        this.router.navigateByUrl('tabs');
+      }
     }
   }
 

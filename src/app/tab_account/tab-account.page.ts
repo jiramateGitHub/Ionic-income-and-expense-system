@@ -10,6 +10,7 @@ import { TransferInputPage } from '../pages/transfer_input/transfer-input.page';
 })
 export class TabAccountPage {
   private view_username
+  private view_wallet
   constructor(
     private SessionService:SessionService,
     private router:Router,
@@ -19,7 +20,9 @@ export class TabAccountPage {
     }
 
   ionViewWillEnter(){
+    console.log(this.SessionService.get_session_wallet())
     this.view_username = this.SessionService.get_session_username()
+    this.view_wallet = this.SessionService.get_session_wallet()
   }
 
   // * @Function   : redirect_signin => ไปหน้า wallet
