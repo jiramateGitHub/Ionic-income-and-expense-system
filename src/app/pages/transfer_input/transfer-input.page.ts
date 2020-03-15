@@ -118,7 +118,7 @@ export class TransferInputPage implements OnInit {
   async insert_tranfer(){
     await this.ServicesService.MWalletService.get_edit_wallet(this.select_wallet_id).subscribe( res => {
       this.select_wallet_name = res.wallet_name;
-
+      
       this.MTransaction.username = this.ServicesService.SessionService.get_session_username();
       this.MTransaction.wallet_name = this.ServicesService.SessionService.get_session_wallet()
       this.MTransaction.transaction_active = "Y"
@@ -135,7 +135,7 @@ export class TransferInputPage implements OnInit {
           this.ServicesService.MWalletService.update_wallet_name(this.ServicesService.SessionService.get_session_wallet_id(),this.edit_MWallet)
         })
       });
-  
+
       this.MTransaction.username = this.ServicesService.SessionService.get_session_username();
       this.MTransaction.wallet_name = this.select_wallet_name
       this.MTransaction.transaction_active = "Y"
@@ -152,7 +152,7 @@ export class TransferInputPage implements OnInit {
           this.ServicesService.MWalletService.update_wallet_name(this.select_wallet_id,this.edit_MWallet)
         })
       });
-
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////
     })
 
       this.balance -= this.money;
