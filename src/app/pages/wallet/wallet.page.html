@@ -3,8 +3,7 @@
     <ion-buttons slot="start" *ngIf="type_input != 'select_wallet'">
       <ion-back-button defaultHref="tabs/tab_account"></ion-back-button>
     </ion-buttons>
-    <ion-title style="text-align: left;" *ngIf="type_input != 'select_wallet'">My Wallets</ion-title>
-    <ion-title style="text-align: left;" *ngIf="type_input == 'select_wallet'">Choose Wallets</ion-title>
+    <ion-title style="text-align: left;" >Choose Wallets</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,15 +16,16 @@
     <ion-card>
       <ion-spinner name="dots" *ngIf="loading == 0" style="text-align: center;"></ion-spinner>
       <div *ngFor="let wallet of (obj_MWallet_List | async)">
-        <div *ngIf="type_input == 'select_wallet'" (click)="set_session_wallet(wallet.wallet_name)">
           <ion-item-sliding>
-            <ion-item style="margin: 0px;">
+            <div (click)="set_session_wallet(wallet.wallet_name)">
+            <ion-item style="margin: 0px;" >
               <ion-icon name="wallet" slot="start" size="large" style="color:blueviolet !important;"></ion-icon>
               <ion-label>
                 <span class="fs-14">{{wallet.wallet_name}}</span>
               </ion-label>
               <ion-chip fill="outline" slot="end" style="color:blueviolet !important;">฿ {{wallet.wallet_balance}}</ion-chip>
             </ion-item>
+            </div>
             <ion-item-options>
               <ion-item-option color="primary" (click)="modal_edit_show(wallet.id)">
                 <ion-icon slot="start" name="create"></ion-icon>
@@ -37,7 +37,6 @@
               </ion-item-option>
             </ion-item-options>
           </ion-item-sliding>
-        </div>
       </div>
     </ion-card>
     <ion-card *ngIf="check_obj_MWallet_List == 0">

@@ -52,6 +52,7 @@ export class WalletInputPage implements OnInit {
     this.edit_MWallet.wallet_name = navParams.get('wallet_name');
     this.edit_MWallet.wallet_balance = navParams.get('wallet_balance');
     this.edit_MWallet.wallet_active = navParams.get('wallet_active');
+    this.obj_MTransaction.transaction_date = Date()
   }
 
   ngOnInit() {
@@ -117,36 +118,54 @@ export class WalletInputPage implements OnInit {
       'dismissed': true
     });
   }
+
   // * @Function   : insert_model => เพิ่มกระเป๋าเงิน
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-09
   async insert_wallet() {
-    this.obj_MWallet.username = this.ServicesService.SessionService.get_session_username();
-    this.obj_MTransaction.username = this.ServicesService.SessionService.get_session_username();
-    this.obj_MTransaction.transaction_note = "New Wallet";
-    this.obj_MTransaction.transaction_active = "Y";
-    this.obj_MWallet.wallet_active = "Y";
+    if(this.obj_MTransaction.wallet_name == null || this.obj_MTransaction.wallet_name == ""){
+      this.showToast('Please fill in wallet name.');
+    }else if(this.obj_MTransaction.sub_categories_name == null || this.obj_MTransaction.sub_categories_name == ""){
+      this.showToast('Please fill in categories.');
+    }else if(this.obj_MTransaction.transaction_date == null || this.obj_MTransaction.transaction_date == "" ){
+      this.showToast('Please fill in date.');
+    }else if(this.obj_MWallet.wallet_balance == null || this.obj_MWallet.wallet_balance == ""){
+      this.showToast('Please fill in balance.');
+    }else{
+      this.obj_MWallet.username = this.ServicesService.SessionService.get_session_username();
+      this.obj_MTransaction.username = this.ServicesService.SessionService.get_session_username();
+      this.obj_MTransaction.transaction_note = "New Wallet";
+      this.obj_MTransaction.transaction_active = "Y";
+      this.obj_MWallet.wallet_active = "Y";
+  
+      this.ServicesService.MTransactionService.insert_transaction(this.obj_MTransaction)
+      this.ServicesService.MWalletService.insert_wallet(this.obj_MWallet)
+      this.showToast('Add Wallet successful.');
+      this.close_modal();
+    }
 
-    this.ServicesService.MTransactionService.insert_transaction(this.obj_MTransaction)
-    this.ServicesService.MWalletService.insert_wallet(this.obj_MWallet)
-    this.showToast('Add Wallet successful.');
-
-    this.close_modal();
   }
 
   // * @Function   : update_wallet_name => แก้ไขชื่อ wallet
   // * @Author     : Netchanok Thaintin
   // * @Create Date: 2563-03-09
   async update_wallet_name(){
-    this.edit_MWallet.username = this.ServicesService.SessionService.get_session_username();
-    this.edit_MWallet.wallet_name = this.edit_MWallet.wallet_name;
-  
-    this.ServicesService.MWalletService.update_wallet_name(this.id,this.edit_MWallet).then(() => {
-      this.showToast('Edit Wallet successful.');
-    });
-    this.close_modal();
+    if(this.edit_MWallet.wallet_name == null || this.edit_MWallet.wallet_name == ""){
+      this.showToast('Please fill in wallet name.');
+    }else{
+      this.edit_MWallet.username = this.ServicesService.SessionService.get_session_username();
+      this.edit_MWallet.wallet_name = this.edit_MWallet.wallet_name;
+    
+      this.ServicesService.MWalletService.update_wallet_name(this.id,this.edit_MWallet).then(() => {
+        this.showToast('Edit Wallet successful.');
+      });
+      this.close_modal();
+    }
   }
 
+  // * @Function   : showToast => แสดงข้อความ
+  // * @Author     : Netchanok Thaintin
+  // * @Create Date: 2563-03-09
   showToast(msg) {
     this.ToastController.create({
       message: msg,
