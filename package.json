@@ -29,7 +29,7 @@
     "@ionic/angular": "^5.0.0",
     "@ionic/storage": "^2.2.0",
     "@ng-bootstrap/ng-bootstrap": "^6.0.0",
-    "cordova-android": "8.1.0",
+    "cordova-android": "^8.1.0",
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
     "firebase": "^7.9.3",
