@@ -1,4 +1,4 @@
-import { ServicesService , MTransaction } from './../../services/services.service';
+import { ServicesService, MTransaction, MWallet } from './../../services/services.service';
 import { TransferInputPage } from './../transfer_input/transfer-input.page';
 import { TransactionCategoryPage } from './../transaction_category/transaction-category.page';
 import { Component, OnInit } from '@angular/core';
@@ -14,9 +14,16 @@ import { Observable } from 'rxjs';
 export class TransactionInputPage implements OnInit {
 
   private type_input: string;
-  public id:string;
+  private id:string;
 
-  private  editMTransaction:MTransaction = {
+  private  edit_MWallet:MWallet = {
+    username: null,
+    wallet_name: null,
+    wallet_balance : null,
+    wallet_active: null
+  }
+
+  private editMTransaction:MTransaction = {
     username : null,
     wallet_name : null,
     categories_type : null,
@@ -113,7 +120,6 @@ export class TransactionInputPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      console.log(data)
       this.MTransaction.categories_type = data['data']['categories_type'];
       this.MTransaction.categories_name = data['data']['categories_name'];
       this.MTransaction.sub_categories_name = data['data']['sub_categories_name'];
@@ -158,10 +164,23 @@ export class TransactionInputPage implements OnInit {
       this.MTransaction.username = this.servicesService.SessionService.get_session_username();
       this.MTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
       this.MTransaction.transaction_active = "Y"
-  
-      this.servicesService.MTransactionService.insert_transaction(this.MTransaction).then(() => {
+      var wallet_id = this.servicesService.SessionService.get_session_wallet_id()
+      console.log("wallet_id ", wallet_id)
+      await this.servicesService.MTransactionService.insert_transaction(this.MTransaction).then(() => {
         this.showToast('Add transaction successful.');
+       
       });
+
+      await this.servicesService.MWalletService.get_edit_wallet(wallet_id).subscribe( res => {
+        this.edit_MWallet = res;
+        if(this.MTransaction.categories_type == 1){
+          this.edit_MWallet.wallet_balance += this.MTransaction.transaction_amount
+        }else if(this.MTransaction.categories_type == 2){
+          this.edit_MWallet.wallet_balance -= this.MTransaction.transaction_amount
+        }
+        this.servicesService.MWalletService.update_wallet_name(wallet_id,this.edit_MWallet)
+      })
+
       this.close_modal();
     }
   }

@@ -69,4 +69,5 @@ export class MWalletService {
   async update_wallet_name(id:string , mwallet:MWallet) {
     this.serviceCollection.doc<MWallet>(id).update(mwallet);
   }
+
 }

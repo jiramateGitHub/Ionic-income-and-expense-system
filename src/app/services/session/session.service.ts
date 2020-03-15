@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 export class SessionService {
   private session_username:any;
   private session_wallet:any;
+  private session_wallet_id:any;
   isLoggedIn: Boolean;
 
   constructor(public storage: Storage, private router:Router) {
@@ -36,6 +37,13 @@ export class SessionService {
     this.session_wallet = wallet;
   }
 
+  // * @Function   : set_session => ตั้งค่า session_wallet_id ที่ใช้
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-07
+  set_session_wallet_id(wallet_id){
+    this.session_wallet_id = wallet_id;
+  }
+
   // * @Function   : get_session_username => คืนค่า session_username ที่เข้าสู่ระบบ
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-08
@@ -48,6 +56,13 @@ export class SessionService {
   // * @Create Date: 2563-03-08
   get_session_wallet(){
     return this.session_wallet;
+  }
+
+  // * @Function   : get_session_wallet_id => คืนค่า session_wallet_id ที่ใช้งานอยู่
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-08
+  get_session_wallet_id(){
+    return this.session_wallet_id;
   }
 
   // * @Function   : login => เมื่อ login จะบันทึกค่าลง Local Storage
