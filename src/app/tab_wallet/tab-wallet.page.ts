@@ -11,6 +11,9 @@ import { TransactionInputPage } from '../pages/transaction_input/transaction-inp
 })
 export class TabWalletPage implements OnInit {
 
+  public income: number;
+  public outcome: number;
+
   public obj_transaction: MTransaction = {
     username: null,
     wallet_name: null,
@@ -34,17 +37,19 @@ export class TabWalletPage implements OnInit {
     private toastController: ToastController,
     private servicesService: ServicesService
   ) {
-    this.get_wallet_balance()
+
   }
 
   ngOnInit() {
     this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
     this.get_all_transaction_show();
+    this.get_wallet_balance()
   }
 
   ionViewWillEnter() {
     this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
     this.get_all_transaction_show();
+    this.get_wallet_balance()
   }
 
   doRefresh(event) {
@@ -53,6 +58,7 @@ export class TabWalletPage implements OnInit {
     }, 2000);
     this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
     this.get_all_transaction_show();
+    this.get_wallet_balance()
   }
 
   // * @Function   : modal_edit_show => Modal edit
@@ -103,7 +109,6 @@ export class TabWalletPage implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
 
@@ -112,26 +117,19 @@ export class TabWalletPage implements OnInit {
   // * @Create Date: 2563-03-06
   async get_all_transaction_show() {
     this.servicesService.MTransactionService.get_all_transaction_show().subscribe(res => {
-      console.log(res)
       this.all_transaction = res;
-      // console.log( this.all_transaction)
 
       for (let i = 0; i < res.length; i++) {
+        if (res[i]['categories_type'] == 1) {
+          this.income += res[i]['transaction_amount']
+        } else {
+          this.outcome += res[i]['transaction_amount']
+        }
         this.all_transaction[i].date = res[i]['transaction_date'].substring(8, 10);
         this.all_transaction[i].month = res[i]['transaction_date'].substring(5, 7);
         this.all_transaction[i].year = res[i]['transaction_date'].substring(0, 4);
-        // if (i == 0) {
-        //   this.all_transaction[i].status = 1
-        // } else if (this.all_transaction[i].status < this.all_transaction[i - 1].status) {
-        //   this.all_transaction[i].status = 1
-        // } else if (this.all_transaction[i].status > this.all_transaction[i - 1].status) {
-        //   this.all_transaction[i].status = 1
-        // } else {
-        //   this.all_transaction[i].status = 0
-        // }
       }
     })
-
   }
 
   // * @Function   : sortData => เรียงข้อมูลตามเวลา
@@ -165,9 +163,12 @@ export class TabWalletPage implements OnInit {
 
   get_wallet_balance() {
     this.servicesService.MWalletService.get_wallet_balance().subscribe(res => {
-      console.log(res)
-      this.obj_wallet = res;
+      this.obj_wallet = res['0'];
     });
+  }
+
+  modal_year() {
+
   }
 
 }

@@ -37,16 +37,50 @@ export class TabReportPage {
     private ServicesService: ServicesService
   ) {
 
-    // this.obj_MTransaction.transaction_date = Date()
-    
+    this.obj_MTransaction.transaction_date = Date()
+
+    this.get_report_by_day()
 
   }
 
 ngOnInit(): void {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.
-  this.obj_MTransaction.transaction_date = Date()
-  console.log(this.obj_MTransaction.transaction_date);
+  // this.obj_MTransaction.transaction_date = Date()
+  var date = Date()
+  var month = date.substr(4,3)
+  var day = date.substr(8,2)
+  var year = date.substr(11,4)
+  var month_num;
+ 
+  if(month == "Jan"){
+    month_num = "01" ; 
+  }else if(month == "Feb"){
+    month_num = "02" ;
+  }else if(month == "Mar"){
+    month_num = "03" ;
+  }else if(month == "Apr"){
+    month_num = "04" ;
+  }else if(month == "May"){
+    month_num = "05" ;
+  }else if(month == "Jun"){
+    month_num = "06" 
+  }else if(month == "Jul"){
+    month_num = "07" 
+  }else if(month == "Aug"){
+    month_num = "08" 
+  }else if(month == "Sep"){
+    month_num = "09" 
+  }else if(month == "Oct"){
+    month_num = "10" 
+  }else if(month == "Nov"){
+    month_num = "11" 
+  }else if(month == "Dec"){
+    month_num = "12" 
+  }
+
+  this.obj_MTransaction.transaction_date = year + "-" + month_num + "-" + day;
+  console.log(this.obj_MTransaction.transaction_date);  
 
   
 }
@@ -59,7 +93,7 @@ ngOnInit(): void {
       header: 'Select time range',
       buttons: [
         {
-          text: 'Day',
+          text: 'Daily',
           cssClass: 'secondary',
           handler: () => {
             this.type_select = "day"
@@ -67,13 +101,7 @@ ngOnInit(): void {
           }
         },
         {
-          text: 'Week',
-          cssClass: 'secondary',
-          handler: () => {
-          }
-        },
-        {
-          text: 'Month',
+          text: 'Monthly',
           cssClass: 'secondary',
           handler: () => {
             this.type_select = "month"
@@ -81,9 +109,10 @@ ngOnInit(): void {
           }
         },
         {
-          text: 'Year',
+          text: 'Yearly',
           cssClass: 'secondary',
           handler: () => {
+            this.type_select = "year"
           }
         },
         {
@@ -154,19 +183,14 @@ ngOnInit(): void {
   }
 
 
-  // * @Function   : get_report_by_day => แสดงข้อมูลรายรับ-รายจ่าย เป็นวัน
+  // * @Function   : get_report_by_month => แสดงข้อมูลรายรับ-รายจ่าย เป็นเดือน
   // * @Author     : Sathien Supabkul
-  // * @Create Date: 2563-03-09
+  // * @Create Date: 2563-03-15
   get_report_by_month() {
-    // console.log(this.date)
-    // console.log(this.obj_MTransaction.transaction_date.substr(0,10))
     this.ServicesService.MTransactionService.get_obs_mtransaction(this.obj_MTransaction).subscribe(async res => {
 
       var sum_income = 0;
       var sum_expent = 0;
-      //console.log(this.obj_MTransaction);
-      //var str = this.obj_MTransaction.transaction_date.substr(0,10)
-      //var date = str.split("-");
       for (var i = 0; i < res.length; i++) {
         if (res[i].categories_type == 1) {
           if (this.obj_MTransaction.transaction_date.substr(0, 8) == res[i].transaction_date.substr(0, 8)) {

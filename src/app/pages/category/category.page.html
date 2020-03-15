@@ -22,7 +22,7 @@
   -->
   <ion-list lines="none">
     <ion-spinner name="dots" *ngIf="loading == 0" style="text-align: center;"></ion-spinner>
-    <div *ngFor="let parent of (obj_MCategories_Income | async)">
+    <div *ngFor="let parent of sortData_obj_MCategories_Income">
       <ion-item-divider >
         <ion-img src="{{'./../assets/icon/'+parent.cat_name+'.png'}}"></ion-img> 
         <ion-label class="fs-17 p-l-15" style="color:black !important;" >
@@ -66,7 +66,7 @@
   -->
   <ion-list lines="none">
     <ion-spinner name="dots" *ngIf="loading == 0" style="text-align: center;"></ion-spinner>
-    <div *ngFor="let parent of (obj_MCategories_Expense | async)">
+    <div *ngFor="let parent of sortData_obj_MCategories_Expense">
       <ion-item-divider >
         <ion-img src="{{'./../assets/icon/'+parent.cat_name+'.png'}}"></ion-img> 
         <ion-label class="fs-17 p-l-15" style="color:black !important;">

@@ -22,7 +22,7 @@ export interface MWallet {
   id?: string,
   username: string,
   wallet_name: string,
-  wallet_balance : string,
+  wallet_balance : number,
   wallet_active: string
 }
 export interface MCategories {

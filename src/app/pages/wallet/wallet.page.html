@@ -17,7 +17,7 @@
       <ion-spinner name="dots" *ngIf="loading == 0" style="text-align: center;"></ion-spinner>
       <div *ngFor="let wallet of (obj_MWallet_List | async)">
           <ion-item-sliding>
-            <div (click)="set_session_wallet(wallet.wallet_name)">
+            <div (click)="set_session_wallet(wallet.wallet_name, wallet.id)">
             <ion-item style="margin: 0px;" >
               <ion-icon name="wallet" slot="start" size="large" style="color:blueviolet !important;"></ion-icon>
               <ion-label>

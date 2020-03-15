@@ -24,7 +24,7 @@
 
   <!-- Item Dividers in a List -->
   <ion-list *ngIf="type_input == 'parent_income' || type_input == 'parent_expense'">
-    <ion-item *ngFor="let value_category of (obj_category | async)" (click)="add_category(value_category.cat_name,value_category.cat_type)">
+    <ion-item *ngFor="let value_category of sortData_obj_category" (click)="add_category(value_category.cat_name,value_category.cat_type)">
       <ion-img src="{{'./../../assets/icon/'+value_category.cat_name+'.png'}}"></ion-img> 
       <ion-label class="p-l-15">{{value_category.cat_name}}</ion-label>
       <ion-button slot="end" color="light" >
@@ -34,7 +34,7 @@
   </ion-list>
   
   <ion-list *ngIf="type_input == 'income' || type_input == 'expense'">
-    <div *ngFor="let parent of (obj_category | async)">
+    <div *ngFor="let parent of sortData_obj_category">
       <ion-item-divider >
         <ion-img src="{{'./../../assets/icon/'+parent.cat_name+'.png'}}"></ion-img> 
         <ion-label class="fs-17 p-l-15" style="color:black !important;">

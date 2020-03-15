@@ -4,17 +4,17 @@
       <ion-row class="ion-align-items-center p-t-10">
         <ion-col></ion-col> 
         <ion-col style="text-align: center;">
-            <ion-label>Wallet Name : {{obj_wallet[0].wallet_name}}</ion-label>  
+            <ion-label>Wallet Name : {{obj_wallet.wallet_name}}</ion-label>  
         </ion-col> 
         <ion-col></ion-col> 
       </ion-row>
     </ion-grid>
-    <ion-title style="font-size: 40px!important;">{{obj_wallet[0].wallet_balance}} <span style="font-size: 20px;">THB.</span></ion-title>
+    <ion-title style="font-size: 40px!important;">{{obj_wallet.wallet_balance}} <span style="font-size: 20px;">THB.</span></ion-title>
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col></ion-col> 
         <ion-col>
-          <ion-chip class="chip-bl">
+          <ion-chip class="chip-bl" (click)="modal_year()">
             <ion-label>This Month</ion-label>
           </ion-chip>
         </ion-col> 
@@ -31,7 +31,7 @@
               <ion-label class="tw">
                 <span class="fs-13" style="color: lightgreen !important;">Income</span> 
                 <br> 
-                <span class="fs-15" style="color: white !important;">20500</span>
+                <span class="fs-15" style="color: white !important;">{{income}}</span>
               </ion-label>
             </ion-col>
             <ion-col></ion-col>
@@ -40,7 +40,7 @@
               <ion-label class="tw">
                 <span class="fs-13" style="color: orange !important;">Expense</span> 
                 <br> 
-                <span class="fs-15" style="color: white !important;">0</span>
+                <span class="fs-15" style="color: white !important;">{{outcome}}</span>
               </ion-label>
             </ion-col>
           </ion-row>
@@ -63,14 +63,14 @@
   </ion-refresher>
 
   <!-- Item Dividers in a List -->
-  <ion-list *ngFor = "let transaction of sortData">
+  <ion-list>
 
-        <ion-item-divider *ngIf="transaction.status == 1">
+        <!-- <ion-item-divider >
           <ion-label slot="start"><span class="fs-25">11</span> March 2562</ion-label>
           <ion-label slot="end" class="p-r-10">+20500</ion-label>
-        </ion-item-divider>       
+        </ion-item-divider>        -->
 
-        <ion-card>
+        <ion-card *ngFor = "let transaction of sortData">
           <ion-item-sliding >
             <ion-item style="margin: -8px;">
               <ion-img src="{{'./../assets/icon/'+transaction.categories_name+'.png'}}"  style="width: 30px; height: 30px;" class="p-l-5"></ion-img> 
@@ -95,8 +95,7 @@
             </ion-item-options>
           </ion-item-sliding>
         </ion-card>
-
+        
   </ion-list> 
- 
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>

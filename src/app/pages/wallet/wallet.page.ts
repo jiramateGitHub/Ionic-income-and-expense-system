@@ -138,7 +138,6 @@ export class WalletPage implements OnInit {
   async modal_edit_show(id:string) {
     await this.ServicesService.MWalletService.get_edit_wallet(id).subscribe( async res => {
       this.edit_MWallet = res;
-      console.log(this.edit_MWallet);
       const modal = await this.modalController.create({
         component: WalletInputPage,
         componentProps: {
@@ -157,8 +156,9 @@ export class WalletPage implements OnInit {
   // * @Function   :  set_session_wallet => ตั้งค่ากระเป๋าเงิน
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-15
-  set_session_wallet(wallet_name : string){
+  set_session_wallet(wallet_name : string, wallet_id : string){
     this.ServicesService.SessionService.set_session_wallet(wallet_name)
+    this.ServicesService.SessionService.set_session_wallet_id(wallet_id)
     this.router.navigateByUrl('tabs');
   }
 
