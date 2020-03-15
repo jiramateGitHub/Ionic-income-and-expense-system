@@ -93,7 +93,7 @@ ngOnInit(): void {
       header: 'Select time range',
       buttons: [
         {
-          text: 'Day',
+          text: 'Daily',
           cssClass: 'secondary',
           handler: () => {
             this.type_select = "day"
@@ -101,13 +101,7 @@ ngOnInit(): void {
           }
         },
         {
-          text: 'Week',
-          cssClass: 'secondary',
-          handler: () => {
-          }
-        },
-        {
-          text: 'Month',
+          text: 'Monthly',
           cssClass: 'secondary',
           handler: () => {
             this.type_select = "month"
@@ -115,7 +109,7 @@ ngOnInit(): void {
           }
         },
         {
-          text: 'Year',
+          text: 'Yearly',
           cssClass: 'secondary',
           handler: () => {
           }
