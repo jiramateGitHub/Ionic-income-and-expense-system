@@ -18,6 +18,11 @@ export class TabWalletPage implements OnInit {
   public income: number;
   public outcome: number;
 
+  public all_date_transaction = []
+  public obj_wallet = []
+  public all_transaction = [];
+  public edit_transaction: any;
+
   public obj_transaction: MTransaction = {
     username: null,
     wallet_name: null,
@@ -30,14 +35,6 @@ export class TabWalletPage implements OnInit {
     transaction_active: null
   };
 
-  public all_date_transaction = []
-  
-
-  public obj_wallet = []
-  public all_transaction = [];
-
-  public edit_transaction: any;
-
   constructor(
     private router: Router,
     public modalController: ModalController,
@@ -49,12 +46,25 @@ export class TabWalletPage implements OnInit {
     this.outcome = 0;
   }
 
-
   ngOnInit() {
 
   }
 
   ionViewWillEnter() {
+    this.obj_transaction  = {
+      username: null,
+      wallet_name: null,
+      categories_type: null,
+      categories_name: null,
+      sub_categories_name: null,
+      transaction_amount: null,
+      transaction_date: null,
+      transaction_note: null,
+      transaction_active: null
+    };
+    this.all_date_transaction = []
+    this.obj_wallet = []
+    this.all_transaction = [];
     this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
     this.get_all_transaction_show();
     this.get_wallet_balance()
@@ -158,58 +168,63 @@ export class TabWalletPage implements OnInit {
         }
       }
       console.log(temp_all_date_transaction)
-      
-      for (var i = 0; i < temp_all_date_transaction.length; i++) {
-        this.all_date_transaction[i] = 
-        {
-          date: null,
-          month: null,
-          year: null,
-          day:null
+      if(temp.length == 0){
+        this.all_date_transaction = null
+        console.log(this.all_date_transaction)
+      }else{
+        for (var i = 0; i < temp_all_date_transaction.length; i++) {
+          this.all_date_transaction[i] = 
+          {
+            date: null,
+            month: null,
+            year: null,
+            day:null
+          }
+          this.all_date_transaction[i].date = temp_all_date_transaction[i]
+          this.all_date_transaction[i].year = temp_all_date_transaction[i].substr(0, 4);
+          this.all_date_transaction[i].day =temp_all_date_transaction[i].substr(8, 2);
+  
+          if (temp_all_date_transaction[i].substr(5, 2) == "01") {
+            this.all_date_transaction[i].month = "Jan";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "02") {
+            this.all_date_transaction[i].month = "Feb";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "03") {
+  
+            this.all_date_transaction[i].month = "Mar";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "04") {
+            this.all_date_transaction[i].month = "Apr";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "05") {
+            this.all_date_transaction[i].month = "May";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "06") {
+            this.all_date_transaction[i].month = "Jun";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "07") {
+            this.all_date_transaction[i].month = "Jul";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "08") {
+            this.all_date_transaction[i].month = "Aug";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "09") {
+            this.all_date_transaction[i].month = "Sep";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "10") {
+            this.all_date_transaction[i].month = "Oct";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "11") {
+            this.all_date_transaction[i].month = "Nov";
+            
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "12") {
+            this.all_date_transaction[i].month = "Dec";
+          }
+  
         }
-        this.all_date_transaction[i].date = temp_all_date_transaction[i]
-        this.all_date_transaction[i].year = temp_all_date_transaction[i].substr(0, 4);
-        this.all_date_transaction[i].day =temp_all_date_transaction[i].substr(8, 2);
-
-        if (temp_all_date_transaction[i].substr(5, 2) == "01") {
-          this.all_date_transaction[i].month = "Jan";
-
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "02") {
-          this.all_date_transaction[i].month = "Feb";
-
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "03") {
-
-          this.all_date_transaction[i].month = "Mar";
-
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "04") {
-          this.all_date_transaction[i].month = "Apr";
-
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "05") {
-          this.all_date_transaction[i].month = "May";
-
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "06") {
-          this.all_date_transaction[i].month = "Jun";
-
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "07") {
-          this.all_date_transaction[i].month = "Jul";
-
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "08") {
-          this.all_date_transaction[i].month = "Aug";
-
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "09") {
-          this.all_date_transaction[i].month = "Sep";
-
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "10") {
-          this.all_date_transaction[i].month = "Oct";
-
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "11") {
-          this.all_date_transaction[i].month = "Nov";
-          
-        } else if (temp_all_date_transaction[i].substr(5, 2) == "12") {
-          this.all_date_transaction[i].month = "Dec";
-        }
-
       }
+      
       // console.log(this.newdate)
 
     })

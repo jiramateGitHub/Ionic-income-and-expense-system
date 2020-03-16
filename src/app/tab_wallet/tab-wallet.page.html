@@ -66,6 +66,9 @@
 
   <!-- Item Dividers in a List -->
   <ion-list>
+    <ion-item-divider *ngIf="all_date_transaction == null">
+      <ion-label style="text-align: center;"><span class="fs-15">No Tranasction.</span></ion-label>
+    </ion-item-divider>    
     <div *ngFor = "let date_transaction of all_date_transaction">
         <ion-item-divider >
           <!-- <ion-label slot="start"><span class="fs-25">11</span> March 2562</ion-label> -->
