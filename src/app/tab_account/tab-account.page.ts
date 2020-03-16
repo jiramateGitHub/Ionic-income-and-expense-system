@@ -20,7 +20,6 @@ export class TabAccountPage {
     }
 
   ionViewWillEnter(){
-    console.log(this.SessionService.get_session_wallet())
     this.view_username = this.SessionService.get_session_username()
     this.view_wallet = this.SessionService.get_session_wallet()
   }
@@ -39,16 +38,16 @@ export class TabAccountPage {
     this.router.navigateByUrl('category');
   }
 
-// * @Function   : logout => ออกจากระบบ
-// * @Author     : Jiramate Phuaphan
-// * @Create Date: 2563-03-02
+  // * @Function   : logout => ออกจากระบบ
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-02
   logout(){
     this.SessionService.set_session(null,null)
     this.SessionService.logout()
     this.router.navigateByUrl('signin');
   }
 
-   // * @Function   : modal_transfer_input_show => แสดง Modal TransferInputPage และ ตอนปิด Modal จะ Passing Data กลับมา
+  // * @Function   : modal_transfer_input_show => แสดง Modal TransferInputPage และ ตอนปิด Modal จะ Passing Data กลับมา
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-02
   async modal_transfer_input_show() { 
