@@ -128,25 +128,28 @@ export class TabWalletPage implements OnInit   {
 
       var temp = res
       temp.sort((one, two) => (one.transaction_date.substr(0, 10) > two.transaction_date.substr(0, 10) ? -1 : 1));
-      for (var i = 0; i < this.all_date_transaction.length; i++) {
-        this.all_date_transaction.pop()
-      }
+
+      this.all_date_transaction = []
 
       if(temp.length == 1){
         this.all_date_transaction.push(temp[0].transaction_date)
-      }
-
-      for (var i = 1; i < temp.length; i++) {
-        if(temp[i-1].transaction_date != temp[i].transaction_date){
-          this.all_date_transaction.push(temp[i-1].transaction_date)
-        }
-        if( i == (temp.length-1)){
-          if(temp[i-1].transaction_date != temp[i].transaction_date){
-            this.all_date_transaction.push(temp[i].transaction_date)
+      }else{
+        for (var i = 1; i < temp.length; i++) {
+          if(i == 1){
+            this.all_date_transaction.push(temp[i-1].transaction_date)
+          }else{
+            if(temp[i-1].transaction_date != temp[i].transaction_date){
+              this.all_date_transaction.push(temp[i-1].transaction_date)
+            }
+            if( i == (temp.length-1)){
+              if(temp[i-1].transaction_date != temp[i].transaction_date){
+                this.all_date_transaction.push(temp[i].transaction_date)
+              }
+            }
           }
         }
       }
-
+      
     })
   }
 
