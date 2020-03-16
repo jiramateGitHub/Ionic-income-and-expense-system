@@ -3,16 +3,25 @@ import { Router } from '@angular/router';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { ServicesService, MTransaction, MWallet } from '../services/services.service';
 import { TransactionInputPage } from '../pages/transaction_input/transaction-input.page';
+import { Pipe, PipeTransform } from '@angular/core';
 // import {MatSortModule} from '@angular/material/sort';
 @Component({
   selector: 'app-tab-wallet',
   templateUrl: 'tab-wallet.page.html',
   styleUrls: ['tab-wallet.page.scss']
 })
+@Pipe({
+  name: 'groupBy',
+})
 export class TabWalletPage implements OnInit {
 
   public income: number;
   public outcome: number;
+
+  public all_date_transaction = []
+  public obj_wallet = []
+  public all_transaction = [];
+  public edit_transaction: any;
 
   public obj_transaction: MTransaction = {
     username: null,
@@ -26,10 +35,6 @@ export class TabWalletPage implements OnInit {
     transaction_active: null
   };
 
-  public obj_wallet = [];
-  public all_transaction = [];
-  public edit_transaction: any;
-
   constructor(
     private router: Router,
     public modalController: ModalController,
@@ -42,12 +47,24 @@ export class TabWalletPage implements OnInit {
   }
 
   ngOnInit() {
-    this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
-    this.get_all_transaction_show();
-    this.get_wallet_balance()
+
   }
 
   ionViewWillEnter() {
+    this.obj_transaction  = {
+      username: null,
+      wallet_name: null,
+      categories_type: null,
+      categories_name: null,
+      sub_categories_name: null,
+      transaction_amount: null,
+      transaction_date: null,
+      transaction_note: null,
+      transaction_active: null
+    };
+    this.all_date_transaction = []
+    this.obj_wallet = []
+    this.all_transaction = [];
     this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
     this.get_all_transaction_show();
     this.get_wallet_balance()
@@ -91,7 +108,7 @@ export class TabWalletPage implements OnInit {
   // * @Function   : transaction_active_update_AlertConfirm => แจ้งเตือนการลบ
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
-  async transaction_active_update_AlertConfirm(id: string) {
+  async transaction_active_update_AlertConfirm(id: string,amount : number,type : number) {
     const alert = await this.alertController.create({
       header: 'Confirm Delete?',
       buttons: [
@@ -104,7 +121,12 @@ export class TabWalletPage implements OnInit {
         }, {
           text: 'Confirm',
           handler: () => {
-            this.delete_transaction(id)
+            if(type == 3 || type == 4){
+              this.showToast("Can't delete transaction.")
+            }else{
+              this.delete_transaction(id)
+              this.update_wallet_balance(amount,type,true)
+            }
           }
         }
       ]
@@ -118,26 +140,96 @@ export class TabWalletPage implements OnInit {
   get_all_transaction_show() {
     this.servicesService.MTransactionService.get_all_transaction_show().subscribe(res => {
       this.all_transaction = res;
-
-      console.log( this.all_transaction );
-
-      for (let i = 0; i < res.length; i++) {
-
-
-        // if (res[i]['categories_type'] == 1) {
-        //   this.income += res[i]['transaction_amount']
-        // } else if(res[i]['categories_type'] == 3){
-        //   this.outcome += res[i]['transaction_amount']
-        // }else if(res[i]['categories_type'] == 4){
-        //   this.income += res[i]['transaction_amount']
-        // }else{
-        //   this.outcome += res[i]['transaction_amount']
-        // }
-        this.all_transaction[i].date = res[i]['transaction_date'].substring(8, 10);
-        this.all_transaction[i].month = res[i]['transaction_date'].substring(5, 7);
-        this.all_transaction[i].year = res[i]['transaction_date'].substring(0, 4);
+      for (var i = 0; i < res.length; i++) {
+        this.all_transaction[i].transaction_date = this.all_transaction[i].transaction_date.substr(0, 10)
       }
+
+      var temp = res
+      temp.sort((one, two) => (one.transaction_date.substr(0, 10) > two.transaction_date.substr(0, 10) ? -1 : 1));
+      var temp_all_date_transaction = []
+      console.log(temp)
+      console.log("temp.length " ,temp.length)
+      if (temp.length == 1) {
+        temp_all_date_transaction.push(temp[0].transaction_date)
+      } else {
+        for (var i = 0; i < temp.length; i++) {
+          if (i == 0) {
+              temp_all_date_transaction.push(temp[i].transaction_date)
+          } else {
+            if (temp[i - 1].transaction_date != temp[i].transaction_date) {
+              temp_all_date_transaction.push(temp[i].transaction_date)
+            }
+          }
+          // if (i == (temp.length - 1)) {
+          //   if (temp[i - 1].transaction_date != temp[i].transaction_date) {
+          //     temp_all_date_transaction.push(temp[i].transaction_date)
+          //   }
+          // }
+        }
+      }
+      console.log(temp_all_date_transaction)
+      if(temp.length == 0){
+        this.all_date_transaction = null
+        console.log(this.all_date_transaction)
+      }else{
+        for (var i = 0; i < temp_all_date_transaction.length; i++) {
+          this.all_date_transaction[i] = 
+          {
+            date: null,
+            month: null,
+            year: null,
+            day:null
+          }
+          this.all_date_transaction[i].date = temp_all_date_transaction[i]
+          this.all_date_transaction[i].year = temp_all_date_transaction[i].substr(0, 4);
+          this.all_date_transaction[i].day =temp_all_date_transaction[i].substr(8, 2);
+  
+          if (temp_all_date_transaction[i].substr(5, 2) == "01") {
+            this.all_date_transaction[i].month = "Jan";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "02") {
+            this.all_date_transaction[i].month = "Feb";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "03") {
+  
+            this.all_date_transaction[i].month = "Mar";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "04") {
+            this.all_date_transaction[i].month = "Apr";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "05") {
+            this.all_date_transaction[i].month = "May";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "06") {
+            this.all_date_transaction[i].month = "Jun";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "07") {
+            this.all_date_transaction[i].month = "Jul";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "08") {
+            this.all_date_transaction[i].month = "Aug";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "09") {
+            this.all_date_transaction[i].month = "Sep";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "10") {
+            this.all_date_transaction[i].month = "Oct";
+  
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "11") {
+            this.all_date_transaction[i].month = "Nov";
+            
+          } else if (temp_all_date_transaction[i].substr(5, 2) == "12") {
+            this.all_date_transaction[i].month = "Dec";
+          }
+  
+        }
+      }
+      
+      // console.log(this.newdate)
+
     })
+
+    // console.log(this.all_date_transaction)
   }
 
   // * @Function   : sortData => เรียงข้อมูลตามเวลา
@@ -173,10 +265,31 @@ export class TabWalletPage implements OnInit {
     this.servicesService.MWalletService.get_wallet_balance().subscribe(res => {
       this.obj_wallet = res['0'];
     });
+  
   }
 
-  modal_year() {
-
+  // * @Function   : update_wallet_balance => อัพเดทเงินในกระเป๋า
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-16
+  update_wallet_balance(amount:number,type:number,check_update){    
+    this.servicesService.MWalletService.get_wallet_balance().subscribe(res => {
+      if(check_update == true){
+        if(type == 1 ){
+          var balance = res[0].wallet_balance-amount
+        }else if(type == 2){
+          var balance = res[0].wallet_balance+amount
+        }
+        var temp : MWallet = {
+          username : res[0].username,
+          wallet_active: res[0].wallet_active,
+          wallet_balance: balance,
+          wallet_name: res[0].wallet_name
+        }
+        this.servicesService.MWalletService.update_wallet_name(res[0].id,temp)
+        check_update = false
+      }
+    });
+    
   }
 
 }
