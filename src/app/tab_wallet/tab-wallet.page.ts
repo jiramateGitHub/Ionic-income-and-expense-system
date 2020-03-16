@@ -128,8 +128,12 @@ export class TabWalletPage implements OnInit   {
 
       var temp = res
       temp.sort((one, two) => (one.transaction_date.substr(0, 10) > two.transaction_date.substr(0, 10) ? -1 : 1));
-      for (var i = 1; i < temp.length; i++) {
+      for (var i = 0; i < this.all_date_transaction.length; i++) {
         this.all_date_transaction.pop()
+      }
+
+      if(temp.length == 1){
+        this.all_date_transaction.push(temp[0].transaction_date)
       }
 
       for (var i = 1; i < temp.length; i++) {
@@ -142,8 +146,6 @@ export class TabWalletPage implements OnInit   {
           }
         }
       }
-
-      console.log(this.all_date_transaction)
 
     })
   }
