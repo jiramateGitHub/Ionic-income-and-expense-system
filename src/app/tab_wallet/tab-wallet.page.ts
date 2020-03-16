@@ -33,7 +33,7 @@ export class TabWalletPage implements OnInit {
   public all_date_transaction = []
 
 
-  public obj_wallet = [];
+  public obj_wallet = []
   public all_transaction = [];
 
   public edit_transaction: any;
@@ -98,7 +98,7 @@ export class TabWalletPage implements OnInit {
   // * @Function   : transaction_active_update_AlertConfirm => แจ้งเตือนการลบ
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
-  async transaction_active_update_AlertConfirm(id: string) {
+  async transaction_active_update_AlertConfirm(id: string, amount: number, type: number) {
     const alert = await this.alertController.create({
       header: 'Confirm Delete?',
       buttons: [
@@ -111,7 +111,12 @@ export class TabWalletPage implements OnInit {
         }, {
           text: 'Confirm',
           handler: () => {
-            this.delete_transaction(id)
+            if (type == 3 || type == 4) {
+              this.showToast("Can't delete transaction.")
+            } else {
+              this.delete_transaction(id)
+              this.update_wallet_balance(amount, type, true)
+            }
           }
         }
       ]
@@ -131,29 +136,27 @@ export class TabWalletPage implements OnInit {
 
       var temp = res
       temp.sort((one, two) => (one.transaction_date.substr(0, 10) > two.transaction_date.substr(0, 10) ? -1 : 1));
-      console.log(temp)
       var temp_all_date_transaction = []
-
+      console.log(temp)
+      console.log("temp.length ", temp.length)
       if (temp.length == 1) {
         temp_all_date_transaction.push(temp[0].transaction_date)
       } else {
-        console.log("else")
-        for (var i = 1; i < temp.length; i++) {
-          if (i == 1) {
-            temp_all_date_transaction.push(temp[i - 1].transaction_date)
+        for (var i = 0; i < temp.length; i++) {
+          if (i == 0) {
+            temp_all_date_transaction.push(temp[i].transaction_date)
           } else {
-            if (temp[i - 1].transaction_date != temp[i].transaction_date) {
-              temp_all_date_transaction.push(temp[i - 1].transaction_date)
-            }
-          }
-          if (i == (temp.length - 1)) {
             if (temp[i - 1].transaction_date != temp[i].transaction_date) {
               temp_all_date_transaction.push(temp[i].transaction_date)
             }
           }
+          // if (i == (temp.length - 1)) {
+          //   if (temp[i - 1].transaction_date != temp[i].transaction_date) {
+          //     temp_all_date_transaction.push(temp[i].transaction_date)
+          //   }
+          // }
         }
       }
-
       for (var i = 0; i < temp_all_date_transaction.length; i++) {
         this.all_date_transaction[i] =
         {
@@ -163,7 +166,7 @@ export class TabWalletPage implements OnInit {
           day: null,
           amout: null
         }
-        console.log(temp_all_date_transaction)
+        // console.log(temp_all_date_transaction)
         this.all_date_transaction[i].date = temp_all_date_transaction[i]
         this.all_date_transaction[i].year = temp_all_date_transaction[i].substr(0, 4);
         this.all_date_transaction[i].day = temp_all_date_transaction[i].substr(8, 2);
@@ -206,30 +209,32 @@ export class TabWalletPage implements OnInit {
           this.all_date_transaction[i].month = "Dec";
         }
 
-        for (var i = 0; i < this.all_transaction.length; i++) {
-          for (var j = 0; j < this.all_date_transaction.length; j++) {
-            if (this.all_transaction[i].transaction_date.substr(8, 2) == this.all_date_transaction[j].day && this.all_transaction[i].categories_type == 1) {
-              this.income += this.all_transaction[i].transaction_amount;
-            }else if (this.all_transaction[i].transaction_date.substr(8, 2) == this.all_date_transaction[j].day && this.all_transaction[i].categories_type == 2) {
-              this.outcome += this.all_transaction[i].transaction_amount;
-            }else if (this.all_transaction[i].transaction_date.substr(8, 2) == this.all_date_transaction[j].day && this.all_transaction[i].categories_type == 3) {
-              this.outcome += this.all_transaction[i].transaction_amount;
-            }else if (this.all_transaction[i].transaction_date.substr(8, 2) == this.all_date_transaction[j].day && this.all_transaction[i].categories_type == 4) {
-              this.income += this.all_transaction[i].transaction_amount;
-            }
-          }
 
-          this.all_date_transaction[i] = this.income - this.outcome;
-          this.income = 0;
-          this.outcome = 0;
-          // console.log(this.all_transaction[i].transaction_date.substr(8, 2))
-          // if(this.all_date_transaction[i])
-          // console.log(this.all_transaction[i].transaction_date.substr(8, 2))
-        }
+
+        // for (var j = 0; j < this.all_transaction.length; j++) {
+        //   for (var k = 0; k < this.all_date_transaction.length; k++) {
+        //     if (this.all_transaction[j].transaction_date.substr(8, 2) == this.all_date_transaction[k].day && this.all_transaction[j].categories_type == 1) {
+        //       this.income += this.all_transaction[j].transaction_amount;
+        //     }else if (this.all_transaction[k].transaction_date.substr(8, 2) == this.all_date_transaction[k].day && this.all_transaction[j].categories_type == 2) {
+        //       this.outcome += this.all_transaction[j].transaction_amount;
+        //     }else if (this.all_transaction[j].transaction_date.substr(8, 2) == this.all_date_transaction[k].day && this.all_transaction[j].categories_type == 3) {
+        //       this.outcome += this.all_transaction[j].transaction_amount;
+        //     }else if (this.all_transaction[j].transaction_date.substr(8, 2) == this.all_date_transaction[k].day && this.all_transaction[j].categories_type == 4) {
+        //       this.income += this.all_transaction[j].transaction_amount;
+        //     }
+        //   }
+
+        //   this.all_date_transaction[j].amount = this.income - this.outcome;
+        //   console.log( this.all_date_transaction[j].amount)
+        //   this.income = 0;
+        //   this.outcome = 0;
+        //   // console.log(this.all_transaction[i].transaction_date.substr(8, 2))
+        //   // if(this.all_date_transaction[i])
+        //   // console.log(this.all_transaction[i].transaction_date.substr(8, 2))
+        // }
       }
-      // console.log(this.newdate)
     })
-    // console.log(this.all_date_transaction)
+
   }
 
   // * @Function   : sortData => เรียงข้อมูลตามเวลา
@@ -265,5 +270,31 @@ export class TabWalletPage implements OnInit {
     this.servicesService.MWalletService.get_wallet_balance().subscribe(res => {
       this.obj_wallet = res['0'];
     });
+
   }
+
+  // * @Function   : update_wallet_balance => อัพเดทเงินในกระเป๋า
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-16
+  update_wallet_balance(amount: number, type: number, check_update) {
+    this.servicesService.MWalletService.get_wallet_balance().subscribe(res => {
+      if (check_update == true) {
+        if (type == 1) {
+          var balance = res[0].wallet_balance - amount
+        } else if (type == 2) {
+          var balance = res[0].wallet_balance + amount
+        }
+        var temp: MWallet = {
+          username: res[0].username,
+          wallet_active: res[0].wallet_active,
+          wallet_balance: balance,
+          wallet_name: res[0].wallet_name
+        }
+        this.servicesService.MWalletService.update_wallet_name(res[0].id, temp)
+        check_update = false
+      }
+    });
+
+  }
+
 }
