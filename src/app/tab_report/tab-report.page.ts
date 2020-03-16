@@ -50,6 +50,7 @@ ngOnInit(): void {
   //Add 'implements OnInit' to the class.
   // this.obj_MTransaction.transaction_date = Date()
   var date = Date()
+  console.log(date)
   var month = date.substr(4,3)
   var day = date.substr(8,2)
   var year = date.substr(11,4)

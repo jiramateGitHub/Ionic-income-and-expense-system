@@ -3,13 +3,17 @@ import { Router } from '@angular/router';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { ServicesService, MTransaction, MWallet } from '../services/services.service';
 import { TransactionInputPage } from '../pages/transaction_input/transaction-input.page';
+import { Pipe, PipeTransform } from '@angular/core';
 // import {MatSortModule} from '@angular/material/sort';
 @Component({
   selector: 'app-tab-wallet',
   templateUrl: 'tab-wallet.page.html',
   styleUrls: ['tab-wallet.page.scss']
 })
-export class TabWalletPage implements OnInit {
+@Pipe({
+  name: 'groupBy',
+})
+export class TabWalletPage implements OnInit   {
 
   public income: number;
   public outcome: number;
@@ -28,6 +32,7 @@ export class TabWalletPage implements OnInit {
 
   public obj_wallet = [];
   public all_transaction = [];
+  public all_date_transaction = [];
   public edit_transaction: any;
 
   constructor(
@@ -41,10 +46,9 @@ export class TabWalletPage implements OnInit {
     this.outcome = 0;
   }
 
+
   ngOnInit() {
-    this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
-    this.get_all_transaction_show();
-    this.get_wallet_balance()
+    
   }
 
   ionViewWillEnter() {
@@ -118,12 +122,24 @@ export class TabWalletPage implements OnInit {
   get_all_transaction_show() {
     this.servicesService.MTransactionService.get_all_transaction_show().subscribe(res => {
       this.all_transaction = res;
+      for (var i = 0; i < res.length; i++) {
+        this.all_transaction[i].transaction_date = this.all_transaction[i].transaction_date.substr(0, 10)
+      }
 
-      console.log( this.all_transaction );
+      var temp = res
+      temp.sort((one, two) => (one.transaction_date.substr(0, 10) > two.transaction_date.substr(0, 10) ? -1 : 1));
+      for (var i = 1; i < temp.length; i++) {
+        if(temp[i-1].transaction_date != temp[i].transaction_date){
+          this.all_date_transaction.push(temp[i-1].transaction_date)
+        }
+        if( i == (temp.length-1)){
+          if(temp[i-1].transaction_date != temp[i].transaction_date){
+            this.all_date_transaction.push(temp[i].transaction_date)
+          }
+        }
+      }
 
       for (let i = 0; i < res.length; i++) {
-
-
         // if (res[i]['categories_type'] == 1) {
         //   this.income += res[i]['transaction_amount']
         // } else if(res[i]['categories_type'] == 3){
@@ -133,10 +149,11 @@ export class TabWalletPage implements OnInit {
         // }else{
         //   this.outcome += res[i]['transaction_amount']
         // }
-        this.all_transaction[i].date = res[i]['transaction_date'].substring(8, 10);
-        this.all_transaction[i].month = res[i]['transaction_date'].substring(5, 7);
-        this.all_transaction[i].year = res[i]['transaction_date'].substring(0, 4);
+        this.all_date_transaction[i].day = res[i]['transaction_date'].substring(8, 10);
+        this.all_date_transaction[i].month = res[i]['transaction_date'].substring(5, 7);
+        this.all_date_transaction[i].year = res[i]['transaction_date'].substring(0, 4);
       }
+      console.log(this.all_date_transaction)
     })
   }
 
@@ -178,5 +195,4 @@ export class TabWalletPage implements OnInit {
   modal_year() {
 
   }
-
 }
