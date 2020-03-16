@@ -30,14 +30,8 @@ export class TabWalletPage implements OnInit {
     transaction_active: null
   };
 
-  public all_date_transaction = [
-    {
-      month: null,
-      date: null,
-      year: null,
-      day:null
-    }
-  ]
+  public all_date_transaction = []
+  
 
   public obj_wallet = [];
   public all_transaction = [];
@@ -137,12 +131,13 @@ export class TabWalletPage implements OnInit {
 
       var temp = res
       temp.sort((one, two) => (one.transaction_date.substr(0, 10) > two.transaction_date.substr(0, 10) ? -1 : 1));
-
+      console.log(temp)
       var temp_all_date_transaction = []
 
       if (temp.length == 1) {
         temp_all_date_transaction.push(temp[0].transaction_date)
       } else {
+        console.log("else")
         for (var i = 1; i < temp.length; i++) {
           if (i == 1) {
             temp_all_date_transaction.push(temp[i - 1].transaction_date)
@@ -150,20 +145,23 @@ export class TabWalletPage implements OnInit {
             if (temp[i - 1].transaction_date != temp[i].transaction_date) {
               temp_all_date_transaction.push(temp[i - 1].transaction_date)
             }
-            if (i == (temp.length - 1)) {
-              if (temp[i - 1].transaction_date != temp[i].transaction_date) {
-                temp_all_date_transaction.push(temp[i].transaction_date)
-              }
+          }
+          if (i == (temp.length - 1)) {
+            if (temp[i - 1].transaction_date != temp[i].transaction_date) {
+              temp_all_date_transaction.push(temp[i].transaction_date)
             }
           }
         }
       }
-
-
+      
       for (var i = 0; i < temp_all_date_transaction.length; i++) {
-
-        console.log(temp_all_date_transaction)
-        
+        this.all_date_transaction[i] = 
+        {
+          date: null,
+          month: null,
+          year: null,
+          day:null
+        }
         this.all_date_transaction[i].date = temp_all_date_transaction[i]
         this.all_date_transaction[i].year = temp_all_date_transaction[i].substr(0, 4);
         this.all_date_transaction[i].day =temp_all_date_transaction[i].substr(8, 2);
