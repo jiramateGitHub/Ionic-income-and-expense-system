@@ -60,7 +60,7 @@
       pullingIcon="arrow-dropdown"
       pullingText="Pull to refresh"
       refreshingSpinner="circles"
-      refreshingText="Refreshing...">
+      refreshingText="Refreshing..."> 
     </ion-refresher-content>
   </ion-refresher>
 
@@ -69,11 +69,11 @@
     <div *ngFor = "let date_transaction of all_date_transaction">
         <ion-item-divider >
           <!-- <ion-label slot="start"><span class="fs-25">11</span> March 2562</ion-label> -->
-          <ion-label slot="start"><span class="fs-15">{{date_transaction}}</span></ion-label>
+          <ion-label slot="start"><span class="fs-15"><span class="fs-25">{{date_transaction.day}}</span> {{date_transaction.month}} {{date_transaction.year}}</span></ion-label>
           <ion-label slot="end" class="p-r-10">+20500</ion-label>
         </ion-item-divider>       
           <div *ngFor = "let transaction of sortData">
-          <div *ngIf="date_transaction == transaction.transaction_date">
+          <div *ngIf="date_transaction.date == transaction.transaction_date">
             <ion-card >
               <ion-item-sliding >
                 <ion-item style="margin: -8px;">
