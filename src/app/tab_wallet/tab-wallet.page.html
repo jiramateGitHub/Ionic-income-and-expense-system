@@ -81,9 +81,12 @@
                 <!-- <span class="fs-14" >{{transaction.categories_name}}&nbsp;( {{transaction.sub_categories_name}} )</span>  -->
                 <br> 
                 <span class="fs-11" style="color: grey !important;">{{transaction.transaction_note}} </span>
+                <span class="fs-11" style="color: grey !important;" *ngIf="transaction.transaction_note == null"> no comment.</span>
               </ion-label>
               <ion-chip fill="outline" slot="end" style="color:red !important;" *ngIf="transaction.categories_type == '2'">- {{transaction.transaction_amount}}</ion-chip>
               <ion-chip fill="outline" slot="end" style="color:#2ECC71  !important;" *ngIf="transaction.categories_type == '1'">+ {{transaction.transaction_amount}}</ion-chip>
+              <ion-chip fill="outline" slot="end" style="color:#2ECC71  !important;" *ngIf="transaction.categories_type == '4'">+ {{transaction.transaction_amount}}</ion-chip>
+              <ion-chip fill="outline" slot="end" style="color:red !important;" *ngIf="transaction.categories_type == '3'">- {{transaction.transaction_amount}}</ion-chip>
             </ion-item>
             <ion-item-options>
               <ion-item-option color="primary" (click)="modal_edit_show(transaction.id)">
