@@ -61,12 +61,17 @@
     <ion-item>
       <ion-icon style="color:blueviolet;" name="wallet-outline" class="p-r-5" ></ion-icon>
       <ion-label position="" class="fs-15"> Select Wallet</ion-label>
-            <ion-select style="margin-left: 1px;" [(ngModel)]="select_wallet_id"  cancelText="Cancle" okText="Confirm" id="select_wallet">
-              <div *ngFor="let value of wallets">
-                  <ion-select-option value="{{value.id}}">{{value.wallet_name}}</ion-select-option>
-              </div>
-            </ion-select>
-      </ion-item>
+      <ion-select style="margin-left: 1px;" [(ngModel)]="select_wallet_id"  cancelText="Cancle" okText="Confirm" id="select_wallet">
+        <div *ngFor="let value of wallets">
+            <ion-select-option value="{{value.id}}">{{value.wallet_name}}</ion-select-option>
+        </div>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-icon style="color:blueviolet;" name="calendar-outline" class="p-r-5"></ion-icon>
+      <ion-label> Date</ion-label>
+      <ion-datetime displayFormat="DD MMMM YY"  placeholder="Select Date" [(ngModel)]="MTransaction.transaction_date"></ion-datetime>
+    </ion-item>
   
     <ion-card-content>
         <ion-label position="floating" class="fs-15">Amount of money</ion-label>

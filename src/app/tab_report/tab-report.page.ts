@@ -30,8 +30,6 @@ export class TabReportPage {
     transaction_active: null
   }
 
-
-
   constructor(
     private SessionService: SessionService,
     private modalController: ModalController,
@@ -40,7 +38,6 @@ export class TabReportPage {
   ) {
 
     this.obj_MTransaction.transaction_date = Date()
-
     this.get_report_by_day()
 
   }
@@ -50,7 +47,6 @@ ngOnInit(): void {
   //Add 'implements OnInit' to the class.
   // this.obj_MTransaction.transaction_date = Date()
   var date = Date()
-  console.log(date)
   var month = date.substr(4,3)
   var day = date.substr(8,2)
   var year = date.substr(11,4)
@@ -83,9 +79,6 @@ ngOnInit(): void {
   }
 
   this.obj_MTransaction.transaction_date = year + "-" + month_num + "-" + day;
-  console.log(this.obj_MTransaction.transaction_date);  
-
-  
 }
 
   // * @Function   : selcet_report_alert => แสดง Select สำหรับเลือกประเภทรายงาน
@@ -145,19 +138,13 @@ ngOnInit(): void {
       //var str = this.obj_MTransaction.transaction_date.substr(0,10)
       //var date = str.split("-");
       for (var i = 0; i < res.length; i++) {
-        if (res[i].categories_type == 1) {
+        if (res[i].categories_type == 1 || res[i].categories_type == 4) {
           if (this.obj_MTransaction.transaction_date.substr(0, 10) == res[i].transaction_date.substr(0, 10)) {
-
-            console.log(res[i].transaction_amount);
             sum_income += +res[i].transaction_amount;
-
           }
-        } else if(res[i].categories_type == 2){
+        } else if(res[i].categories_type == 2 || res[i].categories_type == 3){
           if (this.obj_MTransaction.transaction_date.substr(0, 10) == res[i].transaction_date.substr(0, 10)) {
-
-            console.log(res[i].transaction_amount);
             sum_expent += +res[i].transaction_amount;
-
           }
         }
 
@@ -172,16 +159,6 @@ ngOnInit(): void {
         this.net_income = sum_income - sum_expent
       }
 
-      
-
-
-      //console.log("da",date);
-      //console.log("str",str);
-      // console.log(res[0].transaction_date.substr(0,10));
-      //  console.log(this.obj_MTransaction);
-
-
-
     });
   }
 
@@ -195,19 +172,13 @@ ngOnInit(): void {
       var sum_income = 0;
       var sum_expent = 0;
       for (var i = 0; i < res.length; i++) {
-        if (res[i].categories_type == 1) {
+        if (res[i].categories_type == 1 || res[i].categories_type == 4) {
           if (this.obj_MTransaction.transaction_date.substr(0, 8) == res[i].transaction_date.substr(0, 8)) {
-
-            console.log(res[i].transaction_amount);
             sum_income += +res[i].transaction_amount;
-
           }
-        } else if(res[i].categories_type == 2){
+        } else if(res[i].categories_type == 2 || res[i].categories_type == 3){
           if (this.obj_MTransaction.transaction_date.substr(0, 8) == res[i].transaction_date.substr(0, 8)) {
-
-            console.log(res[i].transaction_amount);
             sum_expent += +res[i].transaction_amount;
-
           }
         }
 
@@ -234,19 +205,13 @@ ngOnInit(): void {
       var sum_income = 0;
       var sum_expent = 0;
       for (var i = 0; i < res.length; i++) {
-        if (res[i].categories_type == 1) {
+        if (res[i].categories_type == 1 || res[i].categories_type == 4) {
           if (this.obj_MTransaction.transaction_date.substr(0, 4) == res[i].transaction_date.substr(0, 4)) {
-
-            console.log(res[i].transaction_amount);
             sum_income += +res[i].transaction_amount;
-
           }
-        } else if(res[i].categories_type == 2){
+        } else if(res[i].categories_type == 2 || res[i].categories_type == 3){
           if (this.obj_MTransaction.transaction_date.substr(0, 4) == res[i].transaction_date.substr(0, 4)) {
-
-            console.log(res[i].transaction_amount);
             sum_expent += +res[i].transaction_amount;
-
           }
         }
 
