@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, Platform } from '@ionic/angular';
 import { ServicesService, MTransaction } from '../services/services.service';
 import { SessionService } from '../services/session/session.service';
 import { timestamp } from 'rxjs/operators';
 
+declare var google
 @Component({
   selector: 'app-tab-report',
   templateUrl: 'tab-report.page.html',
@@ -34,12 +35,15 @@ export class TabReportPage {
     private SessionService: SessionService,
     private modalController: ModalController,
     private alertController: AlertController,
-    private ServicesService: ServicesService
+    private ServicesService: ServicesService,
+    private platform:Platform
   ) {
-
     this.obj_MTransaction.transaction_date = Date()
     this.get_report_by_day()
-
+    this.platform.ready().then(()=>{
+      google.charts.load('current', {'packages':['corechart']});
+      this.get_chart()
+    })
   }
 
 ngOnInit(): void {
@@ -158,7 +162,7 @@ ngOnInit(): void {
       }else if(sum_income <= sum_expent){
         this.net_income = sum_income - sum_expent
       }
-
+      this.get_chart()
     });
   }
 
@@ -191,11 +195,9 @@ ngOnInit(): void {
       }else if(sum_income <= sum_expent){
         this.net_income = sum_income - sum_expent
       }
+      this.get_chart()
     });
   }
-
-
-
 
   // * @Function   : get_report_by_year => แสดงข้อมูลรายรับ-รายจ่าย เป็นปี
   // * @Author     : Peeranat Buranarek
@@ -224,7 +226,25 @@ ngOnInit(): void {
       }else if(sum_income <= sum_expent){
         this.net_income = sum_income - sum_expent
       }
+      this.get_chart()
     });
+  }
+
+  get_chart(){
+    console.log(this.income ," and " ,this.expent)
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Income',     this.income],
+      ['Expense',      this.expent]
+    ]);
+
+    var options = {
+      title: ''
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
   }
 
 }
