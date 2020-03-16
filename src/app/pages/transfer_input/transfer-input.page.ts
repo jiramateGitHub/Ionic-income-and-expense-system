@@ -11,17 +11,16 @@ import { ServicesService, MWallet, MTransaction} from './../../services/services
 })
 export class TransferInputPage implements OnInit {
   private type_input: string;
-  public wallets: any;
-  public balance: number;
-  public check_hide_card_his: any;
-  public check_hide_card_tran: any;
-  public account: string;
-  public money: number;
-  public wallet_name: any;
-  public select_wallet_id: any;
-  public select_wallet_name: any;
-  public historys: any;
-  public now_wallet: any;
+  public wallets: any;                       //เก็บกระเป๋าเงิน
+  public balance: number;                    //เก็บยอดเงินคงเหลือที่จะแสดงหน้า view
+  public check_hide_card_his: any;           //ใช้สำหรับเปิด - ปิด card ประวัติการโอน          
+  public check_hide_card_tran: any;          //ใช้สำหรับเปิด - ปิด card การโอน      
+  public money: number;                      //ใช้เก็บจำนวนเงินที่จะโอน
+  //public wallet_name: any;
+  public select_wallet_id: any;              //เก็บ id ของ wallet ที่เลือกที่จะทำการโอน 
+  public select_wallet_name: any;            //เก็บ ชื่อ ของ wallet ที่เลือกที่จะทำการโอน
+  public historys: any;                      //เก็บข้อมูลของ transaction
+  public now_wallet: any;                    //เก็บชื่อกระเป๋าที่เรากำลังใช้
  
 
   private  MTransaction:MTransaction = {
@@ -58,11 +57,9 @@ export class TransferInputPage implements OnInit {
   }
 
   ngOnInit() {  
-    this.account = ""
     this.money = null
     this.history_transfer()
     this.select_wallet()
-
     this.now_wallet = this.ServicesService.SessionService.get_session_wallet()
     this.ServicesService.MWalletService.get_edit_wallet(this.ServicesService.SessionService.get_session_wallet_id()).subscribe( res => {
       this.balance = res.wallet_balance;
@@ -70,7 +67,7 @@ export class TransferInputPage implements OnInit {
   }
 
   ngViewWillEnter(){
-    this.now_wallet = this.ServicesService.SessionService.get_session_wallet()
+    this.now_wallet = this.ServicesService.SessionService.get_session_wallet()       //กำหนดกระเป๋าที่ใช้อยู่
   }
 
   // * @Function   : close_modal => คำสั่งปิด modal
@@ -81,42 +78,55 @@ export class TransferInputPage implements OnInit {
       'dismissed': true
     });
   }
-
+  // * @Function   : tranfer_money => สลับ card เป็นส่วนของการโอน
+  // * @Author     : Nuttorn Porkpibul
+  // * @Create Date: 2563-03-06
   tranfer_money() {
-    this.check_hide_card_his = false
-    this.check_hide_card_tran = true
-    this.money = null                          //reset money when complete tranfer
-    this.account = ""                            //reset account when complete tranfer
+    this.check_hide_card_his = false           //ทำการปิด card ของประวัติการโอน
+    this.check_hide_card_tran = true           //ทำการเปิด card ของการโอน
+    this.money = null                          //reset ค่าเงินที่จะโอน
   }
 
+
+  // * @Function   : history_transfer => สลับ card เป็นส่วนของประวัติการโอน
+  // * @Author     : Nuttorn Porkpibul
+  // * @Create Date: 2563-03-06
   history_transfer(){
-    this.check_hide_card_his = true
-    this.check_hide_card_tran = false
+    this.check_hide_card_his = true             //ทำการเปิด card ของประวัติการโอน
+    this.check_hide_card_tran = false           //ทำการปิด card ของการโอน
 
     this.ServicesService.MTransactionService.get_all_transaction_show().subscribe(async res => {
-        this.historys = [];
+        this.historys = [];                                                                                 //กำหนดให้ historys เป็น array
         res.map((item, index) => {
-          if(item.categories_type == 3 && item.wallet_name == this.now_wallet){
-            this.historys.push(item)
+          if(item.categories_type == 3 && item.wallet_name == this.now_wallet){                             //เช็คว่าจะเก็บค่า historys เฉพาะประเภทการโอนที่กระเป๋าปัจจุบัน 
+            this.historys.push(item)                                                                        //เก็บค่า historys
             }            
         }) 
     })
   }
 
+
+  // * @Function   : select_wallet => เก็บค่า wallet ที่ยังใช้งานไว้ใน wallets เพื่อนำไปแสดงในส่วนข้อง select box หน้า html
+  // * @Author     : Nuttorn Porkpibul
+  // * @Create Date: 2563-03-06
   select_wallet() {
-    this.wallets = [];
+    this.wallets = [];                                                                    //กำหนด wallets เป็น array
     this.ServicesService.MWalletService.get_obs_mwallet().subscribe(async res => {      
       res.map((item, index) => {
-        if(item.wallet_name != this.now_wallet){
-          this.wallets.push(item) 
+        if(item.wallet_name != this.now_wallet){                                          //จะเก็บ wallets ทุกตัวที่ไม่ใช่ wallets ที่เลือกทั้งเเต่เเรก
+          this.wallets.push(item)                                                         //นำค่าเข้า wallets
         }
       })      
     })  
     
   }
 
+
+  // * @Function   : insert_tranfer => เพิ่มค่าเเละแก้ไขในส่วนของการโอนลง database transaction 
+  // * @Author     : Nuttorn Porkpibul
+  // * @Create Date: 2563-03-06
   async insert_tranfer(){
-    await this.ServicesService.MWalletService.get_edit_wallet(this.select_wallet_id).subscribe( res => {
+    await this.ServicesService.MWalletService.get_edit_wallet(this.select_wallet_id).subscribe( res => {     
       this.select_wallet_name = res.wallet_name;
       
       this.MTransaction.username = this.ServicesService.SessionService.get_session_username();
@@ -129,10 +139,10 @@ export class TransferInputPage implements OnInit {
       this.MTransaction.transaction_date = Date()
       this.ServicesService.MTransactionService.insert_transaction(this.MTransaction).then(() => {
         this.showToast('Transfer successful.');
-        this.ServicesService.MWalletService.get_edit_wallet(this.ServicesService.SessionService.get_session_wallet_id()).subscribe( res => {
+        this.ServicesService.MWalletService.get_edit_wallet(this.ServicesService.SessionService.get_session_wallet_id()).subscribe( res => {    //ดึงข้อมูล wallet ปัจจุบันมาแก้ไข
           this.edit_MWallet = res;
           this.edit_MWallet.wallet_balance -= this.money
-          this.ServicesService.MWalletService.update_wallet_name(this.ServicesService.SessionService.get_session_wallet_id(),this.edit_MWallet)
+          this.ServicesService.MWalletService.update_wallet_name(this.ServicesService.SessionService.get_session_wallet_id(),this.edit_MWallet)  //อัปเดทกระเป๋าโดยส่งค่าที่ทำกสรแก้ไขเเล้วเข้าไป
         })
       });
 
@@ -155,10 +165,10 @@ export class TransferInputPage implements OnInit {
       ////////////////////////////////////////////////////////////////////////////////////////////////////////
     })
 
-      this.balance -= this.money;
+    this.balance -= this.money;                                 //เมื่อโอนเงินเเล้วให้ลบเงินก่อนนำไปแสดง
 
-    this.check_hide_card_his = true
-    this.check_hide_card_tran = false
+    this.check_hide_card_his = true                             //เปิด card ส่วนของประวัติการโฮน
+    this.check_hide_card_tran = false                           //ปิด card ส่วนของการโฮน
   }
 
   
