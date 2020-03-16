@@ -35,7 +35,7 @@
   
   <ion-list *ngIf="type_input == 'income' || type_input == 'expense'">
     <div *ngFor="let parent of sortData_obj_category">
-      <ion-item-divider >
+      <ion-item-divider (click)="add_sub_category(parent.cat_name,parent.cat_type,parent.cat_name)">
         <ion-img src="{{'./../../assets/icon/'+parent.cat_name+'.png'}}"></ion-img> 
         <ion-label class="fs-17 p-l-15" style="color:black !important;">
           {{parent.cat_name}} 

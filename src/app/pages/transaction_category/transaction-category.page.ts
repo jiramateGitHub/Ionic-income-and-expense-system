@@ -66,7 +66,7 @@ export class TransactionCategoryPage  implements OnInit  {
   async add_category(categories_name:string, categories_type:number){
     this.modalController.dismiss({categories_name, categories_type});
   }
-  
+
   // * @Function   : add_sub_category => เลือก Sub Category และเรียกคำสั่งปิด modal 
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-010
