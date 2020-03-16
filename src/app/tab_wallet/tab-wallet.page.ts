@@ -123,16 +123,18 @@ export class TabWalletPage implements OnInit {
 
       for (let i = 0; i < res.length; i++) {
 
+        console.log("type :" ,res[i]['categories_type'] , "Amout : " ,res[i]['transaction_amount'] )
+        
+        if (res[i]['categories_type'] == 1) {
+          this.income += res[i]['transaction_amount']
+        } else if(res[i]['categories_type'] == 3){
+          this.outcome += res[i]['transaction_amount']
+        }else if(res[i]['categories_type'] == 4){
+          this.income += res[i]['transaction_amount']
+        }else{
+          this.outcome += res[i]['transaction_amount']
+        }
 
-        // if (res[i]['categories_type'] == 1) {
-        //   this.income += res[i]['transaction_amount']
-        // } else if(res[i]['categories_type'] == 3){
-        //   this.outcome += res[i]['transaction_amount']
-        // }else if(res[i]['categories_type'] == 4){
-        //   this.income += res[i]['transaction_amount']
-        // }else{
-        //   this.outcome += res[i]['transaction_amount']
-        // }
         this.all_transaction[i].date = res[i]['transaction_date'].substring(8, 10);
         this.all_transaction[i].month = res[i]['transaction_date'].substring(5, 7);
         this.all_transaction[i].year = res[i]['transaction_date'].substring(0, 4);
