@@ -95,7 +95,7 @@
                     <ion-icon slot="start" name="create" ></ion-icon>
                     Edit
                   </ion-item-option>
-                  <ion-item-option color="danger" (click)="transaction_active_update_AlertConfirm(transaction.id)">
+                  <ion-item-option color="danger" (click)="transaction_active_update_AlertConfirm(transaction.id,transaction.transaction_amount,transaction.categories_type)">
                     <ion-icon slot="start" name="trash" ></ion-icon>
                     Delete
                   </ion-item-option>
