@@ -128,6 +128,38 @@ export class TransferInputPage implements OnInit {
   async insert_tranfer(){
     await this.ServicesService.MWalletService.get_edit_wallet(this.select_wallet_id).subscribe( res => {     
       this.select_wallet_name = res.wallet_name;
+
+      var date = Date()
+      var month = date.substr(4,3)
+      var day = date.substr(8,2)
+      var year = date.substr(11,4)
+      var month_num;
+    
+      if(month == "Jan"){
+        month_num = "01" ; 
+      }else if(month == "Feb"){
+        month_num = "02" ;
+      }else if(month == "Mar"){
+        month_num = "03" ;
+      }else if(month == "Apr"){
+        month_num = "04" ;
+      }else if(month == "May"){
+        month_num = "05" ;
+      }else if(month == "Jun"){
+        month_num = "06" 
+      }else if(month == "Jul"){
+        month_num = "07" 
+      }else if(month == "Aug"){
+        month_num = "08" 
+      }else if(month == "Sep"){
+        month_num = "09" 
+      }else if(month == "Oct"){
+        month_num = "10" 
+      }else if(month == "Nov"){
+        month_num = "11" 
+      }else if(month == "Dec"){
+        month_num = "12" 
+      }
       
       this.MTransaction.username = this.ServicesService.SessionService.get_session_username();
       this.MTransaction.wallet_name = this.ServicesService.SessionService.get_session_wallet()
@@ -136,7 +168,7 @@ export class TransferInputPage implements OnInit {
       this.MTransaction.categories_type = 3
       this.MTransaction.sub_categories_name = "Transfer to " + this.select_wallet_name
       this.MTransaction.transaction_amount = this.money
-      this.MTransaction.transaction_date = Date()
+      this.MTransaction.transaction_date = year + "-" + month_num + "-" + day;
       this.ServicesService.MTransactionService.insert_transaction(this.MTransaction).then(() => {
         this.showToast('Transfer successful.');
         this.ServicesService.MWalletService.get_edit_wallet(this.ServicesService.SessionService.get_session_wallet_id()).subscribe( res => {    //ดึงข้อมูล wallet ปัจจุบันมาแก้ไข
@@ -153,7 +185,7 @@ export class TransferInputPage implements OnInit {
       this.MTransaction.categories_type = 4
       this.MTransaction.sub_categories_name = "Incoming from " + this.ServicesService.SessionService.get_session_wallet()
       this.MTransaction.transaction_amount = this.money
-      this.MTransaction.transaction_date = Date()
+      this.MTransaction.transaction_date = year + "-" + month_num + "-" + day;
       this.ServicesService.MTransactionService.insert_transaction(this.MTransaction).then(() => {
         this.showToast('Transfer successful.');
         this.ServicesService.MWalletService.get_edit_wallet(this.select_wallet_id).subscribe( res => {
@@ -179,6 +211,4 @@ export class TransferInputPage implements OnInit {
     }).then(toast => toast.present());
   }
 
-
-  
 }

@@ -129,6 +129,10 @@ export class TabWalletPage implements OnInit   {
       var temp = res
       temp.sort((one, two) => (one.transaction_date.substr(0, 10) > two.transaction_date.substr(0, 10) ? -1 : 1));
       for (var i = 1; i < temp.length; i++) {
+        this.all_date_transaction.pop()
+      }
+
+      for (var i = 1; i < temp.length; i++) {
         if(temp[i-1].transaction_date != temp[i].transaction_date){
           this.all_date_transaction.push(temp[i-1].transaction_date)
         }
@@ -139,21 +143,8 @@ export class TabWalletPage implements OnInit   {
         }
       }
 
-      for (let i = 0; i < res.length; i++) {
-        // if (res[i]['categories_type'] == 1) {
-        //   this.income += res[i]['transaction_amount']
-        // } else if(res[i]['categories_type'] == 3){
-        //   this.outcome += res[i]['transaction_amount']
-        // }else if(res[i]['categories_type'] == 4){
-        //   this.income += res[i]['transaction_amount']
-        // }else{
-        //   this.outcome += res[i]['transaction_amount']
-        // }
-        this.all_date_transaction[i].day = res[i]['transaction_date'].substring(8, 10);
-        this.all_date_transaction[i].month = res[i]['transaction_date'].substring(5, 7);
-        this.all_date_transaction[i].year = res[i]['transaction_date'].substring(0, 4);
-      }
       console.log(this.all_date_transaction)
+
     })
   }
 
@@ -190,9 +181,5 @@ export class TabWalletPage implements OnInit   {
     this.servicesService.MWalletService.get_wallet_balance().subscribe(res => {
       this.obj_wallet = res['0'];
     });
-  }
-
-  modal_year() {
-
   }
 }
