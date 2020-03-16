@@ -111,8 +111,12 @@ export class TabWalletPage implements OnInit {
         }, {
           text: 'Confirm',
           handler: () => {
-            this.delete_transaction(id)
-            this.update_wallet_balance(amount,type,true)
+            if(type == 3 || type == 4){
+              this.showToast("Can't delete transaction.")
+            }else{
+              this.delete_transaction(id)
+              this.update_wallet_balance(amount,type,true)
+            }
           }
         }
       ]
@@ -248,6 +252,9 @@ export class TabWalletPage implements OnInit {
   
   }
 
+  // * @Function   : update_wallet_balance => อัพเดทเงินในกระเป๋า
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-16
   update_wallet_balance(amount:number,type:number,check_update){    
     this.servicesService.MWalletService.get_wallet_balance().subscribe(res => {
       if(check_update == true){
