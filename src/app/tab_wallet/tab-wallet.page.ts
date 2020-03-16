@@ -138,6 +138,7 @@ export class TabWalletPage implements OnInit {
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
   get_all_transaction_show() {
+    this.all_date_transaction = []
     this.servicesService.MTransactionService.get_all_transaction_show().subscribe(res => {
       this.all_transaction = res;
       for (var i = 0; i < res.length; i++) {
@@ -167,19 +168,18 @@ export class TabWalletPage implements OnInit {
           // }
         }
       }
-      console.log(temp_all_date_transaction)
-      if(temp.length == 0){
-        this.all_date_transaction = null
-        console.log(this.all_date_transaction)
-      }else{
+      
+      if(res.length != 0){
         for (var i = 0; i < temp_all_date_transaction.length; i++) {
-          this.all_date_transaction[i] = 
-          {
-            date: null,
-            month: null,
-            year: null,
-            day:null
-          }
+       
+            this.all_date_transaction[i] = 
+            {
+              date: null,
+              month: null,
+              year: null,
+              day:null
+            }
+
           this.all_date_transaction[i].date = temp_all_date_transaction[i]
           this.all_date_transaction[i].year = temp_all_date_transaction[i].substr(0, 4);
           this.all_date_transaction[i].day =temp_all_date_transaction[i].substr(8, 2);
@@ -225,8 +225,6 @@ export class TabWalletPage implements OnInit {
         }
       }
       
-      // console.log(this.newdate)
-
     })
 
     // console.log(this.all_date_transaction)
@@ -248,6 +246,9 @@ export class TabWalletPage implements OnInit {
   delete_transaction(id: string) {
     this.servicesService.MTransactionService.delete_transaction(id)
     this.showToast("Delete successful.")
+    this.obj_transaction.username = this.servicesService.SessionService.get_session_username();
+    this.get_all_transaction_show();
+    this.get_wallet_balance()
   }
 
   // * @Function   : showToast => ใช้แสดง Toast
