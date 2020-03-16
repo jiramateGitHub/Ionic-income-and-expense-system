@@ -31,7 +31,7 @@ export class TabWalletPage implements OnInit {
   };
 
   public all_date_transaction = []
-  
+
 
   public obj_wallet = [];
   public all_transaction = [];
@@ -153,18 +153,20 @@ export class TabWalletPage implements OnInit {
           }
         }
       }
-      
+
       for (var i = 0; i < temp_all_date_transaction.length; i++) {
-        this.all_date_transaction[i] = 
+        this.all_date_transaction[i] =
         {
           date: null,
           month: null,
           year: null,
-          day:null
+          day: null,
+          amout: null
         }
+        console.log(temp_all_date_transaction)
         this.all_date_transaction[i].date = temp_all_date_transaction[i]
         this.all_date_transaction[i].year = temp_all_date_transaction[i].substr(0, 4);
-        this.all_date_transaction[i].day =temp_all_date_transaction[i].substr(8, 2);
+        this.all_date_transaction[i].day = temp_all_date_transaction[i].substr(8, 2);
 
         if (temp_all_date_transaction[i].substr(5, 2) == "01") {
           this.all_date_transaction[i].month = "Jan";
@@ -199,16 +201,34 @@ export class TabWalletPage implements OnInit {
 
         } else if (temp_all_date_transaction[i].substr(5, 2) == "11") {
           this.all_date_transaction[i].month = "Nov";
-          
+
         } else if (temp_all_date_transaction[i].substr(5, 2) == "12") {
           this.all_date_transaction[i].month = "Dec";
         }
 
+        for (var i = 0; i < this.all_transaction.length; i++) {
+          for (var j = 0; j < this.all_date_transaction.length; j++) {
+            if (this.all_transaction[i].transaction_date.substr(8, 2) == this.all_date_transaction[j].day && this.all_transaction[i].categories_type == 1) {
+              this.income += this.all_transaction[i].transaction_amount;
+            }else if (this.all_transaction[i].transaction_date.substr(8, 2) == this.all_date_transaction[j].day && this.all_transaction[i].categories_type == 2) {
+              this.outcome += this.all_transaction[i].transaction_amount;
+            }else if (this.all_transaction[i].transaction_date.substr(8, 2) == this.all_date_transaction[j].day && this.all_transaction[i].categories_type == 3) {
+              this.outcome += this.all_transaction[i].transaction_amount;
+            }else if (this.all_transaction[i].transaction_date.substr(8, 2) == this.all_date_transaction[j].day && this.all_transaction[i].categories_type == 4) {
+              this.income += this.all_transaction[i].transaction_amount;
+            }
+          }
+
+          this.all_date_transaction[i] = this.income - this.outcome;
+          this.income = 0;
+          this.outcome = 0;
+          // console.log(this.all_transaction[i].transaction_date.substr(8, 2))
+          // if(this.all_date_transaction[i])
+          // console.log(this.all_transaction[i].transaction_date.substr(8, 2))
+        }
       }
       // console.log(this.newdate)
-
     })
-
     // console.log(this.all_date_transaction)
   }
 

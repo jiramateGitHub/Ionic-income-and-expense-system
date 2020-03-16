@@ -70,7 +70,7 @@
         <ion-item-divider >
           <!-- <ion-label slot="start"><span class="fs-25">11</span> March 2562</ion-label> -->
           <ion-label slot="start"><span class="fs-15"><span class="fs-25">{{date_transaction.day}}</span> {{date_transaction.month}} {{date_transaction.year}}</span></ion-label>
-          <ion-label slot="end" class="p-r-10">+20500</ion-label>
+          <ion-label slot="end" class="p-r-10">{{date_transaction.amout}}</ion-label>
         </ion-item-divider>       
           <div *ngFor = "let transaction of sortData">
           <div *ngIf="date_transaction.date == transaction.transaction_date">
