@@ -108,7 +108,7 @@ export class TabWalletPage implements OnInit {
   // * @Function   : transaction_active_update_AlertConfirm => แจ้งเตือนการลบ
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
-  async transaction_active_update_AlertConfirm(id: string,amount : number,type : number) {
+  async transaction_active_update_AlertConfirm(id: string, amount: number, type: number) {
     const alert = await this.alertController.create({
       header: 'Confirm Delete?',
       buttons: [
@@ -121,11 +121,11 @@ export class TabWalletPage implements OnInit {
         }, {
           text: 'Confirm',
           handler: () => {
-            if(type == 3 || type == 4){
+            if (type == 3 || type == 4) {
               this.showToast("Can't delete transaction.")
-            }else{
+            } else {
               this.delete_transaction(id)
-              this.update_wallet_balance(amount,type,true)
+              this.update_wallet_balance(amount, type, true)
             }
           }
         }
@@ -148,14 +148,13 @@ export class TabWalletPage implements OnInit {
       var temp = res
       temp.sort((one, two) => (one.transaction_date.substr(0, 10) > two.transaction_date.substr(0, 10) ? -1 : 1));
       var temp_all_date_transaction = []
-      console.log(temp)
-      console.log("temp.length " ,temp.length)
+      
       if (temp.length == 1) {
         temp_all_date_transaction.push(temp[0].transaction_date)
       } else {
         for (var i = 0; i < temp.length; i++) {
           if (i == 0) {
-              temp_all_date_transaction.push(temp[i].transaction_date)
+            temp_all_date_transaction.push(temp[i].transaction_date)
           } else {
             if (temp[i - 1].transaction_date != temp[i].transaction_date) {
               temp_all_date_transaction.push(temp[i].transaction_date)
@@ -177,7 +176,8 @@ export class TabWalletPage implements OnInit {
               date: null,
               month: null,
               year: null,
-              day:null
+              day:null,
+              amount : null
             }
 
           this.all_date_transaction[i].date = temp_all_date_transaction[i]
@@ -222,12 +222,30 @@ export class TabWalletPage implements OnInit {
             this.all_date_transaction[i].month = "Dec";
           }
   
+        } //for
+
+        this.income = 0;
+        this.outcome = 0;
+        for (var j = 0; j < temp_all_date_transaction.length; j++) {
+          for (var k = 0; k < temp.length; k++) {
+            if(this.all_date_transaction[j].date == temp[k].transaction_date.substr(0,10)){
+              if(temp[k].categories_type == 1 || temp[k].categories_type == 4){
+                this.income += temp[k].transaction_amount
+              }else if(temp[k].categories_type == 2 || temp[k].categories_type ==3){
+                this.outcome += temp[k].transaction_amount
+              }
+            }
+          }
+
+          this.all_date_transaction[j].amount = this.income - this.outcome;
+          this.income = 0;
+          this.outcome = 0;
         }
-      }
+        console.log( this.all_date_transaction)
+      } //if
       
     })
 
-    // console.log(this.all_date_transaction)
   }
 
   // * @Function   : sortData => เรียงข้อมูลตามเวลา
@@ -266,31 +284,31 @@ export class TabWalletPage implements OnInit {
     this.servicesService.MWalletService.get_wallet_balance().subscribe(res => {
       this.obj_wallet = res['0'];
     });
-  
+
   }
 
   // * @Function   : update_wallet_balance => อัพเดทเงินในกระเป๋า
   // * @Author     : Jiramate Phuaphan
   // * @Create Date: 2563-03-16
-  update_wallet_balance(amount:number,type:number,check_update){    
+  update_wallet_balance(amount: number, type: number, check_update) {
     this.servicesService.MWalletService.get_wallet_balance().subscribe(res => {
-      if(check_update == true){
-        if(type == 1 ){
-          var balance = res[0].wallet_balance-amount
-        }else if(type == 2){
-          var balance = res[0].wallet_balance+amount
+      if (check_update == true) {
+        if (type == 1) {
+          var balance = res[0].wallet_balance - amount
+        } else if (type == 2) {
+          var balance = res[0].wallet_balance + amount
         }
-        var temp : MWallet = {
-          username : res[0].username,
+        var temp: MWallet = {
+          username: res[0].username,
           wallet_active: res[0].wallet_active,
           wallet_balance: balance,
           wallet_name: res[0].wallet_name
         }
-        this.servicesService.MWalletService.update_wallet_name(res[0].id,temp)
+        this.servicesService.MWalletService.update_wallet_name(res[0].id, temp)
         check_update = false
       }
     });
-    
+
   }
 
 }
