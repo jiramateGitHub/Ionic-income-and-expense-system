@@ -165,7 +165,6 @@ export class TransactionInputPage implements OnInit {
       this.MTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
       this.MTransaction.transaction_active = "Y"
       var wallet_id = this.servicesService.SessionService.get_session_wallet_id()
-      console.log("wallet_id ", wallet_id)
       await this.servicesService.MTransactionService.insert_transaction(this.MTransaction).then(() => {
         this.showToast('Add transaction successful.');
        
@@ -199,11 +198,22 @@ export class TransactionInputPage implements OnInit {
       this.editMTransaction.username = this.servicesService.SessionService.get_session_username();
       this.editMTransaction.wallet_name = this.servicesService.SessionService.get_session_wallet();
       this.editMTransaction.transaction_active = "Y"
-
+      var wallet_id = this.servicesService.SessionService.get_session_wallet_id()
       this.servicesService.MTransactionService.update_transaction( this.id,this.editMTransaction).then(() => {
         this.showToast('Edit transaction successful.');
       });
       this.close_modal();
+
+      await this.servicesService.MWalletService.get_edit_wallet(wallet_id).subscribe( res => {
+        this.edit_MWallet = res;
+        if(this.editMTransaction.categories_type == 1){
+          this.edit_MWallet.wallet_balance += this.editMTransaction.transaction_amount
+        }else if(this.editMTransaction.categories_type == 2){
+          this.edit_MWallet.wallet_balance -= this.editMTransaction.transaction_amount
+        }
+        this.servicesService.MWalletService.update_wallet_name(wallet_id,this.edit_MWallet)
+      })
+
     }
   }
 }
