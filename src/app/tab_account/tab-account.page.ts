@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from './../services/session/session.service';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController ,Platform} from '@ionic/angular';
 import { TransferInputPage } from '../pages/transfer_input/transfer-input.page';
 @Component({
   selector: 'app-tab-account',
@@ -11,12 +11,21 @@ import { TransferInputPage } from '../pages/transfer_input/transfer-input.page';
 export class TabAccountPage {
   private view_username
   private view_wallet
+  public subscribe : any
+
   constructor(
     private SessionService:SessionService,
     private router:Router,
     private modalController: ModalController,
-    private alertController: AlertController,) {
-      
+    private alertController: AlertController,
+    public Platform:Platform) {
+      this.subscribe = this.Platform.backButton.subscribeWithPriority(666666,()=>{
+        if(this.constructor.name == "TabWalletPage"){
+          if(window.confirm("Do yo want to exit app")){
+            navigator["app"].exitApp()
+          }
+        }
+      })
     }
 
   ionViewWillEnter(){

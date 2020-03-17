@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController, AlertController, ToastController } from '@ionic/angular';
+import { ModalController, AlertController, ToastController, Platform } from '@ionic/angular';
 import { ServicesService, MTransaction, MWallet } from '../services/services.service';
 import { TransactionInputPage } from '../pages/transaction_input/transaction-input.page';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -22,7 +22,7 @@ export class TabWalletPage implements OnInit {
   public obj_wallet = []
   public all_transaction = [];
   public edit_transaction: any;
-
+  public subscribe : any
   public obj_transaction: MTransaction = {
     username: null,
     wallet_name: null,
@@ -40,10 +40,18 @@ export class TabWalletPage implements OnInit {
     public modalController: ModalController,
     private alertController: AlertController,
     private toastController: ToastController,
-    private servicesService: ServicesService
+    private servicesService: ServicesService,
+    public Platform:Platform
   ) {
     this.income = 0;
     this.outcome = 0;
+    this.subscribe = this.Platform.backButton.subscribeWithPriority(666666,()=>{
+      if(this.constructor.name == "TabWalletPage"){
+        if(window.confirm("Do yo want to exit app")){
+          navigator["app"].exitApp()
+        }
+      }
+    })
   }
 
   ngOnInit() {

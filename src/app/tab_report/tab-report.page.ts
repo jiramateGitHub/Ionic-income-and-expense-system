@@ -16,7 +16,7 @@ export class TabReportPage {
   public income: number = 0;
   public expent: number = 0;
   public net_income: number = 0;
-  
+  public subscribe : any
 
   public obj_MTransaction: MTransaction = {
     id: null,
@@ -43,6 +43,13 @@ export class TabReportPage {
     this.platform.ready().then(()=>{
       google.charts.load('current', {'packages':['corechart']});
       this.get_chart()
+    })
+    this.subscribe = this.Platform.backButton.subscribeWithPriority(666666,()=>{
+      if(this.constructor.name == "TabWalletPage"){
+        if(window.confirm("Do yo want to exit app")){
+          navigator["app"].exitApp()
+        }
+      }
     })
   }
 
