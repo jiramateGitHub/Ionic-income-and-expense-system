@@ -11,7 +11,7 @@
         <ion-col></ion-col> 
       </ion-row>
     </ion-grid>
-    <ion-title style="font-size: 40px!important;">{{obj_wallet.wallet_balance}} <span style="font-size: 20px;">THB.</span></ion-title>
+    <ion-title style="font-size: 40px!important;">{{obj_wallet.wallet_balance | number:'.0'}} <span style="font-size: 20px;">THB.</span></ion-title>
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col></ion-col> 
@@ -33,7 +33,7 @@
               <ion-label class="tw">
                 <span class="fs-13" style="color: lightgreen !important;">Income</span> 
                 <br> 
-                <span class="fs-15" style="color: white !important;">{{income}}</span>
+                <span class="fs-15" style="color: white !important;">{{income | number:'.0'}}</span>
               </ion-label>
             </ion-col>
             <ion-col></ion-col>
@@ -42,7 +42,7 @@
               <ion-label class="tw">
                 <span class="fs-13" style="color: orange !important;">Expense</span> 
                 <br> 
-                <span class="fs-15" style="color: white !important;">{{outcome}}</span>
+                <span class="fs-15" style="color: white !important;">{{outcome | number:'.0'}}</span>
               </ion-label>
             </ion-col>
           </ion-row>
@@ -74,7 +74,7 @@
         <ion-item-divider >
           <!-- <ion-label slot="start"><span class="fs-25">11</span> March 2562</ion-label> -->
           <ion-label slot="start"><span class="fs-15"><span class="fs-25">{{date_transaction.day}}</span> {{date_transaction.month}} {{date_transaction.year}}</span></ion-label>
-          <ion-label slot="end" class="p-r-10">{{date_transaction.amount}}</ion-label>
+          <ion-label slot="end" class="p-r-10">{{date_transaction.amount | number:'.0'}}</ion-label>
         </ion-item-divider>       
           <div *ngFor = "let transaction of sortData">
           <div *ngIf="date_transaction.date == transaction.transaction_date">
@@ -89,10 +89,10 @@
                     <span class="fs-11" style="color: grey !important;">{{transaction.transaction_note}} </span>
                     <span class="fs-11" style="color: grey !important;" *ngIf="transaction.transaction_note == null"> no comment.</span>
                   </ion-label>
-                  <ion-chip fill="outline" slot="end" style="color:red !important;" *ngIf="transaction.categories_type == '2'">- {{transaction.transaction_amount}}</ion-chip>
-                  <ion-chip fill="outline" slot="end" style="color:#2ECC71  !important;" *ngIf="transaction.categories_type == '1'">+ {{transaction.transaction_amount}}</ion-chip>
-                  <ion-chip fill="outline" slot="end" style="color:#2ECC71  !important;" *ngIf="transaction.categories_type == '4'">+ {{transaction.transaction_amount}}</ion-chip>
-                  <ion-chip fill="outline" slot="end" style="color:red !important;" *ngIf="transaction.categories_type == '3'">- {{transaction.transaction_amount}}</ion-chip>
+                  <ion-chip fill="outline" slot="end" style="color:red !important;" *ngIf="transaction.categories_type == '2'">- {{transaction.transaction_amount | number:'.0'}}</ion-chip>
+                  <ion-chip fill="outline" slot="end" style="color:#2ECC71  !important;" *ngIf="transaction.categories_type == '1'">+ {{transaction.transaction_amount | number:'.0'}}</ion-chip>
+                  <ion-chip fill="outline" slot="end" style="color:#2ECC71  !important;" *ngIf="transaction.categories_type == '4'">+ {{transaction.transaction_amount | number:'.0'}}</ion-chip>
+                  <ion-chip fill="outline" slot="end" style="color:red !important;" *ngIf="transaction.categories_type == '3'">- {{transaction.transaction_amount | number:'.0'}}</ion-chip>
                 </ion-item>
                 <ion-item-options>
                   <ion-item-option color="primary" (click)="modal_edit_show(transaction.id)">

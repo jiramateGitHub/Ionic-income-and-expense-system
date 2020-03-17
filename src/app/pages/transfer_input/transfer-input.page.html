@@ -20,7 +20,7 @@
   <div class="balance">
       <span class="balance">
         Balance 
-        <ion-chip fill="outline" slot="end" style="color:#3358ff; font-size:25px">{{balance}} ฿</ion-chip><br>
+        <ion-chip fill="outline" slot="end" style="color:#3358ff; font-size:25px">{{balance | number:'.0'}} ฿</ion-chip><br>
         <ion-img style="width: auto !important; height: 150px;align-items: center; margin-top: 30px;" src="assets/images/money.jpeg"></ion-img>
         <ion-button *ngIf="check_hide_card_his"  (click)="tranfer_money()">Transfer Money</ion-button>
         <ion-button *ngIf="check_hide_card_tran"  (click)="history_transfer()">History Transfer</ion-button>
@@ -39,7 +39,7 @@
           <ion-datetime displayFormat="DD MMMM YYYY " slot="start" [(ngModel)]="value.transaction_date"></ion-datetime>
           <ion-label class="p-l-30">
             <h3>{{value.sub_categories_name}}</h3>
-            <p>Price : {{value.transaction_amount}} Bath.</p>
+            <p>Price : {{value.transaction_amount | number:'.0'}} Bath.</p>
           </ion-label>
         </ion-item>
       </div>

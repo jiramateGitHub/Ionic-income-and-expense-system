@@ -23,7 +23,7 @@
               <ion-label>
                 <span class="fs-14">{{wallet.wallet_name}}</span>
               </ion-label>
-              <ion-chip fill="outline" slot="end" style="color:blueviolet !important;">฿ {{wallet.wallet_balance}}</ion-chip>
+              <ion-chip fill="outline" slot="end" style="color:blueviolet !important;">฿ {{wallet.wallet_balance | number:'.0'}}</ion-chip>
             </ion-item>
             </div>
             <ion-item-options>
