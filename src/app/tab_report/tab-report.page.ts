@@ -46,9 +46,7 @@ export class TabReportPage {
     })
     this.subscribe = this.platform.backButton.subscribeWithPriority(666666,()=>{
       if(this.constructor.name == "TabReportPage"){
-        if(window.confirm("Do yo want to exit app")){
           navigator["app"].exitApp()
-        }
       }
     })
   }

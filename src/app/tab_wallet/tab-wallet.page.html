@@ -15,11 +15,10 @@
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col></ion-col> 
-        <ion-col>
-          <ion-chip class="chip-bl" (click)="modal_year()">
-            <ion-label>This Month</ion-label>
-          </ion-chip>
-        </ion-col> 
+        <ion-col style="color: white;">
+          <ion-datetime style="color: white; text-align: center;" displayFormat="MMMM YYYY" placeholder="Selcet Time" [(ngModel)]="select_date_time" (ionChange)="search_transaction()">
+        </ion-datetime>
+        </ion-col>  
         <ion-col></ion-col> 
       </ion-row>
     </ion-grid>
@@ -95,7 +94,7 @@
                   <ion-chip fill="outline" slot="end" style="color:red !important;" *ngIf="transaction.categories_type == '3'">- {{transaction.transaction_amount | number:'.0'}}</ion-chip>
                 </ion-item>
                 <ion-item-options>
-                  <ion-item-option color="primary" (click)="modal_edit_show(transaction.id)">
+                  <ion-item-option color="primary" (click)="modal_edit_show(transaction.id, transaction.categories_type)">
                     <ion-icon slot="start" name="create" ></ion-icon>
                     Edit
                   </ion-item-option>

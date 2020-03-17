@@ -21,9 +21,7 @@ export class TabAccountPage {
     public Platform:Platform) {
       this.subscribe = this.Platform.backButton.subscribeWithPriority(666666,()=>{
         if(this.constructor.name == "TabAccountPage"){
-          if(window.confirm("Do yo want to exit app")){
             navigator["app"].exitApp()
-          }
         }
       })
     }

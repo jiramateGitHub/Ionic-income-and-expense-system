@@ -56,6 +56,23 @@ export class MTransactionService {
     return this.service;
   }
 
+   // * @Function  : get_all_transaction_by_date => คือค่าข้อมูล interface MTransaction ที่เราเอามาทำให้อยู่ในรูปที่สามารถ Observe ได้
+  // * @Author     : Jiramate Phuaphan
+  // * @Create Date: 2563-03-17
+  get_all_transaction_by_date(mtransaction: MTransaction): Observable<MTransaction[]> {
+    this.serviceCollection = this.afs.collection<MTransaction>('M_transaction', ref => ref.where('username', '==', this.SessionService.get_session_username()).where('wallet_name', '==', this.SessionService.get_session_wallet()).where('transaction_date','>',mtransaction.transaction_date));
+    this.service = this.serviceCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.service;
+  }
+
   // * @Function   : get_edit_transaction => ดึงข้อมูลเพื่อแก้ไข Transacrion
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-10

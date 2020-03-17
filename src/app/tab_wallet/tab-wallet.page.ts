@@ -23,6 +23,7 @@ export class TabWalletPage implements OnInit {
   public all_transaction = [];
   public edit_transaction: any;
   public subscribe : any
+  public select_date_time
   public obj_transaction: MTransaction = {
     username: null,
     wallet_name: null,
@@ -45,11 +46,43 @@ export class TabWalletPage implements OnInit {
   ) {
     this.income = 0;
     this.outcome = 0;
+    this.select_date_time = Date()
+    var month = this.select_date_time.substr(4,3)
+    var day = this.select_date_time.substr(8,2)
+    var year = this.select_date_time.substr(11,4)
+    var month_num;
+  
+    if(month == "Jan"){
+      month_num = "01" ; 
+    }else if(month == "Feb"){
+      month_num = "02" ;
+    }else if(month == "Mar"){
+      month_num = "03" ;
+    }else if(month == "Apr"){
+      month_num = "04" ;
+    }else if(month == "May"){
+      month_num = "05" ;
+    }else if(month == "Jun"){
+      month_num = "06" 
+    }else if(month == "Jul"){
+      month_num = "07" 
+    }else if(month == "Aug"){
+      month_num = "08" 
+    }else if(month == "Sep"){
+      month_num = "09" 
+    }else if(month == "Oct"){
+      month_num = "10" 
+    }else if(month == "Nov"){
+      month_num = "11" 
+    }else if(month == "Dec"){
+      month_num = "12" 
+    }
+    this.select_date_time = year + "-" + month_num + "-" + day
+    
+
     this.subscribe = this.Platform.backButton.subscribeWithPriority(666666,()=>{
       if(this.constructor.name == "TabWalletPage"){
-        if(window.confirm("Do yo want to exit app")){
           navigator["app"].exitApp()
-        }
       }
     })
   }
@@ -90,27 +123,31 @@ export class TabWalletPage implements OnInit {
   // * @Function   : modal_edit_show => Modal edit
   // * @Author     : Kanathip Phithaksilp
   // * @Create Date: 2563-03-06
-  async modal_edit_show(id: string) {
-    await this.servicesService.MTransactionService.get_edit_transaction(id).subscribe(async res => {
-      this.edit_transaction = res;
-      const modal = await this.modalController.create({
-        component: TransactionInputPage,
-        componentProps: {
-          'type_input': 'update',
-          'id': id,
-          'categories_name': this.edit_transaction.categories_name,
-          'categories_type': this.edit_transaction.categories_type,
-          'sub_categories_name': this.edit_transaction.sub_categories_name,
-          'transaction_amount': this.edit_transaction.transaction_amount,
-          'transaction_active': this.edit_transaction.transaction_active,
-          'transaction_date': this.edit_transaction.transaction_date,
-          'transaction_note': this.edit_transaction.transaction_note,
-          'username': this.edit_transaction.username,
-          'wallet_name': this.edit_transaction.wallet_name
-        }
-      });
-      return await modal.present();
-    })
+  async modal_edit_show(id: string, type: number) {
+    if (type == 3 || type == 4) {
+      this.showToast("Can't edit transaction.")
+    } else {
+      await this.servicesService.MTransactionService.get_edit_transaction(id).subscribe(async res => {
+        this.edit_transaction = res;
+        const modal = await this.modalController.create({
+          component: TransactionInputPage,
+          componentProps: {
+            'type_input': 'update',
+            'id': id,
+            'categories_name': this.edit_transaction.categories_name,
+            'categories_type': this.edit_transaction.categories_type,
+            'sub_categories_name': this.edit_transaction.sub_categories_name,
+            'transaction_amount': this.edit_transaction.transaction_amount,
+            'transaction_active': this.edit_transaction.transaction_active,
+            'transaction_date': this.edit_transaction.transaction_date,
+            'transaction_note': this.edit_transaction.transaction_note,
+            'username': this.edit_transaction.username,
+            'wallet_name': this.edit_transaction.wallet_name
+          }
+        });
+        return await modal.present();
+      })
+    }
   }
 
   // * @Function   : transaction_active_update_AlertConfirm => แจ้งเตือนการลบ
@@ -231,7 +268,6 @@ export class TabWalletPage implements OnInit {
           }
   
         } //for
-        console.log(temp)
 
         this.income = 0;
         this.outcome = 0;
@@ -253,7 +289,6 @@ export class TabWalletPage implements OnInit {
           date_income = 0;
           date_outcome = 0;
         }
-        console.log( this.all_date_transaction)
       } //if
       
     })
@@ -321,6 +356,13 @@ export class TabWalletPage implements OnInit {
       }
     });
 
+  }
+
+  async search_transaction(){
+    this.obj_transaction.transaction_date = this.select_date_time
+    this.servicesService.MTransactionService.get_all_transaction_by_date(this.obj_transaction).subscribe(async res => {
+        console.log(res)
+    })
   }
 
 }
