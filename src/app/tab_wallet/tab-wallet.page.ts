@@ -223,23 +223,27 @@ export class TabWalletPage implements OnInit {
           }
   
         } //for
+        console.log(temp)
 
         this.income = 0;
         this.outcome = 0;
+        var date_income = 0
+        var date_outcome = 0
         for (var j = 0; j < temp_all_date_transaction.length; j++) {
           for (var k = 0; k < temp.length; k++) {
             if(this.all_date_transaction[j].date == temp[k].transaction_date.substr(0,10)){
               if(temp[k].categories_type == 1 || temp[k].categories_type == 4){
+                date_income += temp[k].transaction_amount
                 this.income += temp[k].transaction_amount
               }else if(temp[k].categories_type == 2 || temp[k].categories_type ==3){
+                date_outcome += temp[k].transaction_amount
                 this.outcome += temp[k].transaction_amount
               }
             }
           }
-
-          this.all_date_transaction[j].amount = this.income - this.outcome;
-          this.income = 0;
-          this.outcome = 0;
+          this.all_date_transaction[j].amount = date_income - date_outcome
+          date_income = 0;
+          date_outcome = 0;
         }
         console.log( this.all_date_transaction)
       } //if
