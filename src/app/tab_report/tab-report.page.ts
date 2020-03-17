@@ -44,8 +44,8 @@ export class TabReportPage {
       google.charts.load('current', {'packages':['corechart']});
       this.get_chart()
     })
-    this.subscribe = this.Platform.backButton.subscribeWithPriority(666666,()=>{
-      if(this.constructor.name == "TabWalletPage"){
+    this.subscribe = this.platform.backButton.subscribeWithPriority(666666,()=>{
+      if(this.constructor.name == "TabReportPage"){
         if(window.confirm("Do yo want to exit app")){
           navigator["app"].exitApp()
         }
