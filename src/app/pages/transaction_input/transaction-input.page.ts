@@ -16,6 +16,7 @@ export class TransactionInputPage implements OnInit {
   private type_input: string;
   private id:string;
 
+  private temp_balance_update : number
   private  edit_MWallet:MWallet = {
     username: null,
     wallet_name: null,
@@ -70,6 +71,8 @@ export class TransactionInputPage implements OnInit {
       this.editMTransaction.transaction_note= navParams.get('transaction_note');
       this.editMTransaction.username= navParams.get('username');
       this.editMTransaction.wallet_name= navParams.get('wallet_name');
+
+      this.temp_balance_update = navParams.get('transaction_amount');
 
     }
  
@@ -206,10 +209,17 @@ export class TransactionInputPage implements OnInit {
 
       await this.servicesService.MWalletService.get_edit_wallet(wallet_id).subscribe( res => {
         this.edit_MWallet = res;
-        if(this.editMTransaction.categories_type == 1){
-          this.edit_MWallet.wallet_balance += this.editMTransaction.transaction_amount
-        }else if(this.editMTransaction.categories_type == 2){
-          this.edit_MWallet.wallet_balance -= this.editMTransaction.transaction_amount
+        if(this.temp_balance_update != this.editMTransaction.transaction_amount){
+          if(this.temp_balance_update  > this.editMTransaction.transaction_amount){
+            var sum = this.editMTransaction.transaction_amount - this.temp_balance_update
+          }else{
+            var sum = this.editMTransaction.transaction_amount - this.temp_balance_update
+          }
+          if(this.editMTransaction.categories_type == 1){
+            this.edit_MWallet.wallet_balance += sum
+          }else if(this.editMTransaction.categories_type == 2){
+            this.edit_MWallet.wallet_balance -= sum
+          }
         }
         this.servicesService.MWalletService.update_wallet_name(wallet_id,this.edit_MWallet)
       })

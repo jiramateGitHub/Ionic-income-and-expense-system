@@ -162,4 +162,9 @@ export class WalletPage implements OnInit {
     this.router.navigateByUrl('tabs');
   }
 
+  logout(){
+    this.ServicesService.SessionService.set_session(null,null)
+    this.ServicesService.SessionService.logout()
+    this.router.navigateByUrl('signin');
+  }
 }
