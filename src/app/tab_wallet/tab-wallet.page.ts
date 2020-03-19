@@ -230,41 +230,41 @@ export class TabWalletPage implements OnInit {
           this.all_date_transaction[i].day =temp_all_date_transaction[i].substr(8, 2);
   
           if (temp_all_date_transaction[i].substr(5, 2) == "01") {
-            this.all_date_transaction[i].month = "Jan";
+            this.all_date_transaction[i].month = "January";
   
           } else if (temp_all_date_transaction[i].substr(5, 2) == "02") {
-            this.all_date_transaction[i].month = "Feb";
+            this.all_date_transaction[i].month = "February";
   
           } else if (temp_all_date_transaction[i].substr(5, 2) == "03") {
   
-            this.all_date_transaction[i].month = "Mar";
+            this.all_date_transaction[i].month = "March";
   
           } else if (temp_all_date_transaction[i].substr(5, 2) == "04") {
-            this.all_date_transaction[i].month = "Apr";
+            this.all_date_transaction[i].month = "April";
   
           } else if (temp_all_date_transaction[i].substr(5, 2) == "05") {
             this.all_date_transaction[i].month = "May";
   
           } else if (temp_all_date_transaction[i].substr(5, 2) == "06") {
-            this.all_date_transaction[i].month = "Jun";
+            this.all_date_transaction[i].month = "June";
   
           } else if (temp_all_date_transaction[i].substr(5, 2) == "07") {
-            this.all_date_transaction[i].month = "Jul";
+            this.all_date_transaction[i].month = "July";
   
           } else if (temp_all_date_transaction[i].substr(5, 2) == "08") {
-            this.all_date_transaction[i].month = "Aug";
+            this.all_date_transaction[i].month = "August";
   
           } else if (temp_all_date_transaction[i].substr(5, 2) == "09") {
-            this.all_date_transaction[i].month = "Sep";
+            this.all_date_transaction[i].month = "September";
   
           } else if (temp_all_date_transaction[i].substr(5, 2) == "10") {
-            this.all_date_transaction[i].month = "Oct";
+            this.all_date_transaction[i].month = "October";
   
           } else if (temp_all_date_transaction[i].substr(5, 2) == "11") {
-            this.all_date_transaction[i].month = "Nov";
+            this.all_date_transaction[i].month = "November";
             
           } else if (temp_all_date_transaction[i].substr(5, 2) == "12") {
-            this.all_date_transaction[i].month = "Dec";
+            this.all_date_transaction[i].month = "December";
           }
   
         } //for
